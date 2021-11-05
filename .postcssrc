@@ -1,0 +1,12 @@
+{
+  "modules": true,
+  "plugins": {
+    "stylelint": {},
+    "postcss-reporter": {
+      "throwError": true
+    },
+    "postcss-url": {},
+    "postcss-nested": {},
+    "autoprefixer": {}
+  }
+}

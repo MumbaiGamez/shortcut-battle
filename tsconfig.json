@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "paths": {
+      "*": ["./src/*"]
+    },
+    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"],
+  },
+  "include": [
+    "src",
+    "typings/**/*.d.ts",
+    "./node_modules/@types"
+  ],
+  "exclude": [
+    "**/*.js"
+  ]
+}
