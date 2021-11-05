@@ -17,11 +17,16 @@ export const App = () => {
       <h1>Shortcut Battle</h1>
       <h2>Coming soon</h2>
       <br />
-      <Button>Sample button</Button>
       <Loader />
-      <Star />
-      <Input type={InputTypeEnum.password} validationRule={{ minSymbols: 6 }} />
-      <Card />
+      <Star customClassName={styles.starWrapper} />
+      <Card>
+        <Input
+          type={InputTypeEnum.password}
+          validationRule={{ minSymbols: 6 }}
+        />
+        <Input validationRule={{ isRequired: true }} />
+        <Button>Sample button</Button>
+      </Card>
     </div>
   );
 };

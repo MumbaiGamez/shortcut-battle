@@ -18,6 +18,11 @@ export const useInput = ({
     type || InputTypeEnum.text
   );
 
+  const checkValidation = (value: string) => {
+    const newErrorMessage = getValidationError(validationRule, value);
+    setErrorMessage(newErrorMessage);
+  };
+
   const toggleEye = () => {
     if (isCrossedEye) {
       setDefaultInputType(InputTypeEnum.password);
@@ -31,8 +36,7 @@ export const useInput = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    const newErrorMessage = getValidationError(validationRule, value);
-    setErrorMessage(newErrorMessage);
+    checkValidation(value);
 
     if (inputHandler) {
       inputHandler(value);
@@ -42,6 +46,7 @@ export const useInput = ({
   };
 
   const clearInputValue = () => {
+    checkValidation('');
     if (inputHandler) {
       inputHandler('');
     } else {

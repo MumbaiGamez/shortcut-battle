@@ -2,6 +2,7 @@
   width: 200px;
   position: relative;
   display: inline-block;
+  margin: 20px;
 }
 
 .input {
@@ -9,6 +10,7 @@
   padding: 10px 40px 10px 20px;
   border-radius: var(--border-radius);
   background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
   color: var(--primary-text-color);
   font-size: 14px;
   transition: box-shadow 0.8s;

@@ -1,7 +1,6 @@
 import { InputTypeEnum, ValidationRules } from '../../../typings/commonTypes';
-import { FC } from 'react';
 
-export type OwnProps = {
+export type InputProps = {
   inputHandler?(value: string): void;
   label?: string;
   placeholder?: string;
@@ -10,9 +9,7 @@ export type OwnProps = {
   value?: string;
 };
 
-export type InputProps = FC<OwnProps>;
-
 export type UseInputProps = Pick<
-  OwnProps,
+  InputProps,
   'inputHandler' | 'type' | 'value' | 'validationRule'
 >;

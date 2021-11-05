@@ -10,14 +10,14 @@ import EyeCrossedIcon from '../../assets/icons/eyeCrossed.svg';
 
 import styles from './Input.css';
 
-export const Input: InputProps = ({
+export const Input = ({
   inputHandler,
   label,
   placeholder,
   validationRule,
   type,
   value,
-}) => {
+}: InputProps) => {
   const {
     clearInputValue,
     defaultInputType,
