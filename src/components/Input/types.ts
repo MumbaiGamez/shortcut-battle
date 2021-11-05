@@ -1,4 +1,4 @@
-import { InputTypeEnum } from 'commonTypes';
+import { InputTypeEnum } from '../../../typings/commonTypes';
 import { FC } from 'react';
 
 export type OwnProps = {

@@ -7,7 +7,7 @@ import { Star } from '../Start';
 import { Input } from '../Input';
 import { Card } from '../Card';
 
-import { InputTypeEnum } from '../../commonTypes';
+import { InputTypeEnum } from '../../../typings/commonTypes';
 
 import styles from './App.css';
 
