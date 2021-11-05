@@ -1,16 +1,26 @@
 import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 
-import { Button } from '../Button';
+import { Home } from '../../pages//Home';
+import { ComponentsLibrary } from '../../pages/ComponentsLibrary';
 
 import styles from './App.css';
 
 export const App = () => {
   return (
     <div className={styles.app}>
-      <h1>Shortcut Battle</h1>
-      <h2>Coming soon</h2>
-      <br />
-      <Button>Sample button</Button>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/ComponentsLibrary">Components Library</Link>
+        </li>
+      </ul>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/ComponentsLibrary" element={<ComponentsLibrary />} />
+      </Routes>
     </div>
   );
 };
