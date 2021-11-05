@@ -1,7 +1,7 @@
 import { FC, ButtonHTMLAttributes } from 'react';
 
 export type OwnProps = {
-  className?: 'string';
+  className?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export type Props = FC<OwnProps>;
+export type ButtonProps = FC<OwnProps>;
