@@ -32,11 +32,18 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
+              modules: {
+                localIdentName: '[local]_[hash:base64:6]',
+                exportLocalsConvention: 'camelCase',
+              },
             },
           },
           'postcss-loader',
         ],
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
       },
     ],
   },
