@@ -20,7 +20,7 @@ export const App: FC = () => {
       <Button>Sample button</Button>
       <Loader />
       <Star />
-      <Input type={InputTypeEnum.password} />
+      <Input type={InputTypeEnum.password} validationRule={{ minSymbols: 6 }} />
       <Card />
     </div>
   );

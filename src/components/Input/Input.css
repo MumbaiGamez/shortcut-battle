@@ -7,13 +7,11 @@
 .input {
   width: 100%;
   padding: 10px 40px 10px 20px;
-  border: 1px solid var(--secondary-text-color);
   border-radius: var(--border-radius);
   background-color: var(--card-background-color);
   color: var(--primary-text-color);
   font-size: 14px;
-  outline: none;
-  transition: all 0.3s;
+  transition: box-shadow 0.8s;
 }
 
 .input::placeholder {
@@ -48,4 +46,50 @@
 
 .icon {
   fill: var(--secondary-text-color);
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  transform: translateY(-100%);
+  color: var(--secondary-text-color);
+}
+
+.error {
+  position: absolute;
+  left: 20px;
+  bottom: -30px;
+  display: inline-block;
+  color: var(--error-color);
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}
+
+.error-border {
+  box-shadow: 0 0 5px var(--error-color);
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }

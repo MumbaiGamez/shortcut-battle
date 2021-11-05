@@ -1,10 +1,19 @@
-import { InputTypeEnum } from '../../../typings/commonTypes';
 import { useState } from 'react';
+
+import { InputTypeEnum } from '../../../typings/commonTypes';
 import { UseInputProps } from './types';
 
-export const useInput = ({ inputHandler, type, value }: UseInputProps) => {
+import { getValidationError } from '../../utils/validation';
+
+export const useInput = ({
+  inputHandler,
+  type,
+  value,
+  validationRule,
+}: UseInputProps) => {
   const [defaultInputValue, defaultInputHandler] = useState('');
   const [isCrossedEye, setIsCrossedEye] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [defaultInputType, setDefaultInputType] = useState(
     type || InputTypeEnum.text
   );
@@ -21,6 +30,9 @@ export const useInput = ({ inputHandler, type, value }: UseInputProps) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
+    const newErrorMessage = getValidationError(validationRule, value);
+    setErrorMessage(newErrorMessage);
 
     if (inputHandler) {
       inputHandler(value);
@@ -39,10 +51,13 @@ export const useInput = ({ inputHandler, type, value }: UseInputProps) => {
 
   const isShowEyeIcon = type === InputTypeEnum.password;
 
+  const valueForInput = value || defaultInputValue;
+
   return {
     clearInputValue,
     defaultInputType,
-    defaultInputValue: value || defaultInputValue,
+    defaultInputValue: valueForInput,
+    errorMessage,
     handleInputChange,
     isShowEyeIcon,
     isCrossedEye,

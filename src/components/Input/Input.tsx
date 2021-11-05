@@ -12,7 +12,9 @@ import styles from './Input.css';
 
 export const Input: InputProps = ({
   inputHandler,
+  label,
   placeholder,
+  validationRule,
   type,
   value,
 }) => {
@@ -20,20 +22,23 @@ export const Input: InputProps = ({
     clearInputValue,
     defaultInputType,
     defaultInputValue,
+    errorMessage,
     handleInputChange,
     isShowEyeIcon,
     isCrossedEye,
     toggleEye,
   } = useInput({
     inputHandler,
+    validationRule,
     type,
     value,
   });
 
   return (
     <div className={styles.inputContainer}>
+      <span className={styles.label}>{label}</span>
       <input
-        className={classNames(styles.input)}
+        className={classNames(styles.input, errorMessage && styles.errorBorder)}
         onChange={handleInputChange}
         placeholder={placeholder}
         type={defaultInputType}
@@ -57,6 +62,7 @@ export const Input: InputProps = ({
           onClick={clearInputValue}
         ></span>
       )}
+      {errorMessage && <span className={styles.error}>{errorMessage}</span>}
     </div>
   );
 };

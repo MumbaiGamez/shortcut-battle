@@ -21,3 +21,10 @@ export enum InputTypeEnum {
   url = 'url',
   week = 'week',
 }
+
+export type ValidationRules = {
+  minSymbols?: number;
+  phone?: boolean;
+  email?: boolean;
+  isRequired?: boolean;
+};
