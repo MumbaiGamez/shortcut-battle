@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import { Button } from '../Button';
 
 import styles from './App.css';
 
-export const App: FC = () => {
+export const App = () => {
   return (
     <div className={styles.app}>
       <h1>Shortcut Battle</h1>

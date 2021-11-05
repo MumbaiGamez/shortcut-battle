@@ -5,7 +5,7 @@ import { ButtonProps } from './types';
 
 import styles from './Button.css';
 
-export const Button: ButtonProps = ({ children, className, ...props }) => {
+export const Button = ({ children, className, ...props }: ButtonProps) => {
   return (
     <button className={classNames(styles.button, className)} {...props}>
       {children}
