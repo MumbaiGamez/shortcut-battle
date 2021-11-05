@@ -10,13 +10,13 @@ export const useInput = ({ inputHandler, type, value }: UseInputProps) => {
   );
 
   const toggleEye = () => {
-    setIsCrossedEye((prevState) => !prevState);
-
     if (isCrossedEye) {
-      setDefaultInputType(InputTypeEnum.text);
-    } else {
       setDefaultInputType(InputTypeEnum.password);
+    } else {
+      setDefaultInputType(InputTypeEnum.text);
     }
+
+    setIsCrossedEye((prevState) => !prevState);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
