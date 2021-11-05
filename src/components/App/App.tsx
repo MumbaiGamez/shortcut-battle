@@ -1,10 +1,12 @@
-import Button from '../Button';
 import React, { FC } from 'react';
-import s from './App.css';
+
+import { Button } from '../Button';
+
+import styles from './App.css';
 
 export const App: FC = () => {
   return (
-    <div className={s.app}>
+    <div className={styles.app}>
       <h1>Shortcut Battle</h1>
       <h2>Coming soon</h2>
       <br />
