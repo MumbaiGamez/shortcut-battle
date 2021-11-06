@@ -5,10 +5,16 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Poppins, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
+  font-family: Poppins, sans-serif;
   background-color: #000;
   color: var(--main-text-color);
 }
