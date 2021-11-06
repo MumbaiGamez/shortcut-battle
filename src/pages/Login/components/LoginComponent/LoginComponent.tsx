@@ -1,0 +1,51 @@
+import React from 'react';
+
+import { Button } from '../../../../components/Button';
+import { Card } from '../../../../components/Card';
+import { Input } from '../../../../components/Input';
+import { Toaster } from '../../../../components/Toaster';
+import { Loader } from '../../../../components/Loader';
+
+import { useLogin } from './useLogin';
+
+import { InputTypeEnum } from '../../../../../typings/commonTypes';
+import { LoginComponentProps } from './types';
+
+import styles from './LoginComponent.css';
+
+export const LoginComponent = (props: LoginComponentProps) => {
+  const { switchForm } = props;
+  const {
+    error,
+    handleLogin,
+    isLoading,
+    login,
+    password,
+    setLogin,
+    setPassword,
+  } = useLogin();
+
+  return (
+    <Card title={'Login'}>
+      <Toaster isError={!!error} text={error} />
+      {isLoading && <Loader />}
+      <Input
+        inputHandler={setLogin}
+        placeholder={'Login'}
+        value={login}
+        validationRule={{ isRequired: true }}
+      />
+      <Input
+        inputHandler={setPassword}
+        placeholder={'Password'}
+        value={password}
+        type={InputTypeEnum.password}
+        validationRule={{ minSymbols: 6 }}
+      />
+      <div className={styles.switchForm} onClick={switchForm}>
+        Not registered? Go to Registration
+      </div>
+      <Button onClick={handleLogin}>Login</Button>
+    </Card>
+  );
+};
