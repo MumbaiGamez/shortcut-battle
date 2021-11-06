@@ -12,7 +12,7 @@ import styles from './ComponentsLibrary.css';
 
 export const ComponentsLibrary = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.componentsLibrary}>
       <Loader />
       <Star customClassName={styles.starWrapper} />
       <div className={styles.cardContainer}>

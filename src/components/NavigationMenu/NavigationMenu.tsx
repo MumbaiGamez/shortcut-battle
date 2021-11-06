@@ -14,7 +14,7 @@ const navigationConfig = [
 
 export const NavigationMenu = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.navigationMenu}>
       {navigationConfig.map(({ link, name }) => (
         <NavigationLink link={link} name={name} key={link} />
       ))}
