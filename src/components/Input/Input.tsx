@@ -20,8 +20,8 @@ export const Input = ({
 }: InputProps) => {
   const {
     clearInputValue,
-    defaultInputType,
-    defaultInputValue,
+    currentType,
+    currentValue,
     errorMessage,
     handleInputChange,
     isShowEyeIcon,
@@ -35,14 +35,14 @@ export const Input = ({
   });
 
   return (
-    <div className={styles.inputContainer}>
+    <div className={styles.container}>
       <span className={styles.label}>{label}</span>
       <input
         className={classNames(styles.input, errorMessage && styles.errorBorder)}
         onChange={handleInputChange}
         placeholder={placeholder}
-        type={defaultInputType}
-        value={defaultInputValue}
+        type={currentType}
+        value={currentValue}
       />
       {isShowEyeIcon ? (
         isCrossedEye ? (
