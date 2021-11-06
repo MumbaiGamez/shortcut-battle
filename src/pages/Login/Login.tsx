@@ -21,7 +21,7 @@ export const Login = () => {
         <RegistrationComponent switchForm={switchForm} />
       )}
       <Star
-        customClassName={classNames(
+        className={classNames(
           styles.starWrapper,
           isLogin && styles.loginStarPosition
         )}
