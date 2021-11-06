@@ -9,12 +9,12 @@
   border: 1px solid var(--secondary-text-color);
 }
 
-.card-title {
+.title {
   margin-top: 30px;
   font-size: 24px;
 }
 
-.card-subtitle {
+.subtitle {
   margin-top: 20px;
   font-size: 16px;
   color: var(--secondary-text-color);

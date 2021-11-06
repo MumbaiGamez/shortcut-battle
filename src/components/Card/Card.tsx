@@ -7,8 +7,8 @@ import styles from './Card.css';
 export const Card = ({ children }: CardProps) => {
   return (
     <div className={styles.card}>
-      <div className={styles.cardTitle}>Title</div>
-      <div className={styles.cardSubtitle}>Subtitle</div>
+      <div className={styles.title}>Title</div>
+      <div className={styles.subtitle}>Subtitle</div>
       {children}
     </div>
   );
