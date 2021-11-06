@@ -1,10 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Home } from '../../pages//Home';
-import { ComponentsLibrary } from '../../pages/ComponentsLibrary';
-
-import { NavigationMenu } from '../NavigationMenu';
+import { Home } from '../pages/Home';
+import { ComponentsLibrary } from '../pages/ComponentsLibrary';
+import { NavigationMenu } from '../components/NavigationMenu';
 
 import styles from './App.css';
 
