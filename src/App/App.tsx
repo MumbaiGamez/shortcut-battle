@@ -5,8 +5,9 @@ import { Home } from '../pages/Home';
 import { ComponentsLibrary } from '../pages/ComponentsLibrary';
 import { NavigationMenu } from '../components/NavigationMenu';
 
-import styles from './App.css';
 import { RoutesList } from '../../typings/commonTypes';
+
+import styles from './App.css';
 
 export const App = () => {
   return (
