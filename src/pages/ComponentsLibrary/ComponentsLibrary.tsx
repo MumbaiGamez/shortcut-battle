@@ -14,7 +14,7 @@ export const ComponentsLibrary = () => {
   return (
     <div className={styles.componentsLibrary}>
       <Loader />
-      <Star customClassName={styles.starWrapper} />
+      <Star className={styles.starWrapper} />
       <div className={styles.cardContainer}>
         <Card>
           <Input
