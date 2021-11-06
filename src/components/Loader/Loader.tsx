@@ -1,25 +1,37 @@
 import React from 'react';
-import cn from 'classnames';
+import classNames from 'classnames';
 
 import styles from './Loader.css';
 
 export const Loader = () => {
   return (
     <div className={styles.spinnerBox}>
-      <div className={cn(styles.blueOrbit, styles.common)}></div>
+      <div className={classNames(styles.blueOrbit, styles.common)}></div>
 
-      <div className={cn(styles.greenOrbit, styles.common)}></div>
+      <div className={classNames(styles.greenOrbit, styles.common)}></div>
 
-      <div className={cn(styles.redOrbit, styles.common)}></div>
+      <div className={classNames(styles.redOrbit, styles.common)}></div>
 
       <div
-        className={cn(styles.whiteOrbit, styles.common, styles.transform1)}
+        className={classNames(
+          styles.whiteOrbit,
+          styles.common,
+          styles.transform1
+        )}
       ></div>
       <div
-        className={cn(styles.whiteOrbit, styles.common, styles.transform2)}
+        className={classNames(
+          styles.whiteOrbit,
+          styles.common,
+          styles.transform2
+        )}
       ></div>
       <div
-        className={cn(styles.whiteOrbit, styles.common, styles.transform3)}
+        className={classNames(
+          styles.whiteOrbit,
+          styles.common,
+          styles.transform3
+        )}
       ></div>
     </div>
   );

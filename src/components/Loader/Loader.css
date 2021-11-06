@@ -1,12 +1,10 @@
-:root {
+.spinner-box {
   --loader-size: 200px;
   --blue-orbit-size: calc(var(--loader-size) / 2);
   --green-orbit-size: calc(var(--loader-size) / 2.5);
   --red-orbit-size: calc(var(--loader-size) / 3);
   --white-orbit-size: calc(var(--loader-size) / 5);
-}
 
-.spinner-box {
   width: var(--loader-size);
   height: var(--loader-size);
   display: flex;

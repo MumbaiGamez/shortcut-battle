@@ -6,12 +6,18 @@ import { Routs } from '../../../typings/commonTypes';
 
 import styles from './NavigationMenu.css';
 
+const navigationConfig = [
+  { link: Routs.home, name: 'Home' },
+  { link: Routs.login, name: 'Login' },
+  { link: Routs.library, name: 'Library' },
+];
+
 export const NavigationMenu = () => {
   return (
     <div className={styles.container}>
-      <NavigationLink link={Routs.home} name={'Home'} />
-      <NavigationLink link={Routs.library} name={'Library'} />
-      <NavigationLink link={Routs.login} name={'Login'} />
+      {navigationConfig.map(({ link, name }) => (
+        <NavigationLink link={link} name={name} key={link} />
+      ))}
     </div>
   );
 };

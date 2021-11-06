@@ -15,14 +15,16 @@ export const ComponentsLibrary = () => {
     <div className={styles.container}>
       <Loader />
       <Star customClassName={styles.starWrapper} />
-      <Card>
-        <Input
-          type={InputTypeEnum.password}
-          validationRule={{ minSymbols: 6 }}
-        />
-        <Input validationRule={{ isRequired: true }} />
-        <Button>Sample button</Button>
-      </Card>
+      <div className={styles.cardContainer}>
+        <Card>
+          <Input
+            type={InputTypeEnum.password}
+            validationRule={{ minSymbols: 6 }}
+          />
+          <Input validationRule={{ isRequired: true }} />
+          <Button>Sample button</Button>
+        </Card>
+      </div>
     </div>
   );
 };
