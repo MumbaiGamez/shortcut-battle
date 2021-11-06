@@ -18,3 +18,14 @@ input {
   border: none;
   outline: none;
 }
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-text-color);
+}
