@@ -22,6 +22,13 @@ export enum InputTypeEnum {
   week = 'week',
 }
 
+export enum Routs {
+  home = '/',
+  login = '/login',
+  register = '/register',
+  library = '/library',
+}
+
 export type ValidationRules = {
   minSymbols?: number;
   phone?: boolean;
