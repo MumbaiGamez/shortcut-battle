@@ -1,25 +1,31 @@
 import React from 'react';
+import classNames from 'classnames';
 
-import { Button } from '../../components/Button';
-import { Card } from '../../components/Card';
-import { Input } from '../../components/Input';
-
-import { InputTypeEnum } from '../../../typings/commonTypes';
+import { LoginComponent } from '../../components/LoginComponent';
+import { RegistrationComponent } from '../../components/RegistrationComponent';
+import { Star } from '../../components/Start';
 
 import styles from './Login.css';
 
 export const Login = () => {
+  const [isLogin, setIsLogin] = React.useState(true);
+  const switchForm = () => {
+    setIsLogin((prev) => !prev);
+  };
+
   return (
     <div className={styles.login}>
-      <Card>
-        <Input validationRule={{ isRequired: true }} placeholder={'Login'} />
-        <Input
-          placeholder={'Password'}
-          type={InputTypeEnum.password}
-          validationRule={{ minSymbols: 6 }}
-        />
-        <Button>Login</Button>
-      </Card>
+      {isLogin ? (
+        <LoginComponent switchForm={switchForm} />
+      ) : (
+        <RegistrationComponent switchForm={switchForm} />
+      )}
+      <Star
+        customClassName={classNames(
+          styles.starWrapper,
+          isLogin && styles.loginStarPosition
+        )}
+      />
     </div>
   );
 };

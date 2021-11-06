@@ -16,7 +16,7 @@ export const ComponentsLibrary = () => {
       <Loader />
       <Star customClassName={styles.starWrapper} />
       <div className={styles.cardContainer}>
-        <Card>
+        <Card subtitle={'Subtitle'} title={'Title'}>
           <Input
             type={InputTypeEnum.password}
             validationRule={{ minSymbols: 6 }}
