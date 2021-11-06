@@ -1,32 +1,26 @@
 import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 
-import { Button } from '../Button';
-
-import { Loader } from '../Loader';
-import { Star } from '../Start';
-import { Input } from '../Input';
-import { Card } from '../Card';
-
-import { InputTypeEnum } from '../../../typings/commonTypes';
+import { Home } from '../../pages//Home';
+import { ComponentsLibrary } from '../../pages/ComponentsLibrary';
 
 import styles from './App.css';
 
 export const App = () => {
   return (
     <div className={styles.app}>
-      <h1>Shortcut Battle</h1>
-      <h2>Coming soon</h2>
-      <br />
-      <Loader />
-      <Star customClassName={styles.starWrapper} />
-      <Card>
-        <Input
-          type={InputTypeEnum.password}
-          validationRule={{ minSymbols: 6 }}
-        />
-        <Input validationRule={{ isRequired: true }} />
-        <Button>Sample button</Button>
-      </Card>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/library">Components Library</Link>
+        </li>
+      </ul>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/library" element={<ComponentsLibrary />} />
+      </Routes>
     </div>
   );
 };
