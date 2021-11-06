@@ -1,6 +1,6 @@
-import { Routs } from '../../../typings/commonTypes';
+import { RoutesList } from '../../../typings/commonTypes';
 
 export type NavigationLinkProps = {
-  link: Routs;
+  link: RoutesList;
   name: string;
 };

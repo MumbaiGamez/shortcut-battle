@@ -22,7 +22,7 @@ export enum InputTypeEnum {
   week = 'week',
 }
 
-export enum Routs {
+export enum RoutesList {
   home = '/',
   login = '/login',
   register = '/register',
