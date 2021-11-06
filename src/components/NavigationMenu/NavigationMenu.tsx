@@ -2,14 +2,14 @@ import React from 'react';
 
 import { NavigationLink } from '../NavigationLink';
 
-import { Routs } from '../../../typings/commonTypes';
+import { RoutesList } from '../../../typings/commonTypes';
 
 import styles from './NavigationMenu.css';
 
 const navigationConfig = [
-  { link: Routs.home, name: 'Home' },
-  { link: Routs.login, name: 'Login' },
-  { link: Routs.library, name: 'Library' },
+  { link: RoutesList.home, name: 'Home' },
+  { link: RoutesList.login, name: 'Login' },
+  { link: RoutesList.library, name: 'Library' },
 ];
 
 export const NavigationMenu = () => {
