@@ -14,9 +14,7 @@ export const useInput = ({
   const [defaultInputValue, defaultInputHandler] = useState('');
   const [isCrossedEye, setIsCrossedEye] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [defaultInputType, setDefaultInputType] = useState(
-    type || InputTypeEnum.text
-  );
+  const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
 
   const checkValidation = (value: string) => {
     const newErrorMessage = getValidationError(validationRule, value);
@@ -25,9 +23,9 @@ export const useInput = ({
 
   const toggleEye = () => {
     if (isCrossedEye) {
-      setDefaultInputType(InputTypeEnum.password);
+      setСurrentType(InputTypeEnum.password);
     } else {
-      setDefaultInputType(InputTypeEnum.text);
+      setСurrentType(InputTypeEnum.text);
     }
 
     setIsCrossedEye((prevState) => !prevState);
@@ -56,12 +54,12 @@ export const useInput = ({
 
   const isShowEyeIcon = type === InputTypeEnum.password;
 
-  const valueForInput = value || defaultInputValue;
+  const currentValue = value || defaultInputValue;
 
   return {
     clearInputValue,
-    defaultInputType,
-    defaultInputValue: valueForInput,
+    currentType,
+    currentValue,
     errorMessage,
     handleInputChange,
     isShowEyeIcon,

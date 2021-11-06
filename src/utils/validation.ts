@@ -1,5 +1,5 @@
 import { ValidationRules } from '../../typings/commonTypes';
-import { emailRegExp, phoneRegExp } from './regex';
+import { EMAIL_REG_EXP, PHONE_REG_EXP } from './regex';
 
 export const getValidationError = (
   rules: ValidationRules | undefined,
@@ -14,9 +14,9 @@ export const getValidationError = (
     errorMessage = `Field is required`;
   } else if (rules.minSymbols && rules.minSymbols > value.toString().length) {
     errorMessage = `Less then ${rules.minSymbols} symbols`;
-  } else if (rules.phone && !value.toString().match(phoneRegExp)) {
+  } else if (rules.phone && !value.toString().match(PHONE_REG_EXP)) {
     errorMessage = `Invalid phone`;
-  } else if (rules.email && !value.toString().match(emailRegExp)) {
+  } else if (rules.email && !value.toString().match(EMAIL_REG_EXP)) {
     errorMessage = `Invalid email`;
   }
 

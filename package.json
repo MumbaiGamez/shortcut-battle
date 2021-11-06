@@ -6,8 +6,8 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "npm-run-all lint:*",
-    "lint:ts": "eslint --ext=.ts,.tsx src --fix",
-    "lint:css": "stylelint src/**/*.css --fix",
+    "lint:ts": "eslint --ext=.ts,.tsx src",
+    "lint:css": "stylelint src/**/*.css",
     "prepare": "husky install"
   },
   "repository": {
