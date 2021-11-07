@@ -9,7 +9,7 @@
   box-shadow: 0 0 10em 5em #ff66004d, 0 0 100px 50px #ff66002d inset, 0 0 10px 5px #ffcc007c;
 }
 
-.second-text {
+.hoveredText {
   width: 100%;
   height: 100%;
   mask: url("../../assets/images/nature-sprite.png");
@@ -19,12 +19,12 @@
   animation: blur-animation 0.7s steps(22) forwards;
 }
 
-.link:not(.active-link) .second-text:hover {
+.link:not(.active-link) .hoveredText:hover {
   animation: hover-animation 0.7s steps(22) forwards;
   background-color: #f8a701;
 }
 
-.first-text {
+.mainText {
   position: absolute;
   text-align: center;
   width: 100%;

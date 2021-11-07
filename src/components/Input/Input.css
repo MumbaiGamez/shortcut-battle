@@ -1,4 +1,4 @@
-.input-container {
+.inputContainer {
   width: 100%;
   position: relative;
   display: inline-block;
@@ -32,17 +32,17 @@
   cursor: pointer;
 }
 
-.clear-button {
+.clearButton {
   opacity: 0%;
   transition: opacity 0.3s;
 }
 
-.clear-button::after {
+.clearButton::after {
   display: inline-block;
   content: "\00d7";
 }
 
-.input-container:hover .clear-button {
+.inputContainer:hover .clearButton {
   opacity: 100%;
 }
 
@@ -69,7 +69,7 @@
   transform: translate3d(0, 0, 0);
 }
 
-.error-border {
+.errorBorder {
   box-shadow: 0 0 5px var(--error-color);
 }
 
