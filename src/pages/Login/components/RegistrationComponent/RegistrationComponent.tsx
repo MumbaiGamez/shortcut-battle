@@ -1,15 +1,16 @@
 import React from 'react';
 
+import { Input, InputTypeEnum } from '../../../../components/Input';
 import { Button } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
-import { Input, InputTypeEnum } from '../../../../components/Input';
 import { Toaster } from '../../../../components/Toaster';
 import { Loader } from '../../../../components/Loader';
+
+import { useRegistration } from './useRegistration';
 
 import { RegistrationComponentProps } from './types';
 
 import styles from './RegistrationComponent.css';
-import { useRegistration } from './useRegistration';
 
 export const RegistrationComponent = (props: RegistrationComponentProps) => {
   const { switchForm } = props;
@@ -35,39 +36,39 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
       <Toaster isError={!!error} text={error} />
       {isLoading && <Loader />}
       <Input
-        inputHandler={setFirstName}
+        handleInput={setFirstName}
         placeholder={'First name'}
         value={firstName}
         validationRule={{ isRequired: true }}
       />
       <Input
-        inputHandler={setSecondName}
+        handleInput={setSecondName}
         placeholder={'Second name'}
         value={secondName}
         validationRule={{ isRequired: true }}
       />
       <Input
-        inputHandler={setEmail}
+        handleInput={setEmail}
         placeholder={'Email'}
         type={InputTypeEnum.email}
         value={email}
         validationRule={{ isRequired: true, email: true }}
       />
       <Input
-        inputHandler={setPhone}
+        handleInput={setPhone}
         placeholder={'Phone'}
         type={InputTypeEnum.email}
         value={phone}
         validationRule={{ isRequired: true, phone: true }}
       />
       <Input
-        inputHandler={setLogin}
+        handleInput={setLogin}
         validationRule={{ isRequired: true }}
         value={login}
         placeholder={'Login'}
       />
       <Input
-        inputHandler={setPassword}
+        handleInput={setPassword}
         placeholder={'Password'}
         type={InputTypeEnum.password}
         value={password}

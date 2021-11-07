@@ -51,15 +51,15 @@
   animation: spin-3d 10s linear 0s infinite;
 }
 
-.transform1 {
+.transform-entity-first {
   transform: rotate3d(1, 1, 1, 90deg);
 }
 
-.transform2 {
+.transform-entity-second {
   transform: rotate3d(1, 2, 0.5, 90deg);
 }
 
-.transform3 {
+.transform-entity-third {
   transform: rotate3d(0.5, 1, 2, 90deg);
 }
 

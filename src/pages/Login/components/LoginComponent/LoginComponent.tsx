@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { Input, InputTypeEnum } from '../../../../components/Input';
 import { Button } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
-import { Input, InputTypeEnum } from '../../../../components/Input';
 import { Toaster } from '../../../../components/Toaster';
 import { Loader } from '../../../../components/Loader';
 
@@ -29,13 +29,13 @@ export const LoginComponent = (props: LoginComponentProps) => {
       <Toaster isError={!!error} text={error} />
       {isLoading && <Loader />}
       <Input
-        inputHandler={setLogin}
+        handleInput={setLogin}
         placeholder={'Login'}
         value={login}
         validationRule={{ isRequired: true }}
       />
       <Input
-        inputHandler={setPassword}
+        handleInput={setPassword}
         placeholder={'Password'}
         value={password}
         type={InputTypeEnum.password}

@@ -6,33 +6,33 @@ import styles from './Loader.css';
 export const Loader = () => {
   return (
     <div className={styles.spinnerBox}>
-      <div className={classNames(styles.blueOrbit, styles.common)}></div>
+      <div className={classNames(styles.blueOrbit, styles.common)} />
 
-      <div className={classNames(styles.greenOrbit, styles.common)}></div>
+      <div className={classNames(styles.greenOrbit, styles.common)} />
 
-      <div className={classNames(styles.redOrbit, styles.common)}></div>
+      <div className={classNames(styles.redOrbit, styles.common)} />
 
       <div
         className={classNames(
           styles.whiteOrbit,
           styles.common,
-          styles.transform1
+          styles.transformEntityFirst
         )}
-      ></div>
+      />
       <div
         className={classNames(
           styles.whiteOrbit,
           styles.common,
-          styles.transform2
+          styles.transformEntitySecond
         )}
-      ></div>
+      />
       <div
         className={classNames(
           styles.whiteOrbit,
           styles.common,
-          styles.transform3
+          styles.transformEntityThird
         )}
-      ></div>
+      />
     </div>
   );
 };
