@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from './constants';
 
 import { GameContextType } from './types';
 
@@ -22,5 +23,9 @@ export const useCanvas = (props: UseCanvasProps) => {
     }
   }, [canvasRef, width, height]);
 
-  return { ctx, canvasRef };
+  const clearCanvas = useCallback(() => {
+    ctx && ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  }, [ctx]);
+
+  return { ctx, canvasRef, clearCanvas };
 };

@@ -21,6 +21,7 @@ export type LayerProps = {
 export type PlaygroundProps = {
   ctx: GameContextType;
   stage: GameStage;
+  clearCanvas: () => void;
 };
 
 export type GameUIProps = {

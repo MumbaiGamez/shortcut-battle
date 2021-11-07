@@ -30,8 +30,6 @@ export const useLayer = (props: LayerProps) => {
         return;
       }
 
-      ctx.clearRect(x.current, y.current, width, height);
-
       if (vx) {
         x.current += dt * vx.current;
       }

@@ -12,7 +12,7 @@ import styles from './Game.css';
 export const Game = () => {
   const [stage, setStage] = useState<GameStage>(GameStage.loading);
 
-  const { canvasRef, ctx } = useCanvas({
+  const { canvasRef, ctx, clearCanvas } = useCanvas({
     width: CANVAS_WIDTH,
     height: CANVAS_HEIGHT,
   });
@@ -24,7 +24,12 @@ export const Game = () => {
   return (
     <main className={styles.game}>
       <GameUI stage={stage} setStage={setStage} />
-      <Playground ref={canvasRef} ctx={ctx} stage={stage} />
+      <Playground
+        ref={canvasRef}
+        ctx={ctx}
+        clearCanvas={clearCanvas}
+        stage={stage}
+      />
     </main>
   );
 };
