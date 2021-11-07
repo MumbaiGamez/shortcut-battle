@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { InputTypeEnum } from '../../../typings/commonTypes';
-import { UseInputProps } from './types';
+import { InputTypeEnum, UseInputProps } from './types';
 
 import { getValidationError } from '../../utils/validation';
 
