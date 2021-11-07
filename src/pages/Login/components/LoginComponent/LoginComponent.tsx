@@ -2,13 +2,12 @@ import React from 'react';
 
 import { Button } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
-import { Input } from '../../../../components/Input';
+import { Input, InputTypeEnum } from '../../../../components/Input';
 import { Toaster } from '../../../../components/Toaster';
 import { Loader } from '../../../../components/Loader';
 
 import { useLogin } from './useLogin';
 
-import { InputTypeEnum } from '../../../../../typings/commonTypes';
 import { LoginComponentProps } from './types';
 
 import styles from './LoginComponent.css';
