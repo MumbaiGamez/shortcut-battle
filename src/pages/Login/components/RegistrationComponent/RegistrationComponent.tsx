@@ -32,7 +32,7 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
       <div className={styles.switchForm} onClick={switchForm}>
         Already registered? Go to Login
       </div>
-      <Button>Registration</Button>
+      <Button isGlow={true}>Registration</Button>
     </Card>
   );
 };
