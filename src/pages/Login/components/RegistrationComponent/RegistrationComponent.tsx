@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Button } from '../../components/Button';
-import { Card } from '../../components/Card';
-import { Input, InputTypeEnum } from '../../components/Input';
+import { Button } from '../../../../components/Button';
+import { Card } from '../../../../components/Card';
+import { Input, InputTypeEnum } from '../../../../components/Input';
 
 import { RegistrationComponentProps } from './types';
 
@@ -30,7 +30,7 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
         validationRule={{ minSymbols: 6 }}
       />
       <div className={styles.switchForm} onClick={switchForm}>
-        Already registered? <span>Go to Login</span>
+        Already registered? Go to Login
       </div>
       <Button>Registration</Button>
     </Card>
