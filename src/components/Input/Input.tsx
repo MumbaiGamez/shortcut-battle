@@ -11,7 +11,7 @@ import EyeCrossedIcon from '../../assets/icons/eyeCrossed.svg';
 import styles from './Input.css';
 
 export const Input = (props: InputProps) => {
-  const { inputHandler, label, placeholder, validationRule, type, value } =
+  const { handleInput, label, placeholder, validationRule, type, value } =
     props;
 
   const {
@@ -20,18 +20,18 @@ export const Input = (props: InputProps) => {
     currentValue,
     errorMessage,
     handleInputChange,
-    isShowEyeIcon,
+    shouldShowEyeIcon,
     isCrossedEye,
     toggleEye,
   } = useInput({
-    inputHandler,
+    handleInput,
     validationRule,
     type,
     value,
   });
 
   return (
-    <div className={styles.container}>
+    <div className={styles.inputContainer}>
       <span className={styles.label}>{label}</span>
       <input
         className={classNames(styles.input, errorMessage && styles.errorBorder)}
@@ -40,7 +40,7 @@ export const Input = (props: InputProps) => {
         type={currentType}
         value={currentValue}
       />
-      {isShowEyeIcon ? (
+      {shouldShowEyeIcon ? (
         isCrossedEye ? (
           <EyeCrossedIcon
             className={classNames(styles.icon, styles.button)}

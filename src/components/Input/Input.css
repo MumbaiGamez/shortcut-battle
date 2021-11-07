@@ -1,4 +1,4 @@
-.container {
+.input-container {
   width: 200px;
   position: relative;
   display: inline-block;
@@ -42,7 +42,7 @@
   content: "\00d7";
 }
 
-.input-container:hover .clear-button {
+.container:hover .clear-button {
   opacity: 100%;
 }
 
