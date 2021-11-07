@@ -29,9 +29,9 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
         type={InputTypeEnum.password}
         validationRule={{ minSymbols: 6 }}
       />
-      <div className={styles.switchForm} onClick={switchForm}>
+      <span className={styles.switchForm} onClick={switchForm}>
         Already registered? Go to Login
-      </div>
+      </span>
       <Button isGlow={true}>Registration</Button>
     </Card>
   );

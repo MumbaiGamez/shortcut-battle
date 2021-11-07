@@ -1,10 +1,10 @@
-.switch-form {
+.switchForm {
   cursor: pointer;
   margin: 20px;
   position: relative;
 }
 
-.switch-form::before {
+.switchForm::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -16,7 +16,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .switch-form:hover::before {
+  .switchForm:hover::before {
     left: 0;
     right: auto;
     width: 100%;
