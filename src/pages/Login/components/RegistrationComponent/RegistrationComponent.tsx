@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '../../../../components/Button';
+import { Button, ButtonTheme } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
 import { Input, InputTypeEnum } from '../../../../components/Input';
 
@@ -32,7 +32,7 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
       <span className={styles.switchForm} onClick={switchForm}>
         Already registered? Go to Login
       </span>
-      <Button isGlow={true}>Registration</Button>
+      <Button theme={ButtonTheme.Glow}>Registration</Button>
     </Card>
   );
 };
