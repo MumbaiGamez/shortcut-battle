@@ -5,9 +5,21 @@ import { ButtonProps } from './types';
 
 import styles from './Button.css';
 
-export const Button = ({ children, className, ...props }: ButtonProps) => {
+export const Button = ({
+  children,
+  className,
+  isGlow,
+  ...props
+}: ButtonProps) => {
   return (
-    <button className={classNames(styles.glowOnHover, className)} {...props}>
+    <button
+      className={classNames(
+        styles.button,
+        isGlow && styles.buttonThemeGlow,
+        className
+      )}
+      {...props}
+    >
       {children}
     </button>
   );

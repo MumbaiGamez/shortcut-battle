@@ -1,4 +1,9 @@
-import { ValidationRules } from '../../../typings/commonTypes';
+export type ValidationRules = {
+  minSymbols?: number;
+  phone?: boolean;
+  email?: boolean;
+  isRequired?: boolean;
+};
 
 export enum InputTypeEnum {
   checkbox = 'checkbox',
@@ -25,7 +30,7 @@ export enum InputTypeEnum {
 }
 
 export type InputProps = {
-  inputHandler?(value: string): void;
+  handleInput?(value: string): void;
   label?: string;
   placeholder?: string;
   type?: InputTypeEnum;
@@ -35,5 +40,5 @@ export type InputProps = {
 
 export type UseInputProps = Pick<
   InputProps,
-  'inputHandler' | 'type' | 'value' | 'validationRule'
+  'handleInput' | 'type' | 'value' | 'validationRule'
 >;
