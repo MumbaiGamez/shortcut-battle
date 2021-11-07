@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { InputTypeEnum } from '../../../typings/commonTypes';
-import { UseInputProps } from './types';
+import { InputTypeEnum, UseInputProps } from './types';
 
 import { getValidationError } from '../../utils/validation';
 
 export const useInput = ({
-  inputHandler,
+  handleInput,
   type,
   value,
   validationRule,
@@ -14,57 +13,57 @@ export const useInput = ({
   const [defaultInputValue, defaultInputHandler] = useState('');
   const [isCrossedEye, setIsCrossedEye] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [defaultInputType, setDefaultInputType] = useState(
-    type || InputTypeEnum.text
-  );
+  const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
 
   const checkValidation = (value: string) => {
-    const newErrorMessage = getValidationError(validationRule, value);
-    setErrorMessage(newErrorMessage);
+    const { errorMessage } = getValidationError(validationRule, value);
+
+    setErrorMessage(errorMessage);
   };
 
-  const toggleEye = () => {
+  const toggleEye = useCallback(() => {
     if (isCrossedEye) {
-      setDefaultInputType(InputTypeEnum.password);
+      setСurrentType(InputTypeEnum.password);
     } else {
-      setDefaultInputType(InputTypeEnum.text);
+      setСurrentType(InputTypeEnum.text);
     }
 
     setIsCrossedEye((prevState) => !prevState);
-  };
+  }, [isCrossedEye]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
 
     checkValidation(value);
 
-    if (inputHandler) {
-      inputHandler(value);
+    if (handleInput) {
+      handleInput(value);
     } else {
       defaultInputHandler(value);
     }
   };
 
-  const clearInputValue = () => {
+  const clearInputValue = useCallback(() => {
     checkValidation('');
-    if (inputHandler) {
-      inputHandler('');
+
+    if (handleInput) {
+      handleInput('');
     } else {
       defaultInputHandler('');
     }
-  };
+  }, [handleInput]);
 
-  const isShowEyeIcon = type === InputTypeEnum.password;
+  const shouldShowEyeIcon = type === InputTypeEnum.password;
 
-  const valueForInput = value || defaultInputValue;
+  const currentValue = value || defaultInputValue;
 
   return {
     clearInputValue,
-    defaultInputType,
-    defaultInputValue: valueForInput,
+    currentType,
+    currentValue,
     errorMessage,
     handleInputChange,
-    isShowEyeIcon,
+    shouldShowEyeIcon,
     isCrossedEye,
     toggleEye,
   };

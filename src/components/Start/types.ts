@@ -1,3 +1,3 @@
 export type StarProps = {
-  customClassName?: string;
+  className?: string;
 };
