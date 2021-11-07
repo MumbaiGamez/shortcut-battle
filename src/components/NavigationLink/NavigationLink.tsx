@@ -15,8 +15,8 @@ export const NavigationLink = (props: NavigationLinkProps) => {
       }
       to={link}
     >
-      <span className={styles.firstText}>{name}</span>
-      <button className={styles.secondText}>{name}</button>
+      <span className={styles.mainText}>{name}</span>
+      <button className={styles.hoveredText}>{name}</button>
     </NavLink>
   );
 };

@@ -12,6 +12,7 @@ export const getValidationError = (
   }
 
   let errorMessage = '';
+
   if (rules.isRequired && !value) {
     isValid = false;
     errorMessage = `Field is required`;
