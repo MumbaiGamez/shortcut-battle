@@ -77,7 +77,9 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
       <div className={styles.switchForm} onClick={switchForm}>
         Already registered? Go to Login
       </div>
-      <Button onClick={handleRegistration}>Registration</Button>
+      <Button isGlow={true} onClick={handleRegistration}>
+        Registration
+      </Button>
     </Card>
   );
 };
