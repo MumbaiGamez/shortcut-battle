@@ -15,11 +15,14 @@ export const useInput = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
 
-  const checkValidation = (value: string) => {
-    const { errorMessage } = getValidationError(validationRule, value);
+  const checkValidation = useCallback(
+    (value: string) => {
+      const { errorMessage } = getValidationError(validationRule, value);
 
-    setErrorMessage(errorMessage);
-  };
+      setErrorMessage(errorMessage);
+    },
+    [validationRule]
+  );
 
   const toggleEye = useCallback(() => {
     if (isCrossedEye) {
@@ -51,7 +54,7 @@ export const useInput = ({
     } else {
       defaultInputHandler('');
     }
-  }, [handleInput]);
+  }, [handleInput, checkValidation]);
 
   const shouldShowEyeIcon = type === InputTypeEnum.password;
 
