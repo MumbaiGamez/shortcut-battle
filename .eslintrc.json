@@ -30,7 +30,8 @@
     ],
     "rules": {
       "react/prop-types": 0,
-      "prettier/prettier": [2, {"singleQuote": true}]
+      "prettier/prettier": [2, {"singleQuote": true}],
+      "react-hooks/exhaustive-deps": 2
     },
     "overrides": [
       {
