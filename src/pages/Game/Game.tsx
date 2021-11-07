@@ -18,7 +18,14 @@ export const Game = () => {
   });
 
   useEffect(() => {
-    setTimeout(() => setStage(GameStage.playing), 0);
+    document.documentElement.style.setProperty(
+      '--game-canvas-width',
+      `${CANVAS_WIDTH}px`
+    );
+    document.documentElement.style.setProperty(
+      '--game-canvas-height',
+      `${CANVAS_HEIGHT}px`
+    );
   }, []);
 
   return (
