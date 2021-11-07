@@ -15,7 +15,7 @@
   z-index: 100;
 }
 
-.common {
+.orbit {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -26,21 +26,21 @@
 .blue-orbit {
   width: var(--blue-orbit-size);
   height: var(--blue-orbit-size);
-  border: 1px solid #91daffa5;
+  border: 1px solid #91daff;
   animation: spin-3d 3s linear 0.2s infinite;
 }
 
 .green-orbit {
   width: var(--green-orbit-size);
   height: var(--green-orbit-size);
-  border: 1px solid #91ffbfa5;
+  border: 1px solid #91ffbf;
   animation: spin-3d 2s linear 0s infinite;
 }
 
 .red-orbit {
   width: var(--red-orbit-size);
   height: var(--red-orbit-size);
-  border: 1px solid #ffca91a5;
+  border: 1px solid #ffca91;
   animation: spin-3d 1s linear 0s infinite;
 }
 

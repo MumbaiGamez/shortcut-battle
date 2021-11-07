@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { Button, ButtonTheme } from '../../../../components/Button';
 import { Input, InputTypeEnum } from '../../../../components/Input';
-import { Button } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
 import { Toaster } from '../../../../components/Toaster';
 import { Loader } from '../../../../components/Loader';
@@ -36,48 +36,48 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
       <Toaster isError={!!error} text={error} />
       {isLoading && <Loader />}
       <Input
-        handleInput={setFirstName}
+        hanldeChange={setFirstName}
         placeholder={'First name'}
         value={firstName}
         validationRule={{ isRequired: true }}
       />
       <Input
-        handleInput={setSecondName}
+        hanldeChange={setSecondName}
         placeholder={'Second name'}
         value={secondName}
         validationRule={{ isRequired: true }}
       />
       <Input
-        handleInput={setEmail}
+        hanldeChange={setEmail}
         placeholder={'Email'}
         type={InputTypeEnum.email}
         value={email}
         validationRule={{ isRequired: true, email: true }}
       />
       <Input
-        handleInput={setPhone}
+        hanldeChange={setPhone}
         placeholder={'Phone'}
         type={InputTypeEnum.email}
         value={phone}
         validationRule={{ isRequired: true, phone: true }}
       />
       <Input
-        handleInput={setLogin}
+        hanldeChange={setLogin}
         validationRule={{ isRequired: true }}
         value={login}
         placeholder={'Login'}
       />
       <Input
-        handleInput={setPassword}
+        hanldeChange={setPassword}
         placeholder={'Password'}
         type={InputTypeEnum.password}
         value={password}
         validationRule={{ minSymbols: 6 }}
       />
-      <div className={styles.switchForm} onClick={switchForm}>
+      <span className={styles.switchForm} onClick={switchForm}>
         Already registered? Go to Login
-      </div>
-      <Button isGlow={true} onClick={handleRegistration}>
+      </span>
+      <Button theme={ButtonTheme.Glow} onClick={handleRegistration}>
         Registration
       </Button>
     </Card>
