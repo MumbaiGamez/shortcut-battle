@@ -20,7 +20,7 @@ export const ComponentsLibrary = () => {
             validationRule={{ minSymbols: 6 }}
           />
           <Input validationRule={{ isRequired: true }} />
-          <Button>Sample button</Button>
+          <Button isGlow={true}>Sample button</Button>
         </Card>
       </div>
     </div>
