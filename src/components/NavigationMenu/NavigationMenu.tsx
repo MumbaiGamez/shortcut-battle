@@ -10,6 +10,7 @@ const navigationConfig = [
   { link: RoutesList.home, name: 'Home' },
   { link: RoutesList.login, name: 'Login' },
   { link: RoutesList.library, name: 'Library' },
+  { link: RoutesList.play, name: 'Play' },
 ];
 
 export const NavigationMenu = () => {
