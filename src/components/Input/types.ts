@@ -1,4 +1,9 @@
-import { ValidationRules } from '../../../typings/commonTypes';
+export type ValidationRules = {
+  minSymbols?: number;
+  phone?: boolean;
+  email?: boolean;
+  isRequired?: boolean;
+};
 
 export enum InputTypeEnum {
   checkbox = 'checkbox',
