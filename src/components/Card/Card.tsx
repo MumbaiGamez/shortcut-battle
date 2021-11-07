@@ -4,11 +4,12 @@ import { CardProps } from './types';
 
 import styles from './Card.css';
 
-export const Card = ({ children }: CardProps) => {
+export const Card = (props: CardProps) => {
+  const { children, subtitle, title } = props;
   return (
     <div className={styles.card}>
-      <div className={styles.title}>Title</div>
-      <div className={styles.subtitle}>Subtitle</div>
+      {title && <div className={styles.title}>{title}</div>}
+      {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
       {children}
     </div>
   );
