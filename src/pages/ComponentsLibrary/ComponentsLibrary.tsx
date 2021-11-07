@@ -4,7 +4,7 @@ import { Loader } from '../../components/Loader';
 import { Star } from '../../components/Start';
 import { Input, InputTypeEnum } from '../../components/Input';
 import { Card } from '../../components/Card';
-import { Button } from '../../components/Button';
+import { Button, ButtonTheme } from '../../components/Button';
 
 import styles from './ComponentsLibrary.css';
 
@@ -20,7 +20,7 @@ export const ComponentsLibrary = () => {
             validationRule={{ minSymbols: 6 }}
           />
           <Input validationRule={{ isRequired: true }} />
-          <Button isGlow={true}>Sample button</Button>
+          <Button theme={ButtonTheme.Glow}>Sample button</Button>
         </Card>
       </div>
     </div>
