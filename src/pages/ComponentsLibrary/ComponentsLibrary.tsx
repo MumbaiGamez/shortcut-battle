@@ -2,11 +2,9 @@ import React from 'react';
 
 import { Loader } from '../../components/Loader';
 import { Star } from '../../components/Start';
-import { Input } from '../../components/Input';
+import { Input, InputTypeEnum } from '../../components/Input';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
-
-import { InputTypeEnum } from '../../../typings/commonTypes';
 
 import styles from './ComponentsLibrary.css';
 
