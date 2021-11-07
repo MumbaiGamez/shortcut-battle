@@ -7,7 +7,6 @@ import { useInput } from './useInput';
 
 import EyeIcon from '../../assets/icons/eye.svg';
 import EyeCrossedIcon from '../../assets/icons/eyeCrossed.svg';
-
 import styles from './Input.css';
 
 export const Input = (props: InputProps) => {
