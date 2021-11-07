@@ -13,3 +13,7 @@
 .hide {
   display: none;
 }
+
+.error {
+  color: #f60;
+}
