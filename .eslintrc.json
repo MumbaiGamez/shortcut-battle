@@ -28,6 +28,11 @@
         "plugin:react-hooks/recommended",
         "plugin:@typescript-eslint/recommended"
     ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
     "rules": {
       "react/prop-types": 0,
       "prettier/prettier": [2, {"singleQuote": true}],
