@@ -57,6 +57,7 @@ module.exports = {
       template: path.resolve(__dirname, 'www/index.html'),
     }),
   ],
+  devtool: 'source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, 'dist'),
