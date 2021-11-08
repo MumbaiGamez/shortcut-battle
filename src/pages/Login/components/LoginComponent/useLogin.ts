@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RoutesList } from '../../../../../typings/commonTypes';
+import { InputTypeEnum } from '../../../../components/Input';
 
 import { authAPI } from '../../../../services';
 
@@ -35,16 +36,30 @@ export const useLogin = () => {
     }
   };
 
+  const inputsList = [
+    {
+      hanldeChange: setLogin,
+      placeholder: 'login',
+      setIsFieldValid: setIsAllFieldsValid,
+      value: login,
+      validationRule: { isRequired: true },
+    },
+    {
+      hanldeChange: setPassword,
+      placeholder: 'Password',
+      setIsFieldValid: setIsAllFieldsValid,
+      type: InputTypeEnum.password,
+      value: password,
+      validationRule: { minSymbols: 6 },
+    },
+  ];
+
   return {
     error,
     handleLogin,
+    inputsList,
     isAllFieldsValid,
     isLoading,
     isSuccess,
-    login,
-    password,
-    setLogin,
-    setPassword,
-    setIsAllFieldsValid,
   };
 };

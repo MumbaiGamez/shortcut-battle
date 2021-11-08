@@ -1,60 +1,27 @@
 import React from 'react';
 
-import { Input, InputTypeEnum } from '../../../../components/Input';
-import { Button, ButtonTheme } from '../../../../components/Button';
-import { Card } from '../../../../components/Card';
-import { Toaster } from '../../../../components/Toaster';
-import { Loader } from '../../../../components/Loader';
+import { FormComponent } from '../FormComponent';
 
 import { useLogin } from './useLogin';
 
 import { LoginComponentProps } from './types';
 
-import styles from './LoginComponent.css';
-
 export const LoginComponent = (props: LoginComponentProps) => {
   const { switchForm } = props;
-  const {
-    error,
-    handleLogin,
-    isAllFieldsValid,
-    isLoading,
-    login,
-    password,
-    setLogin,
-    setPassword,
-    setIsAllFieldsValid,
-  } = useLogin();
+  const { error, handleLogin, inputsList, isAllFieldsValid, isLoading } =
+    useLogin();
 
   return (
-    <Card title={'Login'}>
-      <Toaster isError={!!error} text={error} />
-      {isLoading && <Loader />}
-      <Input
-        hanldeChange={setLogin}
-        placeholder={'Login'}
-        value={login}
-        validationRule={{ isRequired: true }}
-        setIsFieldValid={setIsAllFieldsValid}
-      />
-      <Input
-        hanldeChange={setPassword}
-        placeholder={'Password'}
-        value={password}
-        type={InputTypeEnum.password}
-        validationRule={{ minSymbols: 6 }}
-        setIsFieldValid={setIsAllFieldsValid}
-      />
-      <span className={styles.switchFormText} onClick={switchForm}>
-        Not registered? Go to Registration
-      </span>
-      <Button
-        isDisabled={!isAllFieldsValid}
-        onClick={handleLogin}
-        theme={ButtonTheme.Glow}
-      >
-        Login
-      </Button>
-    </Card>
+    <FormComponent
+      buttonText={'Login'}
+      error={error}
+      inputsList={inputsList}
+      isLoading={isLoading}
+      isButtonDisabled={!isAllFieldsValid}
+      onButtonClick={handleLogin}
+      switchForm={switchForm}
+      switchFormText={'Not registered? Go to Registration'}
+      title={'Login'}
+    />
   );
 };

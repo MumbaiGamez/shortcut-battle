@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 import { InputProps, InputTypeEnum } from './types';
 
@@ -24,12 +24,14 @@ export const useInput = (props: UseInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
 
-  if (setIsFieldValid) {
-    const { isValid } = getValidationError(validationRule, value);
-    if (!isValid) {
-      setIsFieldValid(isValid);
+  useEffect(() => {
+    if (setIsFieldValid) {
+      const { isValid } = getValidationError(validationRule, value);
+      if (!isValid) {
+        setIsFieldValid(isValid);
+      }
     }
-  }
+  }, [value, setIsFieldValid, validationRule]);
 
   const checkValidation = useCallback(
     (value: string) => {
