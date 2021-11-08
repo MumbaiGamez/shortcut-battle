@@ -6,30 +6,30 @@ import styles from './Loader.css';
 export const Loader = () => {
   return (
     <div className={styles.spinnerBox}>
-      <div className={classNames(styles.blueOrbit, styles.common)} />
+      <div className={classNames(styles.blueOrbit, styles.orbit)} />
 
-      <div className={classNames(styles.greenOrbit, styles.common)} />
+      <div className={classNames(styles.greenOrbit, styles.orbit)} />
 
-      <div className={classNames(styles.redOrbit, styles.common)} />
+      <div className={classNames(styles.redOrbit, styles.orbit)} />
 
       <div
         className={classNames(
           styles.whiteOrbit,
-          styles.common,
+          styles.orbit,
           styles.transformEntityFirst
         )}
       />
       <div
         className={classNames(
           styles.whiteOrbit,
-          styles.common,
+          styles.orbit,
           styles.transformEntitySecond
         )}
       />
       <div
         className={classNames(
           styles.whiteOrbit,
-          styles.common,
+          styles.orbit,
           styles.transformEntityThird
         )}
       />

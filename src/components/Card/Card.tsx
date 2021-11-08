@@ -10,7 +10,7 @@ export const Card = (props: CardProps) => {
     <div className={styles.card}>
       {title && <div className={styles.title}>{title}</div>}
       {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
-      {children}
+      <div className={styles.bodyWrapper}>{children}</div>
     </div>
   );
 };

@@ -1,16 +1,24 @@
 import { useCallback, useState } from 'react';
 
-import { InputTypeEnum, UseInputProps } from './types';
+import { InputProps, InputTypeEnum } from './types';
 
 import { getValidationError } from '../../utils/validation';
 
-export const useInput = ({
-  handleInput,
-  type,
-  value,
-  validationRule,
-}: UseInputProps) => {
+export type UseInputProps = Pick<
+  InputProps,
+  'hanldeChange' | 'type' | 'value' | 'validationRule'
+>;
+
+export const useInput = (props: UseInputProps) => {
   const [defaultInputValue, defaultInputHandler] = useState('');
+
+  const {
+    hanldeChange = defaultInputHandler,
+    type,
+    value = defaultInputValue,
+    validationRule,
+  } = props;
+
   const [isCrossedEye, setIsCrossedEye] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
@@ -38,32 +46,20 @@ export const useInput = ({
     const { value } = e.target;
 
     checkValidation(value);
-
-    if (handleInput) {
-      handleInput(value);
-    } else {
-      defaultInputHandler(value);
-    }
+    hanldeChange(value);
   };
 
   const clearInputValue = useCallback(() => {
     checkValidation('');
-
-    if (handleInput) {
-      handleInput('');
-    } else {
-      defaultInputHandler('');
-    }
-  }, [handleInput, checkValidation]);
+    hanldeChange('');
+  }, [hanldeChange, checkValidation]);
 
   const shouldShowEyeIcon = type === InputTypeEnum.password;
-
-  const currentValue = value || defaultInputValue;
 
   return {
     clearInputValue,
     currentType,
-    currentValue,
+    currentValue: value,
     errorMessage,
     handleInputChange,
     shouldShowEyeIcon,
