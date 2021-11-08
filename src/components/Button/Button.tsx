@@ -8,6 +8,7 @@ import styles from './Button.css';
 export const Button = ({
   children,
   className,
+  isDisabled,
   theme,
   ...props
 }: ButtonProps) => {
@@ -16,6 +17,7 @@ export const Button = ({
       className={classNames(
         styles.button,
         theme === ButtonTheme.Glow && styles.buttonThemeGlow,
+        isDisabled && styles.buttonDisabled,
         className
       )}
       {...props}
