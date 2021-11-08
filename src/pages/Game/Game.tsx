@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { setVar } from '../../utils/css';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './constants';
 import { GameUI } from './components/GameUI';
 import { Playground } from './components/Playground';
@@ -18,14 +19,8 @@ export const Game = () => {
   });
 
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--game-canvas-width',
-      `${CANVAS_WIDTH}px`
-    );
-    document.documentElement.style.setProperty(
-      '--game-canvas-height',
-      `${CANVAS_HEIGHT}px`
-    );
+    setVar('--game-canvas-width', `${CANVAS_WIDTH}px`);
+    setVar('--game-canvas-height', `${CANVAS_HEIGHT}px`);
   }, []);
 
   return (
