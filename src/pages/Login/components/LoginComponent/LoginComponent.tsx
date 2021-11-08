@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '../../../../components/Button';
+import { Button, ButtonTheme } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
 import { Input, InputTypeEnum } from '../../../../components/Input';
 
@@ -19,10 +19,10 @@ export const LoginComponent = (props: LoginComponentProps) => {
         type={InputTypeEnum.password}
         validationRule={{ minSymbols: 6 }}
       />
-      <div className={styles.switchForm} onClick={switchForm}>
+      <span className={styles.switchFormText} onClick={switchForm}>
         Not registered? Go to Registration
-      </div>
-      <Button isGlow={true}>Login</Button>
+      </span>
+      <Button theme={ButtonTheme.Glow}>Login</Button>
     </Card>
   );
 };
