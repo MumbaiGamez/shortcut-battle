@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { Loader } from '../../../../components/Loader';
-import { Button } from '../../../../components/Button';
+import { Button, ButtonTheme } from '../../../../components/Button';
 
 import { GameStage, GameUIProps } from '../../types';
 
@@ -38,10 +38,18 @@ export const GameUI = (props: GameUIProps) => {
             <b>Scores:</b> <span>0</span>
           </div>
           <div>
-            <Button isGlow className={styles.headerButton} onClick={pause}>
+            <Button
+              theme={ButtonTheme.Glow}
+              className={styles.headerButton}
+              onClick={pause}
+            >
               Pause
             </Button>
-            <Button isGlow className={styles.headerButton} onClick={restart}>
+            <Button
+              theme={ButtonTheme.Glow}
+              className={styles.headerButton}
+              onClick={restart}
+            >
               Exit
             </Button>
           </div>
