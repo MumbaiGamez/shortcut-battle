@@ -11,6 +11,7 @@ export const useLogin = () => {
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAllFieldsValid, setIsAllFieldsValid] = useState(true);
 
   const navigate = useNavigate();
 
@@ -28,18 +29,22 @@ export const useLogin = () => {
   };
 
   const handleLogin = () => {
-    const data = { login, password };
-    authAPI.login({ data, errorCallback, handleLoading, successCallback });
+    if (isAllFieldsValid) {
+      const data = { login, password };
+      authAPI.login({ data, errorCallback, handleLoading, successCallback });
+    }
   };
 
   return {
     error,
+    handleLogin,
+    isAllFieldsValid,
     isLoading,
     isSuccess,
     login,
     password,
     setLogin,
     setPassword,
-    handleLogin,
+    setIsAllFieldsValid,
   };
 };

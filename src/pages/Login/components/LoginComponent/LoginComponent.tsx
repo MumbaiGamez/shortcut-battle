@@ -17,11 +17,13 @@ export const LoginComponent = (props: LoginComponentProps) => {
   const {
     error,
     handleLogin,
+    isAllFieldsValid,
     isLoading,
     login,
     password,
     setLogin,
     setPassword,
+    setIsAllFieldsValid,
   } = useLogin();
 
   return (
@@ -33,6 +35,7 @@ export const LoginComponent = (props: LoginComponentProps) => {
         placeholder={'Login'}
         value={login}
         validationRule={{ isRequired: true }}
+        setIsFieldValid={setIsAllFieldsValid}
       />
       <Input
         hanldeChange={setPassword}
@@ -40,11 +43,16 @@ export const LoginComponent = (props: LoginComponentProps) => {
         value={password}
         type={InputTypeEnum.password}
         validationRule={{ minSymbols: 6 }}
+        setIsFieldValid={setIsAllFieldsValid}
       />
       <span className={styles.switchFormText} onClick={switchForm}>
         Not registered? Go to Registration
       </span>
-      <Button theme={ButtonTheme.Glow} onClick={handleLogin}>
+      <Button
+        isDisabled={!isAllFieldsValid}
+        onClick={handleLogin}
+        theme={ButtonTheme.Glow}
+      >
         Login
       </Button>
     </Card>

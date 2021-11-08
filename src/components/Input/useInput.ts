@@ -6,7 +6,7 @@ import { getValidationError } from '../../utils/validation';
 
 export type UseInputProps = Pick<
   InputProps,
-  'hanldeChange' | 'type' | 'value' | 'validationRule'
+  'hanldeChange' | 'setIsFieldValid' | 'type' | 'value' | 'validationRule'
 >;
 
 export const useInput = (props: UseInputProps) => {
@@ -14,6 +14,7 @@ export const useInput = (props: UseInputProps) => {
 
   const {
     hanldeChange = defaultInputHandler,
+    setIsFieldValid,
     type,
     value = defaultInputValue,
     validationRule,
@@ -23,13 +24,27 @@ export const useInput = (props: UseInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
 
+  if (setIsFieldValid) {
+    const { isValid } = getValidationError(validationRule, value);
+    if (!isValid) {
+      setIsFieldValid(isValid);
+    }
+  }
+
   const checkValidation = useCallback(
     (value: string) => {
-      const { errorMessage } = getValidationError(validationRule, value);
+      const { isValid, errorMessage } = getValidationError(
+        validationRule,
+        value
+      );
+
+      if (isValid && setIsFieldValid) {
+        setIsFieldValid(isValid);
+      }
 
       setErrorMessage(errorMessage);
     },
-    [validationRule]
+    [validationRule, setIsFieldValid]
   );
 
   const toggleEye = useCallback(() => {
@@ -62,8 +77,8 @@ export const useInput = (props: UseInputProps) => {
     currentValue: value,
     errorMessage,
     handleInputChange,
-    shouldShowEyeIcon,
     isCrossedEye,
+    shouldShowEyeIcon,
     toggleEye,
   };
 };
