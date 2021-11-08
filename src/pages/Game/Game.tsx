@@ -5,12 +5,12 @@ import { GameUI } from './components/GameUI';
 import { Playground } from './components/Playground';
 import { useCanvas } from './useCanvas';
 
-import { GameStage } from './types';
+import { Phase } from './types';
 
 import styles from './Game.css';
 
 export const Game = () => {
-  const [stage, setStage] = useState<GameStage>(GameStage.loading);
+  const [phase, setPhase] = useState<Phase>(Phase.loading);
 
   const { canvasRef, ctx, clearCanvas } = useCanvas({
     width: CANVAS_WIDTH,
@@ -30,12 +30,12 @@ export const Game = () => {
 
   return (
     <main className={styles.game}>
-      <GameUI stage={stage} setStage={setStage} />
+      <GameUI phase={phase} setPhase={setPhase} />
       <Playground
         ref={canvasRef}
         ctx={ctx}
         clearCanvas={clearCanvas}
-        stage={stage}
+        phase={phase}
       />
     </main>
   );

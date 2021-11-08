@@ -4,33 +4,33 @@ import classNames from 'classnames';
 import { Loader } from '../../../../components/Loader';
 import { Button, ButtonTheme } from '../../../../components/Button';
 
-import { GameStage, GameUIProps } from '../../types';
+import { Phase, GameUIProps } from '../../types';
 
 import styles from './GameUI.css';
 
 export const GameUI = (props: GameUIProps) => {
-  const { stage, setStage } = props;
+  const { phase, setPhase } = props;
 
   const start = useCallback(() => {
-    setStage(GameStage.playing);
-  }, [setStage]);
+    setPhase(Phase.playing);
+  }, [setPhase]);
 
   const pause = useCallback(() => {
-    setStage(GameStage.pause);
-  }, [setStage]);
+    setPhase(Phase.pause);
+  }, [setPhase]);
 
   const restart = useCallback(() => {
-    setStage(GameStage.ready);
-  }, [setStage]);
+    setPhase(Phase.ready);
+  }, [setPhase]);
 
   useEffect(() => {
     setTimeout(() => {
-      setStage(GameStage.ready);
+      setPhase(Phase.ready);
     }, 2000);
-  }, [setStage]);
+  }, [setPhase]);
 
   return (
-    <div className={classNames(styles.gameUI, styles[stage])}>
+    <div className={classNames(styles.gameUI, styles[phase])}>
       <div className={styles.filler} />
       <section className={styles.inner}>
         <header className={styles.header}>

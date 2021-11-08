@@ -1,5 +1,6 @@
 import React, { ForwardedRef, forwardRef, useCallback } from 'react';
 
+import { getVar } from '../../../../utils/css';
 import {
   PLAYER_HEIGHT,
   PLAYER_WIDTH,
@@ -12,7 +13,7 @@ import { useAnimationLoop } from '../../useAnimationLoop';
 import { usePlayerKeys } from '../../usePlayerKeys';
 import { useBackground } from '../../useBackground';
 
-import { PlaygroundProps, PlayerAction } from '../../types';
+import { PlaygroundProps, PlayerAction, Entity } from '../../types';
 
 import playerImg from '../../../../assets/images/player.png';
 import bgImg from '../../../../assets/images/starBackground.png';
@@ -20,7 +21,30 @@ import styles from './Playground.css';
 
 export const Playground = forwardRef(
   (props: PlaygroundProps, ref: ForwardedRef<HTMLCanvasElement>) => {
-    const { ctx, stage, clearCanvas } = props;
+    const { ctx, phase, clearCanvas } = props;
+
+    const background = useBackground({
+      ctx,
+      src: bgImg,
+    });
+
+    const leftBorder = useLayer({
+      ctx,
+      pos: [0, 0],
+      width: 1,
+      height: CANVAS_HEIGHT,
+      color: getVar('--game-ui-filler-bg-color'),
+      entity: Entity.border,
+    });
+
+    const rightBorder = useLayer({
+      ctx,
+      pos: [CANVAS_WIDTH - 1, 0],
+      width: 1,
+      height: CANVAS_HEIGHT,
+      color: getVar('--game-ui-filler-bg-color'),
+      entity: Entity.border,
+    });
 
     const startX = CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2;
     const startY = CANVAS_HEIGHT - 2 * PLAYER_HEIGHT;
@@ -31,16 +55,14 @@ export const Playground = forwardRef(
       width: PLAYER_WIDTH,
       height: PLAYER_HEIGHT,
       src: playerImg,
+      entity: Entity.player,
     });
+
+    player.onCollide([leftBorder, rightBorder]);
 
     usePlayerKeys(player, {
       [PlayerAction.moveLeft]: { code: 'ArrowLeft' },
       [PlayerAction.moveRight]: { code: 'ArrowRight' },
-    });
-
-    const background = useBackground({
-      ctx,
-      src: bgImg,
     });
 
     const render = useCallback(
@@ -56,7 +78,7 @@ export const Playground = forwardRef(
       [player, background, ctx, clearCanvas]
     );
 
-    useAnimationLoop(stage, render);
+    useAnimationLoop(phase, render);
 
     return (
       <GameContext.Provider value={ctx}>

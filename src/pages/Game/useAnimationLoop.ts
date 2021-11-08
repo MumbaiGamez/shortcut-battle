@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { GameStage } from './types';
+import { Phase } from './types';
 
 export const useAnimationLoop = (
-  stage: GameStage,
+  phase: Phase,
   callback: (dt: number) => void
 ) => {
   const loop = useRef<number>(0);
@@ -11,7 +11,7 @@ export const useAnimationLoop = (
   const lastUpdate = useRef<number>(performance.now());
 
   const animate = useCallback(() => {
-    if (stage === GameStage.playing) {
+    if (phase === Phase.playing) {
       prevUpdate.current = lastUpdate.current;
       lastUpdate.current = performance.now();
 
@@ -23,7 +23,7 @@ export const useAnimationLoop = (
       cancelAnimationFrame(loop.current);
       loop.current = 0;
     }
-  }, [stage, lastUpdate, callback]);
+  }, [phase, lastUpdate, callback]);
 
   useEffect(() => {
     animate();
