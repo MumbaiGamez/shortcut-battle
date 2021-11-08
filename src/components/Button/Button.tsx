@@ -5,13 +5,8 @@ import { ButtonProps, ButtonTheme } from './types';
 
 import styles from './Button.css';
 
-export const Button = ({
-  children,
-  className,
-  isDisabled,
-  theme,
-  ...props
-}: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
+  const { children, className, isDisabled, theme, ...restProps } = props;
   return (
     <button
       className={classNames(
@@ -20,7 +15,7 @@ export const Button = ({
         isDisabled && styles.buttonDisabled,
         className
       )}
-      {...props}
+      {...restProps}
     >
       {children}
     </button>
