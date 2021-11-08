@@ -8,10 +8,10 @@ import {
   CANVAS_HEIGHT,
 } from '../../constants';
 import { GameContext } from '../../context';
-import { useLayer } from '../../useLayer';
-import { useAnimationLoop } from '../../useAnimationLoop';
-import { usePlayerKeys } from '../../usePlayerKeys';
-import { useBackground } from '../../useBackground';
+import { useLayer } from '../../hooks/useLayer';
+import { useAnimationLoop } from '../../hooks/useAnimationLoop';
+import { usePlayerKeys } from '../../hooks/usePlayerKeys';
+import { useBackground } from '../../hooks/useBackground';
 
 import { PlaygroundProps, PlayerAction, Entity } from '../../types';
 

@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
 
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from './constants';
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
 
-import { GameContextType } from './types';
+import { GameContextType } from '../types';
 
 type UseBackgroundProps = {
   ctx: GameContextType;

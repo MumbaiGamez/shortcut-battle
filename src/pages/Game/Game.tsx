@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './constants';
 import { GameUI } from './components/GameUI';
 import { Playground } from './components/Playground';
-import { useCanvas } from './useCanvas';
+import { useCanvas } from './hooks/useCanvas';
 
 import { Phase } from './types';
 

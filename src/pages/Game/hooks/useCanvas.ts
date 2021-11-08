@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from './constants';
 
-import { GameContextType } from './types';
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
+
+import { GameContextType } from '../types';
 
 type UseCanvasProps = {
   width: number;

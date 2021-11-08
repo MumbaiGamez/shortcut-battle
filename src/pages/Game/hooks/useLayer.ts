@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react';
 
-import { Layer, LayerProps } from './types';
+import { Layer, LayerProps } from '../types';
 
 type CollisionHandler = undefined | ((layer: Layer) => void);
 

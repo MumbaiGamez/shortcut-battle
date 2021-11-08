@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { MIN_SPEED } from './constants';
+import { MIN_SPEED } from '../constants';
 
-import { Layer, PlayerAction, Shortcut } from './types';
+import { Layer, PlayerAction, Shortcut } from '../types';
 
 type KeysMap = Record<PlayerAction, Shortcut>;
 
