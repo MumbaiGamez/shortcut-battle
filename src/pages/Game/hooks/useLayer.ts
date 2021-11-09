@@ -4,7 +4,7 @@ import { Layer, LayerProps } from '../types';
 
 type CollisionHandler = undefined | ((layer: Layer) => void);
 
-const isCollision = (boundaries1: number[], boundaries2: number[]) => {
+const haveCollisions = (boundaries1: number[], boundaries2: number[]) => {
   const [left1, top1, right1, bottom1] = boundaries1;
   const [left2, top2, right2, bottom2] = boundaries2;
 
@@ -79,9 +79,7 @@ export const useLayer = (props: LayerProps) => {
             y.current + height,
           ];
 
-          for (let i = 0; i < layers.length; i++) {
-            const layer = layers[i];
-
+          for (const layer of layers) {
             const layerBoundaries = [
               layer.x.current,
               layer.y.current,
@@ -89,7 +87,7 @@ export const useLayer = (props: LayerProps) => {
               layer.y.current + layer.height,
             ];
 
-            if (isCollision(ownBoundaries, layerBoundaries)) {
+            if (haveCollisions(ownBoundaries, layerBoundaries)) {
               callback && callback(layer);
 
               return true;
