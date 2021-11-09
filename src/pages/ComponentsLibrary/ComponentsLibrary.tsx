@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Loader } from '../../components/Loader';
-import { Star } from '../../components/Start';
+import { Star } from '../../components/Star';
 import { Input, InputTypeEnum } from '../../components/Input';
 import { Card } from '../../components/Card';
 import { Button, ButtonTheme } from '../../components/Button';
@@ -14,7 +14,7 @@ export const ComponentsLibrary = () => {
       <Loader />
       <Star className={styles.starWrapper} />
       <div className={styles.cardContainer}>
-        <Card title={'Title'} subtitle={'Subtitle'}>
+        <Card title="Title" subtitle="Subtitle">
           <Input
             type={InputTypeEnum.password}
             validationRule={{ minSymbols: 6 }}

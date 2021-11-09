@@ -1,0 +1,34 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  position: relative;
+}
+
+.starWrapper {
+  position: absolute;
+  transition: 1s;
+  transition-delay: 100ms;
+  transform: translate(50%, 50%);
+  z-index: -1;
+  width: 400px;
+  height: 400px;
+}
+
+.loginStarPosition {
+  width: 200px;
+  height: 200px;
+  transform: translate(-70%, -70%);
+  background: #5cb6fff2;
+}
+
+.loginStarPosition::after {
+  box-shadow: 0 0 10em 5em #2571ff6b, 0 0 100px 50px #0077ff6b inset, 0 0 10px 5px #5cb6fff2;
+}
