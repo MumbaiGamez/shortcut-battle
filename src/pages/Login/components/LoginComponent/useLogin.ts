@@ -6,10 +6,13 @@ import { InputTypeEnum } from '../../../../components/Input';
 
 import { authAPI } from '../../../../services';
 
-export const useLogin = () => {
+import { UseLoginComponentProps } from './types';
+
+export const useLogin = (props: UseLoginComponentProps) => {
+  const { setError } = props;
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isAllFieldsValid, setIsAllFieldsValid] = useState(true);
@@ -55,7 +58,6 @@ export const useLogin = () => {
   ];
 
   return {
-    error,
     handleLogin,
     inputsList,
     isAllFieldsValid,

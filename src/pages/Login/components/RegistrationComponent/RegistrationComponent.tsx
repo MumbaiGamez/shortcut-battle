@@ -9,14 +9,13 @@ import { RegistrationComponentProps } from './types';
 import styles from './RegistrationComponent.css';
 
 export const RegistrationComponent = (props: RegistrationComponentProps) => {
-  const { switchForm } = props;
-  const { error, handleRegistration, inputsList, isAllFieldsValid, isLoading } =
-    useRegistration();
+  const { switchForm, setError } = props;
+  const { handleRegistration, inputsList, isAllFieldsValid, isLoading } =
+    useRegistration({ setError });
 
   return (
     <FormComponent
       buttonText={'Registration'}
-      error={error}
       inputsList={inputsList}
       isLoading={isLoading}
       isButtonDisabled={!isAllFieldsValid}

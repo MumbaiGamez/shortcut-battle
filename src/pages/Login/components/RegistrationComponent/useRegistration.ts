@@ -6,14 +6,17 @@ import { InputTypeEnum } from '../../../../components/Input';
 
 import { authAPI } from '../../../../services';
 
-export const useRegistration = () => {
+import { UseRegistrationComponentProps } from './types';
+
+export const useRegistration = (props: UseRegistrationComponentProps) => {
+  const { setError } = props;
+
   const [firstName, setFirstName] = useState('');
   const [secondName, setSecondName] = useState('');
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isAllFieldsValid, setIsAllFieldsValid] = useState(true);
@@ -101,7 +104,6 @@ export const useRegistration = () => {
   ];
 
   return {
-    error,
     handleRegistration,
     inputsList,
     isAllFieldsValid,

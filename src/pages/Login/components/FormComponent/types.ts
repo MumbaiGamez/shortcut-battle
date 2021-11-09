@@ -2,7 +2,6 @@ import { InputProps } from '../../../../components/Input';
 
 export type FormComponentProps = {
   buttonText: string;
-  error: string;
   inputsList: InputProps[];
   isLoading: boolean;
   isButtonDisabled: boolean;
