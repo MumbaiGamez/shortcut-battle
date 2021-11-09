@@ -9,17 +9,17 @@ import { LoginComponentProps } from './types';
 import styles from './LoginComponent.css';
 
 export const LoginComponent = (props: LoginComponentProps) => {
-  const { switchForm } = props;
+  const { toggleForm } = props;
 
   return (
-    <Card title={'Login'}>
-      <Input validationRule={{ isRequired: true }} placeholder={'Login'} />
+    <Card title="Login">
+      <Input validationRule={{ isRequired: true }} placeholder="Login" />
       <Input
-        placeholder={'Password'}
+        placeholder="Password"
         type={InputTypeEnum.password}
         validationRule={{ minSymbols: 6 }}
       />
-      <span className={styles.switchFormText} onClick={switchForm}>
+      <span className={styles.toggleFormText} onClick={toggleForm}>
         Not registered? Go to Registration
       </span>
       <Button theme={ButtonTheme.Glow}>Login</Button>

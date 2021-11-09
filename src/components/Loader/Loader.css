@@ -7,10 +7,12 @@
 
   width: var(--loader-size);
   height: var(--loader-size);
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  z-index: 100;
 }
 
 .orbit {
@@ -24,28 +26,28 @@
 .orbitBlue {
   width: var(--blue-orbit-size);
   height: var(--blue-orbit-size);
-  border: 1px solid #91daff;
+  border: 1px solid var(--light-blue-color);
   animation: spin-3d 3s linear 0.2s infinite;
 }
 
 .orbitGreen {
   width: var(--green-orbit-size);
   height: var(--green-orbit-size);
-  border: 1px solid #91ffbf;
+  border: 1px solid var(--green-color);
   animation: spin-3d 2s linear 0s infinite;
 }
 
 .orbitRed {
   width: var(--red-orbit-size);
   height: var(--red-orbit-size);
-  border: 1px solid #ffca91;
+  border: 1px solid var(--error-color);
   animation: spin-3d 1s linear 0s infinite;
 }
 
 .orbitWhite {
   width: var(--white-orbit-size);
   height: var(--white-orbit-size);
-  border: 2px solid #fff;
+  border: 2px solid var(--main-text-color);
   animation: spin-3d 10s linear 0s infinite;
 }
 

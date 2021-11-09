@@ -9,27 +9,28 @@ import { RegistrationComponentProps } from './types';
 import styles from './RegistrationComponent.css';
 
 export const RegistrationComponent = (props: RegistrationComponentProps) => {
-  const { switchForm } = props;
+  const { toggleForm } = props;
+
   return (
-    <Card title={'Registration'}>
-      <Input validationRule={{ isRequired: true }} placeholder={'Name'} />
+    <Card title="Registration">
+      <Input validationRule={{ isRequired: true }} placeholder="Name" />
       <Input
-        placeholder={'Email'}
+        placeholder="Email"
         type={InputTypeEnum.email}
         validationRule={{ isRequired: true, email: true }}
       />
       <Input
-        placeholder={'Phone'}
+        placeholder="Phone"
         type={InputTypeEnum.email}
         validationRule={{ isRequired: true, phone: true }}
       />
-      <Input validationRule={{ isRequired: true }} placeholder={'Login'} />
+      <Input validationRule={{ isRequired: true }} placeholder="Login" />
       <Input
-        placeholder={'Password'}
+        placeholder="Password"
         type={InputTypeEnum.password}
         validationRule={{ minSymbols: 6 }}
       />
-      <span className={styles.switchForm} onClick={switchForm}>
+      <span className={styles.toggleForm} onClick={toggleForm}>
         Already registered? Go to Login
       </span>
       <Button theme={ButtonTheme.Glow}>Registration</Button>

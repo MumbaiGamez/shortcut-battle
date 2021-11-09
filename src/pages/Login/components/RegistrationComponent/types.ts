@@ -1,3 +1,3 @@
 export type RegistrationComponentProps = {
-  switchForm: () => void;
+  toggleForm: () => void;
 };

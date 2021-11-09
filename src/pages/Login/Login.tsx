@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 
 import { LoginComponent } from './components/LoginComponent';
 import { RegistrationComponent } from './components/RegistrationComponent';
-import { Star } from '../../components/Start';
+import { Star } from '../../components/Star';
 
 import styles from './Login.css';
 
 export const Login = () => {
-  const [isLogin, setIsLogin] = React.useState(true);
-  const switchForm = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const toggleForm = () => {
     setIsLogin((prev) => !prev);
   };
 
   return (
     <div className={styles.login}>
       {isLogin ? (
-        <LoginComponent switchForm={switchForm} />
+        <LoginComponent toggleForm={toggleForm} />
       ) : (
-        <RegistrationComponent switchForm={switchForm} />
+        <RegistrationComponent toggleForm={toggleForm} />
       )}
       <Star
         className={classNames(
