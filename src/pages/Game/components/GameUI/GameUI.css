@@ -52,6 +52,8 @@
 }
 
 .header {
+  @mixin showOn playing, 0.3s, 0.3s, 0.1s;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,8 +61,6 @@
   height: 40px;
   padding: 0 40px;
   background-color: var(--game-ui-header-bg-color);
-
-  @mixin showOn playing, 0.3s, 0.3s, 0.1s;
 }
 
 .scores {
