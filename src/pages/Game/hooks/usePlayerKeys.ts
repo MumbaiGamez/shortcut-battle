@@ -12,7 +12,7 @@ export const usePlayerKeys = (player: Layer, keysMap: KeysMap) => {
       const { code } = event;
 
       if (code === keysMap.moveLeft.code) {
-        player.setVx(-MIN_SPEED);
+        player.setVx(-1 * MIN_SPEED);
       }
 
       if (code === keysMap.moveRight.code) {
