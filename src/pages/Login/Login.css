@@ -12,7 +12,7 @@
   position: relative;
 }
 
-.star-wrapper {
+.starWrapper {
   position: absolute;
   transition: 1s;
   transition-delay: 100ms;
@@ -22,13 +22,13 @@
   height: 400px;
 }
 
-.login-star-position {
+.loginStarPosition {
   width: 200px;
   height: 200px;
   transform: translate(-70%, -70%);
   background: #5cb6fff2;
 }
 
-.login-star-position::after {
+.loginStarPosition::after {
   box-shadow: 0 0 10em 5em #2571ff6b, 0 0 100px 50px #0077ff6b inset, 0 0 10px 5px #5cb6fff2;
 }
