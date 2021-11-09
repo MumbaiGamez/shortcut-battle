@@ -12,8 +12,9 @@ type handleLoading = (isLoading: boolean) => void;
 export type LoginAPIProps = {
   data: LoginDataType;
   errorCallback: errorCallback;
-  handleLoading?: handleLoading;
   successCallback: successCallback;
+
+  handleLoading?: handleLoading;
 };
 
 export type RegistrationDataType = {
@@ -28,17 +29,19 @@ export type RegistrationDataType = {
 export type RegistrationAPIProps = {
   data: RegistrationDataType;
   errorCallback: errorCallback;
-  handleLoading?: handleLoading;
   successCallback: successCallback;
+
+  handleLoading?: handleLoading;
 };
 
 export type FetchDataProps = {
-  data: any;
+  data: RegistrationDataType | LoginDataType;
   errorCallback: errorCallback;
   errorMessage: string;
   method: ApiMethods;
-  handleLoading?: handleLoading;
   successCallback: successCallback;
+
+  handleLoading?: handleLoading;
   url: string;
 };
 
