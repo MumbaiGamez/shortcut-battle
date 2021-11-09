@@ -1,8 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export type RegistrationComponentProps = {
   switchForm: () => void;
-  setError: Dispatch<SetStateAction<string>>;
+  setError(error: string): void;
 };
 
 export type UseRegistrationComponentProps = Pick<

@@ -1,0 +1,23 @@
+import { useState } from 'react';
+
+export const useLogin = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const switchForm = () => {
+    setIsLogin((prev) => !prev);
+  };
+  const [errorId, setErrorId] = useState<number | null>(null);
+  const [error, setError] = useState('');
+
+  const handleError = (errorText: string) => {
+    setError(errorText);
+    setErrorId(new Date().getTime());
+  };
+
+  return {
+    error,
+    errorId,
+    handleError,
+    isLogin,
+    switchForm,
+  };
+};

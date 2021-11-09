@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
-type UseToasterProps = {
-  isSuccess?: boolean;
-  isError?: boolean;
-  text: string;
-};
+
+import { UseToasterProps } from './types';
 
 export const useToaster = (props: UseToasterProps) => {
-  const { isSuccess, isError, text } = props;
+  const { errorId, isSuccess, isError, text } = props;
   const [isHideToaster, setIsHideToaster] = useState(true);
 
   useEffect(() => {
@@ -15,9 +12,9 @@ export const useToaster = (props: UseToasterProps) => {
 
       setTimeout(() => {
         setIsHideToaster(true);
-      }, 1500);
+      }, 2000);
     }
-  }, [isSuccess, isError, text]);
+  }, [isSuccess, isError, text, errorId]);
 
   return [isHideToaster, setIsHideToaster];
 };

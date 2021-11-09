@@ -3,17 +3,27 @@
   top: 0;
   right: 0;
   z-index: 50;
-  width: 100%;
-  display: flex;
+  width: 200px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background: rgb(119 14 14);
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateX(-10%);
 }
 
 .hide {
-  display: none;
+  transform: translateX(100%);
+  transition: 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
 .error {
+  background: linear-gradient(98deg, rgb(119 14 14 / 100%) 0%, rgb(55 21 21 / 100%) 15%, rgb(1 1 13 / 100%) 36%);
+}
+
+.error span {
   color: #f60;
 }
