@@ -1,5 +1,5 @@
 export type RegistrationComponentProps = {
-  switchForm: () => void;
+  toggleForm: () => void;
   setError(error: string): void;
 };
 

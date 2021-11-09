@@ -1,5 +1,5 @@
 export type LoginComponentProps = {
-  switchForm: () => void;
+  toggleForm: () => void;
   setError(error: string): void;
 };
 

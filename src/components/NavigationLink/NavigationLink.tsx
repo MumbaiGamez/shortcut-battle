@@ -8,6 +8,7 @@ import styles from './NavigationLink.css';
 
 export const NavigationLink = (props: NavigationLinkProps) => {
   const { link, name } = props;
+
   return (
     <NavLink
       className={({ isActive }) =>

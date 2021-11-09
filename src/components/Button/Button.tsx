@@ -11,7 +11,7 @@ export const Button = (props: ButtonProps) => {
     <button
       className={classNames(
         styles.button,
-        theme === ButtonTheme.Glow && styles.buttonThemeGlow,
+        styles[`buttonTheme${theme}`],
         isDisabled && styles.buttonDisabled,
         className
       )}
