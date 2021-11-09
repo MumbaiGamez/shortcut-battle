@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { UseToasterProps } from './types';
 
+const TOASTER_TIMEOUT = 2000;
+
 export const useToaster = (props: UseToasterProps) => {
   const { toasterId, theme, text } = props;
   const [isHideToaster, setIsHideToaster] = useState(true);
@@ -12,7 +14,7 @@ export const useToaster = (props: UseToasterProps) => {
 
       setTimeout(() => {
         setIsHideToaster(true);
-      }, 2000);
+      }, TOASTER_TIMEOUT);
     }
   }, [theme, text, toasterId]);
 
