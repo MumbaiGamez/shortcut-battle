@@ -82,7 +82,7 @@
   @mixin showOn loading;
 }
 
-.inited {
+.initialized {
   @mixin center;
   @mixin showOn ready, 0.3s, 0.1s, 0;
 }

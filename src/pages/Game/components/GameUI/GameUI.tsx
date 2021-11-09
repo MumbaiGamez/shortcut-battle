@@ -58,7 +58,7 @@ export const GameUI = (props: GameUIProps) => {
           <div className={styles.loader}>
             <Loader />
           </div>
-          <div className={styles.inited}>
+          <div className={styles.initialized}>
             <Button onClick={start}>Start new game</Button>
           </div>
           <div className={styles.paused}>
