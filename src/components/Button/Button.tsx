@@ -7,6 +7,7 @@ import styles from './Button.css';
 
 export const Button = (props: ButtonProps) => {
   const { children, className, isDisabled, theme, ...restProps } = props;
+
   return (
     <button
       className={classNames(

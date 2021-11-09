@@ -7,6 +7,7 @@ import styles from './Card.css';
 
 export const Card = (props: CardProps) => {
   const { children, className, subtitle, title } = props;
+
   return (
     <div className={classNames(styles.card, className)}>
       {title && <div className={styles.title}>{title}</div>}

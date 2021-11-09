@@ -10,6 +10,7 @@ export const Toaster = (props: ToasterProps) => {
   const { toasterId, theme, text } = props;
 
   const [isHideToaster] = useToaster({ toasterId, theme, text });
+
   return (
     <div
       className={classNames(
