@@ -7,5 +7,6 @@ export type ButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export enum ButtonTheme {
+  Default = 'Default',
   Glow = 'Glow',
 }

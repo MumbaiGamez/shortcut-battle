@@ -42,12 +42,15 @@ export const useInput = (props: UseInputProps) => {
     setIsCrossedEye((prevState) => !prevState);
   }, [isCrossedEye]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
 
-    checkValidation(value);
-    hanldeChange(value);
-  };
+      checkValidation(value);
+      hanldeChange(value);
+    },
+    [checkValidation, hanldeChange]
+  );
 
   const clearInputValue = useCallback(() => {
     checkValidation('');
