@@ -13,14 +13,14 @@ class Auth {
       data,
       errorCallback,
       errorMessage,
-      handleLoading,
+      loadingCallback,
       method,
       successCallback,
       url,
     } = props;
 
-    if (handleLoading) {
-      handleLoading(true);
+    if (loadingCallback) {
+      loadingCallback(true);
     }
 
     return fetch(`${API_URL}${url}`, {
@@ -38,8 +38,8 @@ class Auth {
       })
       .then((data) => {
         const { reason } = data;
-        if (handleLoading) {
-          handleLoading(false);
+        if (loadingCallback) {
+          loadingCallback(false);
         }
         if (reason) {
           errorCallback(reason);
@@ -50,20 +50,20 @@ class Auth {
       })
       .catch(() => {
         errorCallback(errorMessage);
-        if (handleLoading) {
-          handleLoading(false);
+        if (loadingCallback) {
+          loadingCallback(false);
         }
       });
   }
 
   login(props: LoginAPIProps) {
-    const { data, errorCallback, handleLoading, successCallback } = props;
+    const { data, errorCallback, loadingCallback, successCallback } = props;
 
     return this.fetchData({
       data,
       errorCallback,
       errorMessage: 'Login error',
-      handleLoading,
+      loadingCallback,
       method: ApiMethods.POST,
       successCallback,
       url: '/auth/signin',
@@ -71,13 +71,13 @@ class Auth {
   }
 
   registration(props: RegistrationAPIProps) {
-    const { data, errorCallback, handleLoading, successCallback } = props;
+    const { data, errorCallback, loadingCallback, successCallback } = props;
 
     return this.fetchData({
       data,
       errorCallback,
       errorMessage: 'Registration error',
-      handleLoading,
+      loadingCallback,
       method: ApiMethods.POST,
       successCallback,
       url: '/auth/signup',

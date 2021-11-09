@@ -28,14 +28,14 @@ export const useLogin = (props: UseLoginComponentProps) => {
     navigate(RoutesList.home);
   };
 
-  const handleLoading = (isLoading: boolean) => {
+  const loadingCallback = (isLoading: boolean) => {
     setIsLoading(isLoading);
   };
 
   const handleLogin = () => {
     if (isAllFieldsValid) {
       const data = { login, password };
-      authAPI.login({ data, errorCallback, handleLoading, successCallback });
+      authAPI.login({ data, errorCallback, loadingCallback, successCallback });
     }
   };
 

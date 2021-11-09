@@ -7,14 +7,14 @@ type errorCallback = (error: string) => void;
 
 type successCallback = () => void;
 
-type handleLoading = (isLoading: boolean) => void;
+type loadingCallback = (isLoading: boolean) => void;
 
 export type LoginAPIProps = {
   data: LoginDataType;
   errorCallback: errorCallback;
   successCallback: successCallback;
 
-  handleLoading?: handleLoading;
+  loadingCallback?: loadingCallback;
 };
 
 export type RegistrationDataType = {
@@ -31,7 +31,7 @@ export type RegistrationAPIProps = {
   errorCallback: errorCallback;
   successCallback: successCallback;
 
-  handleLoading?: handleLoading;
+  loadingCallback?: loadingCallback;
 };
 
 export type FetchDataProps = {
@@ -41,7 +41,7 @@ export type FetchDataProps = {
   method: ApiMethods;
   successCallback: successCallback;
 
-  handleLoading?: handleLoading;
+  loadingCallback?: loadingCallback;
   url: string;
 };
 

@@ -32,7 +32,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
     navigate(RoutesList.home);
   };
 
-  const handleLoading = (isLoading: boolean) => {
+  const loadingCallback = (isLoading: boolean) => {
     setIsLoading(isLoading);
   };
 
@@ -49,7 +49,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       authAPI.registration({
         data,
         errorCallback,
-        handleLoading,
+        loadingCallback,
         successCallback,
       });
     }
