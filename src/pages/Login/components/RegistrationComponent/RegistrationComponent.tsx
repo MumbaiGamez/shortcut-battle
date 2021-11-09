@@ -9,7 +9,7 @@ import { RegistrationComponentProps } from './types';
 import styles from './RegistrationComponent.css';
 
 export const RegistrationComponent = (props: RegistrationComponentProps) => {
-  const { switchForm, setError } = props;
+  const { toggleForm, setError } = props;
   const { handleRegistration, inputsList, isAllFieldsValid, isLoading } =
     useRegistration({ setError });
 
@@ -20,9 +20,9 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
       isLoading={isLoading}
       isButtonDisabled={!isAllFieldsValid}
       onButtonClick={handleRegistration}
-      switchForm={switchForm}
-      switchFormText={'Already registered? Go to Login'}
-      switchFormClass={styles.switchForm}
+      toggleForm={toggleForm}
+      toggleFormText={'Already registered? Go to Login'}
+      toggleFormClass={styles.toggleForm}
       title={'Registration'}
     />
   );

@@ -13,17 +13,27 @@
   background: rgb(119 14 14);
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform: translateX(-10%);
+  opacity: 100%;
 }
 
 .hide {
   transform: translateX(100%);
   transition: 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  opacity: 0%;
 }
 
-.error {
-  background: linear-gradient(98deg, rgb(119 14 14 / 100%) 0%, rgb(55 21 21 / 100%) 15%, rgb(1 1 13 / 100%) 36%);
+.toasterThemeError {
+  background: linear-gradient(90deg, rgb(119 14 14 / 100%) 0%, rgb(1 1 13 / 100%) 14%);
 }
 
-.error span {
-  color: #f60;
+.toasterThemeError span {
+  color: var(--error-color);
+}
+
+.toasterThemeSuccess {
+  background: linear-gradient(90deg, rgb(0 255 0 / 100%) 0%, rgb(1 1 13 / 100%) 14%);
+}
+
+.toasterThemeSuccess span {
+  color: var(--green-color);
 }

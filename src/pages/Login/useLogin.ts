@@ -2,9 +2,11 @@ import { useState } from 'react';
 
 export const useLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const switchForm = () => {
+
+  const toggleForm = () => {
     setIsLogin((prev) => !prev);
   };
+
   const [errorId, setErrorId] = useState<number | null>(null);
   const [error, setError] = useState('');
 
@@ -18,6 +20,6 @@ export const useLogin = () => {
     errorId,
     handleError,
     isLogin,
-    switchForm,
+    toggleForm,
   };
 };

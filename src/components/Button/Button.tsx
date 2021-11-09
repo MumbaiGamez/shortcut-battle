@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { ButtonProps, ButtonTheme } from './types';
+import { ButtonProps } from './types';
 
 import styles from './Button.css';
 

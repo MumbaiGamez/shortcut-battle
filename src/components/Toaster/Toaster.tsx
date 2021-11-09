@@ -7,19 +7,18 @@ import { ToasterProps } from './types';
 import styles from './Toaster.css';
 
 export const Toaster = (props: ToasterProps) => {
-  const { errorId, isSuccess, isError, text } = props;
+  const { toasterId, theme, text } = props;
 
-  const [isHideToaster] = useToaster({ errorId, isSuccess, isError, text });
+  const [isHideToaster] = useToaster({ toasterId, theme, text });
   return (
     <div
       className={classNames(
         styles.toaster,
-        isError && styles.error,
-        isSuccess && styles.success,
+        styles[`toasterTheme${theme}`],
         isHideToaster && styles.hide
       )}
     >
-      <span>{(isError && 'Error') || (isSuccess && 'Success')}</span>
+      <span>{theme}</span>
       <div>{text}</div>
     </div>
   );

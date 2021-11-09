@@ -17,23 +17,24 @@ export const FormComponent = (props: FormComponentProps) => {
     isLoading,
     isButtonDisabled,
     onButtonClick,
-    switchForm,
-    switchFormClass,
-    switchFormText,
+    toggleForm,
+    toggleFormClass,
+    toggleFormText,
     title,
   } = props;
+
   return (
     <Card title={title}>
       {isLoading && <Loader />}
       {inputsList.map((inputProps) => {
         return <Input key={inputProps.placeholder} {...inputProps} />;
       })}
-      {switchFormText && (
+      {toggleFormText && (
         <span
-          className={classNames(styles.switchFormText, switchFormClass)}
-          onClick={switchForm}
+          className={classNames(styles.toggleFormText, toggleFormClass)}
+          onClick={toggleForm}
         >
-          {switchFormText}
+          {toggleFormText}
         </span>
       )}
       <Button

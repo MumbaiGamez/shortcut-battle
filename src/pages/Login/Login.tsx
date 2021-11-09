@@ -3,23 +3,25 @@ import classNames from 'classnames';
 
 import { LoginComponent } from './components/LoginComponent';
 import { RegistrationComponent } from './components/RegistrationComponent';
-import { Star } from '../../components/Start';
+import { Star } from '../../components/Star';
 import { Toaster } from '../../components/Toaster';
 
 import { useLogin } from './useLogin';
 
+import { ToasterTheme } from '../../components/Toaster/types';
+
 import styles from './Login.css';
 
 export const Login = () => {
-  const { error, errorId, handleError, isLogin, switchForm } = useLogin();
+  const { error, errorId, handleError, isLogin, toggleForm } = useLogin();
 
   return (
     <div className={styles.login}>
-      <Toaster isError={!!error} text={error} errorId={errorId} />
+      <Toaster theme={ToasterTheme.Error} text={error} toasterId={errorId} />
       {isLogin ? (
-        <LoginComponent switchForm={switchForm} setError={handleError} />
+        <LoginComponent toggleForm={toggleForm} setError={handleError} />
       ) : (
-        <RegistrationComponent switchForm={switchForm} setError={handleError} />
+        <RegistrationComponent toggleForm={toggleForm} setError={handleError} />
       )}
       <Star
         className={classNames(

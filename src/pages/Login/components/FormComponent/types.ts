@@ -8,7 +8,7 @@ export type FormComponentProps = {
   onButtonClick(): void;
   title: string;
 
-  switchForm?(): void;
-  switchFormClass?: string;
-  switchFormText?: string;
+  toggleForm?(): void;
+  toggleFormClass?: string;
+  toggleFormText?: string;
 };
