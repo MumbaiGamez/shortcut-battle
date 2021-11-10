@@ -15,15 +15,15 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
 
   return (
     <FormComponent
-      buttonText={'Registration'}
+      buttonText="Registration"
       inputsList={inputsList}
       isLoading={isLoading}
       isButtonDisabled={!isAllFieldsValid}
       onButtonClick={handleRegistration}
       toggleForm={toggleForm}
-      toggleFormText={'Already registered? Go to Login'}
+      toggleFormText="Already registered? Go to Login"
       toggleFormClass={styles.toggleForm}
-      title={'Registration'}
+      title="Registration"
     />
   );
 };

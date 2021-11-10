@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RoutesList } from '../../../../../typings/commonTypes';
 import { InputTypeEnum } from '../../../../components/Input';
 
-import { authAPI } from '../../../../services';
+import { authAPI } from '../../../../api';
 
 import { UseRegistrationComponentProps } from './types';
 
@@ -23,20 +23,26 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
 
   const navigate = useNavigate();
 
-  const errorCallback = (error: string) => {
-    setError(error);
-  };
+  const handleError = useCallback(
+    (error: string) => {
+      setError(error);
+    },
+    [setError]
+  );
 
-  const successCallback = () => {
+  const handleSuccess = useCallback(() => {
     setIsSuccess(true);
     navigate(RoutesList.home);
-  };
+  }, [setIsSuccess, navigate]);
 
-  const loadingCallback = (isLoading: boolean) => {
-    setIsLoading(isLoading);
-  };
+  const handleLoading = useCallback(
+    (isLoading: boolean) => {
+      setIsLoading(isLoading);
+    },
+    [setIsLoading]
+  );
 
-  const handleRegistration = () => {
+  const handleRegistration = useCallback(() => {
     if (isAllFieldsValid) {
       const data = {
         first_name: firstName,
@@ -48,12 +54,23 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       };
       authAPI.registration({
         data,
-        errorCallback,
-        loadingCallback,
-        successCallback,
+        handleError,
+        handleLoading,
+        handleSuccess,
       });
     }
-  };
+  }, [
+    email,
+    firstName,
+    handleError,
+    handleLoading,
+    handleSuccess,
+    isAllFieldsValid,
+    login,
+    password,
+    phone,
+    secondName,
+  ]);
 
   const inputsList = [
     {

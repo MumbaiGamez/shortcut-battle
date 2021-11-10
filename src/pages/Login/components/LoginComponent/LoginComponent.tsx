@@ -14,14 +14,14 @@ export const LoginComponent = (props: LoginComponentProps) => {
 
   return (
     <FormComponent
-      buttonText={'Login'}
+      buttonText="Login"
       inputsList={inputsList}
       isLoading={isLoading}
       isButtonDisabled={!isAllFieldsValid}
       onButtonClick={handleLogin}
       toggleForm={toggleForm}
-      toggleFormText={'Not registered? Go to Registration'}
-      title={'Login'}
+      toggleFormText="Not registered? Go to Registration"
+      title="Login"
     />
   );
 };

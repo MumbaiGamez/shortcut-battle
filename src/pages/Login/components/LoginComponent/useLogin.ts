@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { RoutesList } from '../../../../../typings/commonTypes';
 import { InputTypeEnum } from '../../../../components/Input';
 
-import { authAPI } from '../../../../services';
+import { authAPI } from '../../../../api';
 
 import { UseLoginComponentProps } from './types';
 
@@ -19,23 +19,23 @@ export const useLogin = (props: UseLoginComponentProps) => {
 
   const navigate = useNavigate();
 
-  const errorCallback = (error: string) => {
+  const handleError = (error: string) => {
     setError(error);
   };
 
-  const successCallback = () => {
+  const handleSuccess = () => {
     setIsSuccess(true);
     navigate(RoutesList.home);
   };
 
-  const loadingCallback = (isLoading: boolean) => {
+  const handleLoading = (isLoading: boolean) => {
     setIsLoading(isLoading);
   };
 
   const handleLogin = () => {
     if (isAllFieldsValid) {
       const data = { login, password };
-      authAPI.login({ data, errorCallback, loadingCallback, successCallback });
+      authAPI.login({ data, handleError, handleLoading, handleSuccess });
     }
   };
 

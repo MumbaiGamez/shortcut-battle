@@ -3,18 +3,17 @@ export type LoginDataType = {
   password: string;
 };
 
-type errorCallback = (error: string) => void;
+type handleError = (error: string) => void;
 
-type successCallback = () => void;
+type handleSuccess = () => void;
 
-type loadingCallback = (isLoading: boolean) => void;
+type handleLoading = (isLoading: boolean) => void;
 
 export type LoginAPIProps = {
   data: LoginDataType;
-  errorCallback: errorCallback;
-  successCallback: successCallback;
-
-  loadingCallback?: loadingCallback;
+  handleError: handleError;
+  handleLoading: handleLoading;
+  handleSuccess: handleSuccess;
 };
 
 export type RegistrationDataType = {
@@ -28,20 +27,18 @@ export type RegistrationDataType = {
 
 export type RegistrationAPIProps = {
   data: RegistrationDataType;
-  errorCallback: errorCallback;
-  successCallback: successCallback;
-
-  loadingCallback?: loadingCallback;
+  handleError: handleError;
+  handleLoading: handleLoading;
+  handleSuccess: handleSuccess;
 };
 
 export type FetchDataProps = {
   data: RegistrationDataType | LoginDataType;
-  errorCallback: errorCallback;
   errorMessage: string;
+  handleError: handleError;
+  handleLoading: handleLoading;
+  handleSuccess: handleSuccess;
   method: ApiMethods;
-  successCallback: successCallback;
-
-  loadingCallback?: loadingCallback;
   url: string;
 };
 

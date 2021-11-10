@@ -27,6 +27,7 @@ export const useInput = (props: UseInputProps) => {
   useEffect(() => {
     if (setIsFieldValid) {
       const { isValid } = getValidationError(validationRule, value);
+
       if (!isValid) {
         setIsFieldValid(isValid);
       }
