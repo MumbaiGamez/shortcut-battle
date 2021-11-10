@@ -8,7 +8,8 @@ import { LoginComponentProps } from './types';
 
 export const LoginComponent = (props: LoginComponentProps) => {
   const { toggleForm, setError } = props;
-  const { handleLogin, inputsList, isAllFieldsValid, isLoading } = useLogin({
+
+  const { handleLogin, inputsList, isFormValid, isLoading } = useLogin({
     setError,
   });
 
@@ -17,7 +18,7 @@ export const LoginComponent = (props: LoginComponentProps) => {
       buttonText="Login"
       inputsList={inputsList}
       isLoading={isLoading}
-      isButtonDisabled={!isAllFieldsValid}
+      isButtonDisabled={!isFormValid}
       onButtonClick={handleLogin}
       toggleForm={toggleForm}
       toggleFormText="Not registered? Go to Registration"

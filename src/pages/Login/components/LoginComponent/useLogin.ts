@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RoutesList } from '../../../../../typings/commonTypes';
@@ -15,7 +15,26 @@ export const useLogin = (props: UseLoginComponentProps) => {
   const [password, setPassword] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isAllFieldsValid, setIsAllFieldsValid] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(true);
+  const [formFieldsValidation, setFormFieldsValidation] = useState({
+    login: false,
+    password: false,
+  });
+
+  useEffect(() => {
+    const isFormValid = Object.values(formFieldsValidation).every(
+      (field) => field
+    );
+
+    setIsFormValid(isFormValid);
+  }, [formFieldsValidation]);
+
+  const validateField = (fieldName: string, isValid: boolean) => {
+    setFormFieldsValidation({
+      ...formFieldsValidation,
+      [fieldName]: isValid,
+    });
+  };
 
   const navigate = useNavigate();
 
@@ -33,7 +52,7 @@ export const useLogin = (props: UseLoginComponentProps) => {
   };
 
   const handleLogin = () => {
-    if (isAllFieldsValid) {
+    if (isFormValid) {
       const data = { login, password };
       authAPI.login({ data, handleError, handleLoading, handleSuccess });
     }
@@ -41,26 +60,28 @@ export const useLogin = (props: UseLoginComponentProps) => {
 
   const inputsList = [
     {
+      fieldName: 'login',
       hanldeChange: setLogin,
       placeholder: 'login',
-      setIsFieldValid: setIsAllFieldsValid,
       value: login,
       validationRule: { isRequired: true },
+      validateField,
     },
     {
+      fieldName: 'password',
       hanldeChange: setPassword,
       placeholder: 'Password',
-      setIsFieldValid: setIsAllFieldsValid,
       type: InputTypeEnum.password,
       value: password,
       validationRule: { minSymbols: 6 },
+      validateField,
     },
   ];
 
   return {
     handleLogin,
     inputsList,
-    isAllFieldsValid,
+    isFormValid,
     isLoading,
     isSuccess,
   };

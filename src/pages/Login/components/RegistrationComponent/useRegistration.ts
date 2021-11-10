@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RoutesList } from '../../../../../typings/commonTypes';
@@ -19,7 +19,30 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
   const [password, setPassword] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isAllFieldsValid, setIsAllFieldsValid] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(true);
+  const [formFieldsValidation, setFormFieldsValidation] = useState({
+    firstName: false,
+    secondName: false,
+    login: false,
+    email: false,
+    password: false,
+    phone: false,
+  });
+
+  useEffect(() => {
+    const isFormValid = Object.values(formFieldsValidation).every(
+      (field) => field
+    );
+
+    setIsFormValid(isFormValid);
+  }, [formFieldsValidation]);
+
+  const validateField = (fieldName: string, isValid: boolean) => {
+    setFormFieldsValidation({
+      ...formFieldsValidation,
+      [fieldName]: isValid,
+    });
+  };
 
   const navigate = useNavigate();
 
@@ -43,7 +66,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
   );
 
   const handleRegistration = useCallback(() => {
-    if (isAllFieldsValid) {
+    if (isFormValid) {
       const data = {
         first_name: firstName,
         second_name: secondName,
@@ -65,7 +88,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
     handleError,
     handleLoading,
     handleSuccess,
-    isAllFieldsValid,
+    isFormValid,
     login,
     password,
     phone,
@@ -74,56 +97,62 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
 
   const inputsList = [
     {
+      fieldName: 'firstName',
       hanldeChange: setFirstName,
       placeholder: 'First name',
-      setIsFieldValid: setIsAllFieldsValid,
       value: firstName,
       validationRule: { isRequired: true },
+      validateField,
     },
     {
+      fieldName: 'secondName',
       hanldeChange: setSecondName,
       placeholder: 'Second name',
-      setIsFieldValid: setIsAllFieldsValid,
       value: secondName,
       validationRule: { isRequired: true },
+      validateField,
     },
     {
+      fieldName: 'email',
       hanldeChange: setEmail,
       placeholder: 'Email',
-      setIsFieldValid: setIsAllFieldsValid,
       type: InputTypeEnum.email,
       value: email,
       validationRule: { isRequired: true, email: true },
+      validateField,
     },
     {
+      fieldName: 'phone',
       hanldeChange: setPhone,
       placeholder: 'Phone',
-      setIsFieldValid: setIsAllFieldsValid,
       type: InputTypeEnum.email,
       value: phone,
       validationRule: { isRequired: true, phone: true },
+      validateField,
     },
     {
+      fieldName: 'login',
       hanldeChange: setLogin,
       placeholder: 'Login',
-      setIsFieldValid: setIsAllFieldsValid,
       value: login,
       validationRule: { isRequired: true },
+      validateField,
     },
     {
+      fieldName: 'password',
       hanldeChange: setPassword,
       placeholder: 'Password',
-      setIsFieldValid: setIsAllFieldsValid,
       type: InputTypeEnum.password,
       value: password,
       validationRule: { minSymbols: 6 },
+      validateField,
     },
   ];
 
   return {
     handleRegistration,
     inputsList,
-    isAllFieldsValid,
+    isFormValid,
     isLoading,
     isSuccess,
   };

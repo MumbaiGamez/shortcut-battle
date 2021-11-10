@@ -1,23 +1,19 @@
 import { useCallback, useState, useEffect } from 'react';
 
-import { InputProps, InputTypeEnum } from './types';
+import { InputTypeEnum, UseInputProps } from './types';
 
 import { getValidationError } from '../../utils/validation';
-
-export type UseInputProps = Pick<
-  InputProps,
-  'hanldeChange' | 'setIsFieldValid' | 'type' | 'value' | 'validationRule'
->;
 
 export const useInput = (props: UseInputProps) => {
   const [defaultInputValue, defaultInputHandler] = useState('');
 
   const {
+    fieldName,
     hanldeChange = defaultInputHandler,
-    setIsFieldValid,
     type,
     value = defaultInputValue,
     validationRule,
+    validateField,
   } = props;
 
   const [isCrossedEye, setIsCrossedEye] = useState(false);
@@ -25,14 +21,13 @@ export const useInput = (props: UseInputProps) => {
   const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
 
   useEffect(() => {
-    if (setIsFieldValid) {
+    if (validateField && fieldName) {
       const { isValid } = getValidationError(validationRule, value);
 
-      if (!isValid) {
-        setIsFieldValid(isValid);
-      }
+      validateField(fieldName, isValid);
     }
-  }, [value, setIsFieldValid, validationRule]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const checkValidation = useCallback(
     (value: string) => {
@@ -41,13 +36,13 @@ export const useInput = (props: UseInputProps) => {
         value
       );
 
-      if (isValid && setIsFieldValid) {
-        setIsFieldValid(isValid);
+      if (validateField && fieldName) {
+        validateField(fieldName, isValid);
       }
 
       setErrorMessage(errorMessage);
     },
-    [validationRule, setIsFieldValid]
+    [validationRule, validateField, fieldName]
   );
 
   const toggleEye = useCallback(() => {

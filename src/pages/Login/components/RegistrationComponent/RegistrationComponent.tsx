@@ -10,7 +10,8 @@ import styles from './RegistrationComponent.css';
 
 export const RegistrationComponent = (props: RegistrationComponentProps) => {
   const { toggleForm, setError } = props;
-  const { handleRegistration, inputsList, isAllFieldsValid, isLoading } =
+
+  const { handleRegistration, inputsList, isFormValid, isLoading } =
     useRegistration({ setError });
 
   return (
@@ -18,7 +19,7 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
       buttonText="Registration"
       inputsList={inputsList}
       isLoading={isLoading}
-      isButtonDisabled={!isAllFieldsValid}
+      isButtonDisabled={!isFormValid}
       onButtonClick={handleRegistration}
       toggleForm={toggleForm}
       toggleFormText="Already registered? Go to Login"

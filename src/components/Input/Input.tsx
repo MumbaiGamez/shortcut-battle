@@ -11,13 +11,14 @@ import styles from './Input.css';
 
 export const Input = (props: InputProps) => {
   const {
+    fieldName,
     hanldeChange,
     label,
     placeholder,
-    setIsFieldValid,
     type,
     value,
     validationRule,
+    validateField,
   } = props;
 
   const {
@@ -30,11 +31,12 @@ export const Input = (props: InputProps) => {
     isCrossedEye,
     toggleEye,
   } = useInput({
+    fieldName,
     hanldeChange,
-    setIsFieldValid,
     validationRule,
     type,
     value,
+    validateField,
   });
 
   return (

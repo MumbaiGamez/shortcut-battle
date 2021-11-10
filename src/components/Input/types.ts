@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 export type ValidationRules = {
   minSymbols?: number;
   phone?: boolean;
@@ -32,11 +30,22 @@ export enum InputTypeEnum {
 }
 
 export type InputProps = {
+  fieldName?: string;
   hanldeChange?(value: string): void;
   label?: string;
   placeholder?: string;
-  setIsFieldValid?: Dispatch<SetStateAction<boolean>>;
+  validateField?(fieldName: string, isValid: boolean): void;
   type?: InputTypeEnum;
   validationRule?: ValidationRules;
   value?: string;
 };
+
+export type UseInputProps = Pick<
+  InputProps,
+  | 'fieldName'
+  | 'hanldeChange'
+  | 'type'
+  | 'value'
+  | 'validationRule'
+  | 'validateField'
+>;
