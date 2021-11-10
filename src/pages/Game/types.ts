@@ -10,22 +10,50 @@ export enum Phase {
   over = 'over',
 }
 
-export enum Entity {
-  border = 'border',
+export enum EntityType {
+  background = 'background',
+  topBorder = 'topBorder',
+  rightBorder = 'rightBorder',
+  bottomBorder = 'bottomBorder',
+  leftBorder = 'leftBorder',
   player = 'player',
   bullet = 'bullet',
   asteroid = 'asteroid',
 }
 
 export type Layer = {
-  entity: Entity;
+  type: EntityType;
   width: number;
   height: number;
   x: MutableRefObject<number>;
   y: MutableRefObject<number>;
-  render: (dt: number) => void;
   setVx: (velo: number) => void;
   setVy: (velo: number) => void;
+  render: (
+    dt: number,
+    collisionHandlers: Array<{ layers: Layer[]; callback: CollisionHandler }>
+  ) => void;
+};
+
+export type CollisionHandler = (withLayer: Layer) => void;
+
+export type CollisionRule = Partial<{
+  [key in EntityType]: CollisionHandler;
+}>;
+
+export type CollisionRules = Partial<{
+  [key in EntityType]: CollisionRule;
+}>;
+
+export type Engine = {
+  ctx: GameContextType;
+  render: (dt: number) => void;
+  addLayer: (type: EntityType, layer: Layer) => void;
+  addCollisionHandler: (
+    type: EntityType,
+    withType: EntityType,
+    callback: CollisionHandler
+  ) => void;
 };
 
 export enum PlayerAction {
@@ -48,18 +76,27 @@ export type LayerProps = RequireAtLeastOne<
     height: number;
     src?: string;
     color?: string;
-    entity: Entity;
+    type: EntityType;
   },
   'src' | 'color'
 >;
 
 export type PlaygroundProps = {
-  ctx: GameContextType;
   phase: Phase;
-  clearCanvas: () => void;
 };
 
 export type GameUIProps = {
   phase: Phase;
   setPhase: Dispatch<SetStateAction<Phase>>;
+};
+
+export type LayerComponentProps = {
+  engine: Engine;
+};
+
+export type LayersType = Partial<Record<EntityType, Layer[]>>;
+
+export type UseEngineProps = {
+  ctx: GameContextType;
+  clear: () => void;
 };

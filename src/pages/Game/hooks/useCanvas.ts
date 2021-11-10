@@ -12,21 +12,21 @@ type UseCanvasProps = {
 export const useCanvas = (props: UseCanvasProps) => {
   const { width, height } = props;
   const [ctx, setCtx] = useState<GameContextType>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = ref.current;
 
     if (canvas) {
       setCtx(canvas.getContext('2d'));
       canvas.width = width;
       canvas.height = height;
     }
-  }, [canvasRef, width, height]);
+  }, [ref, width, height]);
 
-  const clearCanvas = useCallback(() => {
+  const clear = useCallback(() => {
     ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }, [ctx]);
 
-  return { ctx, canvasRef, clearCanvas };
+  return { ctx, ref, clear };
 };
