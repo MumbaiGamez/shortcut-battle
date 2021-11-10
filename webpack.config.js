@@ -45,6 +45,10 @@ module.exports = {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -53,6 +57,7 @@ module.exports = {
       template: path.resolve(__dirname, 'www/index.html'),
     }),
   ],
+  devtool: 'source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, 'dist'),

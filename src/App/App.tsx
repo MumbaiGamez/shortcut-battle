@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ComponentsLibrary } from '../pages/ComponentsLibrary';
 import { Home } from '../pages/Home';
 import { Login } from '../pages/Login';
+import { Game } from '../pages/Game';
 import { NavigationMenu } from '../components/NavigationMenu';
 
 import { RoutesList } from '../../typings/commonTypes';
@@ -18,6 +19,7 @@ export const App = () => {
         <Route path={RoutesList.home} element={<Home />} />
         <Route path={RoutesList.login} element={<Login />} />
         <Route path={RoutesList.library} element={<ComponentsLibrary />} />
+        <Route path={RoutesList.play} element={<Game />} />
       </Routes>
     </div>
   );
