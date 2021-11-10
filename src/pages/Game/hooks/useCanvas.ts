@@ -25,7 +25,7 @@ export const useCanvas = (props: UseCanvasProps) => {
   }, [canvasRef, width, height]);
 
   const clearCanvas = useCallback(() => {
-    ctx && ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }, [ctx]);
 
   return { ctx, canvasRef, clearCanvas };

@@ -15,8 +15,7 @@ export const useAnimationLoop = (
       prevUpdate.current = lastUpdate.current;
       lastUpdate.current = performance.now();
 
-      const dt = lastUpdate.current - prevUpdate.current;
-      callback(dt);
+      callback(lastUpdate.current - prevUpdate.current);
 
       loop.current = requestAnimationFrame(animate);
     } else {
