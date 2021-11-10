@@ -1,0 +1,10 @@
+:root {
+  --game-ui-filler-bg-color: rgb(94 63 107 / 70%);
+  --game-ui-header-bg-color: rgb(164 100 191 / 70%);
+}
+
+.game {
+  position: relative;
+  width: 100%;
+  margin: 40px 0;
+}

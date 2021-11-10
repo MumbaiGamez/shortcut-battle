@@ -5,7 +5,10 @@
     "postcss-reporter": {
       "throwError": true
     },
+    "postcss-import": {},
+    "postcss-mixins": {},
     "postcss-url": {},
+    "postcss-simple-vars": {},
     "postcss-nested": {},
     "autoprefixer": {}
   }
