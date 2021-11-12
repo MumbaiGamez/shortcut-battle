@@ -6,7 +6,7 @@ import { RegistrationComponent } from './components/RegistrationComponent';
 import { Star } from '../../components/Star';
 import { Toaster } from '../../components/Toaster';
 
-import { useLogin } from './useLogin';
+import { useLogin } from './useLoginPage';
 
 import { ToasterTheme } from '../../components/Toaster/types';
 

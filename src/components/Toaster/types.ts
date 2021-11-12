@@ -4,7 +4,7 @@ export type ToasterProps = {
   toasterId: number | null;
 };
 
-export type UseToasterProps = ToasterProps;
+export type UseToasterProps = Omit<ToasterProps, 'theme'>;
 
 export enum ToasterTheme {
   Error = 'Error',

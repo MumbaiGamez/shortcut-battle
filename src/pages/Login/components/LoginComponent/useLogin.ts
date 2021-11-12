@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RoutesList } from '../../../../../typings/commonTypes';
@@ -29,54 +29,63 @@ export const useLogin = (props: UseLoginComponentProps) => {
     setIsFormValid(isFormValid);
   }, [formFieldsValidation]);
 
-  const validateField = (fieldName: string, isValid: boolean) => {
-    setFormFieldsValidation({
-      ...formFieldsValidation,
-      [fieldName]: isValid,
-    });
-  };
+  const validateField = useCallback(
+    (fieldName: string, isValid: boolean) => {
+      setFormFieldsValidation({
+        ...formFieldsValidation,
+        [fieldName]: isValid,
+      });
+    },
+    [formFieldsValidation]
+  );
 
   const navigate = useNavigate();
 
-  const handleError = (error: string) => {
-    setError(error);
-  };
+  const handleError = useCallback(
+    (error: string) => {
+      setError(error);
+    },
+    [setError]
+  );
 
-  const handleSuccess = () => {
+  const handleSuccess = useCallback(() => {
     setIsSuccess(true);
     navigate(RoutesList.home);
-  };
+  }, [navigate]);
 
-  const handleLoading = (isLoading: boolean) => {
+  const handleLoading = useCallback((isLoading: boolean) => {
     setIsLoading(isLoading);
-  };
+  }, []);
 
-  const handleLogin = () => {
+  const handleLogin = useCallback(() => {
     if (isFormValid) {
       const data = { login, password };
       authAPI.login({ data, handleError, handleLoading, handleSuccess });
     }
-  };
+  }, [handleError, handleLoading, handleSuccess, isFormValid, login, password]);
 
-  const inputsList = [
-    {
-      fieldName: 'login',
-      hanldeChange: setLogin,
-      placeholder: 'login',
-      value: login,
-      validationRule: { isRequired: true },
-      validateField,
-    },
-    {
-      fieldName: 'password',
-      hanldeChange: setPassword,
-      placeholder: 'Password',
-      type: InputTypeEnum.password,
-      value: password,
-      validationRule: { minSymbols: 6 },
-      validateField,
-    },
-  ];
+  const inputsList = useMemo(
+    () => [
+      {
+        fieldName: 'login',
+        hanldeChange: setLogin,
+        placeholder: 'login',
+        value: login,
+        validationRule: { isRequired: true },
+        validateField,
+      },
+      {
+        fieldName: 'password',
+        hanldeChange: setPassword,
+        placeholder: 'Password',
+        type: InputTypeEnum.password,
+        value: password,
+        validationRule: { minSymbols: 6 },
+        validateField,
+      },
+    ],
+    [login, password, validateField]
+  );
 
   return {
     handleLogin,

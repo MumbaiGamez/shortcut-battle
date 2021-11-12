@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 export const useLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,10 +10,10 @@ export const useLogin = () => {
   const [errorId, setErrorId] = useState<number | null>(null);
   const [error, setError] = useState('');
 
-  const handleError = (errorText: string) => {
+  const handleError = useCallback((errorText: string) => {
     setError(errorText);
     setErrorId(new Date().getTime());
-  };
+  }, []);
 
   return {
     error,
