@@ -1,3 +1,5 @@
+import { convertObjectKeysToSnakeCase } from '../utils/convertToSnakeCase';
+
 import { ApiMethods, FetchDataProps, FetchMethodsProps } from './types';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
@@ -44,7 +46,9 @@ class BasicAPI {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: data ? JSON.stringify(data) : undefined,
+        body: data
+          ? JSON.stringify(convertObjectKeysToSnakeCase(data))
+          : undefined,
       };
 
       const response = await fetch(`${API_URL}${url}`, requestParams);

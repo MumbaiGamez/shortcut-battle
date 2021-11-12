@@ -40,8 +40,8 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
   const handleRegistration = useCallback(() => {
     if (isFormValid) {
       const data = {
-        first_name: firstName,
-        second_name: secondName,
+        firstName,
+        secondName,
         login,
         password,
         email,
