@@ -1,13 +1,24 @@
-import {
-  ApiMethods,
-  LoginAPIProps,
-  RegistrationAPIProps,
-  FetchDataProps,
-} from '../../typings/apiTypes';
+import { ApiMethods, FetchDataProps, FetchMethodsProps } from './types';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
 
-class Auth {
+class BasicAPI {
+  get(props: FetchMethodsProps) {
+    return this.fetchData({ ...props, method: ApiMethods.GET });
+  }
+
+  post(props: FetchMethodsProps) {
+    return this.fetchData({ ...props, method: ApiMethods.POST });
+  }
+
+  put(props: FetchMethodsProps) {
+    return this.fetchData({ ...props, method: ApiMethods.PUT });
+  }
+
+  delete(props: FetchMethodsProps) {
+    return this.fetchData({ ...props, method: ApiMethods.DELETE });
+  }
+
   async fetchData(props: FetchDataProps) {
     const {
       data,
@@ -24,13 +35,16 @@ class Auth {
     }
 
     try {
-      const response = await fetch(`${API_URL}${url}`, {
-        method: method,
+      const requestParams: RequestInit = {
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-      });
+        credentials: 'include',
+        body: data ? JSON.stringify(data) : undefined,
+      };
+
+      const response = await fetch(`${API_URL}${url}`, requestParams);
 
       if (!response.ok) {
         throw new Error();
@@ -48,43 +62,17 @@ class Auth {
         handleError(reason);
       } else {
         handleSuccess();
+
         return data;
       }
     } catch (error) {
       handleError(errorMessage);
+
       if (handleLoading) {
         handleLoading(false);
       }
     }
   }
-
-  login(props: LoginAPIProps) {
-    const { data, handleError, handleLoading, handleSuccess } = props;
-
-    return this.fetchData({
-      data,
-      handleError,
-      errorMessage: 'Login error',
-      handleLoading,
-      method: ApiMethods.POST,
-      handleSuccess,
-      url: '/auth/signin',
-    });
-  }
-
-  registration(props: RegistrationAPIProps) {
-    const { data, handleError, handleLoading, handleSuccess } = props;
-
-    return this.fetchData({
-      data,
-      handleError,
-      errorMessage: 'Registration error',
-      handleLoading,
-      method: ApiMethods.POST,
-      handleSuccess,
-      url: '/auth/signup',
-    });
-  }
 }
 
-export const authAPI = new Auth();
+export const basicAPI = new BasicAPI();

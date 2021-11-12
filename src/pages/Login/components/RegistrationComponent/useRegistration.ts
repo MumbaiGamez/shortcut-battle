@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { RoutesList } from '../../../../../typings/commonTypes';
 import { InputTypeEnum } from '../../../../components/Input';
 
-import { authAPI } from '../../../../api';
+import { authAPI } from '../../../../api/auth';
 
 import { UseRegistrationComponentProps } from './types';
 
