@@ -4,19 +4,26 @@ import { UseToasterProps } from './types';
 
 const TOASTER_TIMEOUT = 2000;
 
+let openedToaster: ReturnType<typeof setTimeout> | null = null;
+
 export const useToaster = (props: UseToasterProps) => {
-  const { toasterId, theme, text } = props;
-  const [isHideToaster, setIsHideToaster] = useState(true);
+  const { toasterId, text } = props;
+
+  const [isHiddenToaster, setIsHiddenToaster] = useState(true);
 
   useEffect(() => {
     if (text) {
-      setIsHideToaster(false);
+      setIsHiddenToaster(false);
 
-      setTimeout(() => {
-        setIsHideToaster(true);
+      if (openedToaster) {
+        clearTimeout(openedToaster);
+      }
+
+      openedToaster = setTimeout(() => {
+        setIsHiddenToaster(true);
       }, TOASTER_TIMEOUT);
     }
-  }, [theme, text, toasterId]);
+  }, [text, toasterId]);
 
-  return [isHideToaster, setIsHideToaster];
+  return [isHiddenToaster, setIsHiddenToaster];
 };
