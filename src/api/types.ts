@@ -34,12 +34,12 @@ export type RegistrationAPIProps = {
 
 export type FetchMethodsProps = {
   errorMessage: string;
-  handleError: HandleError;
-  handleLoading: HandleLoading;
-  handleSuccess: HandleSuccess;
   url: string;
 
   data?: RegistrationDataType | LoginDataType;
+  handleError?: HandleError;
+  handleLoading?: HandleLoading;
+  handleSuccess?: HandleSuccess;
 };
 
 export type FetchDataProps = FetchMethodsProps & {

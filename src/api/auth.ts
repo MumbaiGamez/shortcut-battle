@@ -4,6 +4,7 @@ import { RegistrationAPIProps, LoginAPIProps } from './types';
 enum AuthURL {
   SIGNUP = '/auth/signup',
   SIGNIN = '/auth/signin',
+  LOGOUT = '/auth/logout',
 }
 
 class AuthAPI {
@@ -31,6 +32,10 @@ class AuthAPI {
       handleSuccess,
       url: AuthURL.SIGNUP,
     });
+  }
+
+  logout() {
+    basicAPI.post({ errorMessage: 'Logout error', url: AuthURL.LOGOUT });
   }
 }
 

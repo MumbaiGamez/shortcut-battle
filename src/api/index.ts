@@ -2,6 +2,9 @@ import { ApiMethods, FetchDataProps, FetchMethodsProps } from './types';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const mockEmptyFunction = () => {};
+
 class BasicAPI {
   get(props: FetchMethodsProps) {
     return this.fetchData({ ...props, method: ApiMethods.GET });
@@ -23,9 +26,9 @@ class BasicAPI {
     const {
       data,
       errorMessage,
-      handleError,
-      handleLoading,
-      handleSuccess,
+      handleError = mockEmptyFunction,
+      handleLoading = mockEmptyFunction,
+      handleSuccess = mockEmptyFunction,
       method,
       url,
     } = props;
