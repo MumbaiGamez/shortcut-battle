@@ -1,12 +1,21 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useCallback, useMemo } from 'react';
 
-import { RoutesList } from '../../../../../typings/commonTypes';
-import { InputTypeEnum } from '../../../../components/Input';
+import { useForm } from '../FormComponent/useForm';
 
 import { authAPI } from '../../../../api/auth';
 
+import { InputTypeEnum } from '../../../../components/Input';
 import { UseRegistrationComponentProps } from './types';
+import { FieldsList } from '../FormComponent/types';
+
+const fieldsList = [
+  FieldsList.firstName,
+  FieldsList.secondName,
+  FieldsList.login,
+  FieldsList.email,
+  FieldsList.phone,
+  FieldsList.password,
+];
 
 export const useRegistration = (props: UseRegistrationComponentProps) => {
   const { setError } = props;
@@ -17,56 +26,16 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(true);
-  const [formFieldsValidation, setFormFieldsValidation] = useState({
-    firstName: false,
-    secondName: false,
-    login: false,
-    email: false,
-    password: false,
-    phone: false,
-  });
 
-  useEffect(() => {
-    const isFormValid = Object.values(formFieldsValidation).every(
-      (field) => field
-    );
-
-    setIsFormValid(isFormValid);
-  }, [formFieldsValidation]);
-
-  const validateField = useCallback(
-    (fieldName: string, isValid: boolean) => {
-      setFormFieldsValidation({
-        ...formFieldsValidation,
-        [fieldName]: isValid,
-      });
-    },
-    [formFieldsValidation]
-  );
-
-  const navigate = useNavigate();
-
-  const handleError = useCallback(
-    (error: string) => {
-      setError(error);
-    },
-    [setError]
-  );
-
-  const handleSuccess = useCallback(() => {
-    setIsSuccess(true);
-    navigate(RoutesList.home);
-  }, [setIsSuccess, navigate]);
-
-  const handleLoading = useCallback(
-    (isLoading: boolean) => {
-      setIsLoading(isLoading);
-    },
-    [setIsLoading]
-  );
+  const {
+    handleError,
+    handleLoading,
+    handleSuccess,
+    isFormValid,
+    isLoading,
+    isSuccess,
+    validateField,
+  } = useForm({ fieldsList, setError });
 
   const handleRegistration = useCallback(() => {
     if (isFormValid) {
@@ -78,6 +47,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
         email,
         phone,
       };
+
       authAPI.registration({
         data,
         handleError,
@@ -101,7 +71,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
   const inputsList = useMemo(
     () => [
       {
-        fieldName: 'firstName',
+        fieldName: FieldsList.firstName,
         hanldeChange: setFirstName,
         placeholder: 'First name',
         value: firstName,
@@ -109,7 +79,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
         validateField,
       },
       {
-        fieldName: 'secondName',
+        fieldName: FieldsList.secondName,
         hanldeChange: setSecondName,
         placeholder: 'Second name',
         value: secondName,
@@ -117,7 +87,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
         validateField,
       },
       {
-        fieldName: 'email',
+        fieldName: FieldsList.email,
         hanldeChange: setEmail,
         placeholder: 'Email',
         type: InputTypeEnum.email,
@@ -126,7 +96,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
         validateField,
       },
       {
-        fieldName: 'phone',
+        fieldName: FieldsList.phone,
         hanldeChange: setPhone,
         placeholder: 'Phone',
         type: InputTypeEnum.email,
@@ -135,7 +105,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
         validateField,
       },
       {
-        fieldName: 'login',
+        fieldName: FieldsList.login,
         hanldeChange: setLogin,
         placeholder: 'Login',
         value: login,
@@ -143,7 +113,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
         validateField,
       },
       {
-        fieldName: 'password',
+        fieldName: FieldsList.password,
         hanldeChange: setPassword,
         placeholder: 'Password',
         type: InputTypeEnum.password,

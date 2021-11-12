@@ -1,65 +1,35 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useCallback, useMemo } from 'react';
 
-import { RoutesList } from '../../../../../typings/commonTypes';
-import { InputTypeEnum } from '../../../../components/Input';
+import { useForm } from '../FormComponent/useForm';
 
 import { authAPI } from '../../../../api/auth';
 
+import { InputTypeEnum } from '../../../../components/Input';
+import { FieldsList } from '../FormComponent/types';
 import { UseLoginComponentProps } from './types';
+
+const fieldsList = [FieldsList.login, FieldsList.password];
 
 export const useLogin = (props: UseLoginComponentProps) => {
   const { setError } = props;
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(true);
-  const [formFieldsValidation, setFormFieldsValidation] = useState({
-    login: false,
-    password: false,
-  });
 
-  useEffect(() => {
-    const isFormValid = Object.values(formFieldsValidation).every(
-      (field) => field
-    );
-
-    setIsFormValid(isFormValid);
-  }, [formFieldsValidation]);
-
-  const validateField = useCallback(
-    (fieldName: string, isValid: boolean) => {
-      setFormFieldsValidation({
-        ...formFieldsValidation,
-        [fieldName]: isValid,
-      });
-    },
-    [formFieldsValidation]
-  );
-
-  const navigate = useNavigate();
-
-  const handleError = useCallback(
-    (error: string) => {
-      setError(error);
-    },
-    [setError]
-  );
-
-  const handleSuccess = useCallback(() => {
-    setIsSuccess(true);
-    navigate(RoutesList.home);
-  }, [navigate]);
-
-  const handleLoading = useCallback((isLoading: boolean) => {
-    setIsLoading(isLoading);
-  }, []);
+  const {
+    handleError,
+    handleLoading,
+    handleSuccess,
+    isFormValid,
+    isLoading,
+    isSuccess,
+    validateField,
+  } = useForm({ fieldsList, setError });
 
   const handleLogin = useCallback(() => {
     if (isFormValid) {
       const data = { login, password };
+
       authAPI.login({ data, handleError, handleLoading, handleSuccess });
     }
   }, [handleError, handleLoading, handleSuccess, isFormValid, login, password]);
