@@ -15,9 +15,8 @@ const logout = () => {
 const navigationLinks = [
   { link: RoutesList.home, name: 'Home' },
   { link: RoutesList.login, name: 'Login' },
-  { link: RoutesList.library, name: 'Library' },
   { link: RoutesList.play, name: 'Play' },
-  { link: RoutesList.home, name: 'Logout', handleClick: logout },
+  { link: RoutesList.logout, name: 'Logout', handleClick: logout },
 ];
 
 export const NavigationMenu = () => {
