@@ -1,0 +1,21 @@
+.pointer {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px 15px;
+}
+
+tr {
+  border-radius: var(--border-radius);
+  transition: 0.3s;
+}
+
+tbody tr:hover {
+  box-shadow: 0 0 10em 5em #2292fc4d, 0 0 100px 50px #0044ff2d inset, 0 0 10px 5px #4c8bff7c;
+}
