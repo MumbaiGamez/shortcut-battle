@@ -1,42 +1,42 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { setVar } from '../../../../utils/css';
 import { GameContext } from '../../context';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
-import { useAnimationLoop } from '../../hooks/useAnimationLoop';
-import { useEngine } from '../../hooks/useEngine';
-import { useCanvas } from '../../hooks/useCanvas';
 import { Background } from '../Background';
 import { Borders } from '../Borders';
 import { Player } from '../Player';
+import { Enemy } from '../Enemy';
+import { useCanvas } from '../../hooks/useCanvas';
+import { useEngine } from '../../hooks/useEngine';
+import { useAnimationLoop } from '../../hooks/useAnimationLoop';
 
-import { PlaygroundProps } from '../../types';
+import { GameState } from '../../types';
 
 import styles from './Playground.css';
 
-export const Playground = (props: PlaygroundProps) => {
-  const { phase } = props;
+type PlaygroundProps = {
+  state: GameState;
+};
 
-  const { ctx, ref, clear } = useCanvas({
+export const Playground = (props: PlaygroundProps) => {
+  const { state } = props;
+
+  const { ctx, ref } = useCanvas({
     width: CANVAS_WIDTH,
     height: CANVAS_HEIGHT,
   });
 
-  const engine = useEngine({ ctx, clear });
+  const engine = useEngine({ ctx, state });
 
-  useAnimationLoop(phase, engine.render);
-
-  useEffect(() => {
-    setVar('--game-canvas-width', `${CANVAS_WIDTH}px`);
-    setVar('--game-canvas-height', `${CANVAS_HEIGHT}px`);
-  }, []);
+  useAnimationLoop(state.phase, engine.render);
 
   return (
-    <GameContext.Provider value={ctx}>
+    <GameContext.Provider value={engine.ctx}>
       <canvas ref={ref} className={styles.canvas} />
       <Background engine={engine} />
       <Borders engine={engine} />
       <Player engine={engine} />
+      <Enemy engine={engine} />
     </GameContext.Provider>
   );
 };

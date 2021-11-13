@@ -1,67 +1,116 @@
 import { useCallback, useRef } from 'react';
 
+import { haveCollisions } from '../utils/collision';
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
+
 import {
+  CanvasContext,
   CollisionHandler,
-  CollisionRule,
-  CollisionRules,
-  EntityType,
+  Entity,
+  GameState,
   Layer,
-  LayersType,
-  UseEngineProps,
 } from '../types';
 
+type CollisionHandlers = [Entity, Entity, CollisionHandler][];
+
+type Layers = Partial<Record<Entity, Layer[]>>;
+
+type UseEngineProps = {
+  ctx: CanvasContext;
+  state: GameState;
+};
+
 export const useEngine = (props: UseEngineProps) => {
-  const { clear, ctx } = props;
+  const { ctx } = props;
 
-  const layers = useRef<LayersType>({});
+  const layers = useRef<Layers>({});
 
-  const collisionRules = useRef<CollisionRules>({});
+  const collisionHandlers = useRef<CollisionHandlers>([]);
 
-  const addLayer = useCallback(
-    (type: EntityType, layer: Layer) => {
-      if (!layers.current[type]) {
-        layers.current[type] = [];
+  const addLayer = useCallback((type: Entity, layer: Layer) => {
+    if (!layers.current[type]) {
+      layers.current[type] = [];
+    }
+
+    layers.current[type]?.push(layer);
+  }, []);
+
+  const updateCollisionHandler = useCallback(
+    (type: Entity, withType: Entity, callback: CollisionHandler) => {
+      const currentHandler = collisionHandlers.current.find(
+        (handler) => handler[0] === type && handler[1] === withType
+      );
+
+      if (currentHandler) {
+        currentHandler[2] = callback;
+      } else {
+        collisionHandlers.current.push([type, withType, callback]);
       }
-
-      layers.current[type]?.push(layer);
     },
-    [layers]
+    []
   );
 
-  const addCollisionHandler = useCallback(
-    (type: EntityType, withType: EntityType, callback: CollisionHandler) => {
-      if (!collisionRules.current[type]) {
-        collisionRules.current[type] = {};
-      }
-
-      (collisionRules.current[type] as CollisionRule)[withType] = callback;
+  const setCollisionHandler = useCallback(
+    (type: Entity, withTypes: Entity[], callback: CollisionHandler) => {
+      withTypes.forEach((withType) => {
+        updateCollisionHandler(type, withType, callback);
+      });
     },
-    [collisionRules]
+    [updateCollisionHandler]
+  );
+
+  const handleCollisions = useCallback(
+    (layer: Layer, layers: Layer[], callback: CollisionHandler) => {
+      const ownBoundaries = [
+        layer.x.current,
+        layer.y.current,
+        layer.x.current + layer.width,
+        layer.y.current + layer.height,
+      ];
+
+      for (const withLayer of layers) {
+        const layerBoundaries = [
+          withLayer.x.current,
+          withLayer.y.current,
+          withLayer.x.current + withLayer.width,
+          withLayer.y.current + withLayer.height,
+        ];
+
+        if (haveCollisions(ownBoundaries, layerBoundaries)) {
+          callback && callback(layer, withLayer);
+        }
+      }
+    },
+    []
   );
 
   const render = useCallback(
     (dt: number) => {
-      clear();
+      ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-      for (const type of Object.values(EntityType)) {
+      for (const type of Object.values(Entity)) {
+        const handlers = collisionHandlers.current.filter(
+          (handler) => handler[0] === type
+        );
+
         for (const layer of layers.current[type] || []) {
-          const rule = collisionRules.current[layer.type];
+          for (const handler of handlers) {
+            const [, withType, callback] = handler;
 
-          const handlers = Object.entries(rule || {}).map((handler) => {
-            const [type, callback] = handler;
+            handleCollisions(layer, layers.current[withType] || [], callback);
+          }
 
-            return {
-              layers: layers.current[type as EntityType] || [],
-              callback,
-            };
-          });
-
-          layer.render(dt, handlers);
+          layer.render(dt);
         }
       }
     },
-    [clear, layers]
+    [ctx, handleCollisions]
   );
 
-  return { ctx, render, addLayer, addCollisionHandler };
+  return {
+    ctx,
+    render,
+    addLayer,
+    setCollisionHandler,
+  };
 };

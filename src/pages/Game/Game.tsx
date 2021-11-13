@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { GameUI } from './components/GameUI';
 import { Playground } from './components/Playground';
-
-import { Phase } from './types';
+import { useGameState } from './hooks/useGameState';
 
 import styles from './Game.css';
 
 export const Game = () => {
-  const [phase, setPhase] = useState<Phase>(Phase.loading);
+  const state = useGameState();
 
   return (
     <main className={styles.game}>
-      <GameUI phase={phase} setPhase={setPhase} />
-      <Playground phase={phase} />
+      <GameUI state={state} />
+      <Playground state={state} />
     </main>
   );
 };

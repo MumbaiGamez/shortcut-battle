@@ -1,6 +1,6 @@
-import { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { MutableRefObject } from 'react';
 
-export type GameContextType = CanvasRenderingContext2D | null;
+export type CanvasContext = CanvasRenderingContext2D | null;
 
 export enum Phase {
   loading = 'loading',
@@ -10,7 +10,7 @@ export enum Phase {
   over = 'over',
 }
 
-export enum EntityType {
+export enum Entity {
   background = 'background',
   topBorder = 'topBorder',
   rightBorder = 'rightBorder',
@@ -22,81 +22,57 @@ export enum EntityType {
 }
 
 export type Layer = {
-  type: EntityType;
+  type: Entity;
   width: number;
   height: number;
+  prevX: MutableRefObject<number>;
+  prevY: MutableRefObject<number>;
   x: MutableRefObject<number>;
   y: MutableRefObject<number>;
-  setVx: (velo: number) => void;
-  setVy: (velo: number) => void;
-  render: (
-    dt: number,
-    collisionHandlers: Array<{ layers: Layer[]; callback: CollisionHandler }>
-  ) => void;
+  vx: MutableRefObject<number>;
+  vy: MutableRefObject<number>;
+  render: (dt: number) => void;
+  setVx: (value: number) => void;
+  setVy: (value: number) => void;
 };
 
-export type CollisionHandler = (withLayer: Layer) => void;
-
-export type CollisionRule = Partial<{
-  [key in EntityType]: CollisionHandler;
-}>;
-
-export type CollisionRules = Partial<{
-  [key in EntityType]: CollisionRule;
-}>;
+export type GameState = {
+  phase: Phase;
+  score: number;
+  reset: () => void;
+  start: () => void;
+  pause: () => void;
+};
 
 export type Engine = {
-  ctx: GameContextType;
+  ctx: CanvasContext;
   render: (dt: number) => void;
-  addLayer: (type: EntityType, layer: Layer) => void;
-  addCollisionHandler: (
-    type: EntityType,
-    withType: EntityType,
+  addLayer: (type: Entity, layer: Layer) => void;
+  setCollisionHandler: (
+    type: Entity,
+    withTypes: Entity[],
     callback: CollisionHandler
   ) => void;
 };
 
-export enum PlayerAction {
-  moveLeft = 'moveLeft',
-  moveRight = 'moveRight',
-}
-
-export type Shortcut = {
-  code: string;
-  ctrl?: boolean;
-  shift?: boolean;
-  meta?: boolean;
-};
+export type CollisionHandler = (layer: Layer, withLayer?: Layer) => void;
 
 export type LayerProps = RequireAtLeastOne<
   {
-    ctx: GameContextType;
+    type: Entity;
+    ctx: CanvasContext;
     pos: number[];
     width: number;
     height: number;
+
+    velo?: number[];
     src?: string;
     color?: string;
-    type: EntityType;
+    id?: number;
   },
   'src' | 'color'
 >;
 
-export type PlaygroundProps = {
-  phase: Phase;
-};
-
-export type GameUIProps = {
-  phase: Phase;
-  setPhase: Dispatch<SetStateAction<Phase>>;
-};
-
 export type LayerComponentProps = {
   engine: Engine;
-};
-
-export type LayersType = Partial<Record<EntityType, Layer[]>>;
-
-export type UseEngineProps = {
-  ctx: GameContextType;
-  clear: () => void;
 };

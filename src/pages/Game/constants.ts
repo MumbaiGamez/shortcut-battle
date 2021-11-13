@@ -3,3 +3,4 @@ export const CANVAS_HEIGHT = 480;
 export const PLAYER_WIDTH = 40;
 export const PLAYER_HEIGHT = 30;
 export const MIN_SPEED = 0.3;
+export const ASTEROID_SIZE_SMALL = 40;

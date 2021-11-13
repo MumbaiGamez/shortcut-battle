@@ -7,9 +7,9 @@ import {
   PLAYER_WIDTH,
 } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
-import { usePlayerKeys } from './usePlayerKeys';
+import { PlayerAction, usePlayerKeys } from './usePlayerKeys';
 
-import { EntityType, LayerComponentProps, PlayerAction } from '../../types';
+import { Entity, LayerComponentProps } from '../../types';
 
 import playerImg from '../../../../assets/images/player.png';
 
@@ -25,7 +25,7 @@ export const Player = (props: LayerComponentProps) => {
     width: PLAYER_WIDTH,
     height: PLAYER_HEIGHT,
     src: playerImg,
-    type: EntityType.player,
+    type: Entity.player,
   });
 
   usePlayerKeys(player, {
@@ -34,20 +34,19 @@ export const Player = (props: LayerComponentProps) => {
   });
 
   useEffect(() => {
-    engine.addLayer(EntityType.player, player);
-
-    engine.addCollisionHandler(
-      EntityType.player,
-      EntityType.leftBorder,
-      () => undefined
-    );
-
-    engine.addCollisionHandler(
-      EntityType.player,
-      EntityType.rightBorder,
-      () => undefined
-    );
+    engine.addLayer(Entity.player, player);
   }, [player, engine]);
+
+  useEffect(() => {
+    engine.setCollisionHandler(
+      Entity.player,
+      [Entity.leftBorder, Entity.rightBorder],
+      (layer) => {
+        layer.x.current = layer.prevX.current;
+        layer.y.current = layer.prevY.current;
+      }
+    );
+  }, [engine]);
 
   return null;
 };

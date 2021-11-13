@@ -2,7 +2,19 @@ import { useEffect } from 'react';
 
 import { MIN_SPEED } from '../../constants';
 
-import { Layer, PlayerAction, Shortcut } from '../../types';
+import { Layer } from '../../types';
+
+export enum PlayerAction {
+  moveLeft = 'moveLeft',
+  moveRight = 'moveRight',
+}
+
+export type Shortcut = {
+  code: string;
+  ctrl?: boolean;
+  shift?: boolean;
+  meta?: boolean;
+};
 
 type KeysMap = Record<PlayerAction, Shortcut>;
 
@@ -12,11 +24,11 @@ export const usePlayerKeys = (player: Layer, keysMap: KeysMap) => {
       const { code } = event;
 
       if (code === keysMap.moveLeft.code) {
-        player.setVx(-1 * MIN_SPEED);
+        player.vx.current = -1 * MIN_SPEED;
       }
 
       if (code === keysMap.moveRight.code) {
-        player.setVx(MIN_SPEED);
+        player.vx.current = MIN_SPEED;
       }
     };
 
@@ -24,7 +36,7 @@ export const usePlayerKeys = (player: Layer, keysMap: KeysMap) => {
       const { code } = event;
 
       if (code === keysMap.moveLeft.code || code === keysMap.moveRight.code) {
-        player.setVx(0);
+        player.vx.current = 0;
       }
     };
 

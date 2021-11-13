@@ -1,17 +1,18 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
+import { setVar } from '../../../utils/css';
 
-import { GameContextType } from '../types';
+import { CanvasContext } from '../types';
 
-type UseCanvasProps = {
+export type UseCanvasProps = {
   width: number;
   height: number;
 };
 
 export const useCanvas = (props: UseCanvasProps) => {
   const { width, height } = props;
-  const [ctx, setCtx] = useState<GameContextType>(null);
+
+  const [ctx, setCtx] = useState<CanvasContext>(null);
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -24,9 +25,10 @@ export const useCanvas = (props: UseCanvasProps) => {
     }
   }, [ref, width, height]);
 
-  const clear = useCallback(() => {
-    ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-  }, [ctx]);
+  useEffect(() => {
+    setVar('--game-canvas-width', `${width}px`);
+    setVar('--game-canvas-height', `${height}px`);
+  }, [width, height]);
 
-  return { ctx, ref, clear };
+  return { ctx, ref };
 };
