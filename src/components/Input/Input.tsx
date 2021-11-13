@@ -10,8 +10,16 @@ import EyeCrossedIcon from '../../assets/icons/eyeCrossed.svg';
 import styles from './Input.css';
 
 export const Input = (props: InputProps) => {
-  const { hanldeChange, label, placeholder, validationRule, type, value } =
-    props;
+  const {
+    fieldName,
+    hanldeChange,
+    label,
+    placeholder,
+    type,
+    value,
+    validationRule,
+    validateField,
+  } = props;
 
   const {
     clearInputValue,
@@ -23,10 +31,12 @@ export const Input = (props: InputProps) => {
     isCrossedEye,
     toggleEye,
   } = useInput({
+    fieldName,
     hanldeChange,
     validationRule,
     type,
     value,
+    validateField,
   });
 
   return (

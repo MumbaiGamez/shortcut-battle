@@ -1,39 +1,30 @@
 import React from 'react';
 
-import { Button, ButtonTheme } from '../../../../components/Button';
-import { Card } from '../../../../components/Card';
-import { Input, InputTypeEnum } from '../../../../components/Input';
+import { FormComponent } from '../FormComponent';
+
+import { useRegistration } from './useRegistration';
 
 import { RegistrationComponentProps } from './types';
 
 import styles from './RegistrationComponent.css';
 
 export const RegistrationComponent = (props: RegistrationComponentProps) => {
-  const { toggleForm } = props;
+  const { toggleForm, setError } = props;
+
+  const { handleRegistration, inputsList, isFormValid, isLoading } =
+    useRegistration({ setError });
 
   return (
-    <Card title="Registration">
-      <Input validationRule={{ isRequired: true }} placeholder="Name" />
-      <Input
-        placeholder="Email"
-        type={InputTypeEnum.email}
-        validationRule={{ isRequired: true, email: true }}
-      />
-      <Input
-        placeholder="Phone"
-        type={InputTypeEnum.email}
-        validationRule={{ isRequired: true, phone: true }}
-      />
-      <Input validationRule={{ isRequired: true }} placeholder="Login" />
-      <Input
-        placeholder="Password"
-        type={InputTypeEnum.password}
-        validationRule={{ minSymbols: 6 }}
-      />
-      <span className={styles.toggleForm} onClick={toggleForm}>
-        Already registered? Go to Login
-      </span>
-      <Button theme={ButtonTheme.Glow}>Registration</Button>
-    </Card>
+    <FormComponent
+      buttonText="Registration"
+      inputsList={inputsList}
+      isLoading={isLoading}
+      isButtonDisabled={!isFormValid}
+      onButtonClick={handleRegistration}
+      toggleForm={toggleForm}
+      toggleFormText="Already registered? Go to Login"
+      toggleFormClass={styles.toggleForm}
+      title="Registration"
+    />
   );
 };

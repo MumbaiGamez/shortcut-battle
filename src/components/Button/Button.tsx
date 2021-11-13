@@ -1,24 +1,22 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { ButtonProps, ButtonTheme } from './types';
+import { ButtonProps } from './types';
 
 import styles from './Button.css';
 
-export const Button = ({
-  children,
-  className,
-  theme = ButtonTheme.Default,
-  ...props
-}: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
+  const { children, className, isDisabled, theme, ...restProps } = props;
+
   return (
     <button
       className={classNames(
         styles.button,
         styles[`buttonTheme${theme}`],
+        isDisabled && styles.buttonDisabled,
         className
       )}
-      {...props}
+      {...restProps}
     >
       {children}
     </button>

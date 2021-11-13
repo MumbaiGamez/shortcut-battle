@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 import { LoginComponent } from './components/LoginComponent';
 import { RegistrationComponent } from './components/RegistrationComponent';
 import { Star } from '../../components/Star';
+import { Toaster } from '../../components/Toaster';
+
+import { useLoginPage } from './useLoginPage';
+
+import { ToasterTheme } from '../../components/Toaster/types';
 
 import styles from './Login.css';
 
 export const Login = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const toggleForm = () => {
-    setIsLogin((prev) => !prev);
-  };
+  const { error, errorId, handleError, isLogin, toggleForm } = useLoginPage();
 
   return (
     <div className={styles.login}>
+      <Toaster theme={ToasterTheme.Error} text={error} toasterId={errorId} />
       {isLogin ? (
-        <LoginComponent toggleForm={toggleForm} />
+        <LoginComponent toggleForm={toggleForm} setError={handleError} />
       ) : (
-        <RegistrationComponent toggleForm={toggleForm} />
+        <RegistrationComponent toggleForm={toggleForm} setError={handleError} />
       )}
       <Star
         className={classNames(

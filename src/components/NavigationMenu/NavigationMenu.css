@@ -1,6 +1,7 @@
-.navigation-menu {
-  height: 100%;
+.navigationMenu {
+  height: var(--nav-height);
   display: flex;
+  justify-content: center;
   font-size: 14px;
   z-index: 20;
 }

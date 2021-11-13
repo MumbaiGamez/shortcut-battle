@@ -30,10 +30,22 @@ export enum InputTypeEnum {
 }
 
 export type InputProps = {
+  fieldName?: string;
   hanldeChange?(value: string): void;
   label?: string;
   placeholder?: string;
+  validateField?(fieldName: string, isValid: boolean): void;
   type?: InputTypeEnum;
   validationRule?: ValidationRules;
   value?: string;
 };
+
+export type UseInputProps = Pick<
+  InputProps,
+  | 'fieldName'
+  | 'hanldeChange'
+  | 'type'
+  | 'value'
+  | 'validationRule'
+  | 'validateField'
+>;
