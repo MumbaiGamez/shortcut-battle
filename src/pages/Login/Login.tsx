@@ -6,14 +6,14 @@ import { RegistrationComponent } from './components/RegistrationComponent';
 import { Star } from '../../components/Star';
 import { Toaster } from '../../components/Toaster';
 
-import { useLogin } from './useLoginPage';
+import { useLoginPage } from './useLoginPage';
 
 import { ToasterTheme } from '../../components/Toaster/types';
 
 import styles from './Login.css';
 
 export const Login = () => {
-  const { error, errorId, handleError, isLogin, toggleForm } = useLogin();
+  const { error, errorId, handleError, isLogin, toggleForm } = useLoginPage();
 
   return (
     <div className={styles.login}>

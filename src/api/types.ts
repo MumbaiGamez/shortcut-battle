@@ -5,7 +5,7 @@ export type LoginDataType = {
 
 type HandleError = (error: string) => void;
 
-type HandleSuccess = () => void;
+type HandleSuccess = (success: string) => void;
 
 type HandleLoading = (isLoading: boolean) => void;
 

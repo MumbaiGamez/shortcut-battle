@@ -68,7 +68,7 @@ class BasicAPI {
       if (reason) {
         handleError(reason);
       } else {
-        handleSuccess();
+        handleSuccess('success');
 
         return data;
       }

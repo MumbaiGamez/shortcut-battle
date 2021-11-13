@@ -9,27 +9,17 @@ enum AuthURL {
 
 class AuthAPI {
   login(props: LoginAPIProps) {
-    const { data, handleError, handleLoading, handleSuccess } = props;
-
     return basicAPI.post({
-      data,
-      handleError,
+      ...props,
       errorMessage: 'Login error',
-      handleLoading,
-      handleSuccess,
       url: AuthURL.SIGNIN,
     });
   }
 
-  registration(props: RegistrationAPIProps) {
-    const { data, handleError, handleLoading, handleSuccess } = props;
-
+  signup(props: RegistrationAPIProps) {
     basicAPI.post({
-      data,
-      handleError,
+      ...props,
       errorMessage: 'Registration error',
-      handleLoading,
-      handleSuccess,
       url: AuthURL.SIGNUP,
     });
   }

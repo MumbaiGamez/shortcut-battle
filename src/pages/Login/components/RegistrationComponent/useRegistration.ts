@@ -48,7 +48,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
         phone,
       };
 
-      authAPI.registration({
+      authAPI.signup({
         data,
         handleError,
         handleLoading,

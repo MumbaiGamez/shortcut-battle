@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export const useLogin = () => {
+export const useLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => {
