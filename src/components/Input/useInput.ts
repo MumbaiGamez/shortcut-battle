@@ -1,35 +1,48 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
-import { InputProps, InputTypeEnum } from './types';
+import { InputTypeEnum, UseInputProps } from './types';
 
 import { getValidationError } from '../../utils/validation';
-
-export type UseInputProps = Pick<
-  InputProps,
-  'hanldeChange' | 'type' | 'value' | 'validationRule'
->;
 
 export const useInput = (props: UseInputProps) => {
   const [defaultInputValue, defaultInputHandler] = useState('');
 
   const {
+    fieldName,
     hanldeChange = defaultInputHandler,
     type,
     value = defaultInputValue,
     validationRule,
+    validateField,
   } = props;
 
   const [isCrossedEye, setIsCrossedEye] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentType, setСurrentType] = useState(type || InputTypeEnum.text);
 
+  useEffect(() => {
+    if (validateField && fieldName) {
+      const { isValid } = getValidationError(validationRule, value);
+
+      validateField(fieldName, isValid);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const checkValidation = useCallback(
     (value: string) => {
-      const { errorMessage } = getValidationError(validationRule, value);
+      const { isValid, errorMessage } = getValidationError(
+        validationRule,
+        value
+      );
+
+      if (validateField && fieldName) {
+        validateField(fieldName, isValid);
+      }
 
       setErrorMessage(errorMessage);
     },
-    [validationRule]
+    [validationRule, validateField, fieldName]
   );
 
   const toggleEye = useCallback(() => {
@@ -42,15 +55,12 @@ export const useInput = (props: UseInputProps) => {
     setIsCrossedEye((prevState) => !prevState);
   }, [isCrossedEye]);
 
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
 
-      checkValidation(value);
-      hanldeChange(value);
-    },
-    [checkValidation, hanldeChange]
-  );
+    checkValidation(value);
+    hanldeChange(value);
+  };
 
   const clearInputValue = useCallback(() => {
     checkValidation('');
@@ -65,8 +75,8 @@ export const useInput = (props: UseInputProps) => {
     currentValue: value,
     errorMessage,
     handleInputChange,
-    shouldShowEyeIcon,
     isCrossedEye,
+    shouldShowEyeIcon,
     toggleEye,
   };
 };

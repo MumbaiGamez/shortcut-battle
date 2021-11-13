@@ -1,14 +1,15 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import { CardProps } from './types';
 
 import styles from './Card.css';
 
 export const Card = (props: CardProps) => {
-  const { children, subtitle, title } = props;
+  const { children, className, subtitle, title } = props;
 
   return (
-    <div className={styles.card}>
+    <div className={classNames(styles.card, className)}>
       {title && <div className={styles.title}>{title}</div>}
       {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
       <div className={styles.content}>{children}</div>
