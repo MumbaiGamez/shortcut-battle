@@ -1,0 +1,44 @@
+.leaderboard {
+  max-width: 1200px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 400px;
+  height: 200px;
+}
+
+.row {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  transition: 0.3s;
+  border-radius: var(--border-radius);
+  padding: 10px;
+}
+
+.row:first-child {
+  margin-bottom: 15px;
+}
+
+.row:hover {
+  box-shadow: 0 0 10em 5em #ff66004d, 0 0 100px 50px #ff66002d inset, 0 0 10px 5px var(--dark-yellow-color);
+}
+
+@media only screen and (max-width: 768px) {
+  .leaderboard {
+    margin-top: var(--nav-height);
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+    height: 100px;
+  }
+
+  .row:first-child {
+    margin-bottom: 0;
+  }
+}
