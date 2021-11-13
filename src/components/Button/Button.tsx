@@ -6,7 +6,8 @@ import { ButtonProps } from './types';
 import styles from './Button.css';
 
 export const Button = (props: ButtonProps) => {
-  const { children, className, isDisabled, theme, ...restProps } = props;
+  const { children, className, isActive, isDisabled, theme, ...restProps } =
+    props;
 
   return (
     <button
@@ -14,6 +15,7 @@ export const Button = (props: ButtonProps) => {
         styles.button,
         styles[`buttonTheme${theme}`],
         isDisabled && styles.buttonDisabled,
+        isActive && styles.buttonActive,
         className
       )}
       {...restProps}

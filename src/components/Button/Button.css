@@ -56,6 +56,48 @@
   border-color: var(--button-background-color);
 }
 
+.buttonThemeMenu {
+  --line-height: 2px;
+
+  width: 30px;
+  height: 20px;
+  padding: 0;
+  border-radius: 0;
+  border: 0;
+  display: block;
+  border-top: var(--line-height) solid;
+  border-bottom: var(--line-height) solid;
+  color: var(--main-text-color);
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+}
+
+.buttonThemeMenu::before,
+.buttonThemeMenu::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: var(--line-height);
+  left: 50%;
+  top: 50%;
+  background-color: var(--main-text-color);
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+}
+
+.buttonThemeMenu.buttonActive {
+  border-color: transparent;
+}
+
+.buttonThemeMenu.buttonActive::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.buttonThemeMenu.buttonActive::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
 @keyframes glowing {
   0% { background-position: 0 0; }
   50% { background-position: 400% 0; }
