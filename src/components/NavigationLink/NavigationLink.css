@@ -6,7 +6,7 @@
   overflow: hidden;
   transition: 0.5s;
   border-radius: var(--border-radius);
-  box-shadow: 0 0 10em 5em #ff66004d, 0 0 100px 50px #ff66002d inset, 0 0 10px 5px #ffcc007c;
+  box-shadow: 0 0 10em 5em #ff66004d, 0 0 100px 50px #ff66002d inset, 0 0 10px 5px var(--dark-yellow-color);
 }
 
 .hoveredText {

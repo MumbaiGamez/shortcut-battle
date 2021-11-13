@@ -1,7 +1,8 @@
 .inputContainer {
   width: 100%;
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   margin: 20px;
 }
 
@@ -51,17 +52,13 @@
 }
 
 .label {
-  position: absolute;
-  top: 0;
-  left: 20px;
-  transform: translateY(-100%);
-  color: var(--secondary-text-color);
+  margin-inline-end: 20px;
 }
 
 .error {
   position: absolute;
   z-index: 10;
-  left: 20px;
+  right: 20px;
   bottom: -30px;
   display: inline-block;
   color: var(--error-color);
@@ -93,5 +90,11 @@
   40%,
   60% {
     transform: translate3d(4px, 0, 0);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .inputContainer {
+    margin: 15px;
   }
 }

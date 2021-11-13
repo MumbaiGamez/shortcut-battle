@@ -9,6 +9,9 @@
   --light-blue-color: #5cb6fff2;
   --orange-color: #f60;
   --yellow-color: #fc0;
+  --dark-yellow-color: #ffcc007c;
   --green-color: #0f0;
   --nav-height: 80px;
+  --desktop-screen-width: 1200px;
+  --mobile-screen-width: 768px;
 }

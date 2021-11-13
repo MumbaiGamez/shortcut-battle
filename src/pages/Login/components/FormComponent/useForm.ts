@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RoutesList } from '../../../../../typings/commonTypes';
+import { RoutesList } from '../../../../components/NavigationMenu/useNavigationMenu';
+
 import { FieldsList, FieldsObject, UseFormProps } from './types';
 
 export const useForm = (props: UseFormProps) => {
