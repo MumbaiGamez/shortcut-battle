@@ -5,6 +5,7 @@ import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
 import { Background } from '../Background';
 import { Borders } from '../Borders';
 import { Player } from '../Player';
+import { Weapon } from '../Weapon';
 import { Enemy } from '../Enemy';
 import { useCanvas } from '../../hooks/useCanvas';
 import { useEngine } from '../../hooks/useEngine';
@@ -36,6 +37,7 @@ export const Playground = (props: PlaygroundProps) => {
       <Background engine={engine} />
       <Borders engine={engine} />
       <Player engine={engine} />
+      <Weapon engine={engine} />
       <Enemy engine={engine} />
     </GameContext.Provider>
   );

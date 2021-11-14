@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import {
   CANVAS_HEIGHT,
   CANVAS_WIDTH,
+  MIN_PLAYER_SPEED,
   PLAYER_HEIGHT,
   PLAYER_WIDTH,
 } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
-import { PlayerAction, usePlayerKeys } from './usePlayerKeys';
 
-import { Entity, LayerComponentProps } from '../../types';
+import { Entity, Layer, LayerComponentProps, PlayerAction } from '../../types';
 
 import playerImg from '../../../../assets/images/player.png';
 
@@ -28,11 +28,6 @@ export const Player = (props: LayerComponentProps) => {
     type: Entity.player,
   });
 
-  usePlayerKeys(player, {
-    [PlayerAction.moveLeft]: { code: 'ArrowLeft' },
-    [PlayerAction.moveRight]: { code: 'ArrowRight' },
-  });
-
   useEffect(() => {
     engine.addLayer(Entity.player, player);
   }, [player, engine]);
@@ -41,9 +36,37 @@ export const Player = (props: LayerComponentProps) => {
     engine.setCollisionHandler(
       Entity.player,
       [Entity.leftBorder, Entity.rightBorder],
-      (layer) => {
+      (layer: Layer) => {
         layer.x.current = layer.prevX.current;
         layer.y.current = layer.prevY.current;
+      }
+    );
+
+    engine.setShortcutHandler(
+      Entity.player,
+      PlayerAction.moveLeft,
+      (layer: Layer, pressed, allPressed) => {
+        if (!pressed && !allPressed?.moveRight) {
+          layer.vx.current = 0;
+        }
+
+        if (pressed) {
+          layer.vx.current = -1 * MIN_PLAYER_SPEED;
+        }
+      }
+    );
+
+    engine.setShortcutHandler(
+      Entity.player,
+      PlayerAction.moveRight,
+      (layer: Layer, pressed, allPressed) => {
+        if (!pressed && !allPressed?.moveLeft) {
+          layer.vx.current = 0;
+        }
+
+        if (pressed) {
+          layer.vx.current = MIN_PLAYER_SPEED;
+        }
       }
     );
   }, [engine]);

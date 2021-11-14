@@ -28,7 +28,7 @@ export const useAsteroidsGenerator = (ctx: CanvasContext) => {
     }
 
     setAsteroids((prev) => [...prev, getRandomAsteroid(ctx)]);
-  }, [setAsteroids, ctx]);
+  }, [ctx]);
 
   return { asteroids, generate };
 };

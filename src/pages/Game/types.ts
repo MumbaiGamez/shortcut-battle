@@ -53,9 +53,22 @@ export type Engine = {
     withTypes: Entity[],
     callback: CollisionHandler
   ) => void;
+  setShortcutHandler: (
+    type: Entity,
+    acton: PlayerAction,
+    callback: ShortcutHandler
+  ) => void;
 };
 
 export type CollisionHandler = (layer: Layer, withLayer?: Layer) => void;
+
+export type ShortcutsPressed = Partial<Record<PlayerAction, boolean>>;
+
+export type ShortcutHandler = (
+  layer: Layer,
+  pressed: boolean | undefined,
+  shortcutsPressed?: ShortcutsPressed
+) => void;
 
 export type LayerProps = RequireAtLeastOne<
   {
@@ -76,3 +89,9 @@ export type LayerProps = RequireAtLeastOne<
 export type LayerComponentProps = {
   engine: Engine;
 };
+
+export enum PlayerAction {
+  moveLeft = 'moveLeft',
+  moveRight = 'moveRight',
+  fire = 'fire',
+}
