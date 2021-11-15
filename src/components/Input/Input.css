@@ -1,3 +1,5 @@
+@import "../../assets/styles/variables";
+
 .inputContainer {
   width: 100%;
   position: relative;
@@ -93,7 +95,7 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: $mobile-screen-width) {
   .inputContainer {
     margin: 15px;
   }
