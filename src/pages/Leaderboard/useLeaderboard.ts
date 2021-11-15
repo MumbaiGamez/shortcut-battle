@@ -11,8 +11,9 @@ const mockUserRank = '3';
 const mockUserScore = '700';
 
 export const useLeaderboard = () => {
-  const formattedDataList = leadersMockList.map((leader) => {
+  const formattedDataList = leadersMockList.map((leader, index) => {
     return {
+      id: index.toString(),
       ratingFieldName: leader.ratingFieldName,
       teamName: leader.teamName,
       score: leader.data.score,

@@ -5,6 +5,7 @@ type HeaderListType = {
 };
 
 type DataListType = {
+  id: string;
   [key: string]: string;
 };
 
