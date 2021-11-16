@@ -44,6 +44,24 @@ export const useEngine = (props: UseEngineProps) => {
     layers.current[type]?.push(layer);
   }, []);
 
+  const removeLayer = useCallback((layer: Layer) => {
+    const { type } = layer;
+
+    const layersByType = layers.current[type];
+
+    if (!layersByType) {
+      return;
+    }
+
+    const layerIndex = layersByType.findIndex(
+      (nextLayer) => nextLayer === layer
+    );
+
+    if (layerIndex !== -1) {
+      layersByType.splice(layerIndex, 1);
+    }
+  }, []);
+
   const updateCollisionHandler = useCallback(
     (type: Entity, withType: Entity, callback: CollisionHandler) => {
       const currentHandler = collisionHandlers.current.find(
@@ -108,22 +126,26 @@ export const useEngine = (props: UseEngineProps) => {
     []
   );
 
-  const render = useCallback(
-    (dt: number) => {
-      ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  const clear = useCallback(() => {
+    ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  }, [ctx]);
 
-      for (const handler of shortcutHandlers.current) {
-        const [type, action, callback] = handler;
+  const handleShortcuts = useCallback(() => {
+    for (const handler of shortcutHandlers.current) {
+      const [type, action, callback] = handler;
 
-        for (const layer of layers.current[type] || []) {
-          callback(
-            layer,
-            shortcutsPressed.current[action],
-            shortcutsPressed.current
-          );
-        }
+      for (const layer of layers.current[type] || []) {
+        callback(
+          layer,
+          shortcutsPressed.current[action],
+          shortcutsPressed.current
+        );
       }
+    }
+  }, [shortcutsPressed]);
 
+  const renderLayers = useCallback(
+    (dt: number) => {
       for (const type of Object.values(Entity)) {
         const collisionHandlersByType = collisionHandlers.current.filter(
           (handler) => handler[0] === type
@@ -131,7 +153,6 @@ export const useEngine = (props: UseEngineProps) => {
 
         for (const layer of layers.current[type] || []) {
           layer.render(dt);
-
           for (const handler of collisionHandlersByType) {
             const [, withType, callback] = handler;
 
@@ -140,14 +161,26 @@ export const useEngine = (props: UseEngineProps) => {
         }
       }
     },
-    [ctx, handleCollisions, shortcutsPressed]
+    [handleCollisions]
+  );
+
+  const render = useCallback(
+    (dt: number) => {
+      clear();
+
+      handleShortcuts();
+
+      renderLayers(dt);
+    },
+    [clear, handleShortcuts, renderLayers]
   );
 
   return {
     ctx,
-    render,
     addLayer,
+    removeLayer,
     setCollisionHandler,
     setShortcutHandler,
+    render,
   };
 };

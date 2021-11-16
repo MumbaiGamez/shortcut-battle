@@ -15,6 +15,10 @@ export const Bullet = (props: BulletProps) => {
 
   useEffect(() => {
     engine.addLayer(Entity.bullet, bulletLayer);
+
+    return () => {
+      engine.removeLayer(bulletLayer);
+    };
   }, [bulletLayer, engine]);
 
   return null;

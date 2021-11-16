@@ -11,7 +11,7 @@ import { CanvasContext, Entity, LayerProps } from '../../types';
 
 import asteroidImg from '../../../../assets/images/laserRed.png';
 
-const getBullet = (ctx: CanvasContext, playerX: number, playerY: number) => {
+const createBullet = (ctx: CanvasContext, playerX: number, playerY: number) => {
   return {
     ctx,
     pos: [
@@ -36,10 +36,14 @@ export const useWeapon = (ctx: CanvasContext) => {
         return;
       }
 
-      setBullets((prev) => [...prev, getBullet(ctx, playerX, playerY)]);
+      setBullets((prev) => [...prev, createBullet(ctx, playerX, playerY)]);
     },
     [ctx]
   );
 
-  return { bullets, fire };
+  const blow = useCallback((bulletId: number) => {
+    setBullets((prev) => prev.filter(({ id }) => id !== bulletId));
+  }, []);
+
+  return { bullets, fire, blow };
 };

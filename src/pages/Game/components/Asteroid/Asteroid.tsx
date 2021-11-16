@@ -15,6 +15,10 @@ export const Asteroid = (props: AsteroidProps) => {
 
   useEffect(() => {
     engine.addLayer(Entity.asteroid, asteroidLayer);
+
+    return () => {
+      engine.removeLayer(asteroidLayer);
+    };
   }, [asteroidLayer, engine]);
 
   return null;

@@ -34,6 +34,8 @@ export type Layer = {
   render: (dt: number) => void;
   setVx: (value: number) => void;
   setVy: (value: number) => void;
+
+  id?: number;
 };
 
 export type GameState = {
@@ -48,6 +50,7 @@ export type Engine = {
   ctx: CanvasContext;
   render: (dt: number) => void;
   addLayer: (type: Entity, layer: Layer) => void;
+  removeLayer: (layer: Layer) => void;
   setCollisionHandler: (
     type: Entity,
     withTypes: Entity[],
@@ -60,7 +63,7 @@ export type Engine = {
   ) => void;
 };
 
-export type CollisionHandler = (layer: Layer, withLayer?: Layer) => void;
+export type CollisionHandler = (layer: Layer, withLayer: Layer) => void;
 
 export type ShortcutsPressed = Partial<Record<PlayerAction, boolean>>;
 

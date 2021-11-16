@@ -14,6 +14,7 @@ export const useLayer = (props: LayerProps) => {
     src,
     color,
     type,
+    id,
   } = props;
 
   const prevX = useRef(pos[0]);
@@ -89,6 +90,7 @@ export const useLayer = (props: LayerProps) => {
   }, []);
 
   return {
+    id,
     prevX,
     prevY,
     x,

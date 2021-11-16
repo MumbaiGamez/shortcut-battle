@@ -30,6 +30,10 @@ export const Player = (props: LayerComponentProps) => {
 
   useEffect(() => {
     engine.addLayer(Entity.player, player);
+
+    return () => {
+      engine.removeLayer(player);
+    };
   }, [player, engine]);
 
   useEffect(() => {

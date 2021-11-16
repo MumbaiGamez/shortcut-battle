@@ -30,5 +30,9 @@ export const useAsteroidsGenerator = (ctx: CanvasContext) => {
     setAsteroids((prev) => [...prev, createRandomAsteroid(ctx)]);
   }, [ctx]);
 
-  return { asteroids, generate };
+  const blow = useCallback((asteroidId: number) => {
+    setAsteroids((prev) => prev.filter(({ id }) => id !== asteroidId));
+  }, []);
+
+  return { asteroids, generate, blow };
 };

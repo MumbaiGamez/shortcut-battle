@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
+import { Event, useEventBus } from '../../hooks/useEventBus';
 import { Bullet } from '../Bullet';
 import { useWeapon } from './useWeapon';
 
@@ -9,10 +10,11 @@ const WEAPON_FIRE_TRESHOLD = 500;
 
 export const Weapon = (props: LayerComponentProps) => {
   const { engine } = props;
+  const { bullets, fire, blow } = useWeapon(engine.ctx);
 
   const lastShot = useRef<number>(0);
 
-  const { bullets, fire } = useWeapon(engine.ctx);
+  const { emit } = useEventBus();
 
   useEffect(() => {
     engine.setShortcutHandler(
@@ -27,7 +29,16 @@ export const Weapon = (props: LayerComponentProps) => {
         }
       }
     );
-  }, [engine, fire]);
+
+    engine.setCollisionHandler(
+      Entity.bullet,
+      [Entity.asteroid],
+      (bulletLayer: Layer, asteroidLayer: Layer) => {
+        bulletLayer.id && blow(bulletLayer.id);
+        emit(Event.hit, asteroidLayer);
+      }
+    );
+  }, [engine, fire, emit, blow]);
 
   return (
     <>
