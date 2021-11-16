@@ -112,27 +112,25 @@ export const useEngine = (props: UseEngineProps) => {
     (dt: number) => {
       ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
+      for (const handler of shortcutHandlers.current) {
+        const [type, action, callback] = handler;
+
+        for (const layer of layers.current[type] || []) {
+          callback(
+            layer,
+            shortcutsPressed.current[action],
+            shortcutsPressed.current
+          );
+        }
+      }
+
       for (const type of Object.values(Entity)) {
         const collisionHandlersByType = collisionHandlers.current.filter(
           (handler) => handler[0] === type
         );
 
-        const shortcutHandlersByType = shortcutHandlers.current.filter(
-          (handler) => handler[0] === type
-        );
-
         for (const layer of layers.current[type] || []) {
           layer.render(dt);
-
-          for (const handler of shortcutHandlersByType) {
-            const [, action, callback] = handler;
-
-            callback(
-              layer,
-              shortcutsPressed.current[action],
-              shortcutsPressed.current
-            );
-          }
 
           for (const handler of collisionHandlersByType) {
             const [, withType, callback] = handler;
