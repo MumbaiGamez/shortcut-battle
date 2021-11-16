@@ -6,7 +6,7 @@ import { Entity, CanvasContext, LayerProps } from '../../types';
 
 import asteroidImg from '../../../../assets/images/meteorSmall.png';
 
-const getRandomAsteroid = (ctx: CanvasContext) => {
+const createRandomAsteroid = (ctx: CanvasContext) => {
   return {
     ctx,
     pos: [CANVAS_WIDTH / 4 + (CANVAS_WIDTH / 2) * Math.random(), 0],
@@ -27,7 +27,7 @@ export const useAsteroidsGenerator = (ctx: CanvasContext) => {
       return;
     }
 
-    setAsteroids((prev) => [...prev, getRandomAsteroid(ctx)]);
+    setAsteroids((prev) => [...prev, createRandomAsteroid(ctx)]);
   }, [ctx]);
 
   return { asteroids, generate };

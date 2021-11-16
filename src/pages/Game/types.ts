@@ -55,7 +55,7 @@ export type Engine = {
   ) => void;
   setShortcutHandler: (
     type: Entity,
-    acton: PlayerAction,
+    action: PlayerAction,
     callback: ShortcutHandler
   ) => void;
 };
