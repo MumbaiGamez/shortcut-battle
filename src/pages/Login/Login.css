@@ -1,11 +1,12 @@
 .login {
-  width: 100%;
+  max-width: 400px;
   min-height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  margin: 0 auto;
 }
 
 .starWrapper {
@@ -26,5 +27,8 @@
 }
 
 .loginStarPosition::after {
-  box-shadow: 0 0 10em 5em #2571ff6b, 0 0 100px 50px #0077ff6b inset, 0 0 10px 5px var(--light-blue-color);
+  box-shadow:
+    0 0 10em 5em var(--blue-color),
+    0 0 100px 50px var(--blue-color),
+    0 0 10px 5px var(--light-blue-color);
 }

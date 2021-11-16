@@ -6,7 +6,10 @@
   overflow: hidden;
   transition: 0.5s;
   border-radius: var(--border-radius);
-  box-shadow: 0 0 10em 5em #ff66004d, 0 0 100px 50px #ff66002d inset, 0 0 10px 5px #ffcc007c;
+  box-shadow:
+    0 0 10em 5em var(--dark-orange-color),
+    0 0 100px 50px var(--dark-orange-color) inset,
+    0 0 10px 5px var(--dark-yellow-color);
 }
 
 .hoveredText {
@@ -35,7 +38,10 @@
 
 .active-link {
   transition: 1s;
-  box-shadow: 0 0 10em 5em #2292fc4d, 0 0 100px 50px #0044ff2d inset, 0 0 10px 5px #4c8bff7c;
+  box-shadow:
+    0 0 10em 5em var(--dark-blue-color),
+    0 0 100px 50px var(--dark-blue-color) inset,
+    0 0 10px 5px var(--blue-color);
 }
 
 @keyframes hover-animation {
