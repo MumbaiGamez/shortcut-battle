@@ -1,4 +1,4 @@
-import { RoutesList } from '../../../typings/commonTypes';
+import { RoutesList } from '../NavigationMenu/useNavigationMenu';
 
 export type NavigationLinkProps = {
   link: RoutesList;

@@ -1,35 +1,40 @@
 import React from 'react';
-
-import { authAPI } from '../../api/auth';
+import classNames from 'classnames';
 
 import { NavigationLink } from '../NavigationLink';
+import { Button, ButtonTheme } from '../Button';
 
-import { RoutesList } from '../../../typings/commonTypes';
+import { useNavigationMenu } from './useNavigationMenu';
 
 import styles from './NavigationMenu.css';
 
-const logout = () => {
-  authAPI.logout();
-};
-
-const navigationLinks = [
-  { link: RoutesList.home, name: 'Home' },
-  { link: RoutesList.login, name: 'Login' },
-  { link: RoutesList.play, name: 'Play' },
-  { link: RoutesList.logout, name: 'Logout', handleClick: logout },
-];
-
 export const NavigationMenu = () => {
+  const { isMenuOpen, navigationLinks, toggleMenu } = useNavigationMenu();
+
   return (
-    <div className={styles.navigationMenu}>
-      {navigationLinks.map(({ handleClick, link, name }) => (
-        <NavigationLink
-          handleClick={handleClick}
-          key={link}
-          link={link}
-          name={name}
+    <>
+      <div className={styles.buttonWrapper}>
+        <Button
+          isActive={isMenuOpen}
+          onClick={toggleMenu}
+          theme={ButtonTheme.Menu}
         />
-      ))}
-    </div>
+      </div>
+      <div
+        className={classNames(
+          styles.navigationMenu,
+          isMenuOpen && styles.showMenu
+        )}
+      >
+        {navigationLinks.map(({ handleClick, link, name }) => (
+          <NavigationLink
+            handleClick={handleClick}
+            key={link}
+            link={link}
+            name={name}
+          />
+        ))}
+      </div>
+    </>
   );
 };
