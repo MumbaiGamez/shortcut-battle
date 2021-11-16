@@ -24,14 +24,9 @@ export const useShortcuts = (config: KeyboardConfig = defaultConfig) => {
     for (const shortcut of Object.entries(config)) {
       const [action, codes] = shortcut as [PlayerAction, Combination];
 
-      const areAllShorcutKeysPressed = codes.every((code) =>
+      shortcutsPressed.current[action] = codes.every((code) =>
         keysPressed.current.has(code)
       );
-
-      const areNotOtherKeysPressed = keysPressed.current.size === codes.length;
-
-      shortcutsPressed.current[action] =
-        areAllShorcutKeysPressed && areNotOtherKeysPressed;
     }
   }, [config]);
 
