@@ -47,9 +47,9 @@ export const Enemy = (props: EnemyProps) => {
     engine.setCollisionHandler(
       Entity.asteroid,
       [Entity.leftBorder, Entity.rightBorder],
-      (asteroid) => {
-        asteroid.x.current = asteroid.prevX.current;
-        asteroid.setVx(-1 * asteroid.vx.current);
+      (asteroidLayer) => {
+        asteroidLayer.x.current = asteroidLayer.prevX.current;
+        asteroidLayer.setVx(-1 * asteroidLayer.vx.current);
       }
     );
 
