@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-import { GameContextType } from './types';
+import { CanvasContext } from './types';
 
-export const GameContext = createContext<GameContextType>(null);
+export const GameContext = createContext<CanvasContext>(null);

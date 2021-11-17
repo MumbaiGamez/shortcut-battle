@@ -1,28 +1,27 @@
-import { useCallback, useMemo, useRef } from 'react';
+import { MutableRefObject, useCallback, useMemo, useRef } from 'react';
 
-import { Layer, LayerProps } from '../types';
+import { Entity, LayerProps } from '../types';
 
-type CollisionHandler = undefined | ((layer: Layer) => void);
-
-const haveCollisions = (boundaries1: number[], boundaries2: number[]) => {
-  const [left1, top1, right1, bottom1] = boundaries1;
-  const [left2, top2, right2, bottom2] = boundaries2;
-
-  return (
-    right1 >= left2 && left1 <= right2 && bottom1 >= top2 && top1 <= bottom2
-  );
-};
+const SPEED_CHANGE_TRESHOLD = 100;
 
 export const useLayer = (props: LayerProps) => {
-  const { width, height, pos, ctx, src, color, entity } = props;
+  const {
+    width,
+    height,
+    pos = [0, 0],
+    velo = [0, 0],
+    ctx,
+    src,
+    color,
+    type,
+  } = props;
 
+  const prevX = useRef(pos[0]);
+  const prevY = useRef(pos[1]);
   const x = useRef(pos[0]);
   const y = useRef(pos[1]);
-
-  const vx = useRef(0);
-  const vy = useRef(0);
-
-  const collisionHandlers = useRef<[Layer[], CollisionHandler][]>([]);
+  const vx = useRef(velo[0]);
+  const vy = useRef(velo[1]);
 
   const img = useMemo(() => {
     if (!src) {
@@ -35,80 +34,72 @@ export const useLayer = (props: LayerProps) => {
     return image;
   }, [src]);
 
-  const setVx = useCallback((velo) => {
-    vx.current = velo;
-  }, []);
-
-  const setVy = useCallback((velo) => {
-    vy.current = velo;
-  }, []);
-
-  const onCollide = useCallback(
-    (layers: Layer[], callback: CollisionHandler = undefined) => {
-      collisionHandlers.current.push([layers, callback]);
-    },
-    [collisionHandlers]
-  );
-
   const render = useCallback(
     (dt: number) => {
       if (!ctx) {
         return;
       }
 
-      const prevX = x.current;
-      const prevY = y.current;
+      if (type === Entity.background && img) {
+        const pattern = ctx.createPattern(img, 'repeat');
 
-      if (vx) {
-        x.current += dt * vx.current;
-      }
-
-      if (vy) {
-        y.current += dt * vy.current;
-      }
-
-      const hasCollision = collisionHandlers.current.some(
-        ([layers, callback]) => {
-          const ownBoundaries = [
-            x.current,
-            y.current,
-            x.current + width,
-            y.current + height,
-          ];
-
-          for (const layer of layers) {
-            const layerBoundaries = [
-              layer.x.current,
-              layer.y.current,
-              layer.x.current + layer.width,
-              layer.y.current + layer.height,
-            ];
-
-            if (haveCollisions(ownBoundaries, layerBoundaries)) {
-              callback && callback(layer);
-
-              return true;
-            }
-          }
-
-          return false;
+        if (pattern) {
+          ctx.fillStyle = pattern;
+          ctx.fillRect(x.current, y.current, width, height);
         }
-      );
-
-      if (hasCollision) {
-        x.current = prevX;
-        y.current = prevY;
-      }
-
-      if (img) {
+      } else if (img) {
         ctx.drawImage(img, x.current, y.current, width, height);
       } else {
         ctx.fillStyle = color as string;
         ctx.fillRect(x.current, y.current, width, height);
       }
+
+      if (vx) {
+        prevX.current = x.current;
+        x.current += dt * vx.current;
+      }
+
+      if (vy) {
+        prevY.current = y.current;
+        y.current += dt * vy.current;
+      }
     },
-    [ctx, width, height, x, y, vx, vy, img, color]
+    [ctx, width, height, x, y, vx, vy, img, color, type]
   );
 
-  return { render, setVx, setVy, x, y, width, height, entity, onCollide };
+  const lastUpdate = useRef(performance.now());
+
+  const updateVelo = (velo: MutableRefObject<number>, value: number) => {
+    const now = performance.now();
+
+    if (now - lastUpdate.current < SPEED_CHANGE_TRESHOLD) {
+      return;
+    }
+
+    velo.current = value;
+    lastUpdate.current = now;
+  };
+
+  const setVx = useCallback((value) => {
+    updateVelo(vx, value);
+  }, []);
+
+  const setVy = useCallback((value) => {
+    updateVelo(vy, value);
+  }, []);
+
+  return {
+    prevX,
+    prevY,
+    x,
+    y,
+    vx,
+    vy,
+    width,
+    height,
+    type,
+    render,
+    setVx,
+    setVy,
+  };
 };

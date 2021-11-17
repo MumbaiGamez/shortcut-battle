@@ -11,20 +11,22 @@ export const useAnimationLoop = (
   const lastUpdate = useRef<number>(performance.now());
 
   const animate = useCallback(() => {
-    if (phase === Phase.playing) {
-      prevUpdate.current = lastUpdate.current;
-      lastUpdate.current = performance.now();
+    prevUpdate.current = lastUpdate.current;
+    lastUpdate.current = performance.now();
 
-      callback(lastUpdate.current - prevUpdate.current);
+    callback(lastUpdate.current - prevUpdate.current);
 
-      loop.current = requestAnimationFrame(animate);
-    } else {
-      cancelAnimationFrame(loop.current);
-      loop.current = 0;
-    }
-  }, [phase, lastUpdate, callback]);
+    loop.current = requestAnimationFrame(animate);
+  }, [callback]);
 
   useEffect(() => {
-    animate();
-  }, [animate]);
+    if (phase === Phase.playing) {
+      lastUpdate.current = performance.now();
+      animate();
+    }
+
+    return () => {
+      cancelAnimationFrame(loop.current);
+    };
+  }, [phase, animate]);
 };
