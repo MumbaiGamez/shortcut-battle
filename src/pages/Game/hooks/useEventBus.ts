@@ -4,6 +4,8 @@ import { Layer } from '../types';
 
 export enum Event {
   hit = 'hit',
+  out = 'out',
+  crash = 'crash',
 }
 
 type Listener = (...args: Layer[]) => void;

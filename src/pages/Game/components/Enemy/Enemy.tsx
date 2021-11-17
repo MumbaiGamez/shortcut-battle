@@ -4,21 +4,44 @@ import { Event, useEventBus } from '../../hooks/useEventBus';
 import { Asteroid } from '../Asteroid';
 import { useAsteroidsGenerator } from './useAsteroidsGenerator';
 
-import { Entity, LayerComponentProps } from '../../types';
+import {
+  Entity,
+  GameConfig,
+  GameState,
+  LayerComponentProps,
+  Phase,
+} from '../../types';
 
-export const Enemy = (props: LayerComponentProps) => {
-  const { engine } = props;
+type EnemyProps = LayerComponentProps & {
+  state: GameState;
+  config: GameConfig;
+};
 
-  const { generate, asteroids, blow } = useAsteroidsGenerator(engine.ctx);
+export const Enemy = (props: EnemyProps) => {
+  const { engine, state, config } = props;
 
-  useEventBus(Event.hit, (asteroidLayer) => {
+  const { asteroids, generatedCount, generate, blow } = useAsteroidsGenerator(
+    engine.ctx
+  );
+
+  const { emit } = useEventBus(Event.hit, (asteroidLayer) => {
     asteroidLayer.id && blow(asteroidLayer.id);
   });
 
   useEffect(() => {
-    const interval = setInterval(() => generate(), 2000);
-    setTimeout(() => clearInterval(interval), 20000);
-  }, [generate]);
+    if (
+      generatedCount < config.asteroids.count &&
+      state.phase === Phase.playing
+    ) {
+      setTimeout(generate, config.asteroids.interval);
+    }
+  }, [
+    config.asteroids.count,
+    config.asteroids.interval,
+    generate,
+    generatedCount,
+    state.phase,
+  ]);
 
   useEffect(() => {
     engine.setCollisionHandler(
@@ -29,7 +52,16 @@ export const Enemy = (props: LayerComponentProps) => {
         asteroid.setVx(-1 * asteroid.vx.current);
       }
     );
-  }, [engine]);
+
+    engine.setCollisionHandler(
+      Entity.asteroid,
+      [Entity.bottomBorder],
+      (asteroidLayer) => {
+        asteroidLayer.id && blow(asteroidLayer.id);
+        emit(Event.out);
+      }
+    );
+  }, [blow, emit, engine]);
 
   return (
     <>

@@ -7,6 +7,7 @@ export enum Phase {
   ready = 'ready',
   playing = 'playing',
   pause = 'pause',
+  win = 'win',
   over = 'over',
 }
 
@@ -38,9 +39,18 @@ export type Layer = {
   id?: number;
 };
 
+export type GameConfig = {
+  asteroids: {
+    count: number;
+    hitScore: number;
+    interval: number;
+  };
+};
+
 export type GameState = {
   phase: Phase;
   score: number;
+  enemiesLeft: number;
   reset: () => void;
   start: () => void;
   pause: () => void;

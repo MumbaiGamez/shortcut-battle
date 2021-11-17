@@ -59,7 +59,12 @@ export const GameUI = (props: GameUIProps) => {
             <Button onClick={start}>Continue</Button>
           </div>
           <div className={styles.gameOver}>
+            <h2 className={styles.title}>Game Over</h2>
             <Button onClick={reset}>Try again</Button>
+          </div>
+          <div className={styles.congrats}>
+            <h2 className={styles.title}>Congrats, you won!</h2>
+            <Button onClick={reset}>Restart</Button>
           </div>
         </main>
       </section>

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { haveCollisions } from '../utils/collision';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
@@ -12,6 +12,7 @@ import {
   GameState,
   Layer,
   PlayerAction,
+  Phase,
 } from '../types';
 
 type CollisionHandlers = [Entity, Entity, CollisionHandler][];
@@ -26,7 +27,7 @@ type UseEngineProps = {
 };
 
 export const useEngine = (props: UseEngineProps) => {
-  const { ctx } = props;
+  const { ctx, state } = props;
 
   const layers = useRef<Layers>({});
 
@@ -35,6 +36,12 @@ export const useEngine = (props: UseEngineProps) => {
   const shortcutHandlers = useRef<ShortcutHandlers>([]);
 
   const { shortcutsPressed } = useShortcuts();
+
+  const reset = useCallback(() => {
+    layers.current = {};
+    collisionHandlers.current = [];
+    shortcutHandlers.current = [];
+  }, []);
 
   const addLayer = useCallback((type: Entity, layer: Layer) => {
     if (!layers.current[type]) {
@@ -174,6 +181,13 @@ export const useEngine = (props: UseEngineProps) => {
     },
     [clear, handleShortcuts, renderLayers]
   );
+
+  useEffect(() => {
+    if (state.phase === Phase.ready) {
+      clear();
+      reset();
+    }
+  }, [clear, reset, state.phase]);
 
   return {
     ctx,

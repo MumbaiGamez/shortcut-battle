@@ -11,16 +11,17 @@ import { useCanvas } from '../../hooks/useCanvas';
 import { useEngine } from '../../hooks/useEngine';
 import { useAnimationLoop } from '../../hooks/useAnimationLoop';
 
-import { GameState } from '../../types';
+import { GameConfig, GameState, Phase } from '../../types';
 
 import styles from './Playground.css';
 
 type PlaygroundProps = {
   state: GameState;
+  config: GameConfig;
 };
 
 export const Playground = (props: PlaygroundProps) => {
-  const { state } = props;
+  const { state, config } = props;
 
   const { ctx, ref } = useCanvas({
     width: CANVAS_WIDTH,
@@ -36,9 +37,13 @@ export const Playground = (props: PlaygroundProps) => {
       <canvas ref={ref} className={styles.canvas} />
       <Background engine={engine} />
       <Borders engine={engine} />
-      <Player engine={engine} />
-      <Weapon engine={engine} />
-      <Enemy engine={engine} />
+      {state.phase !== Phase.ready && (
+        <>
+          <Player engine={engine} />
+          <Weapon engine={engine} />
+          <Enemy engine={engine} state={state} config={config} />
+        </>
+      )}
     </GameContext.Provider>
   );
 };

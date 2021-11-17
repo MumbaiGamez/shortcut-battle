@@ -8,6 +8,7 @@ import {
   PLAYER_WIDTH,
 } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
+import { Event, useEventBus } from '../../hooks/useEventBus';
 
 import { Entity, Layer, LayerComponentProps, PlayerAction } from '../../types';
 
@@ -28,6 +29,8 @@ export const Player = (props: LayerComponentProps) => {
     type: Entity.player,
   });
 
+  const { emit } = useEventBus();
+
   useEffect(() => {
     engine.addLayer(Entity.player, player);
 
@@ -45,6 +48,10 @@ export const Player = (props: LayerComponentProps) => {
         layer.y.current = layer.prevY.current;
       }
     );
+
+    engine.setCollisionHandler(Entity.player, [Entity.asteroid], () => {
+      emit(Event.crash);
+    });
 
     engine.setShortcutHandler(
       Entity.player,
@@ -73,7 +80,7 @@ export const Player = (props: LayerComponentProps) => {
         }
       }
     );
-  }, [engine]);
+  }, [emit, engine]);
 
   return null;
 };
