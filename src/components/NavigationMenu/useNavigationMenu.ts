@@ -17,7 +17,10 @@ export enum RoutesList {
 export const useNavigationMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen((prevState) => !prevState);
+  const toggleMenu = useCallback(
+    () => setIsMenuOpen((prevState) => !prevState),
+    []
+  );
 
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 

@@ -1,3 +1,5 @@
+@import "../../assets/styles/variables";
+
 .leaderboard {
   max-width: 1200px;
   margin: 50px auto;
@@ -24,10 +26,13 @@
 }
 
 .row:hover {
-  box-shadow: 0 0 10em 5em #ff66004d, 0 0 100px 50px #ff66002d inset, 0 0 10px 5px var(--dark-yellow-color);
+  box-shadow:
+    0 0 10em 5em var(--dark-orange-color),
+    0 0 100px 50px var(--dark-orange-color) inset,
+    0 0 10px 5px var(--dark-yellow-color);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: $mobile-screen-width) {
   .leaderboard {
     margin-top: var(--nav-height);
     flex-direction: column;

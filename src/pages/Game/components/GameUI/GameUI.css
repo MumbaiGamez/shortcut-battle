@@ -80,6 +80,9 @@
 .loader {
   @mixin center;
   @mixin showOn loading;
+
+  width: 200px;
+  height: 200px;
 }
 
 .initialized {

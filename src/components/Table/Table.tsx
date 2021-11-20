@@ -24,13 +24,14 @@ export const Table = (tableData: TableProps) => {
         </tr>
       </thead>
       <tbody>
-        {dataList.map((rowData, rowIndex) => {
-          const colsValues = Object.values(rowData);
+        {dataList.map((rowData) => {
+          const { id, ...restData } = rowData;
+          const colsValues = Object.values(restData);
 
           return (
-            <tr key={rowIndex} className={styles.tableRow}>
-              {colsValues.map((colValue, calIndex) => (
-                <td key={`${calIndex}${colValue}`}>{colValue}</td>
+            <tr key={id} className={styles.tableRow}>
+              {colsValues.map((colValue) => (
+                <td key={colValue}>{colValue}</td>
               ))}
             </tr>
           );

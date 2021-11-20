@@ -57,7 +57,7 @@
 }
 
 .buttonThemeMenu {
-  --line-height: 2px;
+  --border-height: 2px;
 
   width: 30px;
   height: 20px;
@@ -65,8 +65,8 @@
   border-radius: 0;
   border: 0;
   display: block;
-  border-top: var(--line-height) solid;
-  border-bottom: var(--line-height) solid;
+  border-top: var(--border-height) solid;
+  border-bottom: var(--border-height) solid;
   color: var(--main-text-color);
   transition: all 0.3s ease-in-out;
   background-color: transparent;
@@ -78,7 +78,7 @@
   position: absolute;
   display: block;
   width: 100%;
-  height: var(--line-height);
+  height: var(--border-height);
   left: 50%;
   top: 50%;
   background-color: var(--main-text-color);

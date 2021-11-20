@@ -1,91 +1,44 @@
-import React, { ForwardedRef, forwardRef, useCallback } from 'react';
+import React from 'react';
 
-import { getVar } from '../../../../utils/css';
-import {
-  PLAYER_HEIGHT,
-  PLAYER_WIDTH,
-  CANVAS_WIDTH,
-  CANVAS_HEIGHT,
-} from '../../constants';
 import { GameContext } from '../../context';
-import { useLayer } from '../../hooks/useLayer';
+import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
+import { Background } from '../Background';
+import { Borders } from '../Borders';
+import { Player } from '../Player';
+import { Weapon } from '../Weapon';
+import { Enemy } from '../Enemy';
+import { useCanvas } from '../../hooks/useCanvas';
+import { useEngine } from '../../hooks/useEngine';
 import { useAnimationLoop } from '../../hooks/useAnimationLoop';
-import { usePlayerKeys } from '../../hooks/usePlayerKeys';
-import { useBackground } from '../../hooks/useBackground';
 
-import { PlaygroundProps, PlayerAction, Entity } from '../../types';
+import { GameState } from '../../types';
 
-import playerImg from '../../../../assets/images/player.png';
-import bgImg from '../../../../assets/images/starBackground.png';
 import styles from './Playground.css';
 
-export const Playground = forwardRef(
-  (props: PlaygroundProps, ref: ForwardedRef<HTMLCanvasElement>) => {
-    const { ctx, phase, clearCanvas } = props;
+type PlaygroundProps = {
+  state: GameState;
+};
 
-    const background = useBackground({
-      ctx,
-      src: bgImg,
-    });
+export const Playground = (props: PlaygroundProps) => {
+  const { state } = props;
 
-    const leftBorder = useLayer({
-      ctx,
-      pos: [0, 0],
-      width: 1,
-      height: CANVAS_HEIGHT,
-      color: getVar('--game-ui-filler-bg-color'),
-      entity: Entity.border,
-    });
+  const { ctx, ref } = useCanvas({
+    width: CANVAS_WIDTH,
+    height: CANVAS_HEIGHT,
+  });
 
-    const rightBorder = useLayer({
-      ctx,
-      pos: [CANVAS_WIDTH - 1, 0],
-      width: 1,
-      height: CANVAS_HEIGHT,
-      color: getVar('--game-ui-filler-bg-color'),
-      entity: Entity.border,
-    });
+  const engine = useEngine({ ctx, state });
 
-    const startX = CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2;
-    const startY = CANVAS_HEIGHT - 2 * PLAYER_HEIGHT;
+  useAnimationLoop(state.phase, engine.render);
 
-    const player = useLayer({
-      ctx,
-      pos: [startX, startY],
-      width: PLAYER_WIDTH,
-      height: PLAYER_HEIGHT,
-      src: playerImg,
-      entity: Entity.player,
-    });
-
-    player.onCollide([leftBorder, rightBorder]);
-
-    usePlayerKeys(player, {
-      [PlayerAction.moveLeft]: { code: 'ArrowLeft' },
-      [PlayerAction.moveRight]: { code: 'ArrowRight' },
-    });
-
-    const render = useCallback(
-      (dt: number) => {
-        if (!ctx) {
-          return;
-        }
-
-        clearCanvas();
-        background.render();
-        player.render(dt);
-      },
-      [player, background, ctx, clearCanvas]
-    );
-
-    useAnimationLoop(phase, render);
-
-    return (
-      <GameContext.Provider value={ctx}>
-        <canvas ref={ref} className={styles.canvas} />
-      </GameContext.Provider>
-    );
-  }
-);
-
-Playground.displayName = 'Playground';
+  return (
+    <GameContext.Provider value={engine.ctx}>
+      <canvas ref={ref} className={styles.canvas} />
+      <Background engine={engine} />
+      <Borders engine={engine} />
+      <Player engine={engine} />
+      <Weapon engine={engine} />
+      <Enemy engine={engine} />
+    </GameContext.Provider>
+  );
+};

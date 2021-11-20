@@ -15,5 +15,8 @@
   margin-left: 0.5%;
   margin-top: 0.5%;
   border-radius: 100%;
-  box-shadow: 0 0 10em 5em #ff66006b, 0 0 100px 50px #ff66006b inset, 0 0 10px 5px var(--yellow-color);
+  box-shadow:
+    0 0 10em 5em var(--dark-orange-color),
+    0 0 100px 50px var(--dark-orange-color) inset,
+    0 0 10px 5px var(--yellow-color);
 }

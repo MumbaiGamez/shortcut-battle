@@ -1,33 +1,27 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 
 import { Loader } from '../../../../components/Loader';
 import { Button, ButtonTheme } from '../../../../components/Button';
 
-import { Phase, GameUIProps } from '../../types';
+import { GameState } from '../../types';
 
 import styles from './GameUI.css';
 
+type GameUIProps = {
+  state: GameState;
+};
+
 export const GameUI = (props: GameUIProps) => {
-  const { phase, setPhase } = props;
-
-  const start = useCallback(() => {
-    setPhase(Phase.playing);
-  }, [setPhase]);
-
-  const pause = useCallback(() => {
-    setPhase(Phase.pause);
-  }, [setPhase]);
-
-  const restart = useCallback(() => {
-    setPhase(Phase.ready);
-  }, [setPhase]);
+  const {
+    state: { phase, reset, pause, start, score },
+  } = props;
 
   useEffect(() => {
     setTimeout(() => {
-      setPhase(Phase.ready);
+      reset();
     }, 2000);
-  }, [setPhase]);
+  }, [reset]);
 
   return (
     <div className={classNames(styles.gameUI, styles[phase])}>
@@ -35,7 +29,7 @@ export const GameUI = (props: GameUIProps) => {
       <section className={styles.inner}>
         <header className={styles.header}>
           <div className={styles.scores}>
-            <b>Scores:</b> <span>0</span>
+            <b>Scores:</b> <span>{score}</span>
           </div>
           <div>
             <Button
@@ -48,7 +42,7 @@ export const GameUI = (props: GameUIProps) => {
             <Button
               theme={ButtonTheme.Glow}
               className={styles.headerButton}
-              onClick={restart}
+              onClick={reset}
             >
               Exit
             </Button>
@@ -65,7 +59,7 @@ export const GameUI = (props: GameUIProps) => {
             <Button onClick={start}>Continue</Button>
           </div>
           <div className={styles.gameOver}>
-            <Button onClick={restart}>Try again</Button>
+            <Button onClick={reset}>Try again</Button>
           </div>
         </main>
       </section>
