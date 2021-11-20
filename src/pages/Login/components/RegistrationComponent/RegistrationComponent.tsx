@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormComponent } from '../../../../components/FormComponent';
+import { Form } from '../../../../components/Form';
 
 import { useRegistration } from './useRegistration';
 
@@ -15,7 +15,7 @@ export const RegistrationComponent = (props: RegistrationComponentProps) => {
     useRegistration({ setError });
 
   return (
-    <FormComponent
+    <Form
       buttonText="Registration"
       inputsList={inputsList}
       isLoading={isLoading}

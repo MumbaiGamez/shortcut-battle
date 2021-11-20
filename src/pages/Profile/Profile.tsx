@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormComponent } from '../../components/FormComponent';
+import { Form } from '../../components/Form';
 import { Avatar } from '../../components/Avatar';
 
 import { useProfile } from './useProfile';
@@ -21,7 +21,7 @@ export const Profile = () => {
 
   return (
     <div className={styles.profile}>
-      <FormComponent
+      <Form
         buttonText="Update"
         isButtonDisabled={isFormValid}
         isLoading={isLoading}
@@ -35,7 +35,7 @@ export const Profile = () => {
           name={firstName}
           src={avatar}
         />
-      </FormComponent>
+      </Form>
     </div>
   );
 };

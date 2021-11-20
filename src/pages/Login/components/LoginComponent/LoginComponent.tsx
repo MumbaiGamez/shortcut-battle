@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormComponent } from '../../../../components/FormComponent';
+import { Form } from '../../../../components/Form';
 
 import { useLogin } from './useLogin';
 
@@ -14,7 +14,7 @@ export const LoginComponent = (props: LoginComponentProps) => {
   });
 
   return (
-    <FormComponent
+    <Form
       buttonText="Login"
       inputsList={inputsList}
       isLoading={isLoading}

@@ -6,11 +6,11 @@ import { Input } from '../Input';
 import { Card } from '../Card';
 import { Loader } from '../Loader';
 
-import { FormComponentProps } from './types';
+import { FormProps } from './types';
 
-import styles from './FormComponent.css';
+import styles from './Form.css';
 
-export const FormComponent = (props: FormComponentProps) => {
+export const Form = (props: FormProps) => {
   const {
     buttonText,
     children,

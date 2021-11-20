@@ -21,7 +21,7 @@ export type UseFormProps = {
   fieldsList: FieldsList[];
 };
 
-export type FormComponentProps = {
+export type FormProps = {
   buttonText: string;
   inputsList: InputProps[];
   isLoading: boolean;
