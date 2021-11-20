@@ -10,6 +10,7 @@
 
 .input {
   width: 100%;
+  height: 100%;
   padding: 10px 40px 10px 20px;
   border-radius: var(--border-radius);
   background-color: var(--card-background-color);

@@ -30,6 +30,7 @@ export enum InputTypeEnum {
 }
 
 export type InputProps = {
+  className?: string;
   fieldName?: string;
   hanldeChange?(value: string): void;
   label?: string;

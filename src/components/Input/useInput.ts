@@ -55,11 +55,26 @@ export const useInput = (props: UseInputProps) => {
     setIsCrossedEye((prevState) => !prevState);
   }, [isCrossedEye]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
 
-    checkValidation(value);
-    hanldeChange(value);
+    if (currentType === InputTypeEnum.file) {
+      const file = target.files?.[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          if (typeof reader.result === 'string') {
+            hanldeChange(reader.result);
+          }
+        };
+      }
+    } else {
+      const { value } = target;
+      checkValidation(value);
+      hanldeChange(value);
+    }
   };
 
   const clearInputValue = useCallback(() => {

@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
+
 import { InputProps } from '../Input';
 
 export enum FieldsList {
-  avatar = 'avatar',
   displayName = 'displayName',
   email = 'email',
   firstName = 'firstName',
@@ -28,6 +29,7 @@ export type FormComponentProps = {
   onButtonClick(): void;
   title: string;
 
+  children?: ReactNode;
   toggleForm?(): void;
   toggleFormClass?: string;
   toggleFormText?: string;

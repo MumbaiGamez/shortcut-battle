@@ -16,7 +16,6 @@ const fieldsList = [
   FieldsList.login,
   FieldsList.email,
   FieldsList.phone,
-  FieldsList.avatar,
 ];
 
 export const useProfile = () => {
@@ -141,30 +140,14 @@ export const useProfile = () => {
         validationRule: { isRequired: true },
         validateField,
       },
-      {
-        fieldName: FieldsList.avatar,
-        hanldeChange: setAvatar,
-        label: 'Avatar',
-        placeholder: 'avatar',
-        type: InputTypeEnum.password,
-        value: avatar,
-        validateField,
-      },
     ],
-    [
-      avatar,
-      displayName,
-      email,
-      firstName,
-      login,
-      phone,
-      secondName,
-      validateField,
-    ]
+    [displayName, email, firstName, login, phone, secondName, validateField]
   );
 
   return {
+    avatar,
     error,
+    firstName,
     handleUpdate,
     inputsList,
     isFormValid,

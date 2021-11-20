@@ -11,6 +11,7 @@ import styles from './Input.css';
 
 export const Input = (props: InputProps) => {
   const {
+    className,
     fieldName,
     hanldeChange,
     label,
@@ -40,7 +41,7 @@ export const Input = (props: InputProps) => {
   });
 
   return (
-    <div className={styles.inputContainer}>
+    <div className={classNames(styles.inputContainer, className)}>
       {label && <span className={styles.label}>{label}</span>}
       <input
         className={classNames(styles.input, errorMessage && styles.errorBorder)}

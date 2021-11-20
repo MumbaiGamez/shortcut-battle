@@ -13,6 +13,7 @@ import styles from './FormComponent.css';
 export const FormComponent = (props: FormComponentProps) => {
   const {
     buttonText,
+    children,
     inputsList,
     isLoading,
     isButtonDisabled,
@@ -26,6 +27,7 @@ export const FormComponent = (props: FormComponentProps) => {
   return (
     <Card title={title}>
       {isLoading && <Loader />}
+      {children}
       {inputsList.map((inputProps) => {
         return <Input key={inputProps.placeholder} {...inputProps} />;
       })}
