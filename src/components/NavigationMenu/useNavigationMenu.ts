@@ -33,6 +33,7 @@ export const useNavigationMenu = () => {
       { link: RoutesList.play, name: 'Play', handleClick: closeMenu },
       { link: RoutesList.logout, name: 'Logout', handleClick: logout },
       { link: RoutesList.leaderboard, name: 'Leaders', handleClick: closeMenu },
+      { link: RoutesList.profile, name: 'Profile', handleClick: closeMenu },
     ],
     [closeMenu, logout]
   );
