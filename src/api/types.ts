@@ -21,9 +21,9 @@ type HandleSuccess = (data: UserDataType | any) => void;
 type HandleLoading = (isLoading: boolean) => void;
 
 type BasicAPIProps = {
-  handleError: HandleError;
-  handleLoading: HandleLoading;
-  handleSuccess: HandleSuccess;
+  handleError?: HandleError;
+  handleLoading?: HandleLoading;
+  handleSuccess?: HandleSuccess;
 };
 
 export type ProfileAPIProps = BasicAPIProps;
@@ -45,14 +45,11 @@ export type RegistrationAPIProps = BasicAPIProps & {
   data: RegistrationDataType;
 };
 
-export type FetchMethodsProps = {
+export type FetchMethodsProps = BasicAPIProps & {
   errorMessage: string;
   url: string;
 
   data?: RegistrationDataType | LoginDataType;
-  handleError?: HandleError;
-  handleLoading?: HandleLoading;
-  handleSuccess?: HandleSuccess;
 };
 
 export type FetchDataProps = FetchMethodsProps & {

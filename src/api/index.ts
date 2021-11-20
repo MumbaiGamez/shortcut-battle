@@ -1,11 +1,11 @@
-import { convertObjectKeysToSnakeCase } from '../utils/convertToSnakeCase';
+import {
+  convertObjectKeysToSnakeCase,
+  convertObjectKeysToCamelCase,
+} from '../utils/convertToSnakeCase';
 
 import { ApiMethods, FetchDataProps, FetchMethodsProps } from './types';
 
 const API_URL = 'https://ya-praktikum.tech/api/v2';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const mockEmptyFunction = () => {};
 
 class BasicAPI {
   get(props: FetchMethodsProps) {
@@ -28,16 +28,14 @@ class BasicAPI {
     const {
       data,
       errorMessage,
-      handleError = mockEmptyFunction,
-      handleLoading = mockEmptyFunction,
-      handleSuccess = mockEmptyFunction,
+      handleError,
+      handleLoading,
+      handleSuccess,
       method,
       url,
     } = props;
 
-    if (handleLoading) {
-      handleLoading(true);
-    }
+    handleLoading && handleLoading(true);
 
     try {
       const requestParams: RequestInit = {
@@ -52,31 +50,33 @@ class BasicAPI {
       };
 
       const response = await fetch(`${API_URL}${url}`, requestParams);
+      const responseText = await response.text();
+
+      const receivedData =
+        responseText === 'OK' ? {} : JSON.parse(responseText);
+
+      handleLoading && handleLoading(false);
 
       if (!response.ok) {
-        throw new Error();
+        const { reason } = receivedData;
+
+        throw reason;
       }
 
-      const receivedData = JSON.parse(JSON.stringify(response));
+      const normilizedData = convertObjectKeysToCamelCase(receivedData);
 
-      const { reason } = receivedData;
-
-      if (handleLoading) {
-        handleLoading(false);
+      if (handleSuccess) {
+        handleSuccess(normilizedData);
       }
 
-      if (reason) {
-        handleError(reason);
-      } else {
-        handleSuccess('success');
-
-        return data;
-      }
+      return receivedData;
     } catch (error) {
-      handleError(errorMessage);
+      handleLoading && handleLoading(false);
 
-      if (handleLoading) {
-        handleLoading(false);
+      if (typeof error === 'string') {
+        handleError && handleError(error);
+      } else {
+        handleError && handleError(errorMessage);
       }
     }
   }
