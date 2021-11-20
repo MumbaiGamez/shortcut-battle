@@ -3,17 +3,33 @@ export type LoginDataType = {
   password: string;
 };
 
+export type UserDataType = {
+  id: number;
+  firstName: string;
+  secondName: string;
+  displayName: string;
+  login: string;
+  email: string;
+  phone: string;
+  avatar: string;
+};
+
 type HandleError = (error: string) => void;
 
-type HandleSuccess = (success: string) => void;
+type HandleSuccess = (data: UserDataType | any) => void;
 
 type HandleLoading = (isLoading: boolean) => void;
 
-export type LoginAPIProps = {
-  data: LoginDataType;
+type BasicAPIProps = {
   handleError: HandleError;
   handleLoading: HandleLoading;
   handleSuccess: HandleSuccess;
+};
+
+export type ProfileAPIProps = BasicAPIProps;
+
+export type LoginAPIProps = BasicAPIProps & {
+  data: LoginDataType;
 };
 
 export type RegistrationDataType = {
@@ -25,11 +41,8 @@ export type RegistrationDataType = {
   phone: string;
 };
 
-export type RegistrationAPIProps = {
+export type RegistrationAPIProps = BasicAPIProps & {
   data: RegistrationDataType;
-  handleError: HandleError;
-  handleLoading: HandleLoading;
-  handleSuccess: HandleSuccess;
 };
 
 export type FetchMethodsProps = {
