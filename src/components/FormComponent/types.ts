@@ -1,4 +1,4 @@
-import { InputProps } from '../../../../components/Input';
+import { InputProps } from '../Input';
 
 export enum FieldsList {
   avatar = 'avatar',

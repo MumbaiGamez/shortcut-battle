@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormComponent } from '../../pages/Login/components/FormComponent';
+import { FormComponent } from '../FormComponent';
 import { useProfile } from './useProfile';
 
 import styles from './Profile.css';

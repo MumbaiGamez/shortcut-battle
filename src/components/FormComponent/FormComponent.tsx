@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { ButtonTheme, Button } from '../../../../components/Button';
-import { Input } from '../../../../components/Input';
-import { Card } from '../../../../components/Card';
-import { Loader } from '../../../../components/Loader';
+import { ButtonTheme, Button } from '../Button';
+import { Input } from '../Input';
+import { Card } from '../Card';
+import { Loader } from '../Loader';
 
 import { FormComponentProps } from './types';
 

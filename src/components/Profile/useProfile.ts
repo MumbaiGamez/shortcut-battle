@@ -1,12 +1,12 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 
-import { useForm } from '../../pages/Login/components/FormComponent/useForm';
+import { useForm } from '../FormComponent/useForm';
 
 import { authAPI } from '../../api/auth';
 
 import { InputTypeEnum } from '../Input';
 
-import { FieldsList } from '../../pages/Login/components/FormComponent/types';
+import { FieldsList } from '../FormComponent/types';
 import { UserDataType } from '../../api/types';
 
 const fieldsList = [

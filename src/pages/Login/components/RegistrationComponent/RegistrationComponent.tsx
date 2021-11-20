@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormComponent } from '../FormComponent';
+import { FormComponent } from '../../../../components/FormComponent';
 
 import { useRegistration } from './useRegistration';
 
