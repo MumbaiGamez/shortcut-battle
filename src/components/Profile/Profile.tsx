@@ -11,6 +11,8 @@ export const Profile = () => {
   const {
     avatar,
     firstName,
+    handleChangeAvatar,
+    handleDeleteAvatar,
     handleUpdate,
     inputsList,
     isFormValid,
@@ -27,7 +29,12 @@ export const Profile = () => {
         onButtonClick={handleUpdate}
         title="Profile"
       >
-        <Avatar name={firstName} src={avatar} />
+        <Avatar
+          handleChangeAvatar={handleChangeAvatar}
+          handleDeleteAvatar={handleDeleteAvatar}
+          name={firstName}
+          src={avatar}
+        />
       </FormComponent>
     </div>
   );

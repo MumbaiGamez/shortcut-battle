@@ -29,6 +29,14 @@ export const useProfile = () => {
   const [phone, setPhone] = useState('');
   const [avatar, setAvatar] = useState('');
 
+  const handleChangeAvatar = (newAvatar: string) => {
+    setAvatar(newAvatar);
+  };
+
+  const handleDeleteAvatar = () => {
+    setAvatar('');
+  };
+
   const handleSuccess = (data: UserDataType) => {
     const { firstName, secondName, displayName, login, email, phone, avatar } =
       data;
@@ -148,6 +156,8 @@ export const useProfile = () => {
     avatar,
     error,
     firstName,
+    handleChangeAvatar,
+    handleDeleteAvatar,
     handleUpdate,
     inputsList,
     isFormValid,
