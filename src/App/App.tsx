@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ComponentsLibrary } from '../pages/ComponentsLibrary';
 import { NavigationMenu } from '../components/NavigationMenu';
 import { Leaderboard } from '../pages/Leaderboard';
-import { Profile } from '../components/Profile';
+import { Profile } from '../pages/Profile';
 import { Login } from '../pages/Login';
 import { Home } from '../pages/Home';
 import { Game } from '../pages/Game';
