@@ -41,6 +41,7 @@ export const FormComponent = (props: FormComponentProps) => {
         isDisabled={isButtonDisabled}
         onClick={onButtonClick}
         theme={ButtonTheme.Glow}
+        className={styles.button}
       >
         {buttonText}
       </Button>

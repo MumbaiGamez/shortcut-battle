@@ -1,12 +1,14 @@
 import { InputProps } from '../../../../components/Input';
 
 export enum FieldsList {
-  firstName = 'firstName',
-  secondName = 'secondName',
-  login = 'login',
+  avatar = 'avatar',
+  displayName = 'displayName',
   email = 'email',
-  phone = 'phone',
+  firstName = 'firstName',
+  login = 'login',
   password = 'password',
+  phone = 'phone',
+  secondName = 'secondName',
 }
 
 export type FieldsObject = {

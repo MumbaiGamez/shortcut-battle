@@ -41,7 +41,7 @@ export const Input = (props: InputProps) => {
 
   return (
     <div className={styles.inputContainer}>
-      <span className={styles.label}>{label}</span>
+      {label && <span className={styles.label}>{label}</span>}
       <input
         className={classNames(styles.input, errorMessage && styles.errorBorder)}
         onChange={handleInputChange}
