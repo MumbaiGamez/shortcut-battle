@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, InputTypeEnum } from '../Input';
+import { FilePicker } from '../FilePicker';
 
 import { AvatarProps } from './types';
 
@@ -13,11 +13,12 @@ export const Avatar = (props: AvatarProps) => {
 
   return (
     <div className={styles.avatar}>
-      <Input
-        className={styles.input}
-        type={InputTypeEnum.file}
-        hanldeChange={handleChangeAvatar}
-      />
+      {handleChangeAvatar && (
+        <FilePicker
+          containerClassName={styles.input}
+          handleChange={handleChangeAvatar}
+        />
+      )}
       {src && (
         <>
           <img src={src} alt={name} className={styles.image} />
