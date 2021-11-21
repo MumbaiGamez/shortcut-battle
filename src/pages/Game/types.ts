@@ -50,7 +50,6 @@ export type GameConfig = {
 export type GameState = {
   phase: Phase;
   score: number;
-  enemiesLeft: number;
   reset: () => void;
   start: () => void;
   pause: () => void;

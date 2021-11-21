@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useEventBus, Event } from './useEventBus';
 
@@ -7,23 +7,21 @@ import { GameConfig, Phase } from '../types';
 export const useGameState = (config: GameConfig) => {
   const [phase, setPhase] = useState<Phase>(Phase.loading);
   const [score, setScore] = useState<number>(0);
-  const [enemiesLeft, setEnemiesLeft] = useState<number>(
-    config.asteroids.count
-  );
+  const enemiesLeft = useRef<number>(config.asteroids.count);
 
   const hit = () => {
-    setEnemiesLeft((count) => count - 1);
+    enemiesLeft.current -= 1;
     setScore((score) => score + config.asteroids.hitScore);
   };
 
   const out = () => {
-    setEnemiesLeft((count) => count - 1);
+    enemiesLeft.current -= 1;
   };
 
   const reset = useCallback(() => {
     setPhase(Phase.ready);
     setScore(0);
-    setEnemiesLeft(config.asteroids.count);
+    enemiesLeft.current = config.asteroids.count;
   }, [config.asteroids.count]);
 
   const start = useCallback(() => {
@@ -58,7 +56,6 @@ export const useGameState = (config: GameConfig) => {
 
   return {
     phase,
-    enemiesLeft,
     score,
     reset,
     start,
