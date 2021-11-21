@@ -40,7 +40,7 @@ export const Player = (props: LayerComponentProps) => {
   const { emit } = useEventBus();
 
   useEffect(() => {
-    addLayer(Entity.player, player);
+    addLayer(player);
 
     return () => {
       removeLayer(player);

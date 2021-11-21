@@ -44,7 +44,9 @@ export const useEngine = (props: UseEngineProps) => {
     shortcutHandlers.current = [];
   }, []);
 
-  const addLayer = useCallback((type: Entity, layer: Layer) => {
+  const addLayer = useCallback((layer: Layer) => {
+    const { type } = layer;
+
     if (!layers.current[type]) {
       layers.current[type] = [];
     }

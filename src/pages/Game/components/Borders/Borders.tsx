@@ -46,10 +46,10 @@ export const Borders = (props: LayerComponentProps) => {
   });
 
   useEffect(() => {
-    engine.addLayer(Entity.leftBorder, leftBorder);
-    engine.addLayer(Entity.rightBorder, rightBorder);
-    engine.addLayer(Entity.topBorder, topBorder);
-    engine.addLayer(Entity.bottomBorder, bottomBorder);
+    engine.addLayer(leftBorder);
+    engine.addLayer(rightBorder);
+    engine.addLayer(topBorder);
+    engine.addLayer(bottomBorder);
 
     return () => {
       engine.removeLayer(leftBorder);

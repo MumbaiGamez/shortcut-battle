@@ -58,7 +58,7 @@ export type GameState = {
 export type Engine = {
   ctx: CanvasContext;
   render: (dt: number) => void;
-  addLayer: (type: Entity, layer: Layer) => void;
+  addLayer: (layer: Layer) => void;
   removeLayer: (layer: Layer) => void;
   setCollisionHandler: (
     type: Entity,

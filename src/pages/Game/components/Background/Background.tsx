@@ -20,7 +20,11 @@ export const Background = (props: LayerComponentProps) => {
   });
 
   useEffect(() => {
-    engine.addLayer(Entity.background, background);
+    engine.addLayer(background);
+
+    return () => {
+      engine.removeLayer(background);
+    };
   }, [background, engine]);
 
   return null;
