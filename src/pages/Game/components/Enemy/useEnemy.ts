@@ -48,7 +48,9 @@ export const useEnemy = (props: UseEnemyProps) => {
   const [asteroids, setAsteroids] = useState<LayerProps[]>([]);
 
   const blow = useCallback((asteroidId: number) => {
-    setAsteroids((prev) => prev.filter(({ id }) => id !== asteroidId));
+    setAsteroids((currentAsteroids) =>
+      currentAsteroids.filter(({ id }) => id !== asteroidId)
+    );
   }, []);
 
   const bounce = useCallback((asteroidLayer: Layer) => {
@@ -57,8 +59,10 @@ export const useEnemy = (props: UseEnemyProps) => {
   }, []);
 
   const generate = useCallback(() => {
-    setAsteroids((prev) => [...prev, createAsteroid(ctx)]);
-    setGeneratedCount((prev) => prev + 1);
+    setAsteroids((currentAsteroids) =>
+      currentAsteroids.concat(createAsteroid(ctx))
+    );
+    setGeneratedCount((currentGeneratedCount) => currentGeneratedCount + 1);
   }, [ctx]);
 
   useEffect(() => {

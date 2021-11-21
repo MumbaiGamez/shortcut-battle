@@ -46,13 +46,17 @@ export const useWeapon = (engine: Engine) => {
 
   const fire = useCallback(
     (playerX: number, playerY: number) => {
-      setBullets((prev) => [...prev, createBullet(ctx, playerX, playerY)]);
+      setBullets((currentBullets) =>
+        currentBullets.concat(createBullet(ctx, playerX, playerY))
+      );
     },
     [ctx]
   );
 
   const blow = useCallback((bulletId: number) => {
-    setBullets((prev) => prev.filter(({ id }) => id !== bulletId));
+    setBullets((currentBullets) =>
+      currentBullets.filter(({ id }) => id !== bulletId)
+    );
   }, []);
 
   const { emit } = useEventBus();
