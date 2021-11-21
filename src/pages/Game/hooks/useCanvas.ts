@@ -19,9 +19,10 @@ export const useCanvas = (props: UseCanvasProps) => {
     const canvas = ref.current;
 
     if (canvas) {
-      setCtx(canvas.getContext('2d'));
       canvas.width = width;
       canvas.height = height;
+
+      setCtx(canvas.getContext('2d'));
     }
   }, [ref, width, height]);
 

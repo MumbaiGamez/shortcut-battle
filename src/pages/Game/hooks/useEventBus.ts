@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { Layer } from '../types';
 
-export enum Event {
+export enum GameEvent {
   hit = 'hit',
   out = 'out',
   crash = 'crash',
@@ -10,11 +10,11 @@ export enum Event {
 
 type Listener = (...args: Layer[]) => void;
 
-type Listeners = Partial<Record<Event, Listener[]>>;
+type Listeners = Partial<Record<GameEvent, Listener[]>>;
 
 const listeners: Listeners = {};
 
-const subscribe = (event: Event, callback: Listener) => {
+const subscribe = (event: GameEvent, callback: Listener) => {
   if (!listeners[event]) {
     listeners[event] = [];
   }
@@ -22,7 +22,7 @@ const subscribe = (event: Event, callback: Listener) => {
   listeners[event]?.push(callback);
 };
 
-const unsubscribe = (event: Event, callback: Listener) => {
+const unsubscribe = (event: GameEvent, callback: Listener) => {
   if (!listeners[event]) {
     return;
   }
@@ -32,7 +32,7 @@ const unsubscribe = (event: Event, callback: Listener) => {
   );
 };
 
-const emit = (event: Event, ...args: Layer[]) => {
+const emit = (event: GameEvent, ...args: Layer[]) => {
   if (!listeners[event]) {
     return;
   }
@@ -42,12 +42,16 @@ const emit = (event: Event, ...args: Layer[]) => {
   });
 };
 
-export const useEventBus = (event?: Event, callback?: Listener) => {
+export const useEventBus = (event?: GameEvent, callback?: Listener) => {
   useEffect(() => {
-    event && callback && subscribe(event, callback);
+    if (event && callback) {
+      subscribe(event, callback);
+    }
 
     return () => {
-      event && callback && unsubscribe(event, callback);
+      if (event && callback) {
+        unsubscribe(event, callback);
+      }
     };
   }, [callback, event]);
 

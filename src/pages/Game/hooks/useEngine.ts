@@ -27,12 +27,13 @@ type UseEngineProps = {
 };
 
 export const useEngine = (props: UseEngineProps) => {
-  const { ctx, state } = props;
+  const {
+    ctx,
+    state: { phase },
+  } = props;
 
   const layers = useRef<Layers>({});
-
   const collisionHandlers = useRef<CollisionHandlers>([]);
-
   const shortcutHandlers = useRef<ShortcutHandlers>([]);
 
   const { shortcutsPressed } = useShortcuts();
@@ -126,7 +127,7 @@ export const useEngine = (props: UseEngineProps) => {
         ];
 
         if (haveCollisions(ownBoundaries, layerBoundaries)) {
-          callback && callback(layer, withLayer);
+          callback(layer, withLayer);
         }
       }
     },
@@ -160,6 +161,7 @@ export const useEngine = (props: UseEngineProps) => {
 
         for (const layer of layers.current[type] || []) {
           layer.render(dt);
+
           for (const handler of collisionHandlersByType) {
             const [, withType, callback] = handler;
 
@@ -174,20 +176,18 @@ export const useEngine = (props: UseEngineProps) => {
   const render = useCallback(
     (dt: number) => {
       clear();
-
       handleShortcuts();
-
       renderLayers(dt);
     },
     [clear, handleShortcuts, renderLayers]
   );
 
   useEffect(() => {
-    if (state.phase === Phase.ready) {
+    if (phase === Phase.ready) {
       clear();
       reset();
     }
-  }, [clear, reset, state.phase]);
+  }, [clear, reset, phase]);
 
   return {
     ctx,
