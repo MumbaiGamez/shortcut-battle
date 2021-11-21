@@ -63,6 +63,7 @@ export const useInput = (props: UseInputProps) => {
 
       if (file) {
         const reader = new FileReader();
+
         reader.readAsDataURL(file);
         reader.onload = () => {
           if (typeof reader.result === 'string') {
@@ -72,6 +73,7 @@ export const useInput = (props: UseInputProps) => {
       }
     } else {
       const { value } = target;
+
       checkValidation(value);
       hanldeChange(value);
     }

@@ -1,7 +1,7 @@
 import {
   convertObjectKeysToSnakeCase,
   convertObjectKeysToCamelCase,
-} from '../utils/convertToSnakeCase';
+} from '../utils/convertStringCases';
 
 import { ApiMethods, FetchDataProps, FetchMethodsProps } from './types';
 
@@ -63,10 +63,10 @@ class BasicAPI {
         throw reason;
       }
 
-      const normilizedData = convertObjectKeysToCamelCase(receivedData);
+      const normalizedData = convertObjectKeysToCamelCase(receivedData);
 
       if (handleSuccess) {
-        handleSuccess(normilizedData);
+        handleSuccess(normalizedData);
       }
 
       return receivedData;

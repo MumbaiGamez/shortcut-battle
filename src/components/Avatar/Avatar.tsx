@@ -24,7 +24,7 @@ export const Avatar = (props: AvatarProps) => {
           <div className={styles.delete} onClick={handleDeleteAvatar} />
         </>
       )}
-      <span className={styles.initials}>{initials}</span>
+      {initials && <span className={styles.initials}>{initials}</span>}
     </div>
   );
 };
