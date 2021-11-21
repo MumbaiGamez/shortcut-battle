@@ -72,7 +72,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
     () => [
       {
         fieldName: FieldsList.firstName,
-        hanldeChange: setFirstName,
+        handleChange: setFirstName,
         placeholder: 'First name',
         value: firstName,
         validationRule: { isRequired: true },
@@ -80,7 +80,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       },
       {
         fieldName: FieldsList.secondName,
-        hanldeChange: setSecondName,
+        handleChange: setSecondName,
         placeholder: 'Second name',
         value: secondName,
         validationRule: { isRequired: true },
@@ -88,7 +88,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       },
       {
         fieldName: FieldsList.email,
-        hanldeChange: setEmail,
+        handleChange: setEmail,
         placeholder: 'Email',
         type: InputTypeEnum.email,
         value: email,
@@ -97,7 +97,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       },
       {
         fieldName: FieldsList.phone,
-        hanldeChange: setPhone,
+        handleChange: setPhone,
         placeholder: 'Phone',
         type: InputTypeEnum.email,
         value: phone,
@@ -106,7 +106,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       },
       {
         fieldName: FieldsList.login,
-        hanldeChange: setLogin,
+        handleChange: setLogin,
         placeholder: 'Login',
         value: login,
         validationRule: { isRequired: true },
@@ -114,7 +114,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       },
       {
         fieldName: FieldsList.password,
-        hanldeChange: setPassword,
+        handleChange: setPassword,
         placeholder: 'Password',
         type: InputTypeEnum.password,
         value: password,

@@ -13,7 +13,7 @@ export const Input = (props: InputProps) => {
   const {
     className,
     fieldName,
-    hanldeChange,
+    handleChange,
     label,
     placeholder,
     type,
@@ -33,7 +33,7 @@ export const Input = (props: InputProps) => {
     toggleEye,
   } = useInput({
     fieldName,
-    hanldeChange,
+    handleChange,
     validationRule,
     type,
     value,

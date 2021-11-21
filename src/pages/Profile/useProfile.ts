@@ -95,7 +95,7 @@ export const useProfile = () => {
     () => [
       {
         fieldName: FieldsList.firstName,
-        hanldeChange: setFirstName,
+        handleChange: setFirstName,
         label: 'First name',
         placeholder: 'First name',
         value: firstName,
@@ -104,7 +104,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.secondName,
-        hanldeChange: setSecondName,
+        handleChange: setSecondName,
         label: 'Second name',
         placeholder: 'Second name',
         value: secondName,
@@ -113,7 +113,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.displayName,
-        hanldeChange: setDisplayName,
+        handleChange: setDisplayName,
         label: 'Display name',
         placeholder: 'Display name',
         value: displayName,
@@ -121,7 +121,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.email,
-        hanldeChange: setEmail,
+        handleChange: setEmail,
         label: 'Email',
         placeholder: 'Email',
         type: InputTypeEnum.email,
@@ -131,7 +131,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.phone,
-        hanldeChange: setPhone,
+        handleChange: setPhone,
         label: 'Phone',
         placeholder: 'Phone',
         type: InputTypeEnum.email,
@@ -141,7 +141,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.login,
-        hanldeChange: setLogin,
+        handleChange: setLogin,
         label: 'Login',
         placeholder: 'Login',
         value: login,

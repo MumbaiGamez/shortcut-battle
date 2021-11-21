@@ -38,7 +38,7 @@ export const useLogin = (props: UseLoginComponentProps) => {
     () => [
       {
         fieldName: 'login',
-        hanldeChange: setLogin,
+        handleChange: setLogin,
         placeholder: 'login',
         value: login,
         validationRule: { isRequired: true },
@@ -46,7 +46,7 @@ export const useLogin = (props: UseLoginComponentProps) => {
       },
       {
         fieldName: 'password',
-        hanldeChange: setPassword,
+        handleChange: setPassword,
         placeholder: 'Password',
         type: InputTypeEnum.password,
         value: password,

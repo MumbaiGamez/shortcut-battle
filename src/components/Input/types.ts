@@ -32,7 +32,7 @@ export enum InputTypeEnum {
 export type InputProps = {
   className?: string;
   fieldName?: string;
-  hanldeChange?(value: string): void;
+  handleChange?(value: string): void;
   label?: string;
   placeholder?: string;
   validateField?(fieldName: string, isValid: boolean): void;
@@ -44,7 +44,7 @@ export type InputProps = {
 export type UseInputProps = Pick<
   InputProps,
   | 'fieldName'
-  | 'hanldeChange'
+  | 'handleChange'
   | 'type'
   | 'value'
   | 'validationRule'

@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, ChangeEvent } from 'react';
 
 import { InputTypeEnum, UseInputProps } from './types';
 
@@ -9,7 +9,7 @@ export const useInput = (props: UseInputProps) => {
 
   const {
     fieldName,
-    hanldeChange = defaultInputHandler,
+    handleChange = defaultInputHandler,
     type,
     value = defaultInputValue,
     validationRule,
@@ -55,34 +55,19 @@ export const useInput = (props: UseInputProps) => {
     setIsCrossedEye((prevState) => !prevState);
   }, [isCrossedEye]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
 
-    if (currentType === InputTypeEnum.file) {
-      const file = target.files?.[0];
+    const { value } = target;
 
-      if (file) {
-        const reader = new FileReader();
-
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          if (typeof reader.result === 'string') {
-            hanldeChange(reader.result);
-          }
-        };
-      }
-    } else {
-      const { value } = target;
-
-      checkValidation(value);
-      hanldeChange(value);
-    }
+    checkValidation(value);
+    handleChange(value);
   };
 
   const clearInputValue = useCallback(() => {
     checkValidation('');
-    hanldeChange('');
-  }, [hanldeChange, checkValidation]);
+    handleChange('');
+  }, [handleChange, checkValidation]);
 
   const shouldShowEyeIcon = type === InputTypeEnum.password;
 
