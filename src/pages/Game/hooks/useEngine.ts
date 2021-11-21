@@ -61,13 +61,11 @@ export const useEngine = (props: UseEngineProps) => {
       return;
     }
 
-    const layerIndex = layersByType.findIndex(
-      (nextLayer) => nextLayer === layer
+    const updatedLayers = layersByType.filter(
+      (nextLayer) => nextLayer !== layer
     );
 
-    if (layerIndex !== -1) {
-      layersByType.splice(layerIndex, 1);
-    }
+    layers.current[type] = updatedLayers;
   }, []);
 
   const updateCollisionHandler = useCallback(
