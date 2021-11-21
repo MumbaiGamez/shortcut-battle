@@ -50,6 +50,13 @@ export const Borders = (props: LayerComponentProps) => {
     engine.addLayer(Entity.rightBorder, rightBorder);
     engine.addLayer(Entity.topBorder, topBorder);
     engine.addLayer(Entity.bottomBorder, bottomBorder);
+
+    return () => {
+      engine.removeLayer(leftBorder);
+      engine.removeLayer(rightBorder);
+      engine.removeLayer(topBorder);
+      engine.removeLayer(bottomBorder);
+    };
   }, [engine, leftBorder, rightBorder, topBorder, bottomBorder]);
 
   return null;
