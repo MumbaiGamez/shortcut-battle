@@ -1,11 +1,11 @@
 import { useState, useCallback, useMemo } from 'react';
 
-import { useForm } from '../FormComponent/useForm';
+import { useForm } from '../../../../components/Form/useForm';
 
 import { authAPI } from '../../../../api/auth';
 
 import { InputTypeEnum } from '../../../../components/Input';
-import { FieldsList } from '../FormComponent/types';
+import { FieldsList } from '../../../../components/Form/types';
 import { UseLoginComponentProps } from './types';
 
 const fieldsList = [FieldsList.login, FieldsList.password];
@@ -38,7 +38,7 @@ export const useLogin = (props: UseLoginComponentProps) => {
     () => [
       {
         fieldName: 'login',
-        hanldeChange: setLogin,
+        handleChange: setLogin,
         placeholder: 'login',
         value: login,
         validationRule: { isRequired: true },
@@ -46,7 +46,7 @@ export const useLogin = (props: UseLoginComponentProps) => {
       },
       {
         fieldName: 'password',
-        hanldeChange: setPassword,
+        handleChange: setPassword,
         placeholder: 'Password',
         type: InputTypeEnum.password,
         value: password,

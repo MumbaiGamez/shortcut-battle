@@ -1,10 +1,11 @@
 import { basicAPI } from './';
-import { RegistrationAPIProps, LoginAPIProps } from './types';
+import { RegistrationAPIProps, LoginAPIProps, ProfileAPIProps } from './types';
 
 enum AuthURL {
   SIGNUP = '/auth/signup',
   SIGNIN = '/auth/signin',
   LOGOUT = '/auth/logout',
+  GET_USER = '/auth/user',
 }
 
 class AuthAPI {
@@ -26,6 +27,14 @@ class AuthAPI {
 
   logout() {
     basicAPI.post({ errorMessage: 'Logout error', url: AuthURL.LOGOUT });
+  }
+
+  getUserInfo(props: ProfileAPIProps) {
+    return basicAPI.get({
+      ...props,
+      errorMessage: 'Get user info error',
+      url: AuthURL.GET_USER,
+    });
   }
 }
 

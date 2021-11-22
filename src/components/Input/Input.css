@@ -5,11 +5,12 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin: 20px;
+  margin: 15px;
 }
 
 .input {
   width: 100%;
+  height: 100%;
   padding: 10px 40px 10px 20px;
   border-radius: var(--border-radius);
   background-color: var(--card-background-color);
@@ -55,6 +56,8 @@
 
 .label {
   margin-inline-end: 20px;
+  width: 180px;
+  text-align: end;
 }
 
 .error {
@@ -92,11 +95,5 @@
   40%,
   60% {
     transform: translate3d(4px, 0, 0);
-  }
-}
-
-@media only screen and (max-width: $mobile-screen-width) {
-  .inputContainer {
-    margin: 15px;
   }
 }
