@@ -1,6 +1,6 @@
 .toaster {
   position: absolute;
-  top: 0;
+  top: var(--nav-height);
   right: 0;
   z-index: 50;
   width: 200px;

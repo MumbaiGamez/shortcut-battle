@@ -1,18 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { ButtonTheme, Button } from '../../../../components/Button';
-import { Input } from '../../../../components/Input';
-import { Card } from '../../../../components/Card';
-import { Loader } from '../../../../components/Loader';
+import { ButtonTheme, Button } from '../Button';
+import { Input } from '../Input';
+import { Card } from '../Card';
+import { Loader } from '../Loader';
 
-import { FormComponentProps } from './types';
+import { FormProps } from './types';
 
-import styles from './FormComponent.css';
+import styles from './Form.css';
 
-export const FormComponent = (props: FormComponentProps) => {
+export const Form = (props: FormProps) => {
   const {
     buttonText,
+    children,
     inputsList,
     isLoading,
     isButtonDisabled,
@@ -26,6 +27,7 @@ export const FormComponent = (props: FormComponentProps) => {
   return (
     <Card title={title}>
       {isLoading && <Loader />}
+      {children}
       {inputsList.map((inputProps) => {
         return <Input key={inputProps.placeholder} {...inputProps} />;
       })}
@@ -41,6 +43,7 @@ export const FormComponent = (props: FormComponentProps) => {
         isDisabled={isButtonDisabled}
         onClick={onButtonClick}
         theme={ButtonTheme.Glow}
+        className={styles.button}
       >
         {buttonText}
       </Button>
