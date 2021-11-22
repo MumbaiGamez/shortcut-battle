@@ -8,7 +8,7 @@
     "build": "webpack --mode production",
     "lint": "npm-run-all lint:*",
     "lint:ts": "eslint --ext=.ts,.tsx src --fix",
-    "lint:css": "stylelint src/**/*.css --fix",
+    "lint:css": "stylelint src/**/**/*.css --fix",
     "docker:build": "docker build -t shortcut-battle .",
     "docker:start": "docker run -p 3000:3000 -d shortcut-battle",
     "docker:stop": "docker stop $(docker ps -q --filter ancestor=shortcut-battle)",

@@ -1,12 +1,15 @@
-import { InputProps } from '../../../../components/Input';
+import { ReactNode } from 'react';
+
+import { InputProps } from '../Input';
 
 export enum FieldsList {
-  firstName = 'firstName',
-  secondName = 'secondName',
-  login = 'login',
+  displayName = 'displayName',
   email = 'email',
-  phone = 'phone',
+  firstName = 'firstName',
+  login = 'login',
   password = 'password',
+  phone = 'phone',
+  secondName = 'secondName',
 }
 
 export type FieldsObject = {
@@ -18,7 +21,7 @@ export type UseFormProps = {
   fieldsList: FieldsList[];
 };
 
-export type FormComponentProps = {
+export type FormProps = {
   buttonText: string;
   inputsList: InputProps[];
   isLoading: boolean;
@@ -26,6 +29,7 @@ export type FormComponentProps = {
   onButtonClick(): void;
   title: string;
 
+  children?: ReactNode;
   toggleForm?(): void;
   toggleFormClass?: string;
   toggleFormText?: string;

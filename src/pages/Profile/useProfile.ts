@@ -1,69 +1,92 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
-import { useForm } from '../../../../components/Form/useForm';
+import { useForm } from '../../components/Form/useForm';
 
-import { authAPI } from '../../../../api/auth';
+import { authAPI } from '../../api/auth';
 
-import { InputTypeEnum } from '../../../../components/Input';
-import { UseRegistrationComponentProps } from './types';
-import { FieldsList } from '../../../../components/Form/types';
+import { InputTypeEnum } from '../../components/Input';
+
+import { FieldsList } from '../../components/Form/types';
+import { UserDataType } from '../../api/types';
 
 const fieldsList = [
   FieldsList.firstName,
   FieldsList.secondName,
+  FieldsList.displayName,
   FieldsList.login,
   FieldsList.email,
   FieldsList.phone,
-  FieldsList.password,
 ];
 
-export const useRegistration = (props: UseRegistrationComponentProps) => {
-  const { setError } = props;
+export const useProfile = () => {
+  const [error, setError] = useState('');
 
   const [firstName, setFirstName] = useState('');
   const [secondName, setSecondName] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [avatar, setAvatar] = useState('');
+
+  const handleChangeAvatar = (newAvatar: string) => {
+    setAvatar(newAvatar);
+  };
+
+  const handleDeleteAvatar = () => {
+    setAvatar('');
+  };
+
+  const handleSuccess = (data: UserDataType) => {
+    const { firstName, secondName, displayName, login, email, phone, avatar } =
+      data;
+
+    firstName && setFirstName(firstName);
+    secondName && setSecondName(secondName);
+    displayName && setDisplayName(displayName);
+    login && setLogin(login);
+    email && setEmail(email);
+    phone && setPhone(phone);
+    avatar && setAvatar(avatar);
+  };
 
   const {
     handleError,
     handleLoading,
-    handleSuccess,
     isFormValid,
     isLoading,
     isSuccess,
     validateField,
   } = useForm({ fieldsList, setError });
 
-  const handleRegistration = useCallback(() => {
+  useEffect(() => {
+    authAPI.getUserInfo({
+      handleError,
+      handleLoading,
+      handleSuccess,
+    });
+  }, [handleError, handleLoading]);
+
+  const handleUpdate = useCallback(() => {
     if (isFormValid) {
       const data = {
         firstName,
         secondName,
+        displayName,
         login,
-        password,
         email,
         phone,
+        avatar,
       };
-
-      authAPI.signup({
-        data,
-        handleError,
-        handleLoading,
-        handleSuccess,
-      });
+      console.log('data', data);
     }
   }, [
+    avatar,
+    displayName,
     email,
     firstName,
-    handleError,
-    handleLoading,
-    handleSuccess,
     isFormValid,
     login,
-    password,
     phone,
     secondName,
   ]);
@@ -73,6 +96,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       {
         fieldName: FieldsList.firstName,
         handleChange: setFirstName,
+        label: 'First name',
         placeholder: 'First name',
         value: firstName,
         validationRule: { isRequired: true },
@@ -81,14 +105,24 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       {
         fieldName: FieldsList.secondName,
         handleChange: setSecondName,
+        label: 'Second name',
         placeholder: 'Second name',
         value: secondName,
         validationRule: { isRequired: true },
         validateField,
       },
       {
+        fieldName: FieldsList.displayName,
+        handleChange: setDisplayName,
+        label: 'Display name',
+        placeholder: 'Display name',
+        value: displayName,
+        validateField,
+      },
+      {
         fieldName: FieldsList.email,
         handleChange: setEmail,
+        label: 'Email',
         placeholder: 'Email',
         type: InputTypeEnum.email,
         value: email,
@@ -98,6 +132,7 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       {
         fieldName: FieldsList.phone,
         handleChange: setPhone,
+        label: 'Phone',
         placeholder: 'Phone',
         type: InputTypeEnum.email,
         value: phone,
@@ -107,26 +142,23 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
       {
         fieldName: FieldsList.login,
         handleChange: setLogin,
+        label: 'Login',
         placeholder: 'Login',
         value: login,
         validationRule: { isRequired: true },
         validateField,
       },
-      {
-        fieldName: FieldsList.password,
-        handleChange: setPassword,
-        placeholder: 'Password',
-        type: InputTypeEnum.password,
-        value: password,
-        validationRule: { minSymbols: 6 },
-        validateField,
-      },
     ],
-    [email, firstName, login, password, phone, secondName, validateField]
+    [displayName, email, firstName, login, phone, secondName, validateField]
   );
 
   return {
-    handleRegistration,
+    avatar,
+    error,
+    firstName,
+    handleChangeAvatar,
+    handleDeleteAvatar,
+    handleUpdate,
     inputsList,
     isFormValid,
     isLoading,

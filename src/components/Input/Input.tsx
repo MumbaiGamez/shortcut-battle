@@ -11,8 +11,9 @@ import styles from './Input.css';
 
 export const Input = (props: InputProps) => {
   const {
+    className,
     fieldName,
-    hanldeChange,
+    handleChange,
     label,
     placeholder,
     type,
@@ -32,7 +33,7 @@ export const Input = (props: InputProps) => {
     toggleEye,
   } = useInput({
     fieldName,
-    hanldeChange,
+    handleChange,
     validationRule,
     type,
     value,
@@ -40,8 +41,8 @@ export const Input = (props: InputProps) => {
   });
 
   return (
-    <div className={styles.inputContainer}>
-      <span className={styles.label}>{label}</span>
+    <div className={classNames(styles.inputContainer, className)}>
+      {label && <span className={styles.label}>{label}</span>}
       <input
         className={classNames(styles.input, errorMessage && styles.errorBorder)}
         onChange={handleInputChange}

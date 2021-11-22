@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, ChangeEvent } from 'react';
 
 import { InputTypeEnum, UseInputProps } from './types';
 
@@ -9,7 +9,7 @@ export const useInput = (props: UseInputProps) => {
 
   const {
     fieldName,
-    hanldeChange = defaultInputHandler,
+    handleChange = defaultInputHandler,
     type,
     value = defaultInputValue,
     validationRule,
@@ -55,17 +55,19 @@ export const useInput = (props: UseInputProps) => {
     setIsCrossedEye((prevState) => !prevState);
   }, [isCrossedEye]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+
+    const { value } = target;
 
     checkValidation(value);
-    hanldeChange(value);
+    handleChange(value);
   };
 
   const clearInputValue = useCallback(() => {
     checkValidation('');
-    hanldeChange('');
-  }, [hanldeChange, checkValidation]);
+    handleChange('');
+  }, [handleChange, checkValidation]);
 
   const shouldShowEyeIcon = type === InputTypeEnum.password;
 
