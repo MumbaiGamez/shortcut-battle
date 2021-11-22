@@ -8,9 +8,15 @@ import {
   PLAYER_WIDTH,
 } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
-import { GameEvent, useEventBus } from '../../hooks/useEventBus';
+import { useEmit } from '../../hooks/useBus';
 
-import { Entity, Layer, LayerComponentProps, PlayerAction } from '../../types';
+import {
+  Entity,
+  GameEvent,
+  Layer,
+  LayerComponentProps,
+  PlayerAction,
+} from '../../types';
 
 import playerImg from '../../../../assets/images/player.png';
 
@@ -37,7 +43,7 @@ export const Player = (props: LayerComponentProps) => {
     type: Entity.player,
   });
 
-  const { emit } = useEventBus();
+  const emit = useEmit();
 
   useEffect(() => {
     addLayer(player);

@@ -6,12 +6,13 @@ import {
   MIN_BULLET_SPEED,
   PLAYER_WIDTH,
 } from '../../constants';
-import { useEventBus, GameEvent } from '../../hooks/useEventBus';
+import { useEmit } from '../../hooks/useBus';
 
 import {
   CanvasContext,
   Engine,
   Entity,
+  GameEvent,
   Layer,
   LayerProps,
   PlayerAction,
@@ -59,7 +60,7 @@ export const useWeapon = (engine: Engine) => {
     );
   }, []);
 
-  const { emit } = useEventBus();
+  const emit = useEmit();
 
   useEffect(() => {
     setShortcutHandler(

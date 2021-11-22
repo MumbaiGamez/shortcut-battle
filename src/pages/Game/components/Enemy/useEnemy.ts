@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
-import { useEventBus, GameEvent } from '../../hooks/useEventBus';
+import { useListener, useEmit } from '../../hooks/useBus';
 
 import {
   CanvasContext,
   Engine,
   Entity,
   GameConfig,
+  GameEvent,
   GameState,
   Layer,
   LayerProps,
@@ -65,17 +66,19 @@ export const useEnemy = (props: UseEnemyProps) => {
     setGeneratedCount((currentGeneratedCount) => currentGeneratedCount + 1);
   }, [ctx]);
 
+  const emit = useEmit();
+
+  useListener(GameEvent.hit, (asteroidLayer) => {
+    if (asteroidLayer.id) {
+      blow(asteroidLayer.id);
+    }
+  });
+
   useEffect(() => {
     if (generatedCount < count && phase === Phase.playing) {
       setTimeout(generate, interval);
     }
   }, [count, generate, generatedCount, interval, phase]);
-
-  const { emit } = useEventBus(GameEvent.hit, (asteroidLayer) => {
-    if (asteroidLayer.id) {
-      blow(asteroidLayer.id);
-    }
-  });
 
   useEffect(() => {
     setCollisionHandler(

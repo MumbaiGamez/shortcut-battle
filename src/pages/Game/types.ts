@@ -39,6 +39,12 @@ export type Layer = {
   id?: number;
 };
 
+export enum GameEvent {
+  hit = 'hit',
+  out = 'out',
+  crash = 'crash',
+}
+
 export type GameConfig = {
   asteroids: {
     count: number;

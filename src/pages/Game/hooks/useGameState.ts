@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { useEventBus, GameEvent } from './useEventBus';
+import { useListener } from './useBus';
 
-import { GameConfig, Phase } from '../types';
+import { GameConfig, GameEvent, Phase } from '../types';
 
 export const useGameState = (config: GameConfig) => {
   const {
@@ -13,7 +13,7 @@ export const useGameState = (config: GameConfig) => {
   const [score, setScore] = useState<number>(0);
   const enemiesLeft = useRef<number>(count);
 
-  const hit = () => {
+  const hit = useCallback(() => {
     enemiesLeft.current -= 1;
 
     setScore((score) => score + hitScore);
@@ -21,15 +21,15 @@ export const useGameState = (config: GameConfig) => {
     if (!enemiesLeft.current) {
       setPhase(Phase.win);
     }
-  };
+  }, [hitScore]);
 
-  const out = () => {
+  const out = useCallback(() => {
     enemiesLeft.current -= 1;
 
     if (!enemiesLeft.current) {
       setPhase(Phase.win);
     }
-  };
+  }, []);
 
   const reset = useCallback(() => {
     enemiesLeft.current = count;
@@ -50,9 +50,9 @@ export const useGameState = (config: GameConfig) => {
     setPhase(Phase.over);
   }, []);
 
-  useEventBus(GameEvent.hit, hit);
-  useEventBus(GameEvent.out, out);
-  useEventBus(GameEvent.crash, gameOver);
+  useListener(GameEvent.hit, hit);
+  useListener(GameEvent.out, out);
+  useListener(GameEvent.crash, gameOver);
 
   return {
     phase,
