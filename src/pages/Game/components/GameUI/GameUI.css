@@ -42,12 +42,15 @@
   height: var(--game-canvas-height);
   background-color: var(--game-ui-filler-bg-color);
   transition:
-    height 0.5s ease,
-    width 0.5s ease;
+    height 0,
+    width 0;
 
   .playing & {
     height: 0;
     width: 0;
+    transition:
+      height 0.5s ease,
+      width 0.5s ease;
   }
 }
 
@@ -95,7 +98,24 @@
   @mixin showOn pause;
 }
 
+.title {
+  margin-bottom: 40px;
+}
+
 .gameOver {
   @mixin center;
   @mixin showOn over;
+
+  .title {
+    color: var(--game-ui-title-lost-color);
+  }
+}
+
+.congrats {
+  @mixin center;
+  @mixin showOn win;
+
+  .title {
+    color: var(--game-ui-title-won-color);
+  }
 }

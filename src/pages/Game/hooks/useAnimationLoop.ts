@@ -22,6 +22,7 @@ export const useAnimationLoop = (
   useEffect(() => {
     if (phase === Phase.playing) {
       lastUpdate.current = performance.now();
+
       animate();
     }
 

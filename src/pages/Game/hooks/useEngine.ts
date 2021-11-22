@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { haveCollisions } from '../utils/collision';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
@@ -12,6 +12,7 @@ import {
   GameState,
   Layer,
   PlayerAction,
+  Phase,
 } from '../types';
 
 type CollisionHandlers = [Entity, Entity, CollisionHandler][];
@@ -26,22 +27,47 @@ type UseEngineProps = {
 };
 
 export const useEngine = (props: UseEngineProps) => {
-  const { ctx } = props;
+  const {
+    ctx,
+    state: { phase },
+  } = props;
 
   const layers = useRef<Layers>({});
-
   const collisionHandlers = useRef<CollisionHandlers>([]);
-
   const shortcutHandlers = useRef<ShortcutHandlers>([]);
 
   const { shortcutsPressed } = useShortcuts();
 
-  const addLayer = useCallback((type: Entity, layer: Layer) => {
+  const reset = useCallback(() => {
+    layers.current = {};
+    collisionHandlers.current = [];
+    shortcutHandlers.current = [];
+  }, []);
+
+  const addLayer = useCallback((layer: Layer) => {
+    const { type } = layer;
+
     if (!layers.current[type]) {
       layers.current[type] = [];
     }
 
     layers.current[type]?.push(layer);
+  }, []);
+
+  const removeLayer = useCallback((layer: Layer) => {
+    const { type } = layer;
+
+    const layersByType = layers.current[type];
+
+    if (!layersByType) {
+      return;
+    }
+
+    const updatedLayers = layersByType.filter(
+      (nextLayer) => nextLayer !== layer
+    );
+
+    layers.current[type] = updatedLayers;
   }, []);
 
   const updateCollisionHandler = useCallback(
@@ -101,29 +127,33 @@ export const useEngine = (props: UseEngineProps) => {
         ];
 
         if (haveCollisions(ownBoundaries, layerBoundaries)) {
-          callback && callback(layer, withLayer);
+          callback(layer, withLayer);
         }
       }
     },
     []
   );
 
-  const render = useCallback(
-    (dt: number) => {
-      ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  const clear = useCallback(() => {
+    ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  }, [ctx]);
 
-      for (const handler of shortcutHandlers.current) {
-        const [type, action, callback] = handler;
+  const handleShortcuts = useCallback(() => {
+    for (const handler of shortcutHandlers.current) {
+      const [type, action, callback] = handler;
 
-        for (const layer of layers.current[type] || []) {
-          callback(
-            layer,
-            shortcutsPressed.current[action],
-            shortcutsPressed.current
-          );
-        }
+      for (const layer of layers.current[type] || []) {
+        callback(
+          layer,
+          shortcutsPressed.current[action],
+          shortcutsPressed.current
+        );
       }
+    }
+  }, [shortcutsPressed]);
 
+  const renderLayers = useCallback(
+    (dt: number) => {
       for (const type of Object.values(Entity)) {
         const collisionHandlersByType = collisionHandlers.current.filter(
           (handler) => handler[0] === type
@@ -140,14 +170,31 @@ export const useEngine = (props: UseEngineProps) => {
         }
       }
     },
-    [ctx, handleCollisions, shortcutsPressed]
+    [handleCollisions]
   );
+
+  const render = useCallback(
+    (dt: number) => {
+      clear();
+      handleShortcuts();
+      renderLayers(dt);
+    },
+    [clear, handleShortcuts, renderLayers]
+  );
+
+  useEffect(() => {
+    if (phase === Phase.ready) {
+      clear();
+      reset();
+    }
+  }, [clear, reset, phase]);
 
   return {
     ctx,
-    render,
     addLayer,
+    removeLayer,
     setCollisionHandler,
     setShortcutHandler,
+    render,
   };
 };

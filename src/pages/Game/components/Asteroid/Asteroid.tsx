@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useLayer } from '../../hooks/useLayer';
 
-import { Entity, LayerComponentProps, LayerProps } from '../../types';
+import { LayerComponentProps, LayerProps } from '../../types';
 
 type AsteroidProps = LayerComponentProps & {
   asteroid: LayerProps;
@@ -14,7 +14,11 @@ export const Asteroid = (props: AsteroidProps) => {
   const asteroidLayer = useLayer(asteroid);
 
   useEffect(() => {
-    engine.addLayer(Entity.asteroid, asteroidLayer);
+    engine.addLayer(asteroidLayer);
+
+    return () => {
+      engine.removeLayer(asteroidLayer);
+    };
   }, [asteroidLayer, engine]);
 
   return null;

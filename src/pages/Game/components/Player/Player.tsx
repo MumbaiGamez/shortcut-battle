@@ -8,8 +8,15 @@ import {
   PLAYER_WIDTH,
 } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
+import { useEmit } from '../../hooks/useBus';
 
-import { Entity, Layer, LayerComponentProps, PlayerAction } from '../../types';
+import {
+  Entity,
+  GameEvent,
+  Layer,
+  LayerComponentProps,
+  PlayerAction,
+} from '../../types';
 
 import playerImg from '../../../../assets/images/player.png';
 
@@ -17,10 +24,18 @@ const startX = CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2;
 const startY = CANVAS_HEIGHT - 2 * PLAYER_HEIGHT;
 
 export const Player = (props: LayerComponentProps) => {
-  const { engine } = props;
+  const {
+    engine: {
+      ctx,
+      addLayer,
+      removeLayer,
+      setCollisionHandler,
+      setShortcutHandler,
+    },
+  } = props;
 
   const player = useLayer({
-    ctx: engine.ctx,
+    ctx: ctx,
     pos: [startX, startY],
     width: PLAYER_WIDTH,
     height: PLAYER_HEIGHT,
@@ -28,12 +43,18 @@ export const Player = (props: LayerComponentProps) => {
     type: Entity.player,
   });
 
-  useEffect(() => {
-    engine.addLayer(Entity.player, player);
-  }, [player, engine]);
+  const emit = useEmit();
 
   useEffect(() => {
-    engine.setCollisionHandler(
+    addLayer(player);
+
+    return () => {
+      removeLayer(player);
+    };
+  }, [addLayer, player, removeLayer]);
+
+  useEffect(() => {
+    setCollisionHandler(
       Entity.player,
       [Entity.leftBorder, Entity.rightBorder],
       (layer: Layer) => {
@@ -42,7 +63,11 @@ export const Player = (props: LayerComponentProps) => {
       }
     );
 
-    engine.setShortcutHandler(
+    setCollisionHandler(Entity.player, [Entity.asteroid], () => {
+      emit(GameEvent.crash);
+    });
+
+    setShortcutHandler(
       Entity.player,
       PlayerAction.moveLeft,
       (layer: Layer, pressed, allPressed) => {
@@ -56,7 +81,7 @@ export const Player = (props: LayerComponentProps) => {
       }
     );
 
-    engine.setShortcutHandler(
+    setShortcutHandler(
       Entity.player,
       PlayerAction.moveRight,
       (layer: Layer, pressed, allPressed) => {
@@ -69,7 +94,7 @@ export const Player = (props: LayerComponentProps) => {
         }
       }
     );
-  }, [engine]);
+  }, [emit, setCollisionHandler, setShortcutHandler]);
 
   return null;
 };
