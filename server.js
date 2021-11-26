@@ -11,9 +11,7 @@ const app = express();
 app.use(express.static(STATIC_DIR));
 
 app.get('/sw.js', (req, res) => {
-  res.writeHead(201, {
-    'Content-Type': 'application/javascript',
-  });
+  res.writeHead(201, { 'Content-Type': 'application/javascript' });
   res.sendFile(SW);
 });
 
