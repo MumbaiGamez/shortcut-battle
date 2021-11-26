@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack serve --mode development",
+    "start": "node server.js",
+    "dev": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "npm-run-all lint:*",
     "lint:ts": "eslint --ext=.ts,.tsx src --fix",
     "lint:css": "stylelint src/**/**/*.css --fix",
+    "docker:build": "docker build -t shortcut-battle .",
+    "docker:start": "docker run -p 3000:3000 -d shortcut-battle",
+    "docker:stop": "docker stop $(docker ps -q --filter ancestor=shortcut-battle)",
+    "heroku:release": "heroku container:login && heroku container:push web -a shortcut-battle && heroku container:release web -a shortcut-battle",
     "prepare": "husky install"
   },
   "repository": {
@@ -58,6 +63,7 @@
   },
   "dependencies": {
     "classnames": "2.3.1",
+    "express": "4.17.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-router-dom": "6.0.0"
