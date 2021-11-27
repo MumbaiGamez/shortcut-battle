@@ -1,15 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useToaster } from './useToaster';
 
-import { ToasterProps } from './types';
+import { useToaster } from './useToaster';
 
 import styles from './Toaster.css';
 
-export const Toaster = (props: ToasterProps) => {
-  const { toasterId, theme, text } = props;
-
-  const [isHiddenToaster] = useToaster({ toasterId, text });
+export const Toaster = () => {
+  const { isHiddenToaster, theme, text } = useToaster();
 
   return (
     <div

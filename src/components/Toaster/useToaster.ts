@@ -1,18 +1,42 @@
 import { useEffect, useState } from 'react';
 
-import { UseToasterProps } from './types';
+import { useAppDispatch, useAppSelector } from './../../redux/hooks';
+import {
+  clearMessages,
+  selectErrorMessage,
+  selectSuccessMessage,
+} from '../../redux/settingsSlice';
 
 const TOASTER_TIMEOUT = 2000;
+const REMOVE_MESSAGE_DELAY = 500;
 
 let openedToaster: ReturnType<typeof setTimeout> | null = null;
 
-export const useToaster = (props: UseToasterProps) => {
-  const { toasterId, text } = props;
+enum ToasterTheme {
+  Error = 'Error',
+  Success = 'Success',
+}
+
+export const useToaster = () => {
+  const dispatch = useAppDispatch();
+
+  const error = useAppSelector(selectErrorMessage);
+  const success = useAppSelector(selectSuccessMessage);
+
+  let theme;
+
+  if (error) {
+    theme = ToasterTheme.Error;
+  }
+
+  if (success) {
+    theme = ToasterTheme.Success;
+  }
 
   const [isHiddenToaster, setIsHiddenToaster] = useState(true);
 
   useEffect(() => {
-    if (text) {
+    if (error || success) {
       setIsHiddenToaster(false);
 
       if (openedToaster) {
@@ -21,9 +45,13 @@ export const useToaster = (props: UseToasterProps) => {
 
       openedToaster = setTimeout(() => {
         setIsHiddenToaster(true);
+
+        setTimeout(() => {
+          dispatch(clearMessages());
+        }, REMOVE_MESSAGE_DELAY);
       }, TOASTER_TIMEOUT);
     }
-  }, [text, toasterId]);
+  }, [dispatch, error, success]);
 
-  return [isHiddenToaster, setIsHiddenToaster];
+  return { isHiddenToaster, setIsHiddenToaster, theme, text: error || success };
 };
