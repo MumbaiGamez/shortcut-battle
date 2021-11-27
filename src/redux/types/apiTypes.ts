@@ -1,3 +1,10 @@
+export enum ApiMethods {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+}
+
 export type UserDataResponseType = {
   id: number;
   first_name: string;
@@ -30,17 +37,5 @@ export type LoginDataType = {
   password: string;
 };
 
-export type RegistrationDataType = {
-  firstName: string;
-  secondName: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-};
-
-export type UserState = {
-  error: null | string;
-  loading: boolean;
-  user: UserDataType | null;
-};
+export type RegistrationDataType = Omit<ProfileDataType, 'displayName'> &
+  Pick<LoginDataType, 'password'>;

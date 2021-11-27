@@ -7,16 +7,10 @@ import {
   UserDataType,
   UserDataResponseType,
   ProfileDataType,
-} from '../types/authTypes';
+  ApiMethods,
+} from '../types/apiTypes';
 
 import { baseApi } from './baseApi';
-
-export enum ApiMethods {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
-}
 
 enum UserURL {
   UPDATE_AVATAR = '/user/profile/avatar',

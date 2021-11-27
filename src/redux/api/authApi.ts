@@ -1,15 +1,12 @@
 import { convertObjectKeysToSnakeCase } from '../../utils/convertStringCases';
 
-import { LoginDataType, RegistrationDataType } from '../types/authTypes';
+import {
+  ApiMethods,
+  LoginDataType,
+  RegistrationDataType,
+} from '../types/apiTypes';
 
 import { baseApi } from './baseApi';
-
-export enum ApiMethods {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
-}
 
 enum AuthURL {
   SIGNUP = '/auth/signup',

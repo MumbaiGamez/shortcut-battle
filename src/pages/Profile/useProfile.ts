@@ -10,7 +10,7 @@ import { useForm } from '../../components/Form/useForm';
 
 import { FieldsList } from '../../components/Form/types';
 import { InputTypeEnum } from '../../components/Input';
-import { ProfileDataType } from '../../redux/types/authTypes';
+import { ProfileDataType } from '../../redux/types/apiTypes';
 import { useAppDispatch } from '../../redux/hooks';
 import { setSuccessMessage } from '../../redux/settingsSlice';
 
