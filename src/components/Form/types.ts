@@ -12,13 +12,16 @@ export enum FieldsList {
   secondName = 'secondName',
 }
 
-export type FieldsObject = {
+export type FieldsWithValidation = {
   [key in FieldsList]?: boolean;
 };
 
+export type FieldsWithValues = {
+  [key in FieldsList]?: string;
+};
+
 export type UseFormProps = {
-  setError: (error: string) => void;
-  fieldsList: FieldsList[];
+  fieldsObject: FieldsWithValues;
 };
 
 export type FormProps = {

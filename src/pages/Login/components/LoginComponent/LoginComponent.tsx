@@ -7,11 +7,9 @@ import { useLogin } from './useLogin';
 import { LoginComponentProps } from './types';
 
 export const LoginComponent = (props: LoginComponentProps) => {
-  const { toggleForm, setError } = props;
+  const { toggleForm } = props;
 
-  const { handleLogin, inputsList, isFormValid, isLoading } = useLogin({
-    setError,
-  });
+  const { handleLogin, inputsList, isFormValid, isLoading } = useLogin();
 
   return (
     <Form

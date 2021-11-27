@@ -27,7 +27,7 @@ export const useInput = (props: UseInputProps) => {
       validateField(fieldName, isValid);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [value]);
 
   const checkValidation = useCallback(
     (value: string) => {

@@ -1,60 +1,56 @@
 import { useState, useCallback, useMemo } from 'react';
 
+import { useSigninMutation } from '../../../../redux/api/authApi';
+
 import { useForm } from '../../../../components/Form/useForm';
 
-import { authAPI } from '../../../../api/auth';
-
 import { InputTypeEnum } from '../../../../components/Input';
-import { FieldsList } from '../../../../components/Form/types';
-import { UseLoginComponentProps } from './types';
 
-const fieldsList = [FieldsList.login, FieldsList.password];
+export const useLogin = () => {
+  const [loginData, setLoginData] = useState({
+    login: '',
+    password: '',
+  });
 
-export const useLogin = (props: UseLoginComponentProps) => {
-  const { setError } = props;
+  const { isFormValid, validateField } = useForm({ fieldsObject: loginData });
 
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-
-  const {
-    handleError,
-    handleLoading,
-    handleSuccess,
-    isFormValid,
-    isLoading,
-    isSuccess,
-    validateField,
-  } = useForm({ fieldsList, setError });
+  const [signin, { isLoading }] = useSigninMutation();
 
   const handleLogin = useCallback(() => {
     if (isFormValid) {
-      const data = { login, password };
-
-      authAPI.login({ data, handleError, handleLoading, handleSuccess });
+      signin(loginData);
     }
-  }, [handleError, handleLoading, handleSuccess, isFormValid, login, password]);
+  }, [isFormValid, loginData, signin]);
 
   const inputsList = useMemo(
     () => [
       {
         fieldName: 'login',
-        handleChange: setLogin,
-        placeholder: 'login',
-        value: login,
+        handleChange: (value: string) =>
+          setLoginData((prevState) => ({
+            ...prevState,
+            login: value,
+          })),
+        placeholder: 'Login',
+        value: loginData.login,
         validationRule: { isRequired: true },
         validateField,
       },
       {
         fieldName: 'password',
-        handleChange: setPassword,
+        handleChange: (value: string) =>
+          setLoginData((prevState) => ({
+            ...prevState,
+            password: value,
+          })),
         placeholder: 'Password',
         type: InputTypeEnum.password,
-        value: password,
+        value: loginData.password,
         validationRule: { minSymbols: 6 },
         validateField,
       },
     ],
-    [login, password, validateField]
+    [loginData, validateField]
   );
 
   return {
@@ -62,6 +58,5 @@ export const useLogin = (props: UseLoginComponentProps) => {
     inputsList,
     isFormValid,
     isLoading,
-    isSuccess,
   };
 };

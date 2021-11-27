@@ -1,167 +1,188 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 
+import {
+  useGetUserQuery,
+  useUpdateUserAvatarMutation,
+  useUpdateUserProfileMutation,
+} from '../../redux/api/userApi';
+
 import { useForm } from '../../components/Form/useForm';
 
-import { authAPI } from '../../api/auth';
-
-import { InputTypeEnum } from '../../components/Input';
-
 import { FieldsList } from '../../components/Form/types';
-import { UserDataType } from '../../api/types';
-
-const fieldsList = [
-  FieldsList.firstName,
-  FieldsList.secondName,
-  FieldsList.displayName,
-  FieldsList.login,
-  FieldsList.email,
-  FieldsList.phone,
-];
+import { InputTypeEnum } from '../../components/Input';
+import { ProfileDataType } from '../../redux/types/authTypes';
+import { useAppDispatch } from '../../redux/hooks';
+import { setSuccessMessage } from '../../redux/settingsSlice';
 
 export const useProfile = () => {
-  const [error, setError] = useState('');
+  const [userData, setUserData] = useState<ProfileDataType>({
+    firstName: '',
+    secondName: '',
+    displayName: '',
+    login: '',
+    email: '',
+    phone: '',
+  });
 
-  const [firstName, setFirstName] = useState('');
-  const [secondName, setSecondName] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [login, setLogin] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const dispatch = useAppDispatch();
+
+  const [
+    updateAvatar,
+    { isLoading: isAvatarUpdateLoading, isSuccess: isAvatarUpdateSuccess },
+  ] = useUpdateUserAvatarMutation();
+  const [
+    updateUserProfile,
+    { isLoading: isProfileUpdateLoading, isSuccess: isProfileUpdateSuccess },
+  ] = useUpdateUserProfileMutation();
+
+  useEffect(() => {
+    if (isProfileUpdateSuccess) {
+      dispatch(setSuccessMessage('Profile updated successfully'));
+    }
+    if (isAvatarUpdateSuccess) {
+      dispatch(setSuccessMessage('Avatar updated successfully'));
+    }
+  }, [dispatch, isAvatarUpdateSuccess, isProfileUpdateSuccess]);
+
   const [avatar, setAvatar] = useState('');
 
-  const handleChangeAvatar = (newAvatar: string) => {
-    setAvatar(newAvatar);
+  const handleChangeAvatar = (newAvatar: File) => {
+    const data = new FormData();
+    data.append('file', newAvatar);
+
+    updateAvatar(data);
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(newAvatar);
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        setAvatar(reader.result);
+      }
+    };
   };
 
   const handleDeleteAvatar = () => {
     setAvatar('');
   };
 
-  const handleSuccess = (data: UserDataType) => {
-    const { firstName, secondName, displayName, login, email, phone, avatar } =
-      data;
-
-    firstName && setFirstName(firstName);
-    secondName && setSecondName(secondName);
-    displayName && setDisplayName(displayName);
-    login && setLogin(login);
-    email && setEmail(email);
-    phone && setPhone(phone);
-    avatar && setAvatar(avatar);
-  };
-
-  const {
-    handleError,
-    handleLoading,
-    isFormValid,
-    isLoading,
-    isSuccess,
-    validateField,
-  } = useForm({ fieldsList, setError });
-
-  useEffect(() => {
-    authAPI.getUserInfo({
-      handleError,
-      handleLoading,
-      handleSuccess,
-    });
-  }, [handleError, handleLoading]);
+  const { isFormValid, validateField } = useForm({
+    fieldsObject: userData,
+  });
 
   const handleUpdate = useCallback(() => {
     if (isFormValid) {
-      const data = {
-        firstName,
-        secondName,
-        displayName,
-        login,
-        email,
-        phone,
-        avatar,
-      };
-      console.log('data', data);
+      updateUserProfile(userData);
     }
-  }, [
-    avatar,
-    displayName,
-    email,
-    firstName,
-    isFormValid,
-    login,
-    phone,
-    secondName,
-  ]);
+  }, [updateUserProfile, userData, isFormValid]);
 
   const inputsList = useMemo(
     () => [
       {
         fieldName: FieldsList.firstName,
-        handleChange: setFirstName,
+        handleChange: (value: string) =>
+          setUserData((prevState) => ({
+            ...prevState,
+            firstName: value,
+          })),
         label: 'First name',
         placeholder: 'First name',
-        value: firstName,
+        value: userData.firstName || '',
         validationRule: { isRequired: true },
         validateField,
       },
       {
         fieldName: FieldsList.secondName,
-        handleChange: setSecondName,
+        handleChange: (value: string) =>
+          setUserData((prevState) => ({
+            ...prevState,
+            secondName: value,
+          })),
         label: 'Second name',
         placeholder: 'Second name',
-        value: secondName,
+        value: userData.secondName || '',
         validationRule: { isRequired: true },
         validateField,
       },
       {
         fieldName: FieldsList.displayName,
-        handleChange: setDisplayName,
+        handleChange: (value: string) =>
+          setUserData((prevState) => ({
+            ...prevState,
+            displayName: value,
+          })),
         label: 'Display name',
         placeholder: 'Display name',
-        value: displayName,
+        value: userData.displayName || '',
         validateField,
       },
       {
         fieldName: FieldsList.email,
-        handleChange: setEmail,
+        handleChange: (value: string) =>
+          setUserData((prevState) => ({
+            ...prevState,
+            email: value,
+          })),
         label: 'Email',
         placeholder: 'Email',
         type: InputTypeEnum.email,
-        value: email,
+        value: userData.email || '',
         validationRule: { isRequired: true, email: true },
         validateField,
       },
       {
         fieldName: FieldsList.phone,
-        handleChange: setPhone,
+        handleChange: (value: string) =>
+          setUserData((prevState) => ({
+            ...prevState,
+            phone: value,
+          })),
         label: 'Phone',
         placeholder: 'Phone',
         type: InputTypeEnum.email,
-        value: phone,
+        value: userData.phone || '',
         validationRule: { isRequired: true, phone: true },
         validateField,
       },
       {
         fieldName: FieldsList.login,
-        handleChange: setLogin,
+        handleChange: (value: string) =>
+          setUserData((prevState) => ({
+            ...prevState,
+            login: value,
+          })),
         label: 'Login',
         placeholder: 'Login',
-        value: login,
+        value: userData.login || '',
         validationRule: { isRequired: true },
         validateField,
       },
     ],
-    [displayName, email, firstName, login, phone, secondName, validateField]
+    [userData, validateField]
   );
+
+  const { data, isLoading: isProfileLoading } = useGetUserQuery();
+
+  useEffect(() => {
+    if (data) {
+      const { avatar, id, ...rest } = data;
+      setUserData(rest);
+      const avatarUrl = avatar
+        ? `https://ya-praktikum.tech/api/v2/resources${avatar}`
+        : '';
+      setAvatar(avatarUrl);
+    }
+  }, [data]);
 
   return {
     avatar,
-    error,
-    firstName,
+    firstName: userData.firstName,
     handleChangeAvatar,
     handleDeleteAvatar,
     handleUpdate,
     inputsList,
     isFormValid,
-    isLoading,
-    isSuccess,
+    isLoading:
+      isProfileLoading || isAvatarUpdateLoading || isProfileUpdateLoading,
   };
 };

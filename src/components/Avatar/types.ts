@@ -1,5 +1,5 @@
 export type AvatarProps = {
-  handleChangeAvatar?: (newAvatar: string) => void;
+  handleChangeAvatar?: (newAvatar: File) => void;
   handleDeleteAvatar?: () => void;
   name?: string;
   src?: string;

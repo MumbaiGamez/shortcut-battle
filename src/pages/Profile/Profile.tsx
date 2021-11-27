@@ -23,7 +23,7 @@ export const Profile = () => {
     <div className={styles.profile}>
       <Form
         buttonText="Update"
-        isButtonDisabled={isFormValid}
+        isButtonDisabled={!isFormValid}
         isLoading={isLoading}
         inputsList={inputsList}
         onButtonClick={handleUpdate}
