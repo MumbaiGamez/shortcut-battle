@@ -14,7 +14,7 @@ export const useLoginPage = () => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate(RoutesList.home);
+      navigate(RoutesList.play);
     }
   }, [isAuth, navigate]);
 
