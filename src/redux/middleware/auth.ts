@@ -5,7 +5,7 @@ import { RoutesList } from '../../components/NavigationMenu/useNavigationMenu';
 import { endpoints as authEndpoints } from '../api/authApi';
 import { endpoints as userEndpoints } from '../api/userApi';
 
-import { setAuth } from '../settingsSlice';
+import { setAuth } from '../slices/settingsSlice';
 
 import { history } from '../store';
 

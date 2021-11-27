@@ -4,7 +4,7 @@ import {
   MiddlewareAPI,
 } from '@reduxjs/toolkit';
 
-import { setErrorMessage } from '../settingsSlice';
+import { setErrorMessage } from '../slices/settingsSlice';
 
 export const errorMiddleware: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {

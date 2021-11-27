@@ -5,7 +5,7 @@ import {
   clearMessages,
   selectErrorMessage,
   selectSuccessMessage,
-} from '../../redux/settingsSlice';
+} from '../../redux/slices/settingsSlice';
 
 const TOASTER_TIMEOUT = 2000;
 const REMOVE_MESSAGE_DELAY = 500;

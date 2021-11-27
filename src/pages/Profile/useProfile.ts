@@ -12,7 +12,7 @@ import { FieldsList } from '../../components/Form/types';
 import { InputTypeEnum } from '../../components/Input';
 import { ProfileDataType } from '../../redux/types/apiTypes';
 import { useAppDispatch } from '../../redux/hooks';
-import { setSuccessMessage } from '../../redux/settingsSlice';
+import { setSuccessMessage } from '../../redux/slices/settingsSlice';
 
 export const useProfile = () => {
   const [userData, setUserData] = useState<ProfileDataType>({

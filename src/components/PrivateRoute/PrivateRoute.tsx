@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 import { RoutesList } from '../NavigationMenu/useNavigationMenu';
 
-import { selectIsAuth } from '../../redux/settingsSlice';
+import { selectIsAuth } from '../../redux/slices/settingsSlice';
 
 type PrivateRouteProps = {
   element: JSX.Element;

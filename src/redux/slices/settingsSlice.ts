@@ -1,5 +1,5 @@
-import { RootState } from './store';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type SettingsType = {
   errorMessage: null | string;
@@ -36,11 +36,20 @@ const settingsSlice = createSlice({
 export const { setAuth, setErrorMessage, setSuccessMessage, clearMessages } =
   settingsSlice.actions;
 
-export const selectErrorMessage = (state: RootState) =>
-  state.settings.errorMessage;
-export const selectSuccessMessage = (state: RootState) =>
-  state.settings.successMessage;
+export const selectSettings = (state: RootState) => state.settings;
 
-export const selectIsAuth = (state: RootState) => state.settings.isAuth;
+export const selectErrorMessage = createSelector(
+  selectSettings,
+  (state) => state.errorMessage
+);
+export const selectSuccessMessage = createSelector(
+  selectSettings,
+  (state) => state.successMessage
+);
+
+export const selectIsAuth = createSelector(
+  selectSettings,
+  (state) => state.isAuth
+);
 
 export default settingsSlice.reducer;

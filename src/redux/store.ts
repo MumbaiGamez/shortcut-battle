@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import settingsReducer from './settingsSlice';
+import settingsReducer from './slices/settingsSlice';
 
 import { baseApi } from './api/baseApi';
 import { errorMiddleware } from './middleware/error';
