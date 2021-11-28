@@ -4,16 +4,22 @@ import classNames from 'classnames';
 import { Loader } from '../../../../components/Loader';
 import { Button, ButtonTheme } from '../../../../components/Button';
 
-import { GameState } from '../../types';
+import { GameState, Phase } from '../../types';
 
+import FullscreenOpen from '../../../../assets/icons/fullscreenOpen.svg';
+import FullscreenExit from '../../../../assets/icons/fullscreenExit.svg';
 import styles from './GameUI.css';
 
 type GameUIProps = {
   state: GameState;
+  isFullscreen: boolean;
+  toggleFullscreen: () => void;
 };
 
 export const GameUI = (props: GameUIProps) => {
   const {
+    isFullscreen,
+    toggleFullscreen,
     state: { phase, reset, pause, start, score },
   } = props;
 
@@ -67,6 +73,18 @@ export const GameUI = (props: GameUIProps) => {
             <Button onClick={reset}>Restart</Button>
           </div>
         </main>
+        {phase !== Phase.playing && (
+          <button
+            className={styles.fullscreenButton}
+            onClick={toggleFullscreen}
+          >
+            {isFullscreen ? (
+              <FullscreenExit className={styles.fullscreenExit} />
+            ) : (
+              <FullscreenOpen className={styles.fullscreenOpen} />
+            )}
+          </button>
+        )}
       </section>
     </div>
   );
