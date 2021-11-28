@@ -23,11 +23,13 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.open(cacheName).then((cache) => {
-      return cache
-        .match(event.request.url)
-        .then((response) => response || fetch(event.request.url));
-    })
-  );
+  if (event.request.method === 'GET') {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        caches.open(cacheName).then((cache) => {
+          return cache.match(event.request.url);
+        });
+      })
+    );
+  }
 });
