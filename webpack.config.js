@@ -60,7 +60,7 @@ module.exports = {
     new ServiceWorkerAssetsPlugin({
       path: path.resolve(__dirname, './src/sw.js'),
       output: 'sw.js',
-      routes: ['', 'play', 'login', 'leaderboard'],
+      routes: ['play', 'login', 'leaderboard'],
     }),
   ],
   devtool: 'source-map',
