@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ServiceWorkerAssetsPlugin = require('./webpack/plugins/service-worker-assets-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -55,6 +56,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Shortcut Battle',
       template: path.resolve(__dirname, 'www/index.html'),
+    }),
+    new ServiceWorkerAssetsPlugin({
+      path: path.resolve(__dirname, './src/sw.js'),
+      output: 'sw.js',
+      routes: ['play', 'login', 'leaderboard'],
     }),
   ],
   devtool: 'source-map',

@@ -40,7 +40,7 @@
     },
     "overrides": [
       {
-        "files": ["webpack.config.js", "server.js"],
+        "files": ["webpack/**/*.*", "webpack.config.js", "server.js", "src/sw.js"],
         "rules": {
           "@typescript-eslint/no-var-requires": 0,
           "no-undef": 0
