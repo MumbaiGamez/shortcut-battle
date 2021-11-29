@@ -6,6 +6,7 @@ import settingsReducer from './slices/settingsSlice';
 import { baseApi } from './api/baseApi';
 import { errorMiddleware } from './middleware/error';
 import { authMiddleware } from './middleware/auth';
+import { successMiddleware } from './middleware/success';
 
 const { createReduxHistory, routerMiddleware, routerReducer } =
   createReduxHistoryContext({
@@ -23,7 +24,8 @@ export const store = configureStore({
       baseApi.middleware,
       authMiddleware,
       errorMiddleware,
-      routerMiddleware
+      routerMiddleware,
+      successMiddleware
     );
   },
 });

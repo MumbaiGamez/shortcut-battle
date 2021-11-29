@@ -1,31 +1,38 @@
 import { RootState } from '../store';
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export enum ToastTheme {
+  Error = 'Error',
+  Success = 'Success',
+}
+
+export type ToastType = {
+  id: number;
+  message: string;
+  theme: ToastTheme;
+};
+
 export type SettingsType = {
-  errorMessage: null | string;
   isAuth: boolean;
-  successMessage: null | string;
+  toasts: ToastType[];
 };
 
 const initialState: SettingsType = {
-  errorMessage: null,
   isAuth: false,
-  successMessage: null,
+  toasts: [],
 };
 
 const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setErrorMessage: (state, action: PayloadAction<string>) => {
-      state.errorMessage = action.payload;
+    addToast: (state, action: PayloadAction<ToastType>) => {
+      state.toasts.push(action.payload);
     },
-    setSuccessMessage: (state, action: PayloadAction<string>) => {
-      state.successMessage = action.payload;
-    },
-    clearMessage: (state) => {
-      state.errorMessage = null;
-      state.successMessage = null;
+    removeToast: (state, action: PayloadAction<number>) => {
+      state.toasts = state.toasts.filter(
+        (toast) => toast.id !== action.payload
+      );
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
@@ -33,18 +40,13 @@ const settingsSlice = createSlice({
   },
 });
 
-export const { setAuth, setErrorMessage, setSuccessMessage, clearMessage } =
-  settingsSlice.actions;
+export const { setAuth, addToast, removeToast } = settingsSlice.actions;
 
 export const selectSettings = (state: RootState) => state.settings;
 
-export const selectErrorMessage = createSelector(
+export const selectToasts = createSelector(
   selectSettings,
-  (state) => state.errorMessage
-);
-export const selectSuccessMessage = createSelector(
-  selectSettings,
-  (state) => state.successMessage
+  (state) => state.toasts
 );
 
 export const selectIsAuth = createSelector(

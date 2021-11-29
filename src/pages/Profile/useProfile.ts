@@ -11,8 +11,6 @@ import { useForm } from '../../components/Form/useForm';
 import { FieldsList } from '../../components/Form/types';
 import { InputTypeEnum } from '../../components/Input';
 import { ProfileDataType } from '../../redux/types/apiTypes';
-import { useAppDispatch } from '../../redux/hooks';
-import { setSuccessMessage } from '../../redux/slices/settingsSlice';
 
 export const useProfile = () => {
   const [userData, setUserData] = useState<ProfileDataType>({
@@ -24,26 +22,11 @@ export const useProfile = () => {
     phone: '',
   });
 
-  const dispatch = useAppDispatch();
+  const [updateAvatar, { isLoading: isAvatarUpdateLoading }] =
+    useUpdateUserAvatarMutation();
 
-  const [
-    updateAvatar,
-    { isLoading: isAvatarUpdateLoading, isSuccess: isAvatarUpdateSuccess },
-  ] = useUpdateUserAvatarMutation();
-  const [
-    updateUserProfile,
-    { isLoading: isProfileUpdateLoading, isSuccess: isProfileUpdateSuccess },
-  ] = useUpdateUserProfileMutation();
-
-  useEffect(() => {
-    if (isProfileUpdateSuccess) {
-      dispatch(setSuccessMessage('Profile updated successfully'));
-    }
-
-    if (isAvatarUpdateSuccess) {
-      dispatch(setSuccessMessage('Avatar updated successfully'));
-    }
-  }, [dispatch, isAvatarUpdateSuccess, isProfileUpdateSuccess]);
+  const [updateUserProfile, { isLoading: isProfileUpdateLoading }] =
+    useUpdateUserProfileMutation();
 
   const [avatar, setAvatar] = useState('');
 

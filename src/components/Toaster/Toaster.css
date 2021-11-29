@@ -1,25 +1,35 @@
-.toaster {
+.toasterContainer {
   position: absolute;
   top: var(--nav-height);
   right: 0;
+}
+
+.toaster {
   z-index: 50;
   width: 200px;
   padding: 10px 20px;
+  margin: 20px;
   border-radius: 5px;
-  display: inline-flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background: rgb(119 14 14);
-  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform: translateX(-10%);
-  opacity: 100%;
+  animation: example 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.hide {
-  transform: translateX(100%);
-  transition: 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-  opacity: 0%;
+@keyframes example {
+  0% { transform: translateX(100%); }
+
+  10%,
+  80% {
+    transform: translateX(0);
+    opacity: 100%;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0%;
+  }
 }
 
 .toasterThemeError {
