@@ -26,12 +26,9 @@ export const App = () => {
       <NavigationMenu />
       <Routes>
         <Route path={RoutesList.home} element={<Home />} />
+        <Route path={RoutesList.play} element={<Game />} />
         <Route path={RoutesList.login} element={<Login />} />
         <Route path={RoutesList.library} element={<ComponentsLibrary />} />
-        <Route
-          path={RoutesList.play}
-          element={<PrivateRoute element={<Game />} />}
-        />
         <Route
           path={RoutesList.leaderboard}
           element={<PrivateRoute element={<Leaderboard />} />}

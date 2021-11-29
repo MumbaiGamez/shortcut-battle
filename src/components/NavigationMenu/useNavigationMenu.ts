@@ -45,16 +45,16 @@ export const useNavigationMenu = () => {
           isShow: true,
         },
         {
+          link: RoutesList.play,
+          name: 'Play',
+          handleClick: closeMenu,
+          isShow: true,
+        },
+        {
           link: RoutesList.login,
           name: 'Login',
           handleClick: closeMenu,
           isShow: !isAuth,
-        },
-        {
-          link: RoutesList.play,
-          name: 'Play',
-          handleClick: closeMenu,
-          isShow: isAuth,
         },
         {
           link: RoutesList.logout,
