@@ -12,6 +12,8 @@ import { FieldsList } from '../../components/Form/types';
 import { InputTypeEnum } from '../../components/Input';
 import { ProfileDataType } from '../../redux/types/apiTypes';
 
+import { setValueToUseStateFactory } from '../../utils/setValueToUseStateFactory';
+
 export const useProfile = () => {
   const [userData, setUserData] = useState<ProfileDataType>({
     firstName: '',
@@ -21,6 +23,8 @@ export const useProfile = () => {
     email: '',
     phone: '',
   });
+
+  const changeProfileFactory = setValueToUseStateFactory(setUserData);
 
   const [updateAvatar, { isLoading: isAvatarUpdateLoading }] =
     useUpdateUserAvatarMutation();
@@ -65,11 +69,7 @@ export const useProfile = () => {
     () => [
       {
         fieldName: FieldsList.firstName,
-        handleChange: (value: string) =>
-          setUserData((prevState) => ({
-            ...prevState,
-            firstName: value,
-          })),
+        handleChange: changeProfileFactory(FieldsList.firstName),
         label: 'First name',
         placeholder: 'First name',
         value: userData.firstName || '',
@@ -78,11 +78,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.secondName,
-        handleChange: (value: string) =>
-          setUserData((prevState) => ({
-            ...prevState,
-            secondName: value,
-          })),
+        handleChange: changeProfileFactory(FieldsList.secondName),
         label: 'Second name',
         placeholder: 'Second name',
         value: userData.secondName || '',
@@ -91,11 +87,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.displayName,
-        handleChange: (value: string) =>
-          setUserData((prevState) => ({
-            ...prevState,
-            displayName: value,
-          })),
+        handleChange: changeProfileFactory(FieldsList.displayName),
         label: 'Display name',
         placeholder: 'Display name',
         value: userData.displayName || '',
@@ -103,11 +95,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.email,
-        handleChange: (value: string) =>
-          setUserData((prevState) => ({
-            ...prevState,
-            email: value,
-          })),
+        handleChange: changeProfileFactory(FieldsList.email),
         label: 'Email',
         placeholder: 'Email',
         type: InputTypeEnum.email,
@@ -117,11 +105,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.phone,
-        handleChange: (value: string) =>
-          setUserData((prevState) => ({
-            ...prevState,
-            phone: value,
-          })),
+        handleChange: changeProfileFactory(FieldsList.phone),
         label: 'Phone',
         placeholder: 'Phone',
         type: InputTypeEnum.email,
@@ -131,11 +115,7 @@ export const useProfile = () => {
       },
       {
         fieldName: FieldsList.login,
-        handleChange: (value: string) =>
-          setUserData((prevState) => ({
-            ...prevState,
-            login: value,
-          })),
+        handleChange: changeProfileFactory(FieldsList.login),
         label: 'Login',
         placeholder: 'Login',
         value: userData.login || '',
@@ -143,7 +123,7 @@ export const useProfile = () => {
         validateField,
       },
     ],
-    [userData, validateField]
+    [changeProfileFactory, userData, validateField]
   );
 
   const { data, isLoading: isProfileLoading } = useGetUserQuery();

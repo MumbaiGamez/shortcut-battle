@@ -7,6 +7,8 @@ import { useForm } from '../../../../components/Form/useForm';
 import { InputTypeEnum } from '../../../../components/Input';
 import { FieldsList } from '../../../../components/Form/types';
 
+import { setValueToUseStateFactory } from '../../../../utils/setValueToUseStateFactory';
+
 export const useRegistration = () => {
   const [registrationData, setRegistrationData] = useState({
     firstName: '',
@@ -16,6 +18,9 @@ export const useRegistration = () => {
     phone: '',
     password: '',
   });
+
+  const changeRegistrationFactory =
+    setValueToUseStateFactory(setRegistrationData);
 
   const [signup, { isLoading }] = useSignupMutation();
 
@@ -33,11 +38,7 @@ export const useRegistration = () => {
     () => [
       {
         fieldName: FieldsList.firstName,
-        handleChange: (value: string) =>
-          setRegistrationData((prevState) => ({
-            ...prevState,
-            firstName: value,
-          })),
+        handleChange: changeRegistrationFactory(FieldsList.firstName),
         placeholder: 'First name',
         value: registrationData.firstName,
         validationRule: { isRequired: true },
@@ -45,11 +46,7 @@ export const useRegistration = () => {
       },
       {
         fieldName: FieldsList.secondName,
-        handleChange: (value: string) =>
-          setRegistrationData((prevState) => ({
-            ...prevState,
-            secondName: value,
-          })),
+        handleChange: changeRegistrationFactory(FieldsList.secondName),
         placeholder: 'Second name',
         value: registrationData.secondName,
         validationRule: { isRequired: true },
@@ -57,11 +54,7 @@ export const useRegistration = () => {
       },
       {
         fieldName: FieldsList.email,
-        handleChange: (value: string) =>
-          setRegistrationData((prevState) => ({
-            ...prevState,
-            email: value,
-          })),
+        handleChange: changeRegistrationFactory(FieldsList.email),
         placeholder: 'Email',
         type: InputTypeEnum.email,
         value: registrationData.email,
@@ -70,11 +63,7 @@ export const useRegistration = () => {
       },
       {
         fieldName: FieldsList.phone,
-        handleChange: (value: string) =>
-          setRegistrationData((prevState) => ({
-            ...prevState,
-            phone: value,
-          })),
+        handleChange: changeRegistrationFactory(FieldsList.phone),
         placeholder: 'Phone',
         type: InputTypeEnum.email,
         value: registrationData.phone,
@@ -83,11 +72,7 @@ export const useRegistration = () => {
       },
       {
         fieldName: FieldsList.login,
-        handleChange: (value: string) =>
-          setRegistrationData((prevState) => ({
-            ...prevState,
-            login: value,
-          })),
+        handleChange: changeRegistrationFactory(FieldsList.login),
         placeholder: 'Login',
         value: registrationData.login,
         validationRule: { isRequired: true },
@@ -95,11 +80,7 @@ export const useRegistration = () => {
       },
       {
         fieldName: FieldsList.password,
-        handleChange: (value: string) =>
-          setRegistrationData((prevState) => ({
-            ...prevState,
-            password: value,
-          })),
+        handleChange: changeRegistrationFactory(FieldsList.password),
         placeholder: 'Password',
         type: InputTypeEnum.password,
         value: registrationData.password,
@@ -107,7 +88,7 @@ export const useRegistration = () => {
         validateField,
       },
     ],
-    [registrationData, validateField]
+    [changeRegistrationFactory, registrationData, validateField]
   );
 
   return {
