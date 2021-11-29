@@ -25,8 +25,8 @@ const userApi = baseApi.injectEndpoints({
         url: UserURL.GET_USER,
       }),
       transformResponse: (response: UserDataResponseType) => {
-        const normilizedData = convertObjectKeysToCamelCase(response);
-        return normilizedData as UserDataType;
+        const normalizedData = convertObjectKeysToCamelCase(response);
+        return normalizedData as UserDataType;
       },
     }),
     updateUserProfile: build.mutation<UserDataResponseType, ProfileDataType>({
@@ -44,8 +44,7 @@ const userApi = baseApi.injectEndpoints({
         url: UserURL.UPDATE_AVATAR,
         method: ApiMethods.PUT,
         headers: {
-          'content-type':
-            'multipart/form-data, boundary=----WebKitFormBoundary',
+          accept: 'application/json',
         },
         body: avatar,
       }),

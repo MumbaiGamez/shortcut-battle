@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from './../../redux/hooks';
 import {
-  clearMessages,
+  clearMessage,
   selectErrorMessage,
   selectSuccessMessage,
 } from '../../redux/slices/settingsSlice';
@@ -47,7 +47,7 @@ export const useToaster = () => {
         setIsHiddenToaster(true);
 
         setTimeout(() => {
-          dispatch(clearMessages());
+          dispatch(clearMessage());
         }, REMOVE_MESSAGE_DELAY);
       }, TOASTER_TIMEOUT);
     }

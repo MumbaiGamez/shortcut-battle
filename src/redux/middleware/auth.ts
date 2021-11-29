@@ -1,10 +1,8 @@
 import { Middleware, MiddlewareAPI } from '@reduxjs/toolkit';
 
 import { RoutesList } from '../../components/NavigationMenu/useNavigationMenu';
-
 import { endpoints as authEndpoints } from '../api/authApi';
 import { endpoints as userEndpoints } from '../api/userApi';
-
 import { setAuth } from '../slices/settingsSlice';
 
 import { history } from '../store';

@@ -23,7 +23,7 @@ const settingsSlice = createSlice({
     setSuccessMessage: (state, action: PayloadAction<string>) => {
       state.successMessage = action.payload;
     },
-    clearMessages: (state) => {
+    clearMessage: (state) => {
       state.errorMessage = null;
       state.successMessage = null;
     },
@@ -33,7 +33,7 @@ const settingsSlice = createSlice({
   },
 });
 
-export const { setAuth, setErrorMessage, setSuccessMessage, clearMessages } =
+export const { setAuth, setErrorMessage, setSuccessMessage, clearMessage } =
   settingsSlice.actions;
 
 export const selectSettings = (state: RootState) => state.settings;

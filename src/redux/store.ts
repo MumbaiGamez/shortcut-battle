@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { createReduxHistoryContext } from 'redux-first-history';
+import { createBrowserHistory } from 'history';
 
 import settingsReducer from './slices/settingsSlice';
-
 import { baseApi } from './api/baseApi';
 import { errorMiddleware } from './middleware/error';
 import { authMiddleware } from './middleware/auth';
-
-import { createReduxHistoryContext } from 'redux-first-history';
-import { createBrowserHistory } from 'history';
 
 const { createReduxHistory, routerMiddleware, routerReducer } =
   createReduxHistoryContext({

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { RoutesList } from '../NavigationMenu/useNavigationMenu';
-
 import { selectIsAuth } from '../../redux/slices/settingsSlice';
 
 type PrivateRouteProps = {

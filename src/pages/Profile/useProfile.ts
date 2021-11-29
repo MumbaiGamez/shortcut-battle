@@ -39,6 +39,7 @@ export const useProfile = () => {
     if (isProfileUpdateSuccess) {
       dispatch(setSuccessMessage('Profile updated successfully'));
     }
+
     if (isAvatarUpdateSuccess) {
       dispatch(setSuccessMessage('Avatar updated successfully'));
     }
@@ -48,6 +49,7 @@ export const useProfile = () => {
 
   const handleChangeAvatar = (newAvatar: File) => {
     const data = new FormData();
+
     data.append('file', newAvatar);
 
     updateAvatar(data);
@@ -166,10 +168,11 @@ export const useProfile = () => {
   useEffect(() => {
     if (data) {
       const { avatar, id, ...rest } = data;
-      setUserData(rest);
       const avatarUrl = avatar
         ? `https://ya-praktikum.tech/api/v2/resources${avatar}`
         : '';
+
+      setUserData(rest);
       setAvatar(avatarUrl);
     }
   }, [data]);

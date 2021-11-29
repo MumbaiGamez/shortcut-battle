@@ -2,7 +2,6 @@ import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useLogoutMutation } from '../../redux/api/authApi';
-
 import { selectIsAuth } from '../../redux/slices/settingsSlice';
 
 export enum RoutesList {
@@ -20,7 +19,7 @@ export enum RoutesList {
 export const useNavigationMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [logoutAction] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
 
   const isAuth = useSelector(selectIsAuth);
 
@@ -31,10 +30,10 @@ export const useNavigationMenu = () => {
 
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
-  const logout = useCallback(() => {
-    logoutAction();
+  const handleLogout = useCallback(() => {
+    logout();
     closeMenu();
-  }, [closeMenu, logoutAction]);
+  }, [closeMenu, logout]);
 
   const navigationLinks = useMemo(
     () =>
@@ -60,7 +59,7 @@ export const useNavigationMenu = () => {
         {
           link: RoutesList.logout,
           name: 'Logout',
-          handleClick: logout,
+          handleClick: handleLogout,
           isShow: isAuth,
         },
         {
@@ -76,7 +75,7 @@ export const useNavigationMenu = () => {
           isShow: isAuth,
         },
       ].filter((link) => link.isShow),
-    [closeMenu, logout, isAuth]
+    [closeMenu, handleLogout, isAuth]
   );
 
   return { isMenuOpen, navigationLinks, toggleMenu };
