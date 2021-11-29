@@ -7,6 +7,12 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 
 import './assets/styles/index.css';
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
+
 ReactDOM.render(
   <StrictMode>
     <ErrorBoundary>
