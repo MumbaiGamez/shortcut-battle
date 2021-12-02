@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export const setValueToUseStateFactory = <T>(
+export const setFormFieldValueFactory = <T>(
   callback: Dispatch<SetStateAction<T>>
 ) => {
   return function (fieldName: string) {
