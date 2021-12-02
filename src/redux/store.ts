@@ -3,6 +3,8 @@ import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
 
 import settingsReducer from './slices/settingsSlice';
+import configReducer from './slices/configSlice';
+import gameReducer from './slices/gameSlice';
 import { baseApi } from './api/baseApi';
 import { errorMiddleware } from './middleware/error';
 import { authMiddleware } from './middleware/auth';
@@ -18,6 +20,8 @@ export const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
     router: routerReducer,
     settings: settingsReducer,
+    config: configReducer,
+    game: gameReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(

@@ -3,17 +3,12 @@ import React from 'react';
 import { Asteroid } from '../Asteroid';
 import { useEnemy } from './useEnemy';
 
-import { GameConfig, GameState, LayerComponentProps } from '../../types';
+import { LayerComponentProps } from '../../types';
 
-type EnemyProps = LayerComponentProps & {
-  state: GameState;
-  config: GameConfig;
-};
+export const Enemy = (props: LayerComponentProps) => {
+  const { engine } = props;
 
-export const Enemy = (props: EnemyProps) => {
-  const { engine, state, config } = props;
-
-  const { asteroids } = useEnemy({ engine, state, config });
+  const { asteroids } = useEnemy({ engine });
 
   return (
     <>

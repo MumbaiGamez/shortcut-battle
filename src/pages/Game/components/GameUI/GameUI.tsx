@@ -1,27 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { selectConfig } from '../../../../redux/slices/configSlice';
+import {
+  reset,
+  pause,
+  start,
+  selectScore,
+  selectPhase,
+} from '../../../../redux/slices/gameSlice';
 import { Loader } from '../../../../components/Loader';
 import { Button, ButtonTheme } from '../../../../components/Button';
 
-import { GameState } from '../../types';
-
 import styles from './GameUI.css';
 
-type GameUIProps = {
-  state: GameState;
-};
+export const GameUI = () => {
+  const dispatch = useAppDispatch();
 
-export const GameUI = (props: GameUIProps) => {
-  const {
-    state: { phase, reset, pause, start, score },
-  } = props;
+  const { count } = useAppSelector(selectConfig);
+  const score = useAppSelector(selectScore);
+  const phase = useAppSelector(selectPhase);
+
+  const handleReset = useCallback(() => {
+    dispatch(reset(count));
+  }, [count, dispatch]);
+
+  const handleStart = useCallback(() => {
+    dispatch(start());
+  }, [dispatch]);
+
+  const handlePause = useCallback(() => {
+    dispatch(pause());
+  }, [dispatch]);
 
   useEffect(() => {
-    setTimeout(() => {
-      reset();
-    }, 2000);
-  }, [reset]);
+    setTimeout(handleReset, 2000);
+  }, [dispatch, handleReset]);
 
   return (
     <div className={classNames(styles.gameUI, styles[phase])}>
@@ -35,14 +50,14 @@ export const GameUI = (props: GameUIProps) => {
             <Button
               theme={ButtonTheme.Glow}
               className={styles.headerButton}
-              onClick={pause}
+              onClick={handlePause}
             >
               Pause
             </Button>
             <Button
               theme={ButtonTheme.Glow}
               className={styles.headerButton}
-              onClick={reset}
+              onClick={handleReset}
             >
               Exit
             </Button>
@@ -53,18 +68,18 @@ export const GameUI = (props: GameUIProps) => {
             <Loader />
           </div>
           <div className={styles.initialized}>
-            <Button onClick={start}>Start new game</Button>
+            <Button onClick={handleStart}>Start new game</Button>
           </div>
           <div className={styles.paused}>
-            <Button onClick={start}>Continue</Button>
+            <Button onClick={handleStart}>Continue</Button>
           </div>
           <div className={styles.gameOver}>
             <h2 className={styles.title}>Game Over</h2>
-            <Button onClick={reset}>Try again</Button>
+            <Button onClick={handleReset}>Try again</Button>
           </div>
           <div className={styles.congrats}>
             <h2 className={styles.title}>Congrats, you won!</h2>
-            <Button onClick={reset}>Restart</Button>
+            <Button onClick={handleReset}>Restart</Button>
           </div>
         </main>
       </section>

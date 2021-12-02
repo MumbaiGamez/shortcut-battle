@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { useAppSelector } from '../../../../redux/hooks';
+import { selectConfig } from '../../../../redux/slices/configSlice';
+import { selectPhase } from '../../../../redux/slices/gameSlice';
 import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
 import { useListener, useEmit } from '../../hooks/useBus';
 
@@ -7,9 +10,7 @@ import {
   CanvasContext,
   Engine,
   Entity,
-  GameConfig,
   GameEvent,
-  GameState,
   Layer,
   LayerProps,
   Phase,
@@ -19,8 +20,6 @@ import asteroidImg from '../../../../assets/images/meteorSmall.png';
 
 type UseEnemyProps = {
   engine: Engine;
-  config: GameConfig;
-  state: GameState;
 };
 
 const createAsteroid = (ctx: CanvasContext) => {
@@ -39,11 +38,10 @@ const createAsteroid = (ctx: CanvasContext) => {
 export const useEnemy = (props: UseEnemyProps) => {
   const {
     engine: { ctx, setCollisionHandler },
-    state: { phase },
-    config: {
-      asteroids: { count, interval },
-    },
   } = props;
+
+  const phase = useAppSelector(selectPhase);
+  const { count, interval } = useAppSelector(selectConfig);
 
   const [generatedCount, setGeneratedCount] = useState<number>(0);
   const [asteroids, setAsteroids] = useState<LayerProps[]>([]);

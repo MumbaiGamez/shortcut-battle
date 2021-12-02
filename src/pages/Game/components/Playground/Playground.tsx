@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useAppSelector } from '../../../../redux/hooks';
+import { selectPhase } from '../../../../redux/slices/gameSlice';
 import { GameContext } from '../../context';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
 import { Background } from '../Background';
@@ -11,37 +13,32 @@ import { useCanvas } from '../../hooks/useCanvas';
 import { useEngine } from '../../hooks/useEngine';
 import { useAnimationLoop } from '../../hooks/useAnimationLoop';
 
-import { GameConfig, GameState, Phase } from '../../types';
+import { Phase } from '../../types';
 
 import styles from './Playground.css';
 
-type PlaygroundProps = {
-  state: GameState;
-  config: GameConfig;
-};
-
-export const Playground = (props: PlaygroundProps) => {
-  const { state, config } = props;
+export const Playground = () => {
+  const phase = useAppSelector(selectPhase);
 
   const { ctx, ref } = useCanvas({
     width: CANVAS_WIDTH,
     height: CANVAS_HEIGHT,
   });
 
-  const engine = useEngine({ ctx, state });
+  const engine = useEngine({ ctx });
 
-  useAnimationLoop(state.phase, engine.render);
+  useAnimationLoop(phase, engine.render);
 
   return (
     <GameContext.Provider value={engine.ctx}>
       <canvas ref={ref} className={styles.canvas} />
       <Background engine={engine} />
       <Borders engine={engine} />
-      {state.phase !== Phase.ready && (
+      {phase !== Phase.ready && (
         <>
           <Player engine={engine} />
           <Weapon engine={engine} />
-          <Enemy engine={engine} state={state} config={config} />
+          <Enemy engine={engine} />
         </>
       )}
     </GameContext.Provider>

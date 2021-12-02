@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
+import { useAppSelector } from '../../../redux/hooks';
+import { selectPhase } from '../../../redux/slices/gameSlice';
 import { haveCollisions } from '../utils/collision';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
 import { useShortcuts } from './useShortcuts';
@@ -9,7 +11,6 @@ import {
   CollisionHandler,
   ShortcutHandler,
   Entity,
-  GameState,
   Layer,
   PlayerAction,
   Phase,
@@ -23,15 +24,12 @@ type Layers = Partial<Record<Entity, Layer[]>>;
 
 type UseEngineProps = {
   ctx: CanvasContext;
-  state: GameState;
 };
 
 export const useEngine = (props: UseEngineProps) => {
-  const {
-    ctx,
-    state: { phase },
-  } = props;
+  const { ctx } = props;
 
+  const phase = useAppSelector(selectPhase);
   const layers = useRef<Layers>({});
   const collisionHandlers = useRef<CollisionHandlers>([]);
   const shortcutHandlers = useRef<ShortcutHandlers>([]);

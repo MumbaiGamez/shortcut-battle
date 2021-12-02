@@ -45,22 +45,6 @@ export enum GameEvent {
   crash = 'crash',
 }
 
-export type GameConfig = {
-  asteroids: {
-    count: number;
-    hitScore: number;
-    interval: number;
-  };
-};
-
-export type GameState = {
-  phase: Phase;
-  score: number;
-  reset: () => void;
-  start: () => void;
-  pause: () => void;
-};
-
 export type Engine = {
   ctx: CanvasContext;
   render: (dt: number) => void;
