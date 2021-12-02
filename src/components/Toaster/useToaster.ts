@@ -1,29 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { UseToasterProps } from './types';
+import { useAppDispatch, useAppSelector } from './../../redux/hooks';
+import { removeToast, selectToasts } from '../../redux/slices/settingsSlice';
 
 const TOASTER_TIMEOUT = 2000;
 
-let openedToaster: ReturnType<typeof setTimeout> | null = null;
+export const useToaster = () => {
+  const dispatch = useAppDispatch();
 
-export const useToaster = (props: UseToasterProps) => {
-  const { toasterId, text } = props;
-
-  const [isHiddenToaster, setIsHiddenToaster] = useState(true);
+  const toasts = useAppSelector(selectToasts);
 
   useEffect(() => {
-    if (text) {
-      setIsHiddenToaster(false);
-
-      if (openedToaster) {
-        clearTimeout(openedToaster);
-      }
-
-      openedToaster = setTimeout(() => {
-        setIsHiddenToaster(true);
+    toasts.map((toast) => {
+      setTimeout(() => {
+        dispatch(removeToast(toast.id));
       }, TOASTER_TIMEOUT);
-    }
-  }, [text, toasterId]);
+    });
+  }, [dispatch, toasts]);
 
-  return [isHiddenToaster, setIsHiddenToaster];
+  return { toasts };
 };

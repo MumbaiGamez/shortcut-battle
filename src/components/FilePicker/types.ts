@@ -1,5 +1,5 @@
 export type FilePickerProps = {
-  handleChange(value: string): void;
+  handleChange(file: File): void;
 
   containerClassName?: string;
   inputClassName?: string;

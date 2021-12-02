@@ -1,128 +1,94 @@
 import { useState, useCallback, useMemo } from 'react';
 
+import { useSignupMutation } from '../../../../redux/api/authApi';
+
 import { useForm } from '../../../../components/Form/useForm';
 
-import { authAPI } from '../../../../api/auth';
-
 import { InputTypeEnum } from '../../../../components/Input';
-import { UseRegistrationComponentProps } from './types';
 import { FieldsList } from '../../../../components/Form/types';
 
-const fieldsList = [
-  FieldsList.firstName,
-  FieldsList.secondName,
-  FieldsList.login,
-  FieldsList.email,
-  FieldsList.phone,
-  FieldsList.password,
-];
+import { setFormFieldValueFactory } from '../../../../utils/setFormFieldValueFactory';
 
-export const useRegistration = (props: UseRegistrationComponentProps) => {
-  const { setError } = props;
+export const useRegistration = () => {
+  const [registrationData, setRegistrationData] = useState({
+    firstName: '',
+    secondName: '',
+    login: '',
+    email: '',
+    phone: '',
+    password: '',
+  });
 
-  const [firstName, setFirstName] = useState('');
-  const [secondName, setSecondName] = useState('');
-  const [login, setLogin] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const changeRegistrationFactory =
+    setFormFieldValueFactory(setRegistrationData);
 
-  const {
-    handleError,
-    handleLoading,
-    handleSuccess,
-    isFormValid,
-    isLoading,
-    isSuccess,
-    validateField,
-  } = useForm({ fieldsList, setError });
+  const [signup, { isLoading }] = useSignupMutation();
+
+  const { isFormValid, validateField } = useForm({
+    fieldsObject: registrationData,
+  });
 
   const handleRegistration = useCallback(() => {
     if (isFormValid) {
-      const data = {
-        firstName,
-        secondName,
-        login,
-        password,
-        email,
-        phone,
-      };
-
-      authAPI.signup({
-        data,
-        handleError,
-        handleLoading,
-        handleSuccess,
-      });
+      signup(registrationData);
     }
-  }, [
-    email,
-    firstName,
-    handleError,
-    handleLoading,
-    handleSuccess,
-    isFormValid,
-    login,
-    password,
-    phone,
-    secondName,
-  ]);
+  }, [isFormValid, registrationData, signup]);
 
   const inputsList = useMemo(
     () => [
       {
         fieldName: FieldsList.firstName,
-        handleChange: setFirstName,
+        handleChange: changeRegistrationFactory(FieldsList.firstName),
         placeholder: 'First name',
-        value: firstName,
+        value: registrationData.firstName,
         validationRule: { isRequired: true },
         validateField,
       },
       {
         fieldName: FieldsList.secondName,
-        handleChange: setSecondName,
+        handleChange: changeRegistrationFactory(FieldsList.secondName),
         placeholder: 'Second name',
-        value: secondName,
+        value: registrationData.secondName,
         validationRule: { isRequired: true },
         validateField,
       },
       {
         fieldName: FieldsList.email,
-        handleChange: setEmail,
+        handleChange: changeRegistrationFactory(FieldsList.email),
         placeholder: 'Email',
         type: InputTypeEnum.email,
-        value: email,
+        value: registrationData.email,
         validationRule: { isRequired: true, email: true },
         validateField,
       },
       {
         fieldName: FieldsList.phone,
-        handleChange: setPhone,
+        handleChange: changeRegistrationFactory(FieldsList.phone),
         placeholder: 'Phone',
         type: InputTypeEnum.email,
-        value: phone,
+        value: registrationData.phone,
         validationRule: { isRequired: true, phone: true },
         validateField,
       },
       {
         fieldName: FieldsList.login,
-        handleChange: setLogin,
+        handleChange: changeRegistrationFactory(FieldsList.login),
         placeholder: 'Login',
-        value: login,
+        value: registrationData.login,
         validationRule: { isRequired: true },
         validateField,
       },
       {
         fieldName: FieldsList.password,
-        handleChange: setPassword,
+        handleChange: changeRegistrationFactory(FieldsList.password),
         placeholder: 'Password',
         type: InputTypeEnum.password,
-        value: password,
+        value: registrationData.password,
         validationRule: { minSymbols: 6 },
         validateField,
       },
     ],
-    [email, firstName, login, password, phone, secondName, validateField]
+    [changeRegistrationFactory, registrationData, validateField]
   );
 
   return {
@@ -130,6 +96,5 @@ export const useRegistration = (props: UseRegistrationComponentProps) => {
     inputsList,
     isFormValid,
     isLoading,
-    isSuccess,
   };
 };

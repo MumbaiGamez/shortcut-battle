@@ -1,5 +1,5 @@
 type obj = {
-  [key: string]: string;
+  [key: string]: string | number;
 };
 
 export const convertStringToSnakeCase = (str: string) => {

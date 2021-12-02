@@ -1,60 +1,53 @@
 import { useState, useCallback, useMemo } from 'react';
 
+import { useSigninMutation } from '../../../../redux/api/authApi';
+
 import { useForm } from '../../../../components/Form/useForm';
 
-import { authAPI } from '../../../../api/auth';
-
-import { InputTypeEnum } from '../../../../components/Input';
 import { FieldsList } from '../../../../components/Form/types';
-import { UseLoginComponentProps } from './types';
+import { InputTypeEnum } from '../../../../components/Input';
 
-const fieldsList = [FieldsList.login, FieldsList.password];
+import { setFormFieldValueFactory } from '../../../../utils/setFormFieldValueFactory';
 
-export const useLogin = (props: UseLoginComponentProps) => {
-  const { setError } = props;
+export const useLogin = () => {
+  const [loginData, setLoginData] = useState({
+    login: '',
+    password: '',
+  });
 
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const changeLoginFactory = setFormFieldValueFactory(setLoginData);
 
-  const {
-    handleError,
-    handleLoading,
-    handleSuccess,
-    isFormValid,
-    isLoading,
-    isSuccess,
-    validateField,
-  } = useForm({ fieldsList, setError });
+  const { isFormValid, validateField } = useForm({ fieldsObject: loginData });
+
+  const [signin, { isLoading }] = useSigninMutation();
 
   const handleLogin = useCallback(() => {
     if (isFormValid) {
-      const data = { login, password };
-
-      authAPI.login({ data, handleError, handleLoading, handleSuccess });
+      signin(loginData);
     }
-  }, [handleError, handleLoading, handleSuccess, isFormValid, login, password]);
+  }, [isFormValid, loginData, signin]);
 
   const inputsList = useMemo(
     () => [
       {
-        fieldName: 'login',
-        handleChange: setLogin,
-        placeholder: 'login',
-        value: login,
+        fieldName: FieldsList.login,
+        handleChange: changeLoginFactory(FieldsList.login),
+        placeholder: 'Login',
+        value: loginData.login,
         validationRule: { isRequired: true },
         validateField,
       },
       {
-        fieldName: 'password',
-        handleChange: setPassword,
+        fieldName: FieldsList.password,
+        handleChange: changeLoginFactory(FieldsList.password),
         placeholder: 'Password',
         type: InputTypeEnum.password,
-        value: password,
+        value: loginData.password,
         validationRule: { minSymbols: 6 },
         validateField,
       },
     ],
-    [login, password, validateField]
+    [changeLoginFactory, loginData, validateField]
   );
 
   return {
@@ -62,6 +55,5 @@ export const useLogin = (props: UseLoginComponentProps) => {
     inputsList,
     isFormValid,
     isLoading,
-    isSuccess,
   };
 };
