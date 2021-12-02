@@ -45,6 +45,10 @@ export enum GameEvent {
   crash = 'crash',
 }
 
+export enum AppName {
+  VS_CODE = 'VS_CODE',
+}
+
 export type Engine = {
   ctx: CanvasContext;
   render: (dt: number) => void;

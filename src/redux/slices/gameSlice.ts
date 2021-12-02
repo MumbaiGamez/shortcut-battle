@@ -1,18 +1,21 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 
-import { Phase } from '../../pages/Game/types';
 import { RootState } from '../store';
+
+import { Phase } from '../../pages/Game/types';
 
 export type Game = {
   phase: Phase;
   score: number;
   enemiesLeft: number;
+  activeShortcut: number;
 };
 
 const initialState: Game = {
   phase: Phase.loading,
   score: 0,
   enemiesLeft: 0,
+  activeShortcut: 0,
 };
 
 const gameSlice = createSlice({
@@ -48,15 +51,24 @@ const gameSlice = createSlice({
         state.phase = Phase.win;
       }
     },
+    nextShortcut: (state, action: PayloadAction<number>) => {
+      state.activeShortcut = action.payload;
+    },
   },
 });
 
-export const { reset, start, pause, hit, out, gameOver } = gameSlice.actions;
+export const { reset, start, pause, hit, out, gameOver, nextShortcut } =
+  gameSlice.actions;
 
 export const selectGame = (state: RootState) => state.game;
 
 export const selectPhase = createSelector(selectGame, (state) => state.phase);
 
 export const selectScore = createSelector(selectGame, (state) => state.score);
+
+export const selectActiveShortcut = createSelector(
+  selectGame,
+  (state) => state.activeShortcut
+);
 
 export default gameSlice.reducer;

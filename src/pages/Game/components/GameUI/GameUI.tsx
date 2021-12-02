@@ -2,13 +2,17 @@ import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { selectConfig } from '../../../../redux/slices/configSlice';
+import {
+  selectConfig,
+  selectAppShortcuts,
+} from '../../../../redux/slices/configSlice';
 import {
   reset,
   pause,
   start,
   selectScore,
   selectPhase,
+  selectActiveShortcut,
 } from '../../../../redux/slices/gameSlice';
 import { Loader } from '../../../../components/Loader';
 import { Button, ButtonTheme } from '../../../../components/Button';
@@ -21,6 +25,10 @@ export const GameUI = () => {
   const { count } = useAppSelector(selectConfig);
   const score = useAppSelector(selectScore);
   const phase = useAppSelector(selectPhase);
+  const activeShortcut = useAppSelector(selectActiveShortcut);
+  const appShortcuts = useAppSelector(selectAppShortcuts);
+
+  const { name, desc } = appShortcuts[activeShortcut];
 
   const handleReset = useCallback(() => {
     dispatch(reset(count));
@@ -45,6 +53,15 @@ export const GameUI = () => {
         <header className={styles.header}>
           <div className={styles.scores}>
             <b>Scores:</b> <span>{score}</span>
+          </div>
+          <div className={styles.keys}>
+            <b className={styles.action}>Fire:</b>
+            <div className={styles.shortcut}>
+              <div className={styles.shortcutWrapper}>
+                <span className={styles.shortcutDesc}>{desc}</span>
+                <span className={styles.shortcutKeys}>{name}</span>
+              </div>
+            </div>
           </div>
           <div>
             <Button

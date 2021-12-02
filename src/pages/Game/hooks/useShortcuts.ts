@@ -1,4 +1,8 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+
+import { useAppSelector } from '../../../redux/hooks';
+import { selectAppShortcuts } from '../../../redux/slices/configSlice';
+import { selectActiveShortcut } from '../../../redux/slices/gameSlice';
 
 import { PlayerAction, ShortcutsPressed } from '../types';
 
@@ -8,40 +12,50 @@ type Combination = KeyCode[];
 
 type KeysPressed = Set<KeyCode>;
 
-type KeyboardConfig = Partial<Record<PlayerAction, Combination>>;
-
 const defaultConfig = {
   [PlayerAction.moveLeft]: ['ArrowLeft'],
   [PlayerAction.moveRight]: ['ArrowRight'],
   [PlayerAction.fire]: ['Space'],
 };
 
-export const useShortcuts = (config: KeyboardConfig = defaultConfig) => {
+export const useShortcuts = () => {
+  const activeShortcut = useAppSelector(selectActiveShortcut);
+  const appShortcuts = useAppSelector(selectAppShortcuts);
+
+  const config = useMemo(() => {
+    const { keys } = appShortcuts[activeShortcut];
+
+    return {
+      ...defaultConfig,
+      [PlayerAction.fire]: keys,
+    };
+  }, [activeShortcut, appShortcuts]);
+
   const keysPressed = useRef<KeysPressed>(new Set<KeyCode>());
   const shortcutsPressed = useRef<ShortcutsPressed>({});
 
   const checkShortcutsPressed = useCallback(() => {
     for (const shortcut of Object.entries(config)) {
-      const [action, codes] = shortcut as [PlayerAction, Combination];
+      const [action, keys] = shortcut as [PlayerAction, Combination];
 
-      shortcutsPressed.current[action] = codes.every((code) =>
-        keysPressed.current.has(code)
+      shortcutsPressed.current[action] = keys.every((key) =>
+        keysPressed.current.has(key)
       );
     }
   }, [config]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      const { code } = event;
+      const { key } = event;
 
-      keysPressed.current.add(code);
+      keysPressed.current.add(key);
       checkShortcutsPressed();
     };
 
     const onKeyUp = (event: KeyboardEvent) => {
-      const { code } = event;
+      const { key } = event;
 
-      keysPressed.current.delete(code);
+      keysPressed.current.delete(key);
       checkShortcutsPressed();
     };
 
