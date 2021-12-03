@@ -7,7 +7,7 @@ import { useForm } from '../../../../components/Form/useForm';
 import { FieldsList } from '../../../../components/Form/types';
 import { InputTypeEnum } from '../../../../components/Input';
 
-import { setValueToUseStateFactory } from '../../../../utils/setValueToUseStateFactory';
+import { setFormFieldValueFactory } from '../../../../utils/setFormFieldValueFactory';
 
 export const useLogin = () => {
   const [loginData, setLoginData] = useState({
@@ -15,7 +15,7 @@ export const useLogin = () => {
     password: '',
   });
 
-  const changeLoginFactory = setValueToUseStateFactory(setLoginData);
+  const changeLoginFactory = setFormFieldValueFactory(setLoginData);
 
   const { isFormValid, validateField } = useForm({ fieldsObject: loginData });
 

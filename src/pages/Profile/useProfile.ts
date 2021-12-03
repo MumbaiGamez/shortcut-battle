@@ -12,7 +12,7 @@ import { FieldsList } from '../../components/Form/types';
 import { InputTypeEnum } from '../../components/Input';
 import { ProfileDataType } from '../../redux/types/apiTypes';
 
-import { setValueToUseStateFactory } from '../../utils/setValueToUseStateFactory';
+import { setFormFieldValueFactory } from '../../utils/setFormFieldValueFactory';
 
 export const useProfile = () => {
   const [userData, setUserData] = useState<ProfileDataType>({
@@ -24,7 +24,7 @@ export const useProfile = () => {
     phone: '',
   });
 
-  const changeProfileFactory = setValueToUseStateFactory(setUserData);
+  const changeProfileFactory = setFormFieldValueFactory(setUserData);
 
   const [updateAvatar, { isLoading: isAvatarUpdateLoading }] =
     useUpdateUserAvatarMutation();

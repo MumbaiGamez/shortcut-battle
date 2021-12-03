@@ -7,7 +7,7 @@ import { useForm } from '../../../../components/Form/useForm';
 import { InputTypeEnum } from '../../../../components/Input';
 import { FieldsList } from '../../../../components/Form/types';
 
-import { setValueToUseStateFactory } from '../../../../utils/setValueToUseStateFactory';
+import { setFormFieldValueFactory } from '../../../../utils/setFormFieldValueFactory';
 
 export const useRegistration = () => {
   const [registrationData, setRegistrationData] = useState({
@@ -20,7 +20,7 @@ export const useRegistration = () => {
   });
 
   const changeRegistrationFactory =
-    setValueToUseStateFactory(setRegistrationData);
+    setFormFieldValueFactory(setRegistrationData);
 
   const [signup, { isLoading }] = useSignupMutation();
 

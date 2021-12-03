@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from './../../redux/hooks';
 import { removeToast, selectToasts } from '../../redux/slices/settingsSlice';
 
@@ -8,11 +10,13 @@ export const useToaster = () => {
 
   const toasts = useAppSelector(selectToasts);
 
-  toasts.map((toast) => {
-    setTimeout(() => {
-      dispatch(removeToast(toast.id));
-    }, TOASTER_TIMEOUT);
-  });
+  useEffect(() => {
+    toasts.map((toast) => {
+      setTimeout(() => {
+        dispatch(removeToast(toast.id));
+      }, TOASTER_TIMEOUT);
+    });
+  }, [dispatch, toasts]);
 
   return { toasts };
 };

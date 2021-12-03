@@ -3,7 +3,7 @@ import {
   Middleware,
   MiddlewareAPI,
 } from '@reduxjs/toolkit';
-import { createErrorToasterObject } from '../../utils/createToasterObject';
+import { createErrorToast } from '../../utils/createToast';
 
 import { addToast } from '../slices/settingsSlice';
 
@@ -14,7 +14,7 @@ export const errorMiddleware: Middleware =
       const errorText = data?.reason;
 
       if (errorText && errorText !== 'Cookie is not valid') {
-        api.dispatch(addToast(createErrorToasterObject(errorText)));
+        api.dispatch(addToast(createErrorToast(errorText)));
       }
     }
 
