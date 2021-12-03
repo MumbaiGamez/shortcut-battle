@@ -2,9 +2,9 @@ import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
 
-import { Phase } from '../../pages/Game/types';
+import { Phase } from '../../../typings/gameTypes';
 
-export type Game = {
+type Game = {
   phase: Phase;
   score: number;
   enemiesLeft: number;

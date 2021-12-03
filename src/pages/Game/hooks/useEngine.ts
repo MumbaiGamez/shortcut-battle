@@ -14,7 +14,7 @@ import {
   Layer,
   PlayerAction,
   Phase,
-} from '../types';
+} from '../../../../typings/gameTypes';
 
 type CollisionHandlers = [Entity, Entity, CollisionHandler][];
 

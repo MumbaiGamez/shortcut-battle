@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { APP_SHORTCUTS } from '../../pages/Game/constants';
 import { RootState } from '../store';
 
-export type Config = {
+type Config = {
   interval: number;
   count: number;
   hitScore: number;

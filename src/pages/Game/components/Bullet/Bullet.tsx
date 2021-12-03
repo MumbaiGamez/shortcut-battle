@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 
 import { useLayer } from '../../hooks/useLayer';
 
-import { LayerComponentProps, LayerProps } from '../../types';
+import {
+  LayerComponentProps,
+  LayerProps,
+} from '../../../../../typings/gameTypes';
 
 type BulletProps = LayerComponentProps & {
   bullet: LayerProps;

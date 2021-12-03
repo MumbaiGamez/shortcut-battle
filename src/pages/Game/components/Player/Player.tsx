@@ -16,7 +16,7 @@ import {
   Layer,
   LayerComponentProps,
   PlayerAction,
-} from '../../types';
+} from '../../../../../typings/gameTypes';
 
 import playerImg from '../../../../assets/images/player.png';
 

@@ -4,7 +4,7 @@ import { getVar } from '../../../../utils/css';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
 
-import { Entity, LayerComponentProps } from '../../types';
+import { Entity, LayerComponentProps } from '../../../../../typings/gameTypes';
 
 export const Borders = (props: LayerComponentProps) => {
   const { engine } = props;

@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../redux/hooks';
 import { selectAppShortcuts } from '../../../redux/slices/configSlice';
 import { selectActiveShortcut } from '../../../redux/slices/gameSlice';
 
-import { PlayerAction, ShortcutsPressed } from '../types';
+import { PlayerAction, ShortcutsPressed } from '../../../../typings/gameTypes';
 
 type KeyCode = string;
 

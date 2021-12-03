@@ -13,7 +13,7 @@ import { useCanvas } from '../../hooks/useCanvas';
 import { useEngine } from '../../hooks/useEngine';
 import { useAnimationLoop } from '../../hooks/useAnimationLoop';
 
-import { Phase } from '../../types';
+import { Phase } from '../../../../../typings/gameTypes';
 
 import styles from './Playground.css';
 

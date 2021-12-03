@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { setVar } from '../../../utils/css';
 
-import { CanvasContext } from '../types';
+import { CanvasContext } from '../../../../typings/gameTypes';
 
 export type UseCanvasProps = {
   width: number;

@@ -3,7 +3,7 @@ import React from 'react';
 import { Bullet } from '../Bullet';
 import { useWeapon } from './useWeapon';
 
-import { LayerComponentProps } from '../../types';
+import { LayerComponentProps } from '../../../../../typings/gameTypes';
 
 export const Weapon = (props: LayerComponentProps) => {
   const { engine } = props;

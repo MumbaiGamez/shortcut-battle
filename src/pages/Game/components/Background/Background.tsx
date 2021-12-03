@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
 
-import { Entity, LayerComponentProps } from '../../types';
+import { Entity, LayerComponentProps } from '../../../../../typings/gameTypes';
 
 import bgImg from '../../../../assets/images/starBackground.png';
 

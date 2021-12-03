@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { Phase } from '../types';
+import { Phase } from '../../../../typings/gameTypes';
 
 export const useAnimationLoop = (
   phase: Phase,

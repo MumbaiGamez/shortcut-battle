@@ -16,7 +16,7 @@ import {
   Layer,
   LayerProps,
   PlayerAction,
-} from '../../types';
+} from '../../../../../typings/gameTypes';
 
 import asteroidImg from '../../../../assets/images/laserRed.png';
 

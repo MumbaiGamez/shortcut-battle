@@ -14,7 +14,7 @@ import {
   Layer,
   LayerProps,
   Phase,
-} from '../../types';
+} from '../../../../../typings/gameTypes';
 
 import asteroidImg from '../../../../assets/images/meteorSmall.png';
 

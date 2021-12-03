@@ -1,6 +1,6 @@
 import { MutableRefObject, useCallback, useMemo, useRef } from 'react';
 
-import { Entity, LayerProps } from '../types';
+import { Entity, LayerProps } from '../../../../typings/gameTypes';
 
 const SPEED_CHANGE_TRESHOLD = 100;
 

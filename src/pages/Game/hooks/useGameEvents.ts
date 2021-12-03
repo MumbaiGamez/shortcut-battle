@@ -11,7 +11,7 @@ import {
 } from '../../../redux/slices/gameSlice';
 import { useListener } from './useBus';
 
-import { GameEvent } from '../types';
+import { GameEvent } from '../../../../typings/gameTypes';
 
 export const useGameEvents = () => {
   const { hitScore } = useAppSelector(selectConfig);
