@@ -10,7 +10,6 @@ export const useLayer = (props: LayerProps) => {
     height,
     pos = [0, 0],
     velo = [0, 0],
-    ctx,
     src,
     color,
     type,
@@ -36,7 +35,7 @@ export const useLayer = (props: LayerProps) => {
   }, [src]);
 
   const render = useCallback(
-    (dt: number) => {
+    (ctx, dt) => {
       if (!ctx) {
         return;
       }
@@ -65,7 +64,7 @@ export const useLayer = (props: LayerProps) => {
         y.current += dt * vy.current;
       }
     },
-    [ctx, width, height, x, y, vx, vy, img, color, type]
+    [width, height, x, y, vx, vy, img, color, type]
   );
 
   const lastUpdate = useRef(performance.now());

@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
+import { useAppSelector } from '../../../../redux/hooks';
+import { selectPhase } from '../../../../redux/slices/gameSlice';
 import {
   CANVAS_HEIGHT,
   CANVAS_WIDTH,
@@ -7,6 +9,7 @@ import {
   PLAYER_HEIGHT,
   PLAYER_WIDTH,
 } from '../../constants';
+import { GameContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 import { useEmit } from '../../hooks/useBus';
 
@@ -14,7 +17,7 @@ import {
   Entity,
   GameEvent,
   Layer,
-  LayerComponentProps,
+  Phase,
   PlayerAction,
 } from '../../../../../typings/gameTypes';
 
@@ -23,19 +26,12 @@ import playerImg from '../../../../assets/images/player.png';
 const startX = CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2;
 const startY = CANVAS_HEIGHT - 2 * PLAYER_HEIGHT;
 
-export const Player = (props: LayerComponentProps) => {
-  const {
-    engine: {
-      ctx,
-      addLayer,
-      removeLayer,
-      setCollisionHandler,
-      setShortcutHandler,
-    },
-  } = props;
+export const Player = () => {
+  const engine = useContext(GameContext);
+
+  const phase = useAppSelector(selectPhase);
 
   const player = useLayer({
-    ctx: ctx,
     pos: [startX, startY],
     width: PLAYER_WIDTH,
     height: PLAYER_HEIGHT,
@@ -46,15 +42,17 @@ export const Player = (props: LayerComponentProps) => {
   const emit = useEmit();
 
   useEffect(() => {
-    addLayer(player);
+    if (phase !== Phase.ready) {
+      engine?.addLayer(player);
+    }
 
     return () => {
-      removeLayer(player);
+      engine?.removeLayer(player);
     };
-  }, [addLayer, player, removeLayer]);
+  }, [engine, phase, player]);
 
   useEffect(() => {
-    setCollisionHandler(
+    engine?.setCollisionHandler(
       Entity.player,
       [Entity.leftBorder, Entity.rightBorder],
       (layer: Layer) => {
@@ -63,11 +61,11 @@ export const Player = (props: LayerComponentProps) => {
       }
     );
 
-    setCollisionHandler(Entity.player, [Entity.asteroid], () => {
+    engine?.setCollisionHandler(Entity.player, [Entity.asteroid], () => {
       emit(GameEvent.crash);
     });
 
-    setShortcutHandler(
+    engine?.setShortcutHandler(
       Entity.player,
       PlayerAction.moveLeft,
       (layer: Layer, pressed, allPressed) => {
@@ -81,7 +79,7 @@ export const Player = (props: LayerComponentProps) => {
       }
     );
 
-    setShortcutHandler(
+    engine?.setShortcutHandler(
       Entity.player,
       PlayerAction.moveRight,
       (layer: Layer, pressed, allPressed) => {
@@ -94,7 +92,7 @@ export const Player = (props: LayerComponentProps) => {
         }
       }
     );
-  }, [emit, setCollisionHandler, setShortcutHandler]);
+  }, [emit, engine]);
 
   return null;
 };

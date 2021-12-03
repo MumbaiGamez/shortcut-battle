@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { setVar } from '../../../utils/css';
 
-import { CanvasContext } from '../../../../typings/gameTypes';
+import { GameCanvas } from '../../../../typings/gameTypes';
 
 export type UseCanvasProps = {
   width: number;
@@ -12,7 +12,7 @@ export type UseCanvasProps = {
 export const useCanvas = (props: UseCanvasProps) => {
   const { width, height } = props;
 
-  const [ctx, setCtx] = useState<CanvasContext>(null);
+  const [ctx, setCtx] = useState<GameCanvas>(null);
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

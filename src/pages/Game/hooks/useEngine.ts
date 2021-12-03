@@ -7,7 +7,7 @@ import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
 import { useShortcuts } from './useShortcuts';
 
 import {
-  CanvasContext,
+  GameCanvas,
   CollisionHandler,
   ShortcutHandler,
   Entity,
@@ -22,14 +22,9 @@ type ShortcutHandlers = [Entity, PlayerAction, ShortcutHandler][];
 
 type Layers = Partial<Record<Entity, Layer[]>>;
 
-type UseEngineProps = {
-  ctx: CanvasContext;
-};
-
-export const useEngine = (props: UseEngineProps) => {
-  const { ctx } = props;
-
+export const useEngine = (ctx: GameCanvas) => {
   const phase = useAppSelector(selectPhase);
+
   const layers = useRef<Layers>({});
   const collisionHandlers = useRef<CollisionHandlers>([]);
   const shortcutHandlers = useRef<ShortcutHandlers>([]);
@@ -158,7 +153,7 @@ export const useEngine = (props: UseEngineProps) => {
         );
 
         for (const layer of layers.current[type] || []) {
-          layer.render(dt);
+          layer.render(ctx, dt);
 
           for (const handler of collisionHandlersByType) {
             const [, withType, callback] = handler;
@@ -168,7 +163,7 @@ export const useEngine = (props: UseEngineProps) => {
         }
       }
     },
-    [handleCollisions]
+    [ctx, handleCollisions]
   );
 
   const render = useCallback(

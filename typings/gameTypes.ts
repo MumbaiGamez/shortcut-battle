@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 
-export type CanvasContext = CanvasRenderingContext2D | null;
+export type GameCanvas = CanvasRenderingContext2D | null;
 
 export enum Phase {
   loading = 'loading',
@@ -32,7 +32,7 @@ export type Layer = {
   y: MutableRefObject<number>;
   vx: MutableRefObject<number>;
   vy: MutableRefObject<number>;
-  render: (dt: number) => void;
+  render: (ctx: GameCanvas, dt: number) => void;
   setVx: (value: number) => void;
   setVy: (value: number) => void;
 
@@ -50,7 +50,7 @@ export enum AppName {
 }
 
 export type Engine = {
-  ctx: CanvasContext;
+  ctx: GameCanvas;
   render: (dt: number) => void;
   addLayer: (layer: Layer) => void;
   removeLayer: (layer: Layer) => void;
@@ -79,7 +79,6 @@ export type ShortcutHandler = (
 export type LayerProps = RequireAtLeastOne<
   {
     type: Entity;
-    ctx: CanvasContext;
     pos: number[];
     width: number;
     height: number;
@@ -91,10 +90,6 @@ export type LayerProps = RequireAtLeastOne<
   },
   'src' | 'color'
 >;
-
-export type LayerComponentProps = {
-  engine: Engine;
-};
 
 export enum PlayerAction {
   moveLeft = 'moveLeft',

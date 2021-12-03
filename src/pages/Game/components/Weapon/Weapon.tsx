@@ -1,19 +1,19 @@
 import React from 'react';
 
+import { useAppSelector } from '../../../../redux/hooks';
+import { selectBullets, selectPhase } from '../../../../redux/slices/gameSlice';
 import { Bullet } from '../Bullet';
-import { useWeapon } from './useWeapon';
 
-import { LayerComponentProps } from '../../../../../typings/gameTypes';
+import { Phase } from '../../../../../typings/gameTypes';
 
-export const Weapon = (props: LayerComponentProps) => {
-  const { engine } = props;
+export const Weapon = () => {
+  const phase = useAppSelector(selectPhase);
+  const bullets = useAppSelector(selectBullets);
 
-  const { bullets } = useWeapon(engine);
-
-  return (
+  return phase === Phase.ready ? null : (
     <>
       {bullets.map((bullet) => (
-        <Bullet engine={engine} bullet={bullet} key={bullet.id} />
+        <Bullet bullet={bullet} key={bullet.id} />
       ))}
     </>
   );

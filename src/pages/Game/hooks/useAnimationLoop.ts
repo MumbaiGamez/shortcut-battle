@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { Phase } from '../../../../typings/gameTypes';
+import { useAppSelector } from '../../../redux/hooks';
+import { selectPhase } from '../../../redux/slices/gameSlice';
 
-export const useAnimationLoop = (
-  phase: Phase,
-  callback: (dt: number) => void
-) => {
+import { Engine, Phase } from '../../../../typings/gameTypes';
+
+export const useAnimationLoop = (engine: Engine) => {
+  const phase = useAppSelector(selectPhase);
+
   const loop = useRef<number>(0);
   const prevUpdate = useRef<number>(performance.now());
   const lastUpdate = useRef<number>(performance.now());
@@ -14,10 +16,10 @@ export const useAnimationLoop = (
     prevUpdate.current = lastUpdate.current;
     lastUpdate.current = performance.now();
 
-    callback(lastUpdate.current - prevUpdate.current);
+    engine.render(lastUpdate.current - prevUpdate.current);
 
     loop.current = requestAnimationFrame(animate);
-  }, [callback]);
+  }, [engine]);
 
   useEffect(() => {
     if (phase === Phase.playing) {

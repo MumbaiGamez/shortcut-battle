@@ -1,30 +1,23 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useAppSelector } from '../../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { selectConfig } from '../../../../redux/slices/configSlice';
-import { selectPhase } from '../../../../redux/slices/gameSlice';
+import { selectPhase, addAsteroid } from '../../../../redux/slices/gameSlice';
 import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
-import { useListener, useEmit } from '../../hooks/useBus';
+import { useEmit } from '../../hooks/useBus';
 
 import {
-  CanvasContext,
   Engine,
   Entity,
   GameEvent,
   Layer,
-  LayerProps,
   Phase,
 } from '../../../../../typings/gameTypes';
 
 import asteroidImg from '../../../../assets/images/meteorSmall.png';
 
-type UseEnemyProps = {
-  engine: Engine;
-};
-
-const createAsteroid = (ctx: CanvasContext) => {
+const createAsteroid = () => {
   return {
-    ctx,
     pos: [CANVAS_WIDTH / 4 + (CANVAS_WIDTH / 2) * Math.random(), 0],
     velo: [-0.01 + 0.02 * Math.random(), 0.05 + 0.05 * Math.random()],
     width: ASTEROID_SIZE_SMALL,
@@ -35,22 +28,14 @@ const createAsteroid = (ctx: CanvasContext) => {
   };
 };
 
-export const useEnemy = (props: UseEnemyProps) => {
-  const {
-    engine: { ctx, setCollisionHandler },
-  } = props;
+export const useEnemy = (engine: Engine) => {
+  const { setCollisionHandler } = engine;
 
+  const dispatch = useAppDispatch();
   const phase = useAppSelector(selectPhase);
   const { count, interval } = useAppSelector(selectConfig);
 
   const [generatedCount, setGeneratedCount] = useState<number>(0);
-  const [asteroids, setAsteroids] = useState<LayerProps[]>([]);
-
-  const blow = useCallback((asteroidId: number) => {
-    setAsteroids((currentAsteroids) =>
-      currentAsteroids.filter(({ id }) => id !== asteroidId)
-    );
-  }, []);
 
   const bounce = useCallback((asteroidLayer: Layer) => {
     asteroidLayer.x.current = asteroidLayer.prevX.current;
@@ -58,19 +43,12 @@ export const useEnemy = (props: UseEnemyProps) => {
   }, []);
 
   const generate = useCallback(() => {
-    setAsteroids((currentAsteroids) =>
-      currentAsteroids.concat(createAsteroid(ctx))
-    );
+    dispatch(addAsteroid(createAsteroid()));
+
     setGeneratedCount((currentGeneratedCount) => currentGeneratedCount + 1);
-  }, [ctx]);
+  }, [dispatch]);
 
   const emit = useEmit();
-
-  useListener(GameEvent.hit, (asteroidLayer) => {
-    if (asteroidLayer.id) {
-      blow(asteroidLayer.id);
-    }
-  });
 
   useEffect(() => {
     if (generatedCount < count && phase === Phase.playing) {
@@ -91,13 +69,8 @@ export const useEnemy = (props: UseEnemyProps) => {
       Entity.asteroid,
       [Entity.bottomBorder],
       (asteroidLayer) => {
-        if (asteroidLayer.id) {
-          blow(asteroidLayer.id);
-          emit(GameEvent.out);
-        }
+        emit(GameEvent.out, asteroidLayer);
       }
     );
-  }, [blow, bounce, emit, setCollisionHandler]);
-
-  return { asteroids };
+  }, [bounce, emit, setCollisionHandler]);
 };
