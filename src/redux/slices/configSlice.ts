@@ -11,7 +11,7 @@ type Config = {
 };
 
 const initialState: Config = {
-  interval: 2000,
+  interval: 4000,
   count: 20,
   hitScore: 10,
   appName: 'VS_CODE',

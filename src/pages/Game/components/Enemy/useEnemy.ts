@@ -23,7 +23,7 @@ import asteroidImg from '../../../../assets/images/meteorSmall.png';
 const createAsteroid = () => {
   return {
     pos: [CANVAS_WIDTH / 4 + (CANVAS_WIDTH / 2) * Math.random(), 0],
-    velo: [-0.01 + 0.02 * Math.random(), 0.05 + 0.05 * Math.random()],
+    velo: [-0.02 + 0.04 * Math.random(), 0.02 + 0.02 * Math.random()],
     width: ASTEROID_SIZE_SMALL,
     height: ASTEROID_SIZE_SMALL,
     src: asteroidImg,
