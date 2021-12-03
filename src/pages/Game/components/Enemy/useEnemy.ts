@@ -1,8 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { selectConfig } from '../../../../redux/slices/configSlice';
-import { selectPhase, addAsteroid } from '../../../../redux/slices/gameSlice';
+import {
+  selectPhase,
+  addAsteroid,
+  selectEnemiesGenerated,
+} from '../../../../redux/slices/gameSlice';
 import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
 import { useEmit } from '../../hooks/useBus';
 
@@ -31,9 +35,10 @@ const createAsteroid = () => {
 export const useEnemy = (engine: Engine) => {
   const dispatch = useAppDispatch();
   const phase = useAppSelector(selectPhase);
-  const { count, interval } = useAppSelector(selectConfig);
+  const enemiesGenerated = useAppSelector(selectEnemiesGenerated);
+  const { interval, count } = useAppSelector(selectConfig);
 
-  const [generatedCount, setGeneratedCount] = useState<number>(0);
+  const generateTimer = useRef(0);
 
   const bounce = useCallback((asteroidLayer: Layer) => {
     asteroidLayer.x.current = asteroidLayer.prevX.current;
@@ -42,17 +47,19 @@ export const useEnemy = (engine: Engine) => {
 
   const generate = useCallback(() => {
     dispatch(addAsteroid(createAsteroid()));
-
-    setGeneratedCount((currentGeneratedCount) => currentGeneratedCount + 1);
   }, [dispatch]);
 
   const emit = useEmit();
 
   useEffect(() => {
-    if (generatedCount < count && phase === Phase.playing) {
-      setTimeout(generate, interval);
+    if (phase === Phase.playing && enemiesGenerated < count) {
+      generateTimer.current = window.setTimeout(generate, interval);
     }
-  }, [count, generate, generatedCount, interval, phase]);
+
+    if (phase === Phase.pause || phase === Phase.ready) {
+      clearTimeout(generateTimer.current);
+    }
+  }, [count, enemiesGenerated, generate, interval, phase]);
 
   useEffect(() => {
     engine.setCollisionHandler(
