@@ -9,6 +9,7 @@ import {
   gameOver,
   nextShortcut,
   removeAsteroid,
+  removeBullet,
 } from '../../../redux/slices/gameSlice';
 import { useListener } from './useBus';
 
@@ -35,6 +36,12 @@ export const useGameEvents = () => {
     }
 
     dispatch(out());
+  });
+
+  useListener(GameEvent.miss, (bulletLayer) => {
+    if (bulletLayer.id) {
+      dispatch(removeBullet(bulletLayer.id));
+    }
   });
 
   useListener(GameEvent.crash, () => {

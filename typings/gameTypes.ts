@@ -42,6 +42,7 @@ export type Layer = {
 export enum GameEvent {
   hit = 'hit',
   out = 'out',
+  miss = 'miss',
   crash = 'crash',
 }
 

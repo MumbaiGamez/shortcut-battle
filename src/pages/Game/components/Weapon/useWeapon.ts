@@ -70,5 +70,13 @@ export const useWeapon = (engine: Engine) => {
         }
       }
     );
+
+    engine.setCollisionHandler(
+      Entity.bullet,
+      [Entity.topBorder],
+      (bulletLayer) => {
+        emit(GameEvent.miss, bulletLayer);
+      }
+    );
   }, [dispatch, emit, engine]);
 };

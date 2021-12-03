@@ -29,8 +29,6 @@ const createAsteroid = () => {
 };
 
 export const useEnemy = (engine: Engine) => {
-  const { setCollisionHandler } = engine;
-
   const dispatch = useAppDispatch();
   const phase = useAppSelector(selectPhase);
   const { count, interval } = useAppSelector(selectConfig);
@@ -57,7 +55,7 @@ export const useEnemy = (engine: Engine) => {
   }, [count, generate, generatedCount, interval, phase]);
 
   useEffect(() => {
-    setCollisionHandler(
+    engine.setCollisionHandler(
       Entity.asteroid,
       [Entity.leftBorder, Entity.rightBorder],
       (asteroidLayer) => {
@@ -65,12 +63,12 @@ export const useEnemy = (engine: Engine) => {
       }
     );
 
-    setCollisionHandler(
+    engine.setCollisionHandler(
       Entity.asteroid,
       [Entity.bottomBorder],
       (asteroidLayer) => {
         emit(GameEvent.out, asteroidLayer);
       }
     );
-  }, [bounce, emit, setCollisionHandler]);
+  }, [bounce, emit, engine]);
 };
