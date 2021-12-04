@@ -11,11 +11,9 @@ import {
 } from '../../constants';
 import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
-import { useEmit } from '../../hooks/useBus';
 
 import {
   Entity,
-  GameEvent,
   Layer,
   Phase,
   PlayerAction,
@@ -39,8 +37,6 @@ export const Player = () => {
     type: Entity.player,
   });
 
-  const emit = useEmit();
-
   useEffect(() => {
     if (phase !== Phase.ready) {
       engine?.addLayer(player);
@@ -52,19 +48,6 @@ export const Player = () => {
   }, [engine, phase, player]);
 
   useEffect(() => {
-    engine?.setCollisionHandler(
-      Entity.player,
-      [Entity.leftBorder, Entity.rightBorder],
-      (layer: Layer) => {
-        layer.x.current = layer.prevX.current;
-        layer.y.current = layer.prevY.current;
-      }
-    );
-
-    engine?.setCollisionHandler(Entity.player, [Entity.asteroid], () => {
-      emit(GameEvent.crash);
-    });
-
     engine?.setShortcutHandler(
       Entity.player,
       PlayerAction.moveLeft,
@@ -92,7 +75,7 @@ export const Player = () => {
         }
       }
     );
-  }, [emit, engine]);
+  }, [engine]);
 
   return null;
 };

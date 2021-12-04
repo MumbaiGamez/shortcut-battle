@@ -1,19 +1,17 @@
 import { useEffect, useRef } from 'react';
 
 import { useAppDispatch } from '../../../../redux/hooks';
-import { addBullet, removeBullet } from '../../../../redux/slices/gameSlice';
+import { addBullet } from '../../../../redux/slices/gameSlice';
 import {
   BULLET_HEIGHT,
   BULLET_WIDTH,
   MIN_BULLET_SPEED,
   PLAYER_WIDTH,
 } from '../../constants';
-import { useEmit } from '../../hooks/useBus';
 
 import {
   Engine,
   Entity,
-  GameEvent,
   Layer,
   PlayerAction,
 } from '../../../../../typings/gameTypes';
@@ -42,8 +40,6 @@ export const useWeapon = (engine: Engine) => {
 
   const dispatch = useAppDispatch();
 
-  const emit = useEmit();
-
   useEffect(() => {
     engine.setShortcutHandler(
       Entity.player,
@@ -59,24 +55,5 @@ export const useWeapon = (engine: Engine) => {
         }
       }
     );
-
-    engine.setCollisionHandler(
-      Entity.bullet,
-      [Entity.asteroid],
-      (bulletLayer: Layer, asteroidLayer: Layer) => {
-        if (bulletLayer.id) {
-          dispatch(removeBullet(bulletLayer.id));
-          emit(GameEvent.hit, asteroidLayer);
-        }
-      }
-    );
-
-    engine.setCollisionHandler(
-      Entity.bullet,
-      [Entity.topBorder],
-      (bulletLayer) => {
-        emit(GameEvent.miss, bulletLayer);
-      }
-    );
-  }, [dispatch, emit, engine]);
+  }, [dispatch, engine]);
 };

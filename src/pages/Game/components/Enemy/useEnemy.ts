@@ -8,15 +8,8 @@ import {
   selectEnemiesGenerated,
 } from '../../../../redux/slices/gameSlice';
 import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
-import { useEmit } from '../../hooks/useBus';
 
-import {
-  Engine,
-  Entity,
-  GameEvent,
-  Layer,
-  Phase,
-} from '../../../../../typings/gameTypes';
+import { Entity, Phase } from '../../../../../typings/gameTypes';
 
 import asteroidImg from '../../../../assets/images/meteorSmall.png';
 
@@ -42,7 +35,7 @@ const createAsteroid = () => {
   };
 };
 
-export const useEnemy = (engine: Engine) => {
+export const useEnemy = () => {
   const dispatch = useAppDispatch();
   const phase = useAppSelector(selectPhase);
   const enemiesGenerated = useAppSelector(selectEnemiesGenerated);
@@ -50,16 +43,9 @@ export const useEnemy = (engine: Engine) => {
 
   const generateTimer = useRef(0);
 
-  const bounce = useCallback((asteroidLayer: Layer) => {
-    asteroidLayer.x.current = asteroidLayer.prevX.current;
-    asteroidLayer.setVx(-1 * asteroidLayer.vx.current);
-  }, []);
-
   const generate = useCallback(() => {
     dispatch(addAsteroid(createAsteroid()));
   }, [dispatch]);
-
-  const emit = useEmit();
 
   useEffect(() => {
     if (phase === Phase.playing && enemiesGenerated < count) {
@@ -70,22 +56,4 @@ export const useEnemy = (engine: Engine) => {
       clearTimeout(generateTimer.current);
     }
   }, [count, enemiesGenerated, generate, interval, phase]);
-
-  useEffect(() => {
-    engine.setCollisionHandler(
-      Entity.asteroid,
-      [Entity.leftBorder, Entity.rightBorder],
-      (asteroidLayer) => {
-        bounce(asteroidLayer);
-      }
-    );
-
-    engine.setCollisionHandler(
-      Entity.asteroid,
-      [Entity.bottomBorder],
-      (asteroidLayer) => {
-        emit(GameEvent.out, asteroidLayer);
-      }
-    );
-  }, [bounce, emit, engine]);
 };

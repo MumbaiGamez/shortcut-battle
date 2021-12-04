@@ -4,6 +4,7 @@ import { EngineContext } from '../../context';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
 import { useCanvas } from '../../hooks/useCanvas';
 import { useEngine } from '../../hooks/useEngine';
+import { useCollisions } from '../../hooks/useCollisions';
 import { useAnimationLoop } from '../../hooks/useAnimationLoop';
 import { useWeapon } from '../Weapon/useWeapon';
 import { useEnemy } from '../Enemy/useEnemy';
@@ -23,8 +24,9 @@ export const Playground = () => {
 
   const engine = useEngine(ctx);
 
+  useCollisions(engine);
   useWeapon(engine);
-  useEnemy(engine);
+  useEnemy();
   useAnimationLoop(engine);
 
   return (
