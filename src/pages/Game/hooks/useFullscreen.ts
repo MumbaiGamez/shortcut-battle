@@ -1,30 +1,23 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useFullscreen = (element: Element | null) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const onFullScreenExit = useCallback(() => {
-    document.removeEventListener('fullscreenchange', onFullScreenExit);
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === element);
+    };
 
-    setIsFullscreen(false);
-  }, []);
+    document.addEventListener('fullscreenchange', onFullscreenChange);
 
-  const onFullscreenEnter = useCallback(() => {
-    document.removeEventListener('fullscreenchange', onFullscreenEnter);
-    document.addEventListener('fullscreenchange', onFullScreenExit);
-
-    setIsFullscreen(true);
-  }, [onFullScreenExit]);
+    return () => {
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
+    };
+  }, [element]);
 
   const request = useCallback(() => {
-    if (!element) {
-      return;
-    }
-
-    document.addEventListener('fullscreenchange', onFullscreenEnter);
-
-    element.requestFullscreen();
-  }, [element, onFullscreenEnter]);
+    element?.requestFullscreen();
+  }, [element]);
 
   const exit = useCallback(() => {
     if (document.fullscreenElement) {
@@ -32,9 +25,9 @@ export const useFullscreen = (element: Element | null) => {
     }
   }, []);
 
-  const toggle = useCallback(() => {
+  const toggleFullscreen = useCallback(() => {
     isFullscreen ? exit() : request();
   }, [exit, isFullscreen, request]);
 
-  return { isFullscreen, toggle };
+  return { isFullscreen, toggleFullscreen };
 };

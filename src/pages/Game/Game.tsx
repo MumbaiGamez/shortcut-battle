@@ -16,7 +16,8 @@ export const Game = () => {
   const state = useGameState(config);
 
   const pageRef = useRef(null);
-  const { isFullscreen, toggle } = useFullscreen(pageRef.current);
+
+  const { isFullscreen, toggleFullscreen } = useFullscreen(pageRef.current);
 
   return (
     <EventBusProvider>
@@ -27,7 +28,7 @@ export const Game = () => {
         <GameUI
           state={state}
           isFullscreen={isFullscreen}
-          toggleFullscreen={toggle}
+          toggleFullscreen={toggleFullscreen}
         />
         <Playground state={state} config={config} />
       </main>
