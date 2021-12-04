@@ -5,7 +5,7 @@ describe('setFormFieldValueFactory', () => {
     expect(typeof setFormFieldValueFactory(jest.fn())).toBe('function');
   });
 
-  it('should return a function that takes fieldName', () => {
+  it('should return a function that takes fieldName and return function', () => {
     const callback = jest.fn();
     const setFormFieldValue = setFormFieldValueFactory(callback);
 
@@ -14,9 +14,10 @@ describe('setFormFieldValueFactory', () => {
     expect(typeof setFormFieldValue('fieldName')).toBe('function');
   });
 
-  it('should call callback with the value', () => {
+  it('should call callback', () => {
     const callback = jest.fn();
     const setFormFieldValue = setFormFieldValueFactory(callback);
+
     setFormFieldValue('key')('value');
 
     expect(callback).toHaveBeenCalled();

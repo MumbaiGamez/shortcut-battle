@@ -16,6 +16,10 @@ describe('convertStringCases', () => {
     expect(convertStringToSnakeCase('string_with_snake_case')).toEqual(
       'string_with_snake_case'
     );
+
+    expect(convertStringToSnakeCase('string-with-kebab-case')).toEqual(
+      'string_with_kebab_case'
+    );
   });
 
   it('should convert a string to camel case', () => {
@@ -27,6 +31,10 @@ describe('convertStringCases', () => {
 
     expect(convertStringToCamelCase('stringWithCamelCase')).toEqual(
       'stringWithCamelCase'
+    );
+
+    expect(convertStringToCamelCase('string-with-kebab-case')).toEqual(
+      'stringWithKebabCase'
     );
   });
 
@@ -60,6 +68,16 @@ describe('convertStringCases', () => {
       key_snake_case: 'value',
       key2_snake_case: 'value2',
     });
+
+    expect(
+      convertObjectKeysToSnakeCase({
+        'key-kebab-case': 'value',
+        'key2-kebab-case': 'value2',
+      })
+    ).toEqual({
+      key_kebab_case: 'value',
+      key2_kebab_case: 'value2',
+    });
   });
 
   it('should convert an object to camel case', () => {
@@ -91,6 +109,16 @@ describe('convertStringCases', () => {
     ).toEqual({
       keySnakeCase: 'value',
       key2SnakeCase: 'value2',
+    });
+
+    expect(
+      convertObjectKeysToCamelCase({
+        'key-kebab-case': 'value',
+        'key2-kebab-case': 'value2',
+      })
+    ).toEqual({
+      keyKebabCase: 'value',
+      key2KebabCase: 'value2',
     });
   });
 });

@@ -4,10 +4,11 @@ type obj = {
 
 export const convertStringToSnakeCase = (str: string) => {
   return str
-    .replace(/\.?([A-Z]+)/g, (x, y) => {
+    .replace(/\.?([A-Z-]+)/g, (x, y) => {
       return '_' + y.toLowerCase();
     })
-    .replace(/^_/, '');
+    .replace(/^_/, '')
+    .replace(/-/g, '');
 };
 
 export const convertObjectKeysToSnakeCase = (obj: obj) => {
@@ -21,8 +22,16 @@ export const convertObjectKeysToSnakeCase = (obj: obj) => {
 };
 
 export const convertStringToCamelCase = (str: string) => {
-  return str.replace(/^([A-Z])|_([a-z])/g, (x, y, z) => {
-    return y ? y.toUpperCase() : z.toUpperCase();
+  return str.replace(/^([A-Z])|_([a-z])|-([a-z])/g, (w, x, y, z) => {
+    if (x) {
+      return x.toLowerCase();
+    }
+    if (y) {
+      return y.toUpperCase();
+    }
+    if (z) {
+      return z.toUpperCase();
+    }
   });
 };
 

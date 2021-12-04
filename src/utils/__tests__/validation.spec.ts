@@ -26,7 +26,7 @@ describe('getValidationError', () => {
     const result = getValidationError({ minSymbols: 5 }, 'test');
 
     expect(result.isValid).toBe(false);
-    expect(result.errorMessage).toBe('Less then 5 symbols');
+    expect(result.errorMessage).toBe('Less than 5 symbols');
   });
 
   it('should validate min-symbols', () => {
