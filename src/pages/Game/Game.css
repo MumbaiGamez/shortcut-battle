@@ -3,10 +3,16 @@
   --game-ui-header-bg-color: rgb(164 100 191 / 70%);
   --game-ui-title-won-color: #80e74b;
   --game-ui-title-lost-color: #580822;
+  --game-ui-fullscreen-icon-color: #111;
 }
 
 .game {
+  display: flex;
   position: relative;
   width: 100%;
   margin: 40px 0;
+}
+
+.fullscreen {
+  align-items: center;
 }
