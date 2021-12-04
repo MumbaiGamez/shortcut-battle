@@ -1,27 +1,30 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { RoutesList } from '../NavigationMenu/useNavigationMenu';
-
-import { FieldsList, FieldsObject, UseFormProps } from './types';
+import { FieldsList, FieldsWithValidation, UseFormProps } from './types';
 
 export const useForm = (props: UseFormProps) => {
-  const { fieldsList, setError } = props;
+  const { fieldsObject } = props;
 
-  const fieldsObject = fieldsList.reduce<FieldsObject>(
-    (acc, fieldName: FieldsList) => {
-      acc[fieldName] = false;
+  const fieldsValidateObject = useMemo(
+    () =>
+      (Object.keys(fieldsObject) as FieldsList[]).reduce<FieldsWithValidation>(
+        (acc, fieldName: FieldsList) => {
+          acc[fieldName] = Boolean(fieldsObject[fieldName]);
 
-      return acc;
-    },
-    {}
+          return acc;
+        },
+        {}
+      ),
+    [fieldsObject]
   );
 
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
   const [formFieldsValidation, setFormFieldsValidation] =
-    useState(fieldsObject);
+    useState(fieldsValidateObject);
+
+  useEffect(() => {
+    setFormFieldsValidation(fieldsValidateObject);
+  }, [fieldsValidateObject]);
 
   useEffect(() => {
     const isFormValid = Object.values(formFieldsValidation).every(
@@ -29,7 +32,7 @@ export const useForm = (props: UseFormProps) => {
     );
 
     setIsFormValid(isFormValid);
-  }, [formFieldsValidation]);
+  }, [fieldsObject, formFieldsValidation]);
 
   const validateField = useCallback(
     (fieldName: string, isValid: boolean) => {
@@ -41,31 +44,8 @@ export const useForm = (props: UseFormProps) => {
     [formFieldsValidation]
   );
 
-  const navigate = useNavigate();
-
-  const handleError = useCallback(
-    (error: string) => {
-      setError(error);
-    },
-    [setError]
-  );
-
-  const handleSuccess = useCallback(() => {
-    setIsSuccess(true);
-    navigate(RoutesList.home);
-  }, [navigate]);
-
-  const handleLoading = useCallback((isLoading: boolean) => {
-    setIsLoading(isLoading);
-  }, []);
-
   return {
-    handleError,
-    handleLoading,
-    handleSuccess,
     isFormValid,
-    isLoading,
-    isSuccess,
     validateField,
   };
 };

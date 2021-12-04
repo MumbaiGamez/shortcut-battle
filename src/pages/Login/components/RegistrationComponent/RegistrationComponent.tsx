@@ -9,10 +9,10 @@ import { RegistrationComponentProps } from './types';
 import styles from './RegistrationComponent.css';
 
 export const RegistrationComponent = (props: RegistrationComponentProps) => {
-  const { toggleForm, setError } = props;
+  const { toggleForm } = props;
 
   const { handleRegistration, inputsList, isFormValid, isLoading } =
-    useRegistration({ setError });
+    useRegistration();
 
   return (
     <Form

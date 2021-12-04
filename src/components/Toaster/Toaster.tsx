@@ -1,26 +1,31 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useToaster } from './useToaster';
 
-import { ToasterProps } from './types';
+import { useToaster } from './useToaster';
 
 import styles from './Toaster.css';
 
-export const Toaster = (props: ToasterProps) => {
-  const { toasterId, theme, text } = props;
-
-  const [isHiddenToaster] = useToaster({ toasterId, text });
+export const Toaster = () => {
+  const { toasts } = useToaster();
 
   return (
-    <div
-      className={classNames(
-        styles.toaster,
-        styles[`toasterTheme${theme}`],
-        isHiddenToaster && styles.hide
-      )}
-    >
-      <span>{theme}</span>
-      <div>{text}</div>
+    <div className={styles.toasterContainer}>
+      {toasts.map((toast) => {
+        const { id, message, theme } = toast;
+
+        return (
+          <div
+            key={id}
+            className={classNames(
+              styles.toaster,
+              styles[`toasterTheme${theme}`]
+            )}
+          >
+            <span>{theme}</span>
+            <div>{message}</div>
+          </div>
+        );
+      })}
     </div>
   );
 };
