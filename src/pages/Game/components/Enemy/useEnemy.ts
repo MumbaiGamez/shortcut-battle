@@ -20,10 +20,20 @@ import {
 
 import asteroidImg from '../../../../assets/images/meteorSmall.png';
 
+const X_MIN = CANVAS_WIDTH / 4;
+const X_RANGE = CANVAS_WIDTH / 2;
+const VX_MIN = -0.02;
+const VX_RANGE = 0.04;
+const VY_MIN = 0.02;
+const VY_RANGE = 0.02;
+
 const createAsteroid = () => {
   return {
-    pos: [CANVAS_WIDTH / 4 + (CANVAS_WIDTH / 2) * Math.random(), 0],
-    velo: [-0.02 + 0.04 * Math.random(), 0.02 + 0.02 * Math.random()],
+    pos: [X_MIN + X_RANGE * Math.random(), 0],
+    velo: [
+      VX_MIN + VX_RANGE * Math.random(),
+      VY_MIN + VY_RANGE * Math.random(),
+    ],
     width: ASTEROID_SIZE_SMALL,
     height: ASTEROID_SIZE_SMALL,
     src: asteroidImg,
