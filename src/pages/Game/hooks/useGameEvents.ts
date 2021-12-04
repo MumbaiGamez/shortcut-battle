@@ -4,12 +4,11 @@ import {
   selectAppShortcuts,
 } from '../../../redux/slices/configSlice';
 import {
-  hit,
-  out,
-  gameOver,
-  nextShortcut,
+  updateScore,
+  updateShortcut,
   removeAsteroid,
   removeBullet,
+  gameOver,
 } from '../../../redux/slices/gameSlice';
 import { useListener } from './useBus';
 
@@ -22,20 +21,18 @@ export const useGameEvents = () => {
   const dispatch = useAppDispatch();
 
   useListener(GameEvent.hit, (asteroidLayer) => {
+    dispatch(updateScore(hitScore));
+    dispatch(updateShortcut(Math.floor(Math.random() * shortcuts.length)));
+
     if (asteroidLayer.id) {
       dispatch(removeAsteroid(asteroidLayer.id));
     }
-
-    dispatch(hit(hitScore));
-    dispatch(nextShortcut(Math.floor(Math.random() * shortcuts.length)));
   });
 
   useListener(GameEvent.out, (asteroidLayer) => {
     if (asteroidLayer.id) {
       dispatch(removeAsteroid(asteroidLayer.id));
     }
-
-    dispatch(out());
   });
 
   useListener(GameEvent.miss, (bulletLayer) => {

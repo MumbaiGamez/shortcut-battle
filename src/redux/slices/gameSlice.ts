@@ -48,22 +48,10 @@ const gameSlice = createSlice({
     gameOver: (state) => {
       state.phase = Phase.over;
     },
-    hit: (state, action: PayloadAction<number>) => {
+    updateScore: (state, action: PayloadAction<number>) => {
       state.score += action.payload;
-      state.enemiesDestroyed += 1;
-
-      if (state.enemiesDestroyed >= state.enemiesCount) {
-        state.phase = Phase.win;
-      }
     },
-    out: (state) => {
-      state.enemiesDestroyed += 1;
-
-      if (state.enemiesDestroyed >= state.enemiesCount) {
-        state.phase = Phase.win;
-      }
-    },
-    nextShortcut: (state, action: PayloadAction<number>) => {
+    updateShortcut: (state, action: PayloadAction<number>) => {
       state.activeShortcut = action.payload;
     },
     addBullet: (state, action: PayloadAction<LayerProps>) => {
@@ -86,6 +74,11 @@ const gameSlice = createSlice({
       const { payload: blownId } = action;
 
       state.asteroids = state.asteroids.filter(({ id }) => id !== blownId);
+      state.enemiesDestroyed += 1;
+
+      if (state.enemiesDestroyed >= state.enemiesCount) {
+        state.phase = Phase.win;
+      }
     },
   },
 });
@@ -94,10 +87,9 @@ export const {
   reset,
   start,
   pause,
-  hit,
-  out,
+  updateScore,
   gameOver,
-  nextShortcut,
+  updateShortcut,
   addAsteroid,
   removeAsteroid,
   addBullet,
