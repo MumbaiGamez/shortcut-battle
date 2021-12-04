@@ -13,7 +13,10 @@
     "docker:start": "docker run -p 3000:3000 -d shortcut-battle",
     "docker:stop": "docker stop $(docker ps -q --filter ancestor=shortcut-battle)",
     "heroku:release": "heroku container:login && heroku container:push web -a shortcut-battle && heroku container:release web -a shortcut-battle",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "npx jest",
+    "test:watch": "npx jest --watch",
+    "test:coverage": "npx jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,7 @@
   "homepage": "https://github.com/MumbaiGamez/shortcut-battle#readme",
   "devDependencies": {
     "@svgr/webpack": "5.5.0",
+    "@types/jest": "27.0.3",
     "@types/react": "17.0.34",
     "@types/react-dom": "17.0.11",
     "@types/react-router-dom": "5.3.2",
@@ -43,6 +47,7 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "7.0.0",
+    "jest": "27.4.3",
     "npm-run-all": "4.1.5",
     "postcss-import": "14.0.2",
     "postcss-loader": "6.2.0",
@@ -55,6 +60,7 @@
     "style-loader": "3.3.1",
     "stylelint": "14.0.1",
     "stylelint-config-standard": "23.0.0",
+    "ts-jest": "27.0.7",
     "ts-loader": "9.2.6",
     "typescript": "4.4.4",
     "webpack": "5.61.0",
