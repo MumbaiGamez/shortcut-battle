@@ -2,13 +2,13 @@ import { useContext, useEffect } from 'react';
 
 import { getVar } from '../../../../utils/css';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../constants';
-import { GameContext } from '../../context';
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 
 import { Entity } from '../../../../../typings/gameTypes';
 
 export const Borders = () => {
-  const engine = useContext(GameContext);
+  const engine = useContext(EngineContext);
 
   const leftBorder = useLayer({
     pos: [0, 0],

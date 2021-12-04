@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 
-import { GameContext } from '../../context';
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 
 import { LayerProps } from '../../../../../typings/gameTypes';
@@ -12,7 +12,7 @@ type BulletProps = {
 export const Bullet = (props: BulletProps) => {
   const { bullet } = props;
 
-  const engine = useContext(GameContext);
+  const engine = useContext(EngineContext);
 
   const bulletLayer = useLayer(bullet);
 

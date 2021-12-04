@@ -9,7 +9,7 @@ import {
   PLAYER_HEIGHT,
   PLAYER_WIDTH,
 } from '../../constants';
-import { GameContext } from '../../context';
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 import { useEmit } from '../../hooks/useBus';
 
@@ -27,7 +27,7 @@ const startX = CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2;
 const startY = CANVAS_HEIGHT - 2 * PLAYER_HEIGHT;
 
 export const Player = () => {
-  const engine = useContext(GameContext);
+  const engine = useContext(EngineContext);
 
   const phase = useAppSelector(selectPhase);
 

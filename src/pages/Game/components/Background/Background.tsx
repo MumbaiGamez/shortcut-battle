@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../constants';
-import { GameContext } from '../../context';
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 
 import { Entity } from '../../../../../typings/gameTypes';
@@ -9,7 +9,7 @@ import { Entity } from '../../../../../typings/gameTypes';
 import bgImg from '../../../../assets/images/starBackground.png';
 
 export const Background = () => {
-  const engine = useContext(GameContext);
+  const engine = useContext(EngineContext);
 
   const background = useLayer({
     pos: [0, 0],

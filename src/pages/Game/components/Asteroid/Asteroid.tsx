@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 
-import { GameContext } from '../../context';
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 
 import { LayerProps } from '../../../../../typings/gameTypes';
@@ -12,7 +12,7 @@ type AsteroidProps = {
 export const Asteroid = (props: AsteroidProps) => {
   const { asteroid } = props;
 
-  const engine = useContext(GameContext);
+  const engine = useContext(EngineContext);
 
   const asteroidLayer = useLayer(asteroid);
 

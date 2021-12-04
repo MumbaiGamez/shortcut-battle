@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GameContext } from '../../context';
+import { EngineContext } from '../../context';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
 import { useCanvas } from '../../hooks/useCanvas';
 import { useEngine } from '../../hooks/useEngine';
@@ -28,13 +28,13 @@ export const Playground = () => {
   useAnimationLoop(engine);
 
   return (
-    <GameContext.Provider value={engine}>
+    <EngineContext.Provider value={engine}>
       <canvas ref={ref} className={styles.canvas} />
       <Background />
       <Borders />
       <Player />
       <Weapon />
       <Enemy />
-    </GameContext.Provider>
+    </EngineContext.Provider>
   );
 };
