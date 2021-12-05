@@ -12,11 +12,10 @@ export const Game = () => {
 
   const { isFullscreen, toggleFullscreen } = useFullscreen(pageRef.current);
 
+  const cls = classNames(styles.game, isFullscreen && styles.fullscreen);
+
   return (
-    <main
-      className={classNames(styles.game, isFullscreen && styles.fullscreen)}
-      ref={pageRef}
-    >
+    <main className={cls} ref={pageRef}>
       <GameUI isFullscreen={isFullscreen} toggleFullscreen={toggleFullscreen} />
       <Playground />
     </main>
