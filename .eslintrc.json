@@ -31,6 +31,20 @@
     "settings": {
       "react": {
         "version": "detect"
+      },
+      "import/resolver": {
+        "alias": {
+          "map": [
+            ["@", "./src"],
+            ["@components", "./src/components"],
+            ["@pages", "./src/pages"],
+            ["@utils", "./src/utils"],
+            ["@assets", "./src/assets"],
+            ["@redux", "./src/redux"],
+            ["@typings", "./typings"]
+          ],
+          "extensions": [".tsx", ".ts"]
+        }
       }
     },
     "rules": {

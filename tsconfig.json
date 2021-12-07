@@ -22,7 +22,14 @@
     "baseUrl": ".",
     "outDir": "./dist",
     "paths": {
-      "*": ["./src/*"]
+      "*": ["./*"],
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@redux/*": ["./src/redux/*"],
+      "@typings/*": ["./typings/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"],
   },
