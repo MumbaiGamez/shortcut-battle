@@ -26,9 +26,11 @@ export const convertStringToCamelCase = (str: string) => {
     if (x) {
       return x.toLowerCase();
     }
+
     if (y) {
       return y.toUpperCase();
     }
+
     if (z) {
       return z.toUpperCase();
     }

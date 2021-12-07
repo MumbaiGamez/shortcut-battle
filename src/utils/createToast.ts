@@ -1,6 +1,6 @@
 import { ToastTheme, ToastType } from '../redux/slices/settingsSlice';
 
-export const createToast = (message: string, theme: ToastTheme): ToastType => {
+const createToast = (message: string, theme: ToastTheme): ToastType => {
   return {
     id: new Date().getTime(),
     message: message,
