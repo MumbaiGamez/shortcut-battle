@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { getVar } from '../../../../utils/css';
+import { getVar } from '@utils/css';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../constants';
 import { useLayer } from '../../hooks/useLayer';
 

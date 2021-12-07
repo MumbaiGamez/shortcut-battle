@@ -1,9 +1,9 @@
-import { RoutesList } from './../../components/NavigationMenu/useNavigationMenu';
+import { RoutesList } from '@components/NavigationMenu/useNavigationMenu';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectIsAuth } from '../../redux/slices/settingsSlice';
+import { selectIsAuth } from '@redux/slices/settingsSlice';
 
 export const useLoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from './../../redux/hooks';
-import { removeToast, selectToasts } from '../../redux/slices/settingsSlice';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { removeToast, selectToasts } from '@redux/slices/settingsSlice';
 
 const TOASTER_TIMEOUT = 2000;
 

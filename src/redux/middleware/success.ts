@@ -1,5 +1,5 @@
 import { Middleware, MiddlewareAPI } from '@reduxjs/toolkit';
-import { createSuccessToast } from '../../utils/createToast';
+import { createSuccessToast } from '@utils/createToast';
 
 import { endpoints as userEndpoints } from '../api/userApi';
 import { addToast } from '../slices/settingsSlice';

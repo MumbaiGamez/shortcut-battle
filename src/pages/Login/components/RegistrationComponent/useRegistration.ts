@@ -1,13 +1,13 @@
 import { useState, useCallback, useMemo } from 'react';
 
-import { useSignupMutation } from '../../../../redux/api/authApi';
+import { useSignupMutation } from '@redux/api/authApi';
 
-import { useForm } from '../../../../components/Form/useForm';
+import { useForm } from '@components/Form/useForm';
 
-import { InputTypeEnum } from '../../../../components/Input';
-import { FieldsList } from '../../../../components/Form/types';
+import { InputTypeEnum } from '@components/Input';
+import { FieldsList } from '@components/Form/types';
 
-import { setFormFieldValueFactory } from '../../../../utils/setFormFieldValueFactory';
+import { setFormFieldValueFactory } from '@utils/setFormFieldValueFactory';
 
 export const useRegistration = () => {
   const [registrationData, setRegistrationData] = useState({

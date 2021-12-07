@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Loader } from '../../components/Loader';
-import { Star } from '../../components/Star';
-import { Input, InputTypeEnum } from '../../components/Input';
-import { Card } from '../../components/Card';
-import { Button, ButtonTheme } from '../../components/Button';
+import { Loader } from '@components/Loader';
+import { Star } from '@components/Star';
+import { Input, InputTypeEnum } from '@components/Input';
+import { Card } from '@components/Card';
+import { Button, ButtonTheme } from '@components/Button';
 
 import styles from './ComponentsLibrary.css';
 

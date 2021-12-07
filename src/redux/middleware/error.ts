@@ -3,7 +3,7 @@ import {
   Middleware,
   MiddlewareAPI,
 } from '@reduxjs/toolkit';
-import { createErrorToast } from '../../utils/createToast';
+import { createErrorToast } from '@utils/createToast';
 
 import { addToast } from '../slices/settingsSlice';
 

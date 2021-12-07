@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import { LoginComponent } from './components/LoginComponent';
 import { RegistrationComponent } from './components/RegistrationComponent';
-import { Star } from '../../components/Star';
+import { Star } from '@components/Star';
 
 import { useLoginPage } from './useLoginPage';
 

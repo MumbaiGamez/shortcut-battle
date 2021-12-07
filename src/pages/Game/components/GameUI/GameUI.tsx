@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
 
-import { Loader } from '../../../../components/Loader';
-import { Button, ButtonTheme } from '../../../../components/Button';
+import { Loader } from '@components/Loader';
+import { Button, ButtonTheme } from '@components/Button';
 
 import { GameState, Phase } from '../../types';
 
-import FullscreenOpen from '../../../../assets/icons/fullscreenOpen.svg';
-import FullscreenExit from '../../../../assets/icons/fullscreenExit.svg';
+import FullscreenOpen from '@assets/icons/fullscreenOpen.svg';
+import FullscreenExit from '@assets/icons/fullscreenExit.svg';
 import styles from './GameUI.css';
 
 type GameUIProps = {

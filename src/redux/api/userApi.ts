@@ -1,7 +1,7 @@
 import {
   convertObjectKeysToCamelCase,
   convertObjectKeysToSnakeCase,
-} from '../../utils/convertStringCases';
+} from '@utils/convertStringCases';
 
 import {
   UserDataType,
