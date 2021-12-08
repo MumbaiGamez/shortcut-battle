@@ -18,7 +18,7 @@ export const getValidationError = (
     errorMessage = `Field is required`;
   } else if (rules.minSymbols && rules.minSymbols > value.toString().length) {
     isValid = false;
-    errorMessage = `Less then ${rules.minSymbols} symbols`;
+    errorMessage = `Less than ${rules.minSymbols} symbols`;
   } else if (rules.phone && !value.toString().match(PHONE_REG_EXP)) {
     isValid = false;
     errorMessage = `Invalid phone`;

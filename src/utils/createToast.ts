@@ -1,6 +1,6 @@
 import { ToastTheme, ToastType } from '../redux/slices/settingsSlice';
 
-const createToasterObject = (message: string, theme: ToastTheme): ToastType => {
+const createToast = (message: string, theme: ToastTheme): ToastType => {
   return {
     id: new Date().getTime(),
     message: message,
@@ -9,9 +9,9 @@ const createToasterObject = (message: string, theme: ToastTheme): ToastType => {
 };
 
 export const createErrorToast = (message: string): ToastType => {
-  return createToasterObject(message, ToastTheme.Error);
+  return createToast(message, ToastTheme.Error);
 };
 
 export const createSuccessToast = (message: string): ToastType => {
-  return createToasterObject(message, ToastTheme.Success);
+  return createToast(message, ToastTheme.Success);
 };
