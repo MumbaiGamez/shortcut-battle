@@ -1,4 +1,4 @@
-import { ToastTheme } from '../../redux/slices/settingsSlice';
+import { ToastTheme } from '@redux/slices/settingsSlice';
 import { createErrorToast, createSuccessToast } from '../createToast';
 
 describe('createToast', () => {
