@@ -28,6 +28,8 @@ type GameUIProps = {
   toggleFullscreen: () => void;
 };
 
+const TEMP_LOADER_DELAY = 2000;
+
 export const GameUI = (props: GameUIProps) => {
   const { isFullscreen, toggleFullscreen } = props;
 
@@ -54,7 +56,7 @@ export const GameUI = (props: GameUIProps) => {
   }, [dispatch]);
 
   useEffect(() => {
-    setTimeout(handleReset, 2000);
+    setTimeout(handleReset, TEMP_LOADER_DELAY);
   }, [dispatch, handleReset]);
 
   return (
