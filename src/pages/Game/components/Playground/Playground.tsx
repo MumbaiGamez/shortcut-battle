@@ -1,49 +1,42 @@
 import React from 'react';
 
-import { GameContext } from '../../context';
+import { EngineContext } from '../../context';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from '../../constants';
+import { useCanvas } from '../../hooks/useCanvas';
+import { useEngine } from '../../hooks/useEngine';
+import { useCollisions } from '../../hooks/useCollisions';
+import { useAnimationLoop } from '../../hooks/useAnimationLoop';
+import { useWeapon } from '../Weapon/useWeapon';
+import { useEnemy } from '../Enemy/useEnemy';
 import { Background } from '../Background';
 import { Borders } from '../Borders';
 import { Player } from '../Player';
 import { Weapon } from '../Weapon';
 import { Enemy } from '../Enemy';
-import { useCanvas } from '../../hooks/useCanvas';
-import { useEngine } from '../../hooks/useEngine';
-import { useAnimationLoop } from '../../hooks/useAnimationLoop';
-
-import { GameConfig, GameState, Phase } from '../../types';
 
 import styles from './Playground.css';
 
-type PlaygroundProps = {
-  state: GameState;
-  config: GameConfig;
-};
-
-export const Playground = (props: PlaygroundProps) => {
-  const { state, config } = props;
-
+export const Playground = () => {
   const { ctx, ref } = useCanvas({
     width: CANVAS_WIDTH,
     height: CANVAS_HEIGHT,
   });
 
-  const engine = useEngine({ ctx, state });
+  const engine = useEngine(ctx);
 
-  useAnimationLoop(state.phase, engine.render);
+  useCollisions(engine);
+  useWeapon(engine);
+  useEnemy();
+  useAnimationLoop(engine);
 
   return (
-    <GameContext.Provider value={engine.ctx}>
+    <EngineContext.Provider value={engine}>
       <canvas ref={ref} className={styles.canvas} />
-      <Background engine={engine} />
-      <Borders engine={engine} />
-      {state.phase !== Phase.ready && (
-        <>
-          <Player engine={engine} />
-          <Weapon engine={engine} />
-          <Enemy engine={engine} state={state} config={config} />
-        </>
-      )}
-    </GameContext.Provider>
+      <Background />
+      <Borders />
+      <Player />
+      <Weapon />
+      <Enemy />
+    </EngineContext.Provider>
   );
 };

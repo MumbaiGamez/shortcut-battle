@@ -1,19 +1,20 @@
 import { useCallback, useEffect, useRef } from 'react';
 
+import { useAppSelector } from '../../../redux/hooks';
+import { selectPhase } from '../../../redux/slices/gameSlice';
 import { haveCollisions } from '../utils/collision';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../constants';
 import { useShortcuts } from './useShortcuts';
 
 import {
-  CanvasContext,
+  GameCanvas,
   CollisionHandler,
   ShortcutHandler,
   Entity,
-  GameState,
   Layer,
   PlayerAction,
   Phase,
-} from '../types';
+} from '../../../../typings/gameTypes';
 
 type CollisionHandlers = [Entity, Entity, CollisionHandler][];
 
@@ -21,16 +22,8 @@ type ShortcutHandlers = [Entity, PlayerAction, ShortcutHandler][];
 
 type Layers = Partial<Record<Entity, Layer[]>>;
 
-type UseEngineProps = {
-  ctx: CanvasContext;
-  state: GameState;
-};
-
-export const useEngine = (props: UseEngineProps) => {
-  const {
-    ctx,
-    state: { phase },
-  } = props;
+export const useEngine = (ctx: GameCanvas) => {
+  const phase = useAppSelector(selectPhase);
 
   const layers = useRef<Layers>({});
   const collisionHandlers = useRef<CollisionHandlers>([]);
@@ -160,7 +153,7 @@ export const useEngine = (props: UseEngineProps) => {
         );
 
         for (const layer of layers.current[type] || []) {
-          layer.render(dt);
+          layer.render(ctx, dt);
 
           for (const handler of collisionHandlersByType) {
             const [, withType, callback] = handler;
@@ -170,7 +163,7 @@ export const useEngine = (props: UseEngineProps) => {
         }
       }
     },
-    [handleCollisions]
+    [ctx, handleCollisions]
   );
 
   const render = useCallback(

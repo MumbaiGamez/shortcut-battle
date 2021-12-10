@@ -1,16 +1,16 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { getVar } from '@utils/css';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../constants';
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 
-import { Entity, LayerComponentProps } from '../../types';
+import { Entity } from '../../../../../typings/gameTypes';
 
-export const Borders = (props: LayerComponentProps) => {
-  const { engine } = props;
+export const Borders = () => {
+  const engine = useContext(EngineContext);
 
   const leftBorder = useLayer({
-    ctx: engine.ctx,
     pos: [0, 0],
     width: 1,
     height: CANVAS_HEIGHT,
@@ -19,7 +19,6 @@ export const Borders = (props: LayerComponentProps) => {
   });
 
   const rightBorder = useLayer({
-    ctx: engine.ctx,
     pos: [CANVAS_WIDTH - 1, 0],
     width: 1,
     height: CANVAS_HEIGHT,
@@ -28,7 +27,6 @@ export const Borders = (props: LayerComponentProps) => {
   });
 
   const topBorder = useLayer({
-    ctx: engine.ctx,
     pos: [0, 0],
     width: CANVAS_WIDTH,
     height: 1,
@@ -37,7 +35,6 @@ export const Borders = (props: LayerComponentProps) => {
   });
 
   const bottomBorder = useLayer({
-    ctx: engine.ctx,
     pos: [0, CANVAS_HEIGHT - 1],
     width: CANVAS_WIDTH,
     height: 1,
@@ -46,16 +43,16 @@ export const Borders = (props: LayerComponentProps) => {
   });
 
   useEffect(() => {
-    engine.addLayer(leftBorder);
-    engine.addLayer(rightBorder);
-    engine.addLayer(topBorder);
-    engine.addLayer(bottomBorder);
+    engine?.addLayer(leftBorder);
+    engine?.addLayer(rightBorder);
+    engine?.addLayer(topBorder);
+    engine?.addLayer(bottomBorder);
 
     return () => {
-      engine.removeLayer(leftBorder);
-      engine.removeLayer(rightBorder);
-      engine.removeLayer(topBorder);
-      engine.removeLayer(bottomBorder);
+      engine?.removeLayer(leftBorder);
+      engine?.removeLayer(rightBorder);
+      engine?.removeLayer(topBorder);
+      engine?.removeLayer(bottomBorder);
     };
   }, [engine, leftBorder, rightBorder, topBorder, bottomBorder]);
 

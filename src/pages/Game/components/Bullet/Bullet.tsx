@@ -1,23 +1,26 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 
-import { LayerComponentProps, LayerProps } from '../../types';
+import { LayerProps } from '../../../../../typings/gameTypes';
 
-type BulletProps = LayerComponentProps & {
+type BulletProps = {
   bullet: LayerProps;
 };
 
 export const Bullet = (props: BulletProps) => {
-  const { engine, bullet } = props;
+  const { bullet } = props;
+
+  const engine = useContext(EngineContext);
 
   const bulletLayer = useLayer(bullet);
 
   useEffect(() => {
-    engine.addLayer(bulletLayer);
+    engine?.addLayer(bulletLayer);
 
     return () => {
-      engine.removeLayer(bulletLayer);
+      engine?.removeLayer(bulletLayer);
     };
   }, [bulletLayer, engine]);
 
