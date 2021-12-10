@@ -37,6 +37,7 @@ const createAsteroid = () => {
 
 export const useEnemy = () => {
   const dispatch = useAppDispatch();
+
   const phase = useAppSelector(selectPhase);
   const enemiesGenerated = useAppSelector(selectEnemiesGenerated);
   const { interval, count } = useAppSelector(selectConfig);
