@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect, ChangeEvent } from 'react';
 
 import { InputTypeEnum, UseInputProps } from './types';
 
-import { getValidationError } from '../../utils/validation';
+import { getValidationError } from '@utils/validation';
 
 export const useInput = (props: UseInputProps) => {
   const [defaultInputValue, defaultInputHandler] = useState('');

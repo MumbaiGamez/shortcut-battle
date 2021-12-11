@@ -15,7 +15,7 @@ import {
   Phase,
 } from '../../types';
 
-import asteroidImg from '../../../../assets/images/meteorSmall.png';
+import asteroidImg from '@assets/images/meteorSmall.png';
 
 type UseEnemyProps = {
   engine: Engine;

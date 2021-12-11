@@ -1,4 +1,4 @@
-import { ToastTheme, ToastType } from '../redux/slices/settingsSlice';
+import { ToastTheme, ToastType } from '@redux/slices/settingsSlice';
 
 const createToast = (message: string, theme: ToastTheme): ToastType => {
   return {

@@ -18,7 +18,7 @@ import {
   PlayerAction,
 } from '../../types';
 
-import asteroidImg from '../../../../assets/images/laserRed.png';
+import asteroidImg from '@assets/images/laserRed.png';
 
 const WEAPON_FIRE_TRESHOLD = 500;
 

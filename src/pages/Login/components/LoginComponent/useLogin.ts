@@ -1,13 +1,13 @@
 import { useState, useCallback, useMemo } from 'react';
 
-import { useSigninMutation } from '../../../../redux/api/authApi';
+import { useSigninMutation } from '@redux/api/authApi';
 
-import { useForm } from '../../../../components/Form/useForm';
+import { useForm } from '@components/Form/useForm';
 
-import { FieldsList } from '../../../../components/Form/types';
-import { InputTypeEnum } from '../../../../components/Input';
+import { FieldsList } from '@components/Form/types';
+import { InputTypeEnum } from '@components/Input';
 
-import { setFormFieldValueFactory } from '../../../../utils/setFormFieldValueFactory';
+import { setFormFieldValueFactory } from '@utils/setFormFieldValueFactory';
 
 export const useLogin = () => {
   const [loginData, setLoginData] = useState({

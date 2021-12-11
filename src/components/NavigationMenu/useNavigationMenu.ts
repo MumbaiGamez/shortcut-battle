@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { useLogoutMutation } from '../../redux/api/authApi';
-import { selectIsAuth } from '../../redux/slices/settingsSlice';
+import { useLogoutMutation } from '@redux/api/authApi';
+import { selectIsAuth } from '@redux/slices/settingsSlice';
 
 export enum RoutesList {
   all = '*',

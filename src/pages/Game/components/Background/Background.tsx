@@ -5,7 +5,7 @@ import { useLayer } from '../../hooks/useLayer';
 
 import { Entity, LayerComponentProps } from '../../types';
 
-import bgImg from '../../../../assets/images/starBackground.png';
+import bgImg from '@assets/images/starBackground.png';
 
 export const Background = (props: LayerComponentProps) => {
   const { engine } = props;

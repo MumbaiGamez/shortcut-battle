@@ -1,4 +1,4 @@
-import { convertObjectKeysToSnakeCase } from '../../utils/convertStringCases';
+import { convertObjectKeysToSnakeCase } from '@utils/convertStringCases';
 
 import {
   ApiMethods,
