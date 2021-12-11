@@ -57,12 +57,6 @@ export const useNavigationMenu = () => {
           isShow: !isAuth,
         },
         {
-          link: RoutesList.logout,
-          name: 'Logout',
-          handleClick: handleLogout,
-          isShow: isAuth,
-        },
-        {
           link: RoutesList.leaderboard,
           name: 'Leaders',
           handleClick: closeMenu,
@@ -72,6 +66,12 @@ export const useNavigationMenu = () => {
           link: RoutesList.profile,
           name: 'Profile',
           handleClick: closeMenu,
+          isShow: isAuth,
+        },
+        {
+          link: RoutesList.logout,
+          name: 'Logout',
+          handleClick: handleLogout,
           isShow: isAuth,
         },
       ].filter((link) => link.isShow),

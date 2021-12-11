@@ -1,8 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { useGetUserQuery } from '@redux/api/userApi';
-
 import { NavigationMenu } from '@components/NavigationMenu';
 import { PrivateRoute } from '@components/PrivateRoute';
 import { Toaster } from '@components/Toaster';
@@ -16,10 +14,12 @@ import { Game } from '@pages/Game';
 
 import { RoutesList } from '@components/NavigationMenu/useNavigationMenu';
 
+import { useAuth } from './useAuth';
+
 import styles from './App.css';
 
 export const App = () => {
-  useGetUserQuery();
+  useAuth();
 
   return (
     <div className={styles.app}>
