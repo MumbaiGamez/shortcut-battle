@@ -6,7 +6,7 @@ import { useLayer } from '../../hooks/useLayer';
 
 import { Entity } from '../../../../../typings/gameTypes';
 
-import bgImg from '../../../../assets/images/starBackground.png';
+import bgImg from '@assets/images/starBackground.png';
 
 export const Background = () => {
   const engine = useContext(EngineContext);

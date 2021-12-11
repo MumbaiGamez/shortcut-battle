@@ -1,4 +1,4 @@
-import { ValidationRules } from '../components/Input';
+import { ValidationRules } from '@components/Input';
 import { EMAIL_REG_EXP, PHONE_REG_EXP } from './regex';
 
 export const getValidationError = (

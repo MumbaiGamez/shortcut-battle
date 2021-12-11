@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { setVar } from '../../../utils/css';
+import { setVar } from '@utils/css';
 
 import { GameCanvas } from '../../../../typings/gameTypes';
 

@@ -19,7 +19,7 @@ import {
   PlayerAction,
 } from '../../../../../typings/gameTypes';
 
-import playerImg from '../../../../assets/images/player.png';
+import playerImg from '@assets/images/player.png';
 
 const startX = CANVAS_WIDTH / 2 - PLAYER_WIDTH / 2;
 const startY = CANVAS_HEIGHT - 2 * PLAYER_HEIGHT;

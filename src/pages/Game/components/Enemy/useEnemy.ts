@@ -11,7 +11,7 @@ import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
 
 import { Entity, Phase } from '../../../../../typings/gameTypes';
 
-import asteroidImg from '../../../../assets/images/meteorSmall.png';
+import asteroidImg from '@assets/images/meteorSmall.png';
 
 const X_MIN = CANVAS_WIDTH / 4;
 const X_RANGE = CANVAS_WIDTH / 2;

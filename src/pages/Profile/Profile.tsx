@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Form } from '../../components/Form';
-import { Avatar } from '../../components/Avatar';
+import { Form } from '@components/Form';
+import { Avatar } from '@components/Avatar';
 
 import { useProfile } from './useProfile';
 

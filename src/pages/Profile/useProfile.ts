@@ -4,15 +4,15 @@ import {
   useGetUserQuery,
   useUpdateUserAvatarMutation,
   useUpdateUserProfileMutation,
-} from '../../redux/api/userApi';
+} from '@redux/api/userApi';
 
-import { useForm } from '../../components/Form/useForm';
+import { useForm } from '@components/Form/useForm';
 
-import { FieldsList } from '../../components/Form/types';
-import { InputTypeEnum } from '../../components/Input';
-import { ProfileDataType } from '../../redux/types/apiTypes';
+import { FieldsList } from '@components/Form/types';
+import { InputTypeEnum } from '@components/Input';
+import { ProfileDataType } from '@redux/types/apiTypes';
 
-import { setFormFieldValueFactory } from '../../utils/setFormFieldValueFactory';
+import { setFormFieldValueFactory } from '@utils/setFormFieldValueFactory';
 
 export const useProfile = () => {
   const [userData, setUserData] = useState<ProfileDataType>({
@@ -130,7 +130,7 @@ export const useProfile = () => {
 
   useEffect(() => {
     if (data) {
-      const { avatar, id, ...rest } = data;
+      const { avatar, ...rest } = data;
       const avatarUrl = avatar
         ? `https://ya-praktikum.tech/api/v2/resources${avatar}`
         : '';

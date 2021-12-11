@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from 'react';
 
-import { eventBus, Listener } from '../../../utils/eventBus';
+import { eventBus, Listener } from '@utils/eventBus';
 
 import { GameEvent, Layer } from '../../../../typings/gameTypes';
 

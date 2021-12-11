@@ -1,20 +1,20 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { useGetUserQuery } from '../redux/api/userApi';
+import { useGetUserQuery } from '@redux/api/userApi';
 
-import { NavigationMenu } from '../components/NavigationMenu';
-import { PrivateRoute } from '../components/PrivateRoute';
-import { Toaster } from '../components/Toaster';
+import { NavigationMenu } from '@components/NavigationMenu';
+import { PrivateRoute } from '@components/PrivateRoute';
+import { Toaster } from '@components/Toaster';
 
-import { ComponentsLibrary } from '../pages/ComponentsLibrary';
-import { Leaderboard } from '../pages/Leaderboard';
-import { Profile } from '../pages/Profile';
-import { Login } from '../pages/Login';
-import { Home } from '../pages/Home';
-import { Game } from '../pages/Game';
+import { ComponentsLibrary } from '@pages/ComponentsLibrary';
+import { Leaderboard } from '@pages/Leaderboard';
+import { Profile } from '@pages/Profile';
+import { Login } from '@pages/Login';
+import { Home } from '@pages/Home';
+import { Game } from '@pages/Game';
 
-import { RoutesList } from '../components/NavigationMenu/useNavigationMenu';
+import { RoutesList } from '@components/NavigationMenu/useNavigationMenu';
 
 import styles from './App.css';
 
