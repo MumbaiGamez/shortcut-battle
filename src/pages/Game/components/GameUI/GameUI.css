@@ -122,6 +122,42 @@
   }
 }
 
+.keys {
+  display: flex;
+  align-items: center;
+}
+
+.action {
+  margin-right: 10px;
+}
+
+.shortcut {
+  overflow: hidden;
+  height: 30px;
+  padding: 3px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: default;
+}
+
+.shortcutWrapper {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+
+  .shortcut:hover & {
+    transform: translateY(-50%);
+  }
+}
+
+.shortcutDesc {
+  color: var(--yellow-color);
+}
+
+.shortcutKeys {
+  color: var(--green-color);
+}
+
 @keyframes grow {
   0% {
     transform: scale(1);

@@ -1,24 +1,22 @@
 import React from 'react';
 
+import { useAppSelector } from '../../../../redux/hooks';
+import {
+  selectAsteroids,
+  selectPhase,
+} from '../../../../redux/slices/gameSlice';
 import { Asteroid } from '../Asteroid';
-import { useEnemy } from './useEnemy';
 
-import { GameConfig, GameState, LayerComponentProps } from '../../types';
+import { Phase } from '../../../../../typings/gameTypes';
 
-type EnemyProps = LayerComponentProps & {
-  state: GameState;
-  config: GameConfig;
-};
+export const Enemy = () => {
+  const phase = useAppSelector(selectPhase);
+  const asteroids = useAppSelector(selectAsteroids);
 
-export const Enemy = (props: EnemyProps) => {
-  const { engine, state, config } = props;
-
-  const { asteroids } = useEnemy({ engine, state, config });
-
-  return (
+  return phase === Phase.ready ? null : (
     <>
       {asteroids.map((asteroid) => (
-        <Asteroid engine={engine} asteroid={asteroid} key={asteroid.id} />
+        <Asteroid asteroid={asteroid} key={asteroid.id} />
       ))}
     </>
   );

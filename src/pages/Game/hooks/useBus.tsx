@@ -8,7 +8,7 @@ import React, {
 
 import { eventBus, Listener } from '@utils/eventBus';
 
-import { GameEvent, Layer } from '../types';
+import { GameEvent, Layer } from '../../../../typings/gameTypes';
 
 type ProviderProps = {
   children: ReactNode;

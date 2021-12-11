@@ -1,33 +1,32 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
-import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
-import { useListener, useEmit } from '../../hooks/useBus';
-
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { selectConfig } from '../../../../redux/slices/configSlice';
 import {
-  CanvasContext,
-  Engine,
-  Entity,
-  GameConfig,
-  GameEvent,
-  GameState,
-  Layer,
-  LayerProps,
-  Phase,
-} from '../../types';
+  selectPhase,
+  addAsteroid,
+  selectEnemiesGenerated,
+} from '../../../../redux/slices/gameSlice';
+import { ASTEROID_SIZE_SMALL, CANVAS_WIDTH } from '../../constants';
+
+import { Entity, Phase } from '../../../../../typings/gameTypes';
 
 import asteroidImg from '@assets/images/meteorSmall.png';
 
-type UseEnemyProps = {
-  engine: Engine;
-  config: GameConfig;
-  state: GameState;
-};
+const X_MIN = CANVAS_WIDTH / 4;
+const X_RANGE = CANVAS_WIDTH / 2;
+const VX_MIN = -0.02;
+const VX_RANGE = 0.04;
+const VY_MIN = 0.02;
+const VY_RANGE = 0.02;
 
-const createAsteroid = (ctx: CanvasContext) => {
+const createAsteroid = () => {
   return {
-    ctx,
-    pos: [CANVAS_WIDTH / 4 + (CANVAS_WIDTH / 2) * Math.random(), 0],
-    velo: [-0.01 + 0.02 * Math.random(), 0.05 + 0.05 * Math.random()],
+    pos: [X_MIN + X_RANGE * Math.random(), 0],
+    velo: [
+      VX_MIN + VX_RANGE * Math.random(),
+      VY_MIN + VY_RANGE * Math.random(),
+    ],
     width: ASTEROID_SIZE_SMALL,
     height: ASTEROID_SIZE_SMALL,
     src: asteroidImg,
@@ -36,70 +35,26 @@ const createAsteroid = (ctx: CanvasContext) => {
   };
 };
 
-export const useEnemy = (props: UseEnemyProps) => {
-  const {
-    engine: { ctx, setCollisionHandler },
-    state: { phase },
-    config: {
-      asteroids: { count, interval },
-    },
-  } = props;
+export const useEnemy = () => {
+  const dispatch = useAppDispatch();
 
-  const [generatedCount, setGeneratedCount] = useState<number>(0);
-  const [asteroids, setAsteroids] = useState<LayerProps[]>([]);
+  const phase = useAppSelector(selectPhase);
+  const enemiesGenerated = useAppSelector(selectEnemiesGenerated);
+  const { interval, count } = useAppSelector(selectConfig);
 
-  const blow = useCallback((asteroidId: number) => {
-    setAsteroids((currentAsteroids) =>
-      currentAsteroids.filter(({ id }) => id !== asteroidId)
-    );
-  }, []);
-
-  const bounce = useCallback((asteroidLayer: Layer) => {
-    asteroidLayer.x.current = asteroidLayer.prevX.current;
-    asteroidLayer.setVx(-1 * asteroidLayer.vx.current);
-  }, []);
+  const generateTimer = useRef(0);
 
   const generate = useCallback(() => {
-    setAsteroids((currentAsteroids) =>
-      currentAsteroids.concat(createAsteroid(ctx))
-    );
-    setGeneratedCount((currentGeneratedCount) => currentGeneratedCount + 1);
-  }, [ctx]);
-
-  const emit = useEmit();
-
-  useListener(GameEvent.hit, (asteroidLayer) => {
-    if (asteroidLayer.id) {
-      blow(asteroidLayer.id);
-    }
-  });
+    dispatch(addAsteroid(createAsteroid()));
+  }, [dispatch]);
 
   useEffect(() => {
-    if (generatedCount < count && phase === Phase.playing) {
-      setTimeout(generate, interval);
+    if (phase === Phase.playing && enemiesGenerated < count) {
+      generateTimer.current = window.setTimeout(generate, interval);
     }
-  }, [count, generate, generatedCount, interval, phase]);
 
-  useEffect(() => {
-    setCollisionHandler(
-      Entity.asteroid,
-      [Entity.leftBorder, Entity.rightBorder],
-      (asteroidLayer) => {
-        bounce(asteroidLayer);
-      }
-    );
-
-    setCollisionHandler(
-      Entity.asteroid,
-      [Entity.bottomBorder],
-      (asteroidLayer) => {
-        if (asteroidLayer.id) {
-          blow(asteroidLayer.id);
-          emit(GameEvent.out);
-        }
-      }
-    );
-  }, [blow, bounce, emit, setCollisionHandler]);
-
-  return { asteroids };
+    if (phase === Phase.pause || phase === Phase.ready) {
+      clearTimeout(generateTimer.current);
+    }
+  }, [count, enemiesGenerated, generate, interval, phase]);
 };

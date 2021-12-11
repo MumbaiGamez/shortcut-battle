@@ -1,23 +1,26 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
+import { EngineContext } from '../../context';
 import { useLayer } from '../../hooks/useLayer';
 
-import { LayerComponentProps, LayerProps } from '../../types';
+import { LayerProps } from '../../../../../typings/gameTypes';
 
-type AsteroidProps = LayerComponentProps & {
+type AsteroidProps = {
   asteroid: LayerProps;
 };
 
 export const Asteroid = (props: AsteroidProps) => {
-  const { engine, asteroid } = props;
+  const { asteroid } = props;
+
+  const engine = useContext(EngineContext);
 
   const asteroidLayer = useLayer(asteroid);
 
   useEffect(() => {
-    engine.addLayer(asteroidLayer);
+    engine?.addLayer(asteroidLayer);
 
     return () => {
-      engine.removeLayer(asteroidLayer);
+      engine?.removeLayer(asteroidLayer);
     };
   }, [asteroidLayer, engine]);
 
