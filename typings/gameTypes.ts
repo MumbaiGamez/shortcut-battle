@@ -97,3 +97,8 @@ export enum PlayerAction {
   moveRight = 'moveRight',
   fire = 'fire',
 }
+
+export type PlayerStats = {
+  login: string;
+  score: number;
+};

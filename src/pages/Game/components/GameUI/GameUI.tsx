@@ -7,9 +7,10 @@ import {
   reset,
   pause,
   start,
-  selectScore,
+  selectCurrentScore,
   selectPhase,
   selectActiveShortcut,
+  selectStats,
 } from '@redux/slices/gameSlice';
 import { Loader } from '@components/Loader';
 import { Button, ButtonTheme } from '@components/Button';
@@ -19,6 +20,7 @@ import { Phase } from '@typings/gameTypes';
 import FullscreenOpen from '@assets/icons/fullscreenOpen.svg';
 import FullscreenExit from '@assets/icons/fullscreenExit.svg';
 import styles from './GameUI.css';
+import { useUpdateLeaderboardMutation } from '../../../../redux/api/leaderboardApi';
 
 type GameUIProps = {
   isFullscreen: boolean;
@@ -33,10 +35,13 @@ export const GameUI = (props: GameUIProps) => {
   const dispatch = useAppDispatch();
 
   const { count } = useAppSelector(selectConfig);
-  const score = useAppSelector(selectScore);
+  const currentScore = useAppSelector(selectCurrentScore);
   const phase = useAppSelector(selectPhase);
   const activeShortcut = useAppSelector(selectActiveShortcut);
   const appShortcuts = useAppSelector(selectAppShortcuts);
+  const stats = useAppSelector(selectStats);
+
+  const [updateLeaderboard] = useUpdateLeaderboardMutation();
 
   const { name, desc } = appShortcuts[activeShortcut];
 
@@ -56,13 +61,22 @@ export const GameUI = (props: GameUIProps) => {
     setTimeout(handleReset, TEMP_LOADER_DELAY);
   }, [dispatch, handleReset]);
 
+  useEffect(() => {
+    if (phase === Phase.win && stats.login) {
+      updateLeaderboard({
+        login: stats.login,
+        score: stats.score,
+      });
+    }
+  }, [currentScore, phase, stats.login, stats.score, updateLeaderboard]);
+
   return (
     <div className={classNames(styles.gameUI, styles[phase])}>
       <div className={styles.filler} />
       <section className={styles.inner}>
         <header className={styles.header}>
           <div className={styles.scores}>
-            <b>Scores:</b> <span>{score}</span>
+            <b>Scores:</b> <span>{currentScore}</span>
           </div>
           <div className={styles.keys}>
             <b className={styles.action}>Fire:</b>
