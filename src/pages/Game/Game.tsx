@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import classNames from 'classnames';
 
+import { useGetLeaderboardQuery } from '@redux/api/leaderboardApi';
 import { GameUI } from './components/GameUI';
 import { Playground } from './components/Playground';
 import { useFullscreen } from './hooks/useFullscreen';
@@ -8,6 +9,8 @@ import { useFullscreen } from './hooks/useFullscreen';
 import styles from './Game.css';
 
 export const Game = () => {
+  useGetLeaderboardQuery();
+
   const pageRef = useRef(null);
 
   const { isFullscreen, toggleFullscreen } = useFullscreen(pageRef.current);

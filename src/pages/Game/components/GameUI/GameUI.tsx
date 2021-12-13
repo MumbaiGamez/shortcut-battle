@@ -10,7 +10,7 @@ import {
   selectCurrentScore,
   selectPhase,
   selectActiveShortcut,
-  selectStats,
+  selectPlayerStats,
 } from '@redux/slices/gameSlice';
 import { Loader } from '@components/Loader';
 import { Button, ButtonTheme } from '@components/Button';
@@ -39,7 +39,7 @@ export const GameUI = (props: GameUIProps) => {
   const phase = useAppSelector(selectPhase);
   const activeShortcut = useAppSelector(selectActiveShortcut);
   const appShortcuts = useAppSelector(selectAppShortcuts);
-  const stats = useAppSelector(selectStats);
+  const stats = useAppSelector(selectPlayerStats);
 
   const [updateLeaderboard] = useUpdateLeaderboardMutation();
 

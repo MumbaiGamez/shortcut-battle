@@ -10,12 +10,15 @@ type LeaderboardOptions = {
   teamName?: string;
 };
 
-type LeaderData = {
+export type LeaderData = {
   login: string;
   score: number;
+  rating?: number;
 };
 
 type LeaderboardResponseType = { data: LeaderData }[];
+
+export type Leaders = LeaderData[];
 
 const RATING_FIELD = 'score';
 const DEFAULT_TEAM = 'mumbai';
@@ -33,6 +36,13 @@ const queryLeaderboardByTeamName =
     },
   });
 
+const transformLeaderboardResponse = (response: LeaderboardResponseType) => {
+  return response
+    .map(({ data }) => data)
+    .filter(({ login, score }) => login && score)
+    .map((data, index) => ({ ...data, rating: index + 1 }));
+};
+
 const leaderboardApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     updateLeaderboard: build.mutation<void, LeaderData>({
@@ -46,17 +56,13 @@ const leaderboardApi = baseApi.injectEndpoints({
         },
       }),
     }),
-    getLeaderboard: build.query<
-      LeaderboardResponseType,
-      LeaderboardOptions | void
-    >({
+    getLeaderboard: build.query<Leaders, LeaderboardOptions | void>({
       query: queryLeaderboardByTeamName(DEFAULT_TEAM),
+      transformResponse: transformLeaderboardResponse,
     }),
-    getAllLeaderboard: build.query<
-      LeaderboardResponseType,
-      LeaderboardOptions | void
-    >({
+    getAllLeaderboard: build.query<Leaders, LeaderboardOptions | void>({
       query: queryLeaderboardByTeamName('all'),
+      transformResponse: transformLeaderboardResponse,
     }),
   }),
   overrideExisting: false,

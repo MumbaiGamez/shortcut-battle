@@ -26,7 +26,7 @@ export const Table = (tableData: TableProps) => {
       <tbody>
         {dataList.map((rowData) => {
           const { id, ...restData } = rowData;
-          const colsValues = Object.values(restData);
+          const colsValues = headerList.map(({ prop }) => restData[prop]);
 
           return (
             <tr key={id} className={styles.tableRow}>

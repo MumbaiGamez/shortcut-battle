@@ -2,7 +2,6 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { useGetUserQuery } from '@redux/api/userApi';
-import { useGetLeaderboardQuery } from '@redux/api/leaderboardApi';
 
 import { NavigationMenu } from '@components/NavigationMenu';
 import { PrivateRoute } from '@components/PrivateRoute';
@@ -21,7 +20,6 @@ import styles from './App.css';
 
 export const App = () => {
   useGetUserQuery();
-  useGetLeaderboardQuery({ cursor: 0, limit: 100 });
 
   return (
     <div className={styles.app}>

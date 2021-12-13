@@ -1,59 +1,50 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-const leadersMockList = [
-  { teamName: 'Team 3', ratingFieldName: '1', data: { score: '400' } },
-  { teamName: 'Team 2', ratingFieldName: '2', data: { score: '500' } },
-  { teamName: 'Team 1', ratingFieldName: '3', data: { score: '600' } },
-  { teamName: 'Team 4', ratingFieldName: '4', data: { score: '700' } },
-];
-
-const mockUserRank = '3';
-const mockUserScore = '700';
+import { useAppSelector } from '@redux/hooks';
+import { selectLeaders, selectPlayerStats } from '@redux/slices/gameSlice';
 
 export const useLeaderboard = () => {
-  const formattedDataList = leadersMockList.map((leader, index) => {
+  const { rating, score } = useAppSelector(selectPlayerStats);
+  const data = useAppSelector(selectLeaders);
+
+  const formattedDataList = (data || []).map((leader) => {
     return {
-      id: index.toString(),
-      ratingFieldName: leader.ratingFieldName,
-      teamName: leader.teamName,
-      score: leader.data.score,
+      id: leader.login,
+      ...leader,
     };
   });
 
-  const [dataList, setlLadersList] = useState(formattedDataList);
+  const [dataList, setLeadersList] = useState(formattedDataList);
   const [sortDirection, setSortDirection] = useState(-1);
 
-  const sortByTeamName = () => {
+  const sortByLogin = useCallback(() => {
     const sortedDataList = [...dataList].sort((a, b) => {
-      if (a.teamName < b.teamName) return -sortDirection;
-      if (a.teamName > b.teamName) return sortDirection;
+      if (a.login < b.login) return -sortDirection;
+      if (a.login > b.login) return sortDirection;
 
       return 0;
     });
 
-    setlLadersList(sortedDataList);
+    setLeadersList(sortedDataList);
     setSortDirection((prev) => -prev);
-  };
+  }, [dataList, sortDirection]);
 
-  const sortByRaiting = () => {
+  const sortByRating = useCallback(() => {
     const sortedDataList = [...dataList].sort(
-      (a, b) =>
-        sortDirection *
-        (parseInt(a.ratingFieldName) - parseInt(b.ratingFieldName))
+      (a, b) => sortDirection * (a.score - b.score)
     );
 
-    setlLadersList(sortedDataList);
+    setLeadersList(sortedDataList);
     setSortDirection((prev) => -prev);
-  };
+  }, [dataList, sortDirection]);
 
-  const headerList = [
-    { title: 'Raiting' },
-    { title: 'Team Name', handleClick: sortByTeamName },
-    { title: 'Score', handleClick: sortByRaiting },
-  ];
+  const headerList = useMemo(() => {
+    return [
+      { title: 'Rating', prop: 'rating' },
+      { title: 'Login', prop: 'login', handleClick: sortByLogin },
+      { title: 'Score', prop: 'score', handleClick: sortByRating },
+    ];
+  }, [sortByLogin, sortByRating]);
 
-  const userRank = mockUserRank;
-  const userScore = mockUserScore;
-
-  return { dataList, headerList, userRank, userScore };
+  return { dataList, headerList, rating, score };
 };

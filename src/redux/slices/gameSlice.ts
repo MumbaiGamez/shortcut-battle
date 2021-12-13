@@ -2,9 +2,13 @@ import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
 import { endpoints as userEndpoints } from '../api/userApi';
-import { endpoints as leaderboardEndpoints } from '../api/leaderboardApi';
+import {
+  endpoints as leaderboardEndpoints,
+  LeaderData,
+  Leaders,
+} from '../api/leaderboardApi';
 
-import { LayerProps, Phase, PlayerStats } from '../../../typings/gameTypes';
+import { LayerProps, Phase } from '../../../typings/gameTypes';
 
 type Game = {
   phase: Phase;
@@ -15,7 +19,10 @@ type Game = {
   activeShortcut: number;
   asteroids: LayerProps[];
   bullets: LayerProps[];
-  stats: PlayerStats;
+  stats: {
+    player: LeaderData;
+    leaders: Leaders;
+  };
 };
 
 const initialState: Game = {
@@ -28,8 +35,12 @@ const initialState: Game = {
   asteroids: [],
   bullets: [],
   stats: {
-    login: '',
-    score: 0,
+    player: {
+      login: '',
+      score: 0,
+      rating: 0,
+    },
+    leaders: [],
   },
 };
 
@@ -84,7 +95,7 @@ const gameSlice = createSlice({
       state.enemiesDestroyed += 1;
 
       if (state.enemiesDestroyed >= state.enemiesCount) {
-        state.stats.score += state.currentScore;
+        state.stats.player.score += state.currentScore;
         state.phase = Phase.win;
       }
     },
@@ -93,26 +104,28 @@ const gameSlice = createSlice({
     builder.addMatcher(
       userEndpoints.getUser.matchFulfilled,
       (state, { payload }) => {
-        state.stats.login = payload.login;
+        state.stats.player.login = payload.login;
       }
     );
 
     builder.addMatcher(
       leaderboardEndpoints.getLeaderboard.matchFulfilled,
       (state, { payload }) => {
-        if (!state.stats.login) {
+        state.stats.leaders = payload;
+
+        if (!state.stats.player.login) {
           return;
         }
 
         const playerStats = payload.find(
-          ({ data: { login } }) => login === state.stats.login
+          ({ login }) => login === state.stats.player.login
         );
 
         if (!playerStats) {
           return;
         }
 
-        state.stats.score = playerStats.data.score;
+        state.stats.player = playerStats;
       }
     );
   },
@@ -160,6 +173,14 @@ export const selectActiveShortcut = createSelector(
   (state) => state.activeShortcut
 );
 
-export const selectStats = createSelector(selectGame, (state) => state.stats);
+export const selectPlayerStats = createSelector(
+  selectGame,
+  (state) => state.stats.player
+);
+
+export const selectLeaders = createSelector(
+  selectGame,
+  (state) => state.stats.leaders
+);
 
 export default gameSlice.reducer;
