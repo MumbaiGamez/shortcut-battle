@@ -5,22 +5,22 @@ import { selectIsAuth } from '@redux/slices/settingsSlice';
 import { useGetUserQuery } from '@redux/api/userApi';
 import { useOAuthMutation } from '@redux/api/authApi';
 
+import { getUserOAuthCode } from '@utils/getUserOAuthCode';
+
 export const useAuth = () => {
   const [OAuth] = useOAuthMutation();
 
   const isAuth = useSelector(selectIsAuth);
 
-  const url = window.location.search;
+  const code = getUserOAuthCode();
 
   useEffect(() => {
-    if (!isAuth && url.includes('?code=')) {
-      const code = url.split('?code=')[1];
-
+    if (!isAuth && code) {
       if (code) {
         OAuth(code);
       }
     }
-  }, [OAuth, url, isAuth]);
+  }, [OAuth, code, isAuth]);
 
   useGetUserQuery();
 };
