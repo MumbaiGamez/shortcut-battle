@@ -8,11 +8,6 @@ import {
 
 import { baseApi } from './baseApi';
 
-export const REDIRECT_URI =
-  process.env.NODE_ENV === 'production'
-    ? 'https://shortcut-battle.herokuapp.com/'
-    : 'http://localhost:3000';
-
 enum AuthURL {
   SIGNUP = '/auth/signup',
   SIGNIN = '/auth/signin',
