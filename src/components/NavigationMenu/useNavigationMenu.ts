@@ -42,39 +42,39 @@ export const useNavigationMenu = () => {
           link: RoutesList.home,
           name: 'Home',
           handleClick: closeMenu,
-          isShow: true,
+          isShown: true,
         },
         {
           link: RoutesList.play,
           name: 'Play',
           handleClick: closeMenu,
-          isShow: true,
+          isShown: true,
         },
         {
           link: RoutesList.login,
           name: 'Login',
           handleClick: closeMenu,
-          isShow: !isAuth,
+          isShown: !isAuth,
         },
         {
           link: RoutesList.leaderboard,
           name: 'Leaders',
           handleClick: closeMenu,
-          isShow: isAuth,
+          isShown: isAuth,
         },
         {
           link: RoutesList.profile,
           name: 'Profile',
           handleClick: closeMenu,
-          isShow: isAuth,
+          isShown: isAuth,
         },
         {
           link: RoutesList.logout,
           name: 'Logout',
           handleClick: handleLogout,
-          isShow: isAuth,
+          isShown: isAuth,
         },
-      ].filter((link) => link.isShow),
+      ].filter((link) => link.isShown),
     [closeMenu, handleLogout, isAuth]
   );
 
