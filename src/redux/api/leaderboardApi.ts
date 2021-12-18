@@ -56,11 +56,11 @@ const leaderboardApi = baseApi.injectEndpoints({
         },
       }),
     }),
-    getLeaderboard: build.query<Leaders, LeaderboardOptions | void>({
+    getLeaderboard: build.mutation<Leaders, LeaderboardOptions | void>({
       query: queryLeaderboardByTeamName(DEFAULT_TEAM),
       transformResponse: transformLeaderboardResponse,
     }),
-    getAllLeaderboard: build.query<Leaders, LeaderboardOptions | void>({
+    getAllLeaderboard: build.mutation<Leaders, LeaderboardOptions | void>({
       query: queryLeaderboardByTeamName('all'),
       transformResponse: transformLeaderboardResponse,
     }),
@@ -70,7 +70,7 @@ const leaderboardApi = baseApi.injectEndpoints({
 
 export const {
   endpoints,
-  useGetLeaderboardQuery,
-  useGetAllLeaderboardQuery,
+  useGetLeaderboardMutation,
+  useGetAllLeaderboardMutation,
   useUpdateLeaderboardMutation,
 } = leaderboardApi;

@@ -1,18 +1,34 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useGetLeaderboardMutation } from '@redux/api/leaderboardApi';
 import { useAppSelector } from '@redux/hooks';
 import { selectLeaders, selectPlayerStats } from '@redux/slices/gameSlice';
 
 export const useLeaderboard = () => {
+  const [getLeaderboard] = useGetLeaderboardMutation();
+
+  useEffect(() => {
+    getLeaderboard();
+  }, [getLeaderboard]);
+
   const { rating, score } = useAppSelector(selectPlayerStats);
-  const data = useAppSelector(selectLeaders);
+  const leadersData = useAppSelector(selectLeaders);
 
-  const formattedDataList = (data || []).map((leader) => ({
-    id: leader.login,
-    ...leader,
-  }));
+  const formattedData = useMemo(
+    () =>
+      (leadersData || []).map((leader) => ({
+        id: leader.login,
+        ...leader,
+      })),
+    [leadersData]
+  );
 
-  const [dataList, setDataList] = useState(formattedDataList);
+  const [dataList, setDataList] = useState<typeof formattedData>([]);
+
+  useEffect(() => {
+    setDataList(formattedData);
+  }, [formattedData]);
+
   const [sortDirection, setSortDirection] = useState(-1);
 
   const sortByLogin = useCallback(() => {

@@ -2,7 +2,10 @@ import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
-import { useUpdateLeaderboardMutation } from '@redux/api/leaderboardApi';
+import {
+  useGetLeaderboardMutation,
+  useUpdateLeaderboardMutation,
+} from '@redux/api/leaderboardApi';
 import { selectConfig, selectAppShortcuts } from '@redux/slices/configSlice';
 import {
   reset,
@@ -43,6 +46,7 @@ export const GameUI = (props: GameUIProps) => {
   const stats = useAppSelector(selectPlayerStats);
 
   const [updateLeaderboard] = useUpdateLeaderboardMutation();
+  const [getLeaderboard] = useGetLeaderboardMutation();
 
   const { name, desc } = appShortcuts[activeShortcut];
 
@@ -58,18 +62,27 @@ export const GameUI = (props: GameUIProps) => {
     dispatch(pause());
   }, [dispatch]);
 
+  const updateStats = useCallback(async () => {
+    await updateLeaderboard({
+      login: stats.login,
+      score: stats.score,
+    });
+    await getLeaderboard();
+  }, [getLeaderboard, stats.login, stats.score, updateLeaderboard]);
+
+  useEffect(() => {
+    getLeaderboard();
+  }, [getLeaderboard]);
+
   useEffect(() => {
     setTimeout(handleReset, TEMP_LOADER_DELAY);
   }, [dispatch, handleReset]);
 
   useEffect(() => {
     if (phase === Phase.win && stats.login) {
-      updateLeaderboard({
-        login: stats.login,
-        score: stats.score,
-      });
+      updateStats();
     }
-  }, [currentScore, phase, stats.login, stats.score, updateLeaderboard]);
+  }, [phase, stats.login, updateStats]);
 
   return (
     <div className={classNames(styles.gameUI, styles[phase])}>

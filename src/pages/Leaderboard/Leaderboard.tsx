@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { useGetLeaderboardQuery } from '@redux/api/leaderboardApi';
-
 import { Card } from '@components/Card';
 import { Table } from '@components/Table';
 
@@ -10,8 +8,6 @@ import { useLeaderboard } from './useLeaderboard';
 import styles from './Leaderboard.css';
 
 export const Leaderboard = () => {
-  useGetLeaderboardQuery();
-
   const { dataList, headerList, rating, score } = useLeaderboard();
 
   return (
