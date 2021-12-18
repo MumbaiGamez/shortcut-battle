@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ServiceWorkerAssetsPlugin = require('./webpack/plugins/service-worker-assets-plugin');
@@ -70,6 +71,14 @@ module.exports = {
       path: path.resolve(__dirname, './src/sw.js'),
       output: 'sw.js',
       routes: ['play', 'login', 'leaderboard'],
+    }),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(process.env.NODE_ENV === 'production'),
+      REDIRECT_URI: JSON.stringify(
+        process.env.NODE_ENV === 'production'
+          ? 'https://shortcut-battle.herokuapp.com/'
+          : 'http://localhost:3000'
+      ),
     }),
   ],
   devtool: 'source-map',
