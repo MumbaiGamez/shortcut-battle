@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node server.js",
-    "dev": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "start": "node dist/server/index.js",
+    "dev": "webpack serve --mode development --config webpack/config/client.config.ts",
+    "build": "webpack --mode production --config webpack/config/client.config.ts",
+    "build:server": "tsc --project server",
     "lint": "npm-run-all lint:*",
     "lint:ts": "eslint --ext=.ts,.tsx src --fix",
     "lint:css": "stylelint src/**/**/*.css --fix",
@@ -16,7 +17,8 @@
     "prepare": "husky install",
     "test": "npx jest",
     "test:watch": "npx jest --watch",
-    "test:coverage": "npx jest --coverage"
+    "test:coverage": "npx jest --coverage",
+    "tsc": "node ./node_modules/.bin/tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -31,10 +33,15 @@
   "homepage": "https://github.com/MumbaiGamez/shortcut-battle#readme",
   "devDependencies": {
     "@svgr/webpack": "5.5.0",
+    "@types/express": "4.17.13",
     "@types/jest": "27.0.3",
+    "@types/node": "17.0.0",
     "@types/react": "17.0.34",
     "@types/react-dom": "17.0.11",
     "@types/react-router-dom": "5.3.2",
+    "@types/webpack": "5.28.0",
+    "@types/webpack-dev-server": "4.5.0",
+    "@types/webpack-sources": "3.2.0",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "autoprefixer": "10.4.0",
@@ -63,6 +70,7 @@
     "stylelint-config-standard": "23.0.0",
     "ts-jest": "27.0.7",
     "ts-loader": "9.2.6",
+    "ts-node": "10.4.0",
     "typescript": "4.4.4",
     "webpack": "5.61.0",
     "webpack-cli": "4.9.1",

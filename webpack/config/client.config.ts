@@ -1,24 +1,27 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ServiceWorkerAssetsPlugin = require('./webpack/plugins/service-worker-assets-plugin');
+import * as webpack from 'webpack';
+import * as path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+import ServiceWorkerAssetsPlugin from '../plugins/service-worker-assets-plugin';
+
+const __ROOT = path.resolve(__dirname, '../..');
+
+export default {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__ROOT, 'dist'),
     filename: 'bundle.js',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
-      '@utils': path.resolve(__dirname, 'src/utils'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@redux': path.resolve(__dirname, 'src/redux'),
-      '@typings': path.resolve(__dirname, 'typings'),
+      '@': path.resolve(__ROOT, 'src'),
+      '@components': path.resolve(__ROOT, 'src/components'),
+      '@pages': path.resolve(__ROOT, 'src/pages'),
+      '@utils': path.resolve(__ROOT, 'src/utils'),
+      '@assets': path.resolve(__ROOT, 'src/assets'),
+      '@redux': path.resolve(__ROOT, 'src/redux'),
+      '@typings': path.resolve(__ROOT, 'typings'),
     },
   },
   module: {
@@ -29,7 +32,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json'),
+              configFile: path.resolve(__ROOT, 'tsconfig.json'),
             },
           },
         ],
@@ -65,10 +68,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Shortcut Battle',
-      template: path.resolve(__dirname, 'www/index.html'),
+      template: path.resolve(__ROOT, 'www/index.html'),
     }),
     new ServiceWorkerAssetsPlugin({
-      path: path.resolve(__dirname, './src/sw.js'),
+      path: path.resolve(__ROOT, 'src/sw.js'),
       output: 'sw.js',
       routes: ['play', 'login', 'leaderboard'],
     }),
@@ -84,7 +87,7 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'dist'),
+      directory: path.resolve(__ROOT, 'dist'),
     },
     historyApiFallback: true,
     compress: true,

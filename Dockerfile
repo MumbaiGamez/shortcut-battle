@@ -8,6 +8,7 @@ RUN npm ci --omit=dev --ignore-scripts
 
 COPY . /usr/app/
 RUN npm run build
+RUN npm run build:server
 
 EXPOSE 3000
 
