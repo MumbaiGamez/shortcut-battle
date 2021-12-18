@@ -20,7 +20,7 @@ export const LoginComponent = (props: LoginComponentProps) => {
 
   return (
     <Form
-      bottomComponent={oauthButton}
+      additionalButton={oauthButton}
       buttonText="Login"
       inputsList={inputsList}
       isLoading={isLoading}

@@ -12,7 +12,7 @@ import styles from './Form.css';
 
 export const Form = (props: FormProps) => {
   const {
-    bottomComponent,
+    additionalButton,
     buttonText,
     children,
     inputsList,
@@ -40,7 +40,7 @@ export const Form = (props: FormProps) => {
           {toggleFormText}
         </span>
       )}
-      {bottomComponent}
+      {additionalButton}
       <Button
         isDisabled={isButtonDisabled}
         onClick={onButtonClick}
