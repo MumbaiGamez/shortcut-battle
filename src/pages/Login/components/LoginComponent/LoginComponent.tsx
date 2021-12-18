@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Button, ButtonTheme } from '@components/Button';
 import { Form } from '@components/Form';
@@ -10,12 +10,16 @@ import { LoginComponentProps } from './types';
 export const LoginComponent = (props: LoginComponentProps) => {
   const { toggleForm } = props;
 
-  const { auth, handleLogin, inputsList, isFormValid, isLoading } = useLogin();
+  const { handleLogin, inputsList, isFormValid, isLoading, redirectToOAuth } =
+    useLogin();
 
-  const oauthButton = (
-    <Button theme={ButtonTheme.Glow} onClick={auth}>
-      Auth via Yandex
-    </Button>
+  const oauthButton = useMemo(
+    () => (
+      <Button theme={ButtonTheme.Glow} onClick={redirectToOAuth}>
+        Auth via Yandex
+      </Button>
+    ),
+    [redirectToOAuth]
   );
 
   return (

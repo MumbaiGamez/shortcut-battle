@@ -26,9 +26,9 @@ export const useLogin = () => {
 
   const [getOAuthServiceId] = useGetOAuthServiceIdMutation();
 
-  const auth = () => {
+  const redirectToOAuth = useCallback(() => {
     getOAuthServiceId();
-  };
+  }, [getOAuthServiceId]);
 
   const handleLogin = useCallback(() => {
     if (isFormValid) {
@@ -60,10 +60,10 @@ export const useLogin = () => {
   );
 
   return {
-    auth,
     handleLogin,
     inputsList,
     isFormValid,
     isLoading,
+    redirectToOAuth,
   };
 };
