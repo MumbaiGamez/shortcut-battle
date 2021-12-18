@@ -1,6 +1,9 @@
 import { useState, useCallback, useMemo } from 'react';
 
-import { useSigninMutation } from '@redux/api/authApi';
+import {
+  useGetOAuthServiceIdMutation,
+  useSigninMutation,
+} from '@redux/api/authApi';
 
 import { useForm } from '@components/Form/useForm';
 
@@ -20,6 +23,12 @@ export const useLogin = () => {
   const { isFormValid, validateField } = useForm({ fieldsObject: loginData });
 
   const [signin, { isLoading }] = useSigninMutation();
+
+  const [getOAuthServiceId] = useGetOAuthServiceIdMutation();
+
+  const redirectToOAuth = useCallback(() => {
+    getOAuthServiceId();
+  }, [getOAuthServiceId]);
 
   const handleLogin = useCallback(() => {
     if (isFormValid) {
@@ -55,5 +64,6 @@ export const useLogin = () => {
     inputsList,
     isFormValid,
     isLoading,
+    redirectToOAuth,
   };
 };

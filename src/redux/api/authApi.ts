@@ -11,9 +11,15 @@ import { baseApi } from './baseApi';
 enum AuthURL {
   SIGNUP = '/auth/signup',
   SIGNIN = '/auth/signin',
+  OAUTH = '/oauth/yandex',
+  GET_SERVICE_ID = '/oauth/yandex/service-id',
   LOGOUT = '/auth/logout',
   GET_USER = '/auth/user',
 }
+
+type OAuthResponse = {
+  service_id: string;
+};
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
@@ -38,6 +44,26 @@ const authApi = baseApi.injectEndpoints({
         responseHandler: (response) => response.text(),
       }),
     }),
+    OAuth: build.mutation<void, string>({
+      query: (code: string) => ({
+        url: AuthURL.OAUTH,
+        method: ApiMethods.POST,
+        body: {
+          code,
+          redirect_uri: REDIRECT_URI,
+        },
+        responseHandler: (response) => response.text(),
+      }),
+    }),
+    getOAuthServiceId: build.mutation<OAuthResponse, void>({
+      query: () => ({
+        url: AuthURL.GET_SERVICE_ID,
+        method: ApiMethods.GET,
+        params: {
+          redirect_uri: REDIRECT_URI,
+        },
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -47,4 +73,6 @@ export const {
   useSigninMutation,
   useSignupMutation,
   useLogoutMutation,
+  useOAuthMutation,
+  useGetOAuthServiceIdMutation,
 } = authApi;

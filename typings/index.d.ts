@@ -12,6 +12,9 @@ declare module '*.png' {
   export default content;
 }
 
+declare const PRODUCTION: string;
+declare const REDIRECT_URI: string;
+
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
   T,
   Exclude<keyof T, Keys>

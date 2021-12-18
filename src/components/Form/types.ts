@@ -32,6 +32,7 @@ export type FormProps = {
   onButtonClick(): void;
   title: string;
 
+  additionalButton?: ReactNode;
   children?: ReactNode;
   toggleForm?(): void;
   toggleFormClass?: string;
