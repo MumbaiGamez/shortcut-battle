@@ -9,7 +9,7 @@ import {
   gameOver,
   removeAsteroid,
   removeBullet,
-  updateScore,
+  updateCurrentScore,
   updateShortcut,
 } from '../../../redux/slices/gameSlice';
 
@@ -45,16 +45,16 @@ export const useCollisions = (engine: Engine) => {
       Entity.bullet,
       [Entity.asteroid],
       (bulletLayer: Layer, asteroidLayer: Layer) => {
-        if (asteroidLayer.id) {
-          dispatch(removeAsteroid(asteroidLayer.id));
-        }
-
         if (bulletLayer.id) {
           dispatch(removeBullet(bulletLayer.id));
         }
 
-        dispatch(updateScore(hitScore));
+        dispatch(updateCurrentScore(hitScore));
         dispatch(updateShortcut(Math.floor(Math.random() * shortcuts.length)));
+
+        if (asteroidLayer.id) {
+          dispatch(removeAsteroid(asteroidLayer.id));
+        }
       }
     );
 
