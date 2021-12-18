@@ -1,3 +1,7 @@
 export const getUserOAuthCode = () => {
-  return new URLSearchParams(window.location.search).get('code');
+  return getLocationParams('code');
+};
+
+const getLocationParams = (paramName: string) => {
+  return new URLSearchParams(window.location.search).get(paramName);
 };
