@@ -7,14 +7,12 @@ export const useLeaderboard = () => {
   const { rating, score } = useAppSelector(selectPlayerStats);
   const data = useAppSelector(selectLeaders);
 
-  const formattedDataList = (data || []).map((leader) => {
-    return {
-      id: leader.login,
-      ...leader,
-    };
-  });
+  const formattedDataList = (data || []).map((leader) => ({
+    id: leader.login,
+    ...leader,
+  }));
 
-  const [dataList, setLeadersList] = useState(formattedDataList);
+  const [dataList, setDataList] = useState(formattedDataList);
   const [sortDirection, setSortDirection] = useState(-1);
 
   const sortByLogin = useCallback(() => {
@@ -25,7 +23,7 @@ export const useLeaderboard = () => {
       return 0;
     });
 
-    setLeadersList(sortedDataList);
+    setDataList(sortedDataList);
     setSortDirection((prev) => -prev);
   }, [dataList, sortDirection]);
 
@@ -34,7 +32,7 @@ export const useLeaderboard = () => {
       (a, b) => sortDirection * (a.score - b.score)
     );
 
-    setLeadersList(sortedDataList);
+    setDataList(sortedDataList);
     setSortDirection((prev) => -prev);
   }, [dataList, sortDirection]);
 

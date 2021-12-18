@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { useUpdateLeaderboardMutation } from '@redux/api/leaderboardApi';
 import { selectConfig, selectAppShortcuts } from '@redux/slices/configSlice';
 import {
   reset,
@@ -12,6 +13,7 @@ import {
   selectActiveShortcut,
   selectPlayerStats,
 } from '@redux/slices/gameSlice';
+
 import { Loader } from '@components/Loader';
 import { Button, ButtonTheme } from '@components/Button';
 
@@ -20,7 +22,6 @@ import { Phase } from '@typings/gameTypes';
 import FullscreenOpen from '@assets/icons/fullscreenOpen.svg';
 import FullscreenExit from '@assets/icons/fullscreenExit.svg';
 import styles from './GameUI.css';
-import { useUpdateLeaderboardMutation } from '../../../../redux/api/leaderboardApi';
 
 type GameUIProps = {
   isFullscreen: boolean;

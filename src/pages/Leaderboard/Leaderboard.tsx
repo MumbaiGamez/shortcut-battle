@@ -23,7 +23,7 @@ export const Leaderboard = () => {
         </div>
         <div className={styles.row}>
           <span>My score</span>
-          <span>{score || 'none'}</span>
+          <span>{score}</span>
         </div>
       </Card>
       <Card title="Leaderboard">
