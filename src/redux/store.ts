@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory, createMemoryHistory } from 'history';
 
 import settingsReducer from './slices/settingsSlice';
 import configReducer from './slices/configSlice';
@@ -12,7 +12,9 @@ import { successMiddleware } from './middleware/success';
 
 const { createReduxHistory, routerMiddleware, routerReducer } =
   createReduxHistoryContext({
-    history: createBrowserHistory(),
+    history: process.env.IS_SSR
+      ? createMemoryHistory({ initialEntries: ['/'] })
+      : createBrowserHistory(),
   });
 
 export const store = configureStore({
