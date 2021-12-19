@@ -1,6 +1,5 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import ServiceWorkerAssetsPlugin from '../plugins/service-worker-assets-plugin';
 
@@ -10,6 +9,7 @@ export default {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__ROOT, 'dist'),
+    library: 'Client',
     filename: 'bundle.js',
   },
   resolve: {
@@ -66,10 +66,6 @@ export default {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Shortcut Battle',
-      template: path.resolve(__ROOT, 'www/index.html'),
-    }),
     new ServiceWorkerAssetsPlugin({
       path: path.resolve(__ROOT, 'src/sw.js'),
       output: 'sw.js',
