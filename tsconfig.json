@@ -36,7 +36,7 @@
       "@redux/*": ["./src/redux/*"],
       "@typings/*": ["./typings/*"]
     },
-    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"],
+    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
   "include": [
     "src",

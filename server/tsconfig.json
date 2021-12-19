@@ -1,9 +1,14 @@
 {
-    "extends": "../tsconfig",
-    "compilerOptions": {
-      "module": "CommonJS",
-      "outDir": "../dist/server",
-      "typeRoots": []
-    },
-    "include": ["."]
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "../dist",
+    "baseUrl": "..",
+    "typeRoots": ["../typings/**/*.d.ts", "../node_modules/@types", "@types"],
+  },
+  "include": [
+    ".",
+    "../typings/**/*.d.ts",
+    "../node_modules/@types"
+  ],
 }
