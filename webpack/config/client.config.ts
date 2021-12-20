@@ -7,9 +7,13 @@ const __ROOT = path.resolve(__dirname, '../..');
 
 export default {
   entry: './src/index.tsx',
+  target: 'web',
   output: {
     path: path.resolve(__ROOT, 'dist'),
-    library: 'Client',
+    library: {
+      name: 'Client',
+      type: 'var',
+    },
     filename: 'bundle.js',
   },
   resolve: {

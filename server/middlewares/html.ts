@@ -10,7 +10,7 @@ export const getPageHtml = (bundleHtml: string) => {
     </head>
     <body>
         <div id="root">${bundleHtml}</div>
-        <script src="/bundle.js"/>
+        <script src="/bundle.js"></script>
         <script>
           Client.init();
         </script>
