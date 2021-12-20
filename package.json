@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "IS_SSR=1 node dist/server/index.js",
+    "start": "node dist/server/index.js",
     "dev": "webpack serve --mode development --config webpack/config/client.config.ts",
     "build": "webpack --mode production --config webpack/config/client.config.ts",
     "build:ssr": "webpack --mode production --config webpack/config/ssr.config.ts",

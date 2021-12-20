@@ -10,9 +10,11 @@ import { errorMiddleware } from './middleware/error';
 import { authMiddleware } from './middleware/auth';
 import { successMiddleware } from './middleware/success';
 
+import { isServer } from '@utils/ssr';
+
 const { createReduxHistory, routerMiddleware, routerReducer } =
   createReduxHistoryContext({
-    history: process.env.IS_SSR
+    history: isServer
       ? createMemoryHistory({ initialEntries: ['/'] })
       : createBrowserHistory(),
   });
