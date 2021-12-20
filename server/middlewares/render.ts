@@ -8,7 +8,8 @@ export default (req: Request, res: Response, next: NextFunction) => {
     const bundleHtml = getBundleHtml(req);
     const html = getPageHtml(bundleHtml);
 
-    res.send(html);
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(html);
   };
 
   next();
