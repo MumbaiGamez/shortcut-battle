@@ -48,7 +48,6 @@ export const App = () => {
           </Routes>
           <Toaster />
         </div>
-        <App />
       </ErrorBoundary>
     </StrictMode>
   );
