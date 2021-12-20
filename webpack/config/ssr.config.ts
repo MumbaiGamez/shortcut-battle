@@ -3,14 +3,18 @@ import * as webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 
 const __ROOT__ = path.resolve(__dirname, '../..');
+const __MOCKS__ = path.resolve(__ROOT__, 'webpack/mock');
+const STUB_COMPONENTS_REGEX = /(Playground)$/;
 
 export default {
   entry: path.resolve(__ROOT__, 'src/App/App.tsx'),
+  target: 'node',
   output: {
     path: path.resolve(__ROOT__, 'dist'),
     filename: 'ssr.bundle.js',
-    libraryTarget: 'commonjs2',
-    publicPath: './',
+    library: {
+      type: 'commonjs2',
+    },
   },
   externalsPresets: { node: true },
   externals: [
@@ -69,8 +73,18 @@ export default {
       ),
     }),
     new webpack.ProvidePlugin({
-      window: path.resolve(__ROOT__, 'webpack/mock/window.mock'),
-      document: path.resolve(__ROOT__, 'webpack/mock/document.mock'),
+      window: [__MOCKS__, 'window'],
+      document: [__MOCKS__, 'document'],
+      Image: [__MOCKS__, 'Image'],
+      getComputedStyle: [__MOCKS__, 'getComputedStyle'],
+    }),
+    new webpack.NormalModuleReplacementPlugin(STUB_COMPONENTS_REGEX, function (
+      resource
+    ) {
+      resource.request = resource.request.replace(
+        STUB_COMPONENTS_REGEX,
+        '$&/Stub'
+      );
     }),
   ],
   devtool: 'source-map',
