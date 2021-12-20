@@ -1,3 +1,5 @@
+import { store } from '@redux/store';
+
 export const getPageHtml = (bundleHtml: string) => {
   return `
     <!DOCTYPE html>
@@ -13,6 +15,7 @@ export const getPageHtml = (bundleHtml: string) => {
         <script src="/bundle.js"></script>
         <script>
           Client.init();
+          window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
         </script>
     </body>
     </html>
