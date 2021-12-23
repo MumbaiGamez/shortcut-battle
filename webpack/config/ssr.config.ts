@@ -51,7 +51,20 @@ export default {
       },
       {
         test: /\.css$/i,
-        use: ['null-loader'],
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                localIdentName: '[local]_[hash:base64:6]',
+                exportLocalsConvention: 'camelCase',
+                exportOnlyLocals: true,
+              },
+            },
+          },
+          'postcss-loader',
+        ],
       },
       {
         test: /\.svg$/,
