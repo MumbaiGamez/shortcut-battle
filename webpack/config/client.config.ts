@@ -1,6 +1,6 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
-import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import ServiceWorkerAssetsPlugin from '../plugins/service-worker-assets-plugin';
 
@@ -47,7 +47,7 @@ export default {
       {
         test: /\.css$/i,
         use: [
-          ExtractCssChunks.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -72,7 +72,7 @@ export default {
     ],
   },
   plugins: [
-    new ExtractCssChunks(),
+    new MiniCssExtractPlugin(),
     new ServiceWorkerAssetsPlugin({
       path: path.resolve(__ROOT, 'src/sw.js'),
       output: 'sw.js',
