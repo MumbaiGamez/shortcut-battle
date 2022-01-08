@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import fetch from 'cross-fetch';
+import fetch from 'isomorphic-fetch';
 
 const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 
