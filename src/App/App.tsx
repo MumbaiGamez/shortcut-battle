@@ -1,4 +1,5 @@
 import React, { StrictMode } from 'react';
+import { hot } from 'react-hot-loader/root';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { ComponentsLibrary } from '@pages/ComponentsLibrary';
@@ -18,7 +19,7 @@ import { useAuth } from './useAuth';
 
 import styles from './App.css';
 
-export const App = () => {
+const _App = () => {
   useAuth();
 
   return (
@@ -52,3 +53,5 @@ export const App = () => {
     </StrictMode>
   );
 };
+
+export const App = hot(_App);

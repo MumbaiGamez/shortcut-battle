@@ -4,11 +4,12 @@
     "module": "CommonJS",
     "outDir": "../dist",
     "baseUrl": "..",
-    "typeRoots": ["../typings/**/*.d.ts", "../node_modules/@types", "@types"],
+    "skipLibCheck": true
   },
   "include": [
     ".",
+    "../src",
     "../typings/**/*.d.ts",
     "../node_modules/@types"
-  ],
+  ]
 }

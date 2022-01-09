@@ -8,7 +8,7 @@ import { store } from '@redux/store';
 
 export const getBundleHtml = (req: Request) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const App = require(`../../ssr.bundle`).App;
+  const App = require('../../ssr.bundle.js').App;
 
   return renderToString(
     <Provider store={store}>

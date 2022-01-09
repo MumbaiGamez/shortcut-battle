@@ -39,7 +39,7 @@
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },
   "include": [
-    "src",
+    "src/**/*",
     "typings/**/*.d.ts",
     "./node_modules/@types"
   ],

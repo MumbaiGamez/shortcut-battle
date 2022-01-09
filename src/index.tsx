@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
-import { App } from './App';
-
 import { store } from '@redux/store';
+import { isServer } from '@utils/ssr';
+import { App } from './App';
 
 import './assets/styles/index.css';
 
 export const init = () => {
-  if ('serviceWorker' in navigator) {
+  if (!isServer && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js');
     });

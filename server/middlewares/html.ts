@@ -13,7 +13,7 @@ export const getPageHtml = (bundleHtml: string) => {
     </head>
     <body>
         <div id="root">${bundleHtml}</div>
-        <script src="/bundle.js"></script>
+        <script src="/client.bundle.js"></script>
         <script>
           Client.init();
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
