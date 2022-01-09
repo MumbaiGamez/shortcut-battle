@@ -1,15 +1,13 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import { isDev } from '../../../lib/env';
-
 export default () => {
   return {
     test: /\.css$/i,
     use: [
-      isDev && 'css-hot-loader',
+      require.resolve('css-hot-loader'),
       MiniCssExtractPlugin.loader,
       {
-        loader: 'css-loader',
+        loader: require.resolve('css-loader'),
         options: {
           importLoaders: 1,
           modules: {
@@ -18,7 +16,8 @@ export default () => {
           },
         },
       },
-      'postcss-loader',
-    ].filter(Boolean),
+      { loader: require.resolve('postcss-loader') },
+    ],
+    sideEffects: true,
   };
 };

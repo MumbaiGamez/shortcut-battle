@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(render);
+
 if (isDev) {
   const config = getClientConfig({ isExpress: true });
   // @ts-ignore
@@ -26,7 +28,6 @@ if (isDev) {
     // @ts-ignore
     hotMiddleware(compiler, {
       log: console.log,
-      path: '/__hmr',
       heartbeat: 2000,
     })
   );
@@ -37,7 +38,6 @@ const handleError: ErrorRequestHandler = (err, req, res) => {
   res.status(500).send('Something went wrong...');
 };
 
-app.use(render);
 app.use(router);
 app.use(handleError);
 

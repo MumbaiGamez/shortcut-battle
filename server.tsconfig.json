@@ -1,0 +1,45 @@
+{
+  "ts-node": {
+    "files": true
+  },
+  "compilerOptions": {
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "declaration": false,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "paths": {
+      "*": ["*"],
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@redux/*": ["./src/redux/*"],
+      "@typings/*": ["./typings/*"]
+    }
+  },
+  "include": [
+    "lib",
+    "src",
+    "server",
+    "typings"
+  ]
+}

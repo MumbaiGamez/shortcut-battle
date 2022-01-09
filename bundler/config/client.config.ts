@@ -17,7 +17,7 @@ export const getClientConfig = (opt: Options = {}) => {
       isDev && 'react-hot-loader/patch',
       isDev && 'css-hot-loader/hotModuleReplacement',
       isDev &&
-        'webpack-hot-middleware/client?path=/_hmr&timeout=20000&reload=true',
+        'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr&timeout=20000&reload=true',
       path.resolve(__ROOT__, 'src/index.tsx').replace('dist/', ''),
     ].filter(Boolean),
     mode: isProd ? 'production' : 'development',
