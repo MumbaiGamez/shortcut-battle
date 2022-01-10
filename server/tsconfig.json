@@ -1,15 +1,3 @@
 {
-  "extends": "../tsconfig",
-  "compilerOptions": {
-    "module": "CommonJS",
-    "outDir": "../dist",
-    "baseUrl": "..",
-    "skipLibCheck": true
-  },
-  "include": [
-    ".",
-    "../src",
-    "../typings/**/*.d.ts",
-    "../node_modules/@types"
-  ]
+  "extends": "../server.tsconfig.json"
 }

@@ -10,7 +10,7 @@
     "watch:client": "NODE_ENV=development webpack --watch --config bundler/config/client.config.ts",
     "build:ssr": "webpack --config bundler/config/ssr.config.ts",
     "watch:ssr": "NODE_ENV=development webpack --watch --config bundler/config/ssr.config.ts",
-    "build:server": "tsc --project server && tsc-alias -p server/tsconfig.json",
+    "build:server": "tsc --project server.tsconfig.json && tsc-alias -p server.tsconfig.json",
     "build": "NODE_ENV=production npm-run-all clean build:*",
     "dev": "npm-run-all clean && npm-run-all --parallel watch:client watch:ssr start:dev",
     "lint": "npm-run-all lint:*",
