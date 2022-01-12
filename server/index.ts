@@ -18,6 +18,7 @@ if (isDev) {
   const config = getClientConfig({ isExpress: true });
   // @ts-ignore
   const compiler = webpack(config);
+
   app.use(
     devMiddleware(compiler, {
       publicPath: config.output.publicPath,
