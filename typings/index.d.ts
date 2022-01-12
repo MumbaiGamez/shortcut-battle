@@ -1,3 +1,7 @@
+declare interface Window {
+  __PRELOADED_STATE__?: object;
+}
+
 declare module '*.css' {
   const content: Record<string, string>;
   export default content;

@@ -1,18 +1,24 @@
-const fs = require('fs');
-const {
-  Compilation,
-  sources: { ConcatSource },
-} = require('webpack');
-const { createHash } = require('crypto');
+import fs from 'fs';
+import { Compilation, Compiler } from 'webpack';
+import { ConcatSource } from 'webpack-sources';
+import { createHash } from 'crypto';
+
+type Options = {
+  output: string;
+  path: string;
+  routes: string[];
+};
 
 const PLUGIN_NAME = 'ServiceWorkerAssetsPlugin';
 
 class ServiceWorkerAssetsPlugin {
-  constructor(options) {
+  options: Options;
+
+  constructor(options: Options) {
     this.options = options;
   }
 
-  apply(compiler) {
+  apply(compiler: Compiler) {
     compiler.hooks.thisCompilation.tap(PLUGIN_NAME, (compilation) => {
       compilation.hooks.processAssets.tapPromise(
         {
@@ -52,7 +58,7 @@ class ServiceWorkerAssetsPlugin {
               `const VERSION = ${JSON.stringify(version)};`,
               `const ASSETS = ${JSON.stringify(assetUrls)};`,
               source
-            )
+            ) as any
           );
         }
       );
@@ -60,4 +66,4 @@ class ServiceWorkerAssetsPlugin {
   }
 }
 
-module.exports = ServiceWorkerAssetsPlugin;
+export default ServiceWorkerAssetsPlugin;

@@ -1,8 +1,6 @@
 {
   "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
+    "files": true
   },
   "compilerOptions": {
     "strict": true,
@@ -13,7 +11,7 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
@@ -24,10 +22,11 @@
     "downlevelIteration": true,
     "declaration": false,
     "sourceMap": true,
+    "skipLibCheck": true,
     "baseUrl": ".",
     "outDir": "./dist",
     "paths": {
-      "*": ["./*"],
+      "*": ["*"],
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
@@ -35,15 +34,12 @@
       "@assets/*": ["./src/assets/*"],
       "@redux/*": ["./src/redux/*"],
       "@typings/*": ["./typings/*"]
-    },
-    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
+    }
   },
   "include": [
-    "src/**/*",
-    "typings/**/*.d.ts",
-    "./node_modules/@types"
-  ],
-  "exclude": [
-    "**/*.js"
+    "lib",
+    "src",
+    "server",
+    "typings"
   ]
 }

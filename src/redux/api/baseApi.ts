@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import fetch from 'isomorphic-fetch';
 
 const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 
@@ -7,6 +8,7 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
     credentials: 'include',
+    fetchFn: fetch,
   }),
   endpoints: () => ({}),
 });

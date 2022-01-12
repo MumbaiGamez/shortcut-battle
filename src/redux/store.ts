@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory, createMemoryHistory } from 'history';
 
 import settingsReducer from './slices/settingsSlice';
 import configReducer from './slices/configSlice';
@@ -10,9 +10,13 @@ import { errorMiddleware } from './middleware/error';
 import { authMiddleware } from './middleware/auth';
 import { successMiddleware } from './middleware/success';
 
+import { isServer } from '@utils/ssr';
+
 const { createReduxHistory, routerMiddleware, routerReducer } =
   createReduxHistoryContext({
-    history: createBrowserHistory(),
+    history: isServer
+      ? createMemoryHistory({ initialEntries: ['/'] })
+      : createBrowserHistory(),
   });
 
 export const store = configureStore({
