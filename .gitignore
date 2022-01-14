@@ -99,7 +99,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# Postgres files
-postgresdata/
-pgadmin-data/

@@ -38,6 +38,7 @@ export const getClientConfig = (opt: Options = {}) => {
     module: { rules: [ts(), css(), svg, img] },
     plugins: plugins(opt),
     devtool: 'source-map',
+    stats: 'errors-only',
   };
 };
 

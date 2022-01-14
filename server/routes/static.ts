@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { Router, static as staticRoute } from 'express';
+
 import { isDev } from '../../lib/env';
 
 const STATIC_DIR = path.resolve(__dirname, `../../${isDev ? 'dist/' : ''}`);

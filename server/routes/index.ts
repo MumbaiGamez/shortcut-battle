@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 import { staticRoutes } from './static';
-import { appRoutes } from './app';
+import { dbRoutes } from './db';
+import { appRoutes } from './www';
 
-const router = Router();
+export const router = Router();
 
 staticRoutes(router);
+dbRoutes(router);
 appRoutes(router);
-
-export default router;
