@@ -1,5 +1,7 @@
 declare interface Window {
   __PRELOADED_STATE__?: object;
+  __i18nStore__: any;
+  __i18nLanguage__?: any;
 }
 
 declare module '*.css' {

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { useLogoutMutation } from '@redux/api/authApi';
 import { selectIsAuth } from '@redux/slices/settingsSlice';
+import { useTranslation } from 'react-i18next';
 
 export enum RoutesList {
   all = '*',
@@ -17,6 +18,8 @@ export enum RoutesList {
 }
 
 export const useNavigationMenu = () => {
+  const { t } = useTranslation();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [logout] = useLogoutMutation();
@@ -40,19 +43,19 @@ export const useNavigationMenu = () => {
       [
         {
           link: RoutesList.home,
-          name: 'Home',
+          name: t('nav.home'),
           handleClick: closeMenu,
           isShown: true,
         },
         {
           link: RoutesList.play,
-          name: 'Play',
+          name: t('nav.play'),
           handleClick: closeMenu,
           isShown: true,
         },
         {
           link: RoutesList.login,
-          name: 'Login',
+          name: t('nav.login'),
           handleClick: closeMenu,
           isShown: !isAuth,
         },
@@ -75,7 +78,7 @@ export const useNavigationMenu = () => {
           isShown: isAuth,
         },
       ].filter((link) => link.isShown),
-    [closeMenu, handleLogout, isAuth]
+    [closeMenu, handleLogout, isAuth, t]
   );
 
   return { isMenuOpen, navigationLinks, toggleMenu };

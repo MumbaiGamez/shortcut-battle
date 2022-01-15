@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
 import { isProd } from '../lib/env';
+import { i18n } from './services';
 import { auth, cors, render } from './middlewares';
 import { router } from './routes';
 import { sequelize } from './sequelize';
@@ -39,6 +40,8 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+i18n.i18nInit(app);
+
 app.use(cors);
 app.use(auth);
 app.use(...render);
@@ -51,11 +54,19 @@ app.use(router);
     console.error('Sequelize sync error:', err);
   }
 
-  app
-    .listen(PORT, () => {
-      console.log(`Listening on port ${PORT}`);
-    })
-    .on('error', (err) => {
-      console.error('App start error:', err.stack);
-    });
+  const run = () => {
+    app
+      .listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+      })
+      .on('error', (err) => {
+        console.error('App start error:', err.stack);
+      });
+  };
+
+  if (i18n.instance.isInitialized) {
+    run();
+  } else {
+    i18n.instance.on('initialized', run);
+  }
 })();

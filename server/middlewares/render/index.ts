@@ -5,13 +5,11 @@ import hotMiddleware from 'webpack-hot-middleware';
 
 import { getClientConfig } from '../../../bundler/config/client.config';
 import { isDev } from '../../../lib/env';
-import { getPageHtml } from './html';
-import { getBundleHtml } from './bundle';
+import { getPageHtml } from './bundle';
 
 const render = (req: Request, res: Response, next: NextFunction) => {
   res.renderReact = () => {
-    const bundleHtml = getBundleHtml(req);
-    const html = getPageHtml(bundleHtml);
+    const html = getPageHtml(req);
 
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(html);
