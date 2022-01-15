@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import { LanguageDropdown } from '../LanguageDropdown';
 import { NavigationLink } from '../NavigationLink';
 import { Button, ButtonTheme } from '../Button';
 
@@ -34,6 +35,7 @@ export const NavigationMenu = () => {
             name={name}
           />
         ))}
+        <LanguageDropdown />
       </div>
     </>
   );
