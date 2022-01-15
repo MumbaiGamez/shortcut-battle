@@ -1,7 +1,10 @@
 import { Model, Table, Column } from 'sequelize-typescript';
 
-@Table
+@Table({
+  timestamps: false,
+  tableName: 'users',
+})
 export class User extends Model {
-  @Column({ primaryKey: true }) userId!: string;
-  @Column lang!: string;
+  @Column({ primaryKey: true })
+  id!: string;
 }

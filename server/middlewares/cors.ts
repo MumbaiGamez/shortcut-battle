@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 
-export const cors = (req: Request, res: Response, next: NextFunction) => {
+export const cors: RequestHandler = (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET POST, PUT, DELETE');
 
