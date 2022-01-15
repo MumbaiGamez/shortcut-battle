@@ -1,23 +1,52 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
-import { cors, render } from './middlewares';
+import { isProd } from '../lib/env';
+import { auth, cors, render } from './middlewares';
 import { router } from './routes';
 import { sequelize } from './sequelize';
 
-const PORT = process.env.PORT || 3000;
+declare module 'express-session' {
+  interface SessionData {
+    userId: string;
+  }
+}
+
+const {
+  PORT = 3000,
+  SESSION_MAX_AGE = 1000 * 60 * 60 * 2,
+  SESSION_NAME = 'sid',
+  SESSION_SECRET = 'secret',
+} = process.env;
 
 const app = express();
 
+app.use(cookieParser());
+app.use(
+  session({
+    secret: SESSION_SECRET,
+    name: SESSION_NAME,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: SESSION_MAX_AGE as number,
+      sameSite: true,
+      secure: isProd,
+    },
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors);
+app.use(auth);
 app.use(...render);
 app.use(router);
 
 (async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
   } catch (err) {
     console.error('Sequelize sync error:', err);
   }
