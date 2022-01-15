@@ -6,10 +6,6 @@ export enum ToastTheme {
   Success = 'Success',
 }
 
-type LanguagesType = {
-  name: string;
-};
-
 export type ToastType = {
   id: number;
   message: string;
@@ -19,15 +15,11 @@ export type ToastType = {
 export type SettingsType = {
   isAuth: boolean;
   toasts: ToastType[];
-  languages: LanguagesType[];
-  activeLanguage: LanguagesType['name'];
 };
 
 const initialState: SettingsType = {
   isAuth: false,
   toasts: [],
-  languages: [{ name: 'En' }, { name: 'Ru' }],
-  activeLanguage: 'En',
 };
 
 const settingsSlice = createSlice({
@@ -60,16 +52,6 @@ export const selectToasts = createSelector(
 export const selectIsAuth = createSelector(
   selectSettings,
   (state) => state.isAuth
-);
-
-export const selectLanguages = createSelector(
-  selectSettings,
-  (state) => state.languages
-);
-
-export const selectActiveLanguage = createSelector(
-  selectSettings,
-  (state) => state.activeLanguage
 );
 
 export default settingsSlice.reducer;

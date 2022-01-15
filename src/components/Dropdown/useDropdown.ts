@@ -9,7 +9,9 @@ export const useDropdown = (props: DropdownProps) => {
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  const filteredItems = items.filter((item) => item.name !== selectedItem);
+  const filteredItems = items.filter(
+    (item) => item.value !== selectedItem.value
+  );
 
   const switchDropdown = () => {
     setDropdownOpen((prevState) => !prevState);

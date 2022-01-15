@@ -16,7 +16,7 @@ export const Dropdown = (props: DropdownProps) => {
   return (
     <div className={styles.dropdownContainer} ref={ref}>
       <div className={styles.selectedItem} onClick={switchDropdown}>
-        {selectedItem}
+        {selectedItem.name}
       </div>
       <ul
         className={classNames(
@@ -29,7 +29,7 @@ export const Dropdown = (props: DropdownProps) => {
             <li
               className={styles.listItem}
               key={item.name}
-              onClick={() => selectItem(item.name)}
+              onClick={() => selectItem(item.value)}
             >
               {item.name}
             </li>
