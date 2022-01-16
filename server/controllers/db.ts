@@ -30,9 +30,11 @@ export const getSettings: RequestHandler = async (req, res, next) => {
 export const updateSettings: RequestHandler = async (req, res, next) => {
   try {
     const { userId } = req.session;
-    const { settings } = req.body;
+    const { data } = req.body;
 
-    await settings.updateByUserId(userId, settings);
+    await settings.updateSettings(userId as string, data);
+
+    Object.assign(req.session.userSettings, data);
 
     return res.status(StatusCodes.OK).send(ReasonPhrases.OK);
   } catch (err) {

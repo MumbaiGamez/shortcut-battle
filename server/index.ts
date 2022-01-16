@@ -8,12 +8,6 @@ import { auth, cors, render } from './middlewares';
 import { router } from './routes';
 import { sequelize } from './sequelize';
 
-declare module 'express-session' {
-  interface SessionData {
-    userId: string;
-  }
-}
-
 const {
   PORT = 3000,
   SESSION_MAX_AGE = 1000 * 60 * 60 * 2,
@@ -49,7 +43,7 @@ app.use(router);
 
 (async () => {
   try {
-    await sequelize.sync();
+    await sequelize.sync({ force: true });
   } catch (err) {
     console.error('Sequelize sync error:', err);
   }

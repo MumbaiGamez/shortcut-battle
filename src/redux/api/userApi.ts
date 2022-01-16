@@ -10,7 +10,7 @@ import {
   ApiMethods,
 } from '../types/apiTypes';
 
-import { baseApi } from './baseApi';
+import { yandexApi } from './baseApi';
 
 enum UserURL {
   UPDATE_AVATAR = '/user/profile/avatar',
@@ -18,7 +18,7 @@ enum UserURL {
   GET_USER = '/auth/user',
 }
 
-const userApi = baseApi.injectEndpoints({
+const userApi = yandexApi.injectEndpoints({
   endpoints: (build) => ({
     getUser: build.query<UserDataType, void>({
       query: () => ({

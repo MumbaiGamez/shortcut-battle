@@ -1,6 +1,6 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
-import { User } from './models';
+import { Settings, User } from './models';
 
 const sequelizeOptions: SequelizeOptions = {
   database: 'settings-db',
@@ -9,7 +9,7 @@ const sequelizeOptions: SequelizeOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   dialect: 'postgres',
-  models: [User],
+  models: [User, Settings],
 };
 
 export const sequelize = new Sequelize(sequelizeOptions);

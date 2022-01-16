@@ -12,7 +12,7 @@ export const validateUser: RequestHandler = (req, res, next) => {
   next();
 };
 
-export const validateSettings: RequestHandler = body('settings')
+export const validateSettings: RequestHandler = body('data')
   .isObject()
   .custom((value) => {
     const checkRegex = /(lang)/;

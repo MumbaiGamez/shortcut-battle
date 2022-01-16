@@ -20,6 +20,7 @@ declare module '*.png' {
 
 declare const PRODUCTION: string;
 declare const REDIRECT_URI: string;
+declare const SUPPORTED_LANGUAGES: string[];
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
   T,

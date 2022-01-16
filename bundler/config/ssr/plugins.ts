@@ -1,13 +1,15 @@
 import path from 'path';
 import webpack from 'webpack';
 
-import { isProd } from '../../../lib/env';
+import { isProd, getSupportedLanguages } from '../../../lib/env';
 
 const __MOCKS__ = path.resolve(__dirname, '../../mock');
 const STUB_COMPONENTS_REGEX = /(Playground)$/;
 
 export default [
   new webpack.DefinePlugin({
+    'process.env': JSON.stringify(process.env),
+    SUPPORTED_LANGUAGES: JSON.stringify(getSupportedLanguages()),
     PRODUCTION: JSON.stringify(isProd),
     REDIRECT_URI: JSON.stringify(
       isProd

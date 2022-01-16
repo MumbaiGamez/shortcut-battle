@@ -1,9 +1,16 @@
-import { Settings } from '../models';
+import { Settings, SettingsCreationAttributes } from '../models/Settings';
 
 export const getByUserId = async (userId: string) => {
-  return await Settings.findOne({ where: { user_id: userId } });
+  return await Settings.findOne({ where: { userId } });
 };
 
-export const updateByUserId = async (userId: string, updated: Settings) => {
-  return await Settings.update(updated, { where: { user_id: userId } });
+export const updateSettings = async (
+  userId: string,
+  data: SettingsCreationAttributes
+) => {
+  return await Settings.update(data, { where: { userId }, returning: true });
+};
+
+export const createSettings = async (data: SettingsCreationAttributes) => {
+  return await Settings.create(data);
 };
