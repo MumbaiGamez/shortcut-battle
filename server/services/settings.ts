@@ -1,4 +1,4 @@
-import { Settings, SettingsCreationAttributes } from '../models/Settings';
+import { Settings, SettingsCreationAttributes } from '../models';
 
 export const getByUserId = async (userId: string) => {
   return await Settings.findOne({ where: { userId } });

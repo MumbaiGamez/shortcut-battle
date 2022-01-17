@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { validateUser, validateSettings } from '../middlewares/validator';
-import { getSettings, getUser, updateSettings } from '../controllers/db';
+import { getSettings, getUser, updateSettings } from '../controllers/users';
 
 export const dbRoutes = (router: Router) => {
   router.get('/users/:id', getUser);

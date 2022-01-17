@@ -1,15 +1,18 @@
+import { Optional } from 'sequelize';
 import {
   Model,
   Table,
   Column,
   ForeignKey,
   AutoIncrement,
+  PrimaryKey,
+  AllowNull,
+  BelongsTo,
 } from 'sequelize-typescript';
-import { Optional } from 'sequelize';
 
 import { User } from '.';
 
-export interface SettingsAttributes {
+interface SettingsAttributes {
   id: number;
   userId: string;
   lang?: string;
@@ -26,13 +29,18 @@ export class Settings extends Model<
   SettingsCreationAttributes
 > {
   @AutoIncrement
-  @Column({ primaryKey: true })
+  @PrimaryKey
+  @Column
   id!: number;
+
+  @AllowNull
+  @Column
+  lang?: string;
 
   @ForeignKey(() => User)
   @Column
   userId!: string;
 
-  @Column
-  lang: string;
+  @BelongsTo(() => User)
+  user: User;
 }

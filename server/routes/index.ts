@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { staticRoutes } from './static';
-import { dbRoutes } from './db';
+import { dbRoutes } from './users';
 import { appRoutes } from './www';
 
 export const router = Router();

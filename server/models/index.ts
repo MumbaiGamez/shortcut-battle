@@ -1,2 +1,4 @@
 export { User } from './User';
-export { Settings } from './Settings';
+export { Settings, SettingsCreationAttributes } from './Settings';
+export { Post } from './Post';
+export { Comment } from './Comment';
