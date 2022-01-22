@@ -8,7 +8,8 @@ import { useTranslation } from 'react-i18next';
 export enum RoutesList {
   all = '*',
   home = '/',
-  leaderboard = 'leaderboard',
+  forum = '/forum',
+  leaderboard = '/leaderboard',
   library = '/library',
   logout = '/logout',
   login = '/login',
@@ -70,6 +71,12 @@ export const useNavigationMenu = () => {
           name: 'Profile',
           handleClick: closeMenu,
           isShown: isAuth,
+        },
+        {
+          link: RoutesList.forum,
+          name: t('nav.forum'),
+          handleClick: closeMenu,
+          isShown: true,
         },
         {
           link: RoutesList.logout,
