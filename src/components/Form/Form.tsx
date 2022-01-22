@@ -1,6 +1,6 @@
 import React from 'react';
-import classNames from 'classnames';
 
+import { TextWithUnderline } from '../TextWithUnderline';
 import { ButtonTheme, Button } from '../Button';
 import { Input } from '../Input';
 import { Card } from '../Card';
@@ -33,12 +33,11 @@ export const Form = (props: FormProps) => {
         return <Input key={inputProps.placeholder} {...inputProps} />;
       })}
       {toggleFormText && (
-        <span
-          className={classNames(styles.toggleFormText, toggleFormClass)}
+        <TextWithUnderline
+          className={toggleFormClass}
           onClick={toggleForm}
-        >
-          {toggleFormText}
-        </span>
+          text={toggleFormText}
+        />
       )}
       {additionalButton}
       <Button
