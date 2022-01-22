@@ -12,19 +12,19 @@ import styles from './Topic.css';
 export const Topic = () => {
   const { topic } = useTopic();
 
-  const { avatar, author, title, text, createdAt, updatedAt, comments } = topic;
-
   return (
     <Card className={styles.container} contentClassName={styles.cardContent}>
-      <Avatar name={author} src={avatar} size={50} />
+      <Avatar name={topic?.author} src={topic?.avatar} size={50} />
       <div className={styles.body}>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 className={styles.title}>{topic?.title}</h2>
         <span className={styles.time}>
-          {updatedAt ? `Created at ${updatedAt}` : `Updated at ${createdAt}`} by{' '}
-          {author}
+          {topic?.updatedAt
+            ? `Created at ${topic?.updatedAt}`
+            : `Updated at ${topic?.createdAt}`}{' '}
+          {topic?.author}
         </span>
-        <span className={styles.text}>{text}</span>
-        {comments.map((comment) => {
+        <span className={styles.text}>{topic?.text}</span>
+        {topic?.comments?.map((comment) => {
           return <Comment key={comment.id} {...comment} />;
         })}
       </div>

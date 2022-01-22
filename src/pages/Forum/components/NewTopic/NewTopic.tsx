@@ -8,6 +8,7 @@ import styles from './NewTopic.css';
 
 export const NewTopic = () => {
   const { inputsList, isFormValid, handleSave } = useNewTopic();
+
   return (
     <div className={styles.newTopic}>
       <Form
