@@ -5,7 +5,7 @@ import { createBrowserHistory, createMemoryHistory } from 'history';
 import settingsReducer from './slices/settingsSlice';
 import configReducer from './slices/configSlice';
 import gameReducer from './slices/gameSlice';
-import { yandexApi } from './api/baseApi';
+import { baseApi, yandexApi } from './api/baseApi';
 import { errorMiddleware } from './middleware/error';
 import { authMiddleware } from './middleware/auth';
 import { successMiddleware } from './middleware/success';
@@ -21,6 +21,7 @@ const { createReduxHistory, routerMiddleware, routerReducer } =
 
 export const store = configureStore({
   reducer: {
+    [baseApi.reducerPath]: baseApi.reducer,
     [yandexApi.reducerPath]: yandexApi.reducer,
     router: routerReducer,
     settings: settingsReducer,
@@ -29,6 +30,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
+      baseApi.middleware,
       yandexApi.middleware,
       authMiddleware,
       errorMiddleware,
