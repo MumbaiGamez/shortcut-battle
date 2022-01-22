@@ -74,7 +74,7 @@ export const useNavigationMenu = () => {
         },
         {
           link: RoutesList.forum,
-          name: t('nav.forum'),
+          name: 'Forum',
           handleClick: closeMenu,
           isShown: true,
         },
