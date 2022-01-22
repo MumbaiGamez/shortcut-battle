@@ -10,6 +10,12 @@
           "mixin"
         ]
       }
+    ],
+    "value-no-vendor-prefix": [ 
+      true, 
+      {
+        "ignoreValues" : ["box"]
+      }
     ]
   }
 }
