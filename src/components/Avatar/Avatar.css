@@ -1,12 +1,8 @@
 .avatar {
-  --avatar-size: 100px;
-
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  width: var(--avatar-size);
-  height: var(--avatar-size);
   border-radius: 50%;
   background-color: var(--orange-color);
   overflow: hidden;
@@ -14,7 +10,6 @@
 
 .initials {
   color: var(--white-color);
-  font-size: calc(var(--avatar-size) / 2);
 }
 
 .image {
