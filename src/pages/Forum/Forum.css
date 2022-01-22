@@ -1,0 +1,17 @@
+.forum {
+  margin-top: 50px;
+}
+
+.forumTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.addPost {
+  width: 150px;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  border: none;
+}
