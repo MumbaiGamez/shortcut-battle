@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
 
 import { DropdownProps } from './types';
 
@@ -22,23 +23,7 @@ export const useDropdown = (props: DropdownProps) => {
     switchDropdown();
   };
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e: Event) => {
-      if (
-        isDropdownOpen &&
-        ref.current &&
-        !ref.current.contains(e.target as Node)
-      ) {
-        setDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', checkIfClickedOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', checkIfClickedOutside);
-    };
-  }, [isDropdownOpen]);
+  useOutsideClick(ref, switchDropdown);
 
   return { isDropdownOpen, filteredItems, ref, switchDropdown, selectItem };
 };
