@@ -6,7 +6,7 @@ import {
   RegistrationDataType,
 } from '../types/apiTypes';
 
-import { baseApi } from './baseApi';
+import { yandexApi } from './baseApi';
 
 enum AuthURL {
   SIGNUP = '/auth/signup',
@@ -21,7 +21,7 @@ type OAuthResponse = {
   service_id: string;
 };
 
-const authApi = baseApi.injectEndpoints({
+const authApi = yandexApi.injectEndpoints({
   endpoints: (build) => ({
     signin: build.mutation<string, LoginDataType>({
       query: (loginData) => ({

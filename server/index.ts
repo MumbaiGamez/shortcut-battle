@@ -1,51 +1,66 @@
-import express, { ErrorRequestHandler } from 'express';
-import webpack from 'webpack';
-import devMiddleware from 'webpack-dev-middleware';
-import hotMiddleware from 'webpack-hot-middleware';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
-import { getClientConfig } from '../bundler/config/client.config';
-import { isDev } from '../lib/env';
-import { render } from './middlewares';
-import router from './router';
+import { isProd } from '../lib/env';
+import { i18n } from './services';
+import { auth, cors, render } from './middlewares';
+import { router } from './routes';
+import { sequelize } from './sequelize';
 
-const PORT = process.env.PORT || 3000;
+const {
+  PORT = 3000,
+  SESSION_MAX_AGE = 1000 * 60 * 60 * 2,
+  SESSION_NAME = 'sid',
+  SESSION_SECRET = 'secret',
+} = process.env;
 
 const app = express();
 
-app.use(render);
-
-if (isDev) {
-  const config = getClientConfig({ isExpress: true });
-  // @ts-ignore
-  const compiler = webpack(config);
-  
-  app.use(
-    devMiddleware(compiler, {
-      publicPath: config.output.publicPath,
-      serverSideRender: true,
-    })
-  );
-  app.use(
-    // @ts-ignore
-    hotMiddleware(compiler, {
-      log: console.log,
-      heartbeat: 2000,
-    })
-  );
-}
-
-const handleError: ErrorRequestHandler = (err, req, res) => {
-  console.error(err.stack);
-  res.status(500).send('Something went wrong...');
-};
-
-app.use(router);
-app.use(handleError);
-
-app
-  .listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+app.use(cookieParser());
+app.use(
+  session({
+    secret: SESSION_SECRET,
+    name: SESSION_NAME,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: SESSION_MAX_AGE as number,
+      sameSite: true,
+      secure: isProd,
+    },
   })
-  .on('error', (err) => {
-    console.error(err.stack);
-  });
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+i18n.i18nInit(app);
+
+app.use(cors);
+app.use(auth);
+app.use(...render);
+app.use(router);
+
+(async () => {
+  try {
+    await sequelize.sync({ force: true });
+  } catch (err) {
+    console.error('Sequelize sync error:', err);
+  }
+
+  const run = () => {
+    app
+      .listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+      })
+      .on('error', (err) => {
+        console.error('App start error:', err.stack);
+      });
+  };
+
+  if (i18n.instance.isInitialized) {
+    run();
+  } else {
+    i18n.instance.on('initialized', run);
+  }
+})();

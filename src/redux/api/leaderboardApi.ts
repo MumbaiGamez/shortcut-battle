@@ -1,4 +1,4 @@
-import { baseApi } from './baseApi';
+import { yandexApi } from './baseApi';
 
 import { ApiMethods } from '../types/apiTypes';
 
@@ -43,7 +43,7 @@ const transformLeaderboardResponse = (response: LeaderboardResponseType) => {
     .map((data, index) => ({ ...data, rating: index + 1 }));
 };
 
-const leaderboardApi = baseApi.injectEndpoints({
+const leaderboardApi = yandexApi.injectEndpoints({
   endpoints: (build) => ({
     updateLeaderboard: build.mutation<void, LeaderData>({
       query: (data: LeaderData) => ({

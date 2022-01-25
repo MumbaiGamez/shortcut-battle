@@ -2,7 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import { isDev, isProd } from '../../../lib/env';
+import { isDev, isProd, getSupportedLanguages } from '../../../lib/env';
 import ServiceWorkerAssetsPlugin from '../../plugins/service-worker-assets-plugin';
 
 import { Options } from '../../@types';
@@ -17,6 +17,8 @@ export default ({ isExpress }: Options) =>
         routes: ['play', 'login', 'leaderboard'],
       }),
     new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env),
+      SUPPORTED_LANGUAGES: JSON.stringify(getSupportedLanguages()),
       PRODUCTION: JSON.stringify(isProd),
       REDIRECT_URI: JSON.stringify(
         isProd

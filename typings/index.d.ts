@@ -1,5 +1,7 @@
 declare interface Window {
   __PRELOADED_STATE__?: object;
+  __i18nStore__: any;
+  __i18nLanguage__?: any;
 }
 
 declare module '*.css' {
@@ -18,6 +20,7 @@ declare module '*.png' {
 
 declare const PRODUCTION: string;
 declare const REDIRECT_URI: string;
+declare const SUPPORTED_LANGUAGES: string[];
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Pick<
   T,

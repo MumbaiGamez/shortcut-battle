@@ -1,4 +1,5 @@
 import { Middleware, MiddlewareAPI } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
 import { RoutesList } from '@components/NavigationMenu/useNavigationMenu';
 
@@ -11,7 +12,15 @@ import { history } from '../store';
 export const authMiddleware: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
     if (userEndpoints.getUser.matchFulfilled(action)) {
+      if (!Cookies.get('sbUserId')) {
+        Cookies.set('sbUserId', String(action.payload.id));
+      }
+
       api.dispatch(setAuth(true));
+    } else if (userEndpoints.getUser.matchRejected(action)) {
+      if (Cookies.get('sbUserId')) {
+        Cookies.remove('sbUserId');
+      }
     }
 
     if (
@@ -22,10 +31,13 @@ export const authMiddleware: Middleware =
         action?.payload?.data === 'OK')
     ) {
       api.dispatch(setAuth(true));
+      // @ts-ignore
+      api.dispatch(userEndpoints.getUser.initiate());
       history.push(RoutesList.play);
     }
 
     if (authEndpoints.logout.matchFulfilled(action)) {
+      Cookies.remove('sbUserId');
       api.dispatch(setAuth(false));
     }
 
