@@ -1,19 +1,26 @@
 import { useState } from 'react';
 
-import { useNavigate } from 'react-router';
-
-export const useTopicListItem = (id: number) => {
+export const useTopicListItem = (numberComments: number) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isShowComments, setIsShowComments] = useState(false);
 
   const switchTextView = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  const navigate = useNavigate();
-
-  const openTopicPage = () => {
-    navigate(id);
+  const switchComments = () => {
+    setIsShowComments((prevState) => !prevState);
   };
 
-  return { isOpen, switchTextView, openTopicPage };
+  const commentsText = `${
+    isShowComments ? 'Hide' : 'Show'
+  } ${numberComments} comments`;
+
+  return {
+    commentsText,
+    isOpen,
+    isShowComments,
+    switchTextView,
+    switchComments,
+  };
 };

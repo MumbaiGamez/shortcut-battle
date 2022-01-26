@@ -18,12 +18,16 @@ export const useDropdown = (props: DropdownProps) => {
     setDropdownOpen((prevState) => !prevState);
   };
 
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
+
   const selectItem = (item: string) => {
     setSelectedItem(item);
     switchDropdown();
   };
 
-  useOutsideClick(ref, switchDropdown);
+  useOutsideClick(ref, closeDropdown);
 
   return { isDropdownOpen, filteredItems, ref, switchDropdown, selectItem };
 };

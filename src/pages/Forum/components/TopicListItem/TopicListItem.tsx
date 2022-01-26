@@ -8,13 +8,14 @@ import { TextWithUnderline } from '@components/TextWithUnderline';
 import { Avatar } from '@components/Avatar';
 import { Card } from '@components/Card';
 
+import { Comment } from '../Comment';
+
 import { useTopicListItem } from './useTopicListItem';
 
 import styles from './TopicListItem.css';
 
 export const TopicListItem = (props: TopicType) => {
   const {
-    id,
     avatar,
     author,
     title,
@@ -24,10 +25,16 @@ export const TopicListItem = (props: TopicType) => {
     comments = [],
   } = props;
 
-  const { isOpen, switchTextView, openTopicPage } = useTopicListItem(id);
+  const {
+    commentsText,
+    isOpen,
+    isShowComments,
+    switchTextView,
+    switchComments,
+  } = useTopicListItem(comments?.length || 0);
 
   return (
-    <Card className={styles.container} contentClassName={styles.cardContent}>
+    <Card contentClassName={styles.cardContent}>
       <Avatar name={author} src={avatar} size={50} />
       <div className={styles.body}>
         <h2 className={styles.title}>{title}</h2>
@@ -43,9 +50,13 @@ export const TopicListItem = (props: TopicType) => {
         </span>
         <TextWithUnderline
           className={styles.comments}
-          text={`${comments?.length || 0} comments`}
-          onClick={openTopicPage}
+          text={commentsText}
+          onClick={switchComments}
         />
+        {isShowComments &&
+          comments?.map((comment) => {
+            return <Comment key={comment.id} {...comment} />;
+          })}
       </div>
     </Card>
   );

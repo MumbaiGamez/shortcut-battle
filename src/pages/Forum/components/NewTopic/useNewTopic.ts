@@ -1,19 +1,17 @@
+import { NewTopicPropsType } from './types';
 import { useMemo, useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
 
 import { useAddTopicMutation } from '@redux/api/forumApi';
 
 import { FieldsList } from '@components/Form/types';
 import { useForm } from '@components/Form/useForm';
 import { InputTypeEnum } from '@components/Input';
-import { RoutesList } from '@components/NavigationMenu/useNavigationMenu';
 
 import { setFormFieldValueFactory } from '@utils/setFormFieldValueFactory';
 
-export const useNewTopic = () => {
-  const navigate = useNavigate();
-
+export const useNewTopic = (
+  saveCallback: NewTopicPropsType['saveCallback']
+) => {
   const [newTopicData, setNewTopicData] = useState({
     title: '',
     text: '',
@@ -30,7 +28,7 @@ export const useNewTopic = () => {
   const handleSave = () => {
     if (isFormValid) {
       addTopic(newTopicData);
-      navigate(RoutesList.forum);
+      saveCallback();
     }
   };
 

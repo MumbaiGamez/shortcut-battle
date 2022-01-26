@@ -2,6 +2,11 @@
   margin-top: 50px;
 }
 
+.topicsContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .forumTitle {
   font-size: 1.5em;
   font-weight: bold;

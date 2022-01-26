@@ -1,19 +1,28 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 
 import { selectIsAuth } from '@redux/slices/settingsSlice';
 import { useGetTopicsQuery } from '@redux/api/forumApi';
 
 export const useForum = () => {
+  const [isNewTopicOpen, setIsNewTopicOpen] = useState(false);
+
   const isAuth = useSelector(selectIsAuth);
 
   const { data: topics, isLoading } = useGetTopicsQuery();
 
-  const navigate = useNavigate();
-
-  const goToNewTopicPage = () => {
-    navigate('new');
+  const switchNewTopic = () => {
+    setIsNewTopicOpen((prevState) => !prevState);
   };
 
-  return { isAuth, isLoading, goToNewTopicPage, topics };
+  const isEmptyData = Boolean(topics?.length) === false;
+
+  return {
+    isAuth,
+    isEmptyData,
+    isLoading,
+    isNewTopicOpen,
+    switchNewTopic,
+    topics,
+  };
 };
