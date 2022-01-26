@@ -2,22 +2,24 @@ import { RequestHandler } from 'express';
 import createHttpError from 'http-errors';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 
-import { users, settings } from '../services';
+import { SettingsCreationAttributes } from '../models';
+import * as usersService from '../services/users';
+import * as settingsService from '../services/settings';
 
 export const getUser: RequestHandler = async (req, res, next) => {
   try {
-    const user = await users.getById(req.params.id);
+    const user = await usersService.getById(req.params.id);
 
     return user ? res.json(user) : next(new createHttpError.NotFound());
   } catch (err) {
-    return res.status(500).json(err);
+    return next(new createHttpError.InternalServerError());
   }
 };
 
 export const getSettings: RequestHandler = async (req, res, next) => {
   try {
     const userId = req.session.userId;
-    const userSettings = await settings.getByUserId(userId as string);
+    const userSettings = await settingsService.getByUserId(userId as string);
 
     return userSettings
       ? res.json(userSettings)
@@ -29,10 +31,11 @@ export const getSettings: RequestHandler = async (req, res, next) => {
 
 export const updateSettings: RequestHandler = async (req, res, next) => {
   try {
-    const { userId } = req.session;
-    const { data } = req.body;
+    const userId = req.session.userId as string;
+    const { lang } = req.body.data;
+    const data: SettingsCreationAttributes = { lang, userId };
 
-    await settings.updateSettings(userId as string, data);
+    await settingsService.update(userId, data);
 
     Object.assign(req.session.userSettings, data);
 

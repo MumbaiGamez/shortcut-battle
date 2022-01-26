@@ -26,15 +26,15 @@ const getBundleHtml = (req: Request) => {
 export const getPageHtml = (req: Request) => {
   const bundleHtml = getBundleHtml(req);
 
-  const initialLanguage = req.i18n.languages[0];
-  const initialStore: any = {};
+  const i18nInitialLanguage = req.i18n.languages[0];
+  const i18nInitialStore: any = {};
   const usedNamespaces = req.i18n.reportNamespaces?.getUsedNamespaces() || [];
 
   req.i18n.languages.forEach((language) => {
-    initialStore[language] = {};
+    i18nInitialStore[language] = {};
 
     usedNamespaces.forEach((namespace) => {
-      initialStore[language][namespace] =
+      i18nInitialStore[language][namespace] =
         req.i18n.services.resourceStore.data[language][namespace];
     });
   });
@@ -54,8 +54,10 @@ export const getPageHtml = (req: Request) => {
         <script src="/client.bundle.js"></script>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())};
-          window.__i18nStore__ = JSON.parse('${JSON.stringify(initialStore)}');
-          window.__i18nLanguage__ = '${initialLanguage}';
+          window.__i18nStore__ = JSON.parse('${JSON.stringify(
+            i18nInitialStore
+          )}');
+          window.__i18nLanguage__ = '${i18nInitialLanguage}';
           Client.init();
         </script>
     </body>

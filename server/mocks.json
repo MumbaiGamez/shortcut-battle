@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "id": "111"
+    },
+    {
+      "id": "222"
+    }
+  ],
+  "settings": [
+    {
+      "userId": "111",
+      "lang": "en"
+    },
+    {
+      "userId": "222",
+      "lang": "ru"
+    }
+  ],
+  "posts": [
+    {
+      "title": "Do eiusmod do ad est duis",
+      "text": "Labore labore nulla aliquip eu tempor mollit veniam ea ea consequat magna amet proident ut.",
+      "authorId": "111",
+      "comments": [
+        {
+          "text": "Cillum quis minim sint cillum amet aliqua laboris eu do nisi pariatur.",
+          "authorId": "222"
+        },
+        {
+          "text": "Sunt et veniam anim labore id in magna labore do pariatur.",
+          "authorId": "111"
+        }
+      ]
+    },
+    {
+      "title": "Et anim labore exercitation nostrud",
+      "text": "Labore labore nulla aliquip eu tempor mollit veniam ea ea consequat magna amet proident ut.",
+      "authorId": "222",
+      "comments": [
+        {
+          "text": "Adipisicing anim qui labore esse eu nostrud culpa et excepteur quis non ex ad.",
+          "authorId": "111"
+        },
+        {
+          "text": "Proident quis deserunt consequat ad ut ullamco laboris officia id nisi veniam quis.",
+          "authorId": "222"
+        }
+      ]
+    }
+  ]
+}

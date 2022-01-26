@@ -9,11 +9,15 @@ import {
 
 import { Settings, Comment, Post } from '.';
 
+export interface UserAttributes {
+  id: string;
+}
+
 @Table({
   timestamps: false,
   tableName: 'users',
 })
-export class User extends Model {
+export class User extends Model<UserAttributes, UserAttributes> {
   @PrimaryKey
   @Column
   id!: string;

@@ -1,3 +1,4 @@
+import { Optional } from 'sequelize';
 import {
   AutoIncrement,
   BelongsTo,
@@ -9,12 +10,21 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-import { Comment, User } from '.';
+import { Comment, User, UserAttributes } from '.';
+
+export interface PostAttributes {
+  id: number;
+  title: string;
+  text: string;
+  authorId: UserAttributes['id'];
+}
+
+export type PostCreationAttributes = Optional<PostAttributes, 'id'>;
 
 @Table({
   tableName: 'posts',
 })
-export class Post extends Model {
+export class Post extends Model<PostAttributes, PostCreationAttributes> {
   @AutoIncrement
   @PrimaryKey
   @Column

@@ -12,6 +12,7 @@
     "docker:ps": "docker-compose ps --all",
     "docker:stop": "docker stop $(docker ps -q)",
     "docker:rm": "docker rm $(docker ps -a -q)",
+    "docker:clear": "docker volume rm $(docker volume ls -q)",
     "lint": "npm-run-all lint:*",
     "lint:ts": "eslint --ext=.ts,.tsx src --fix",
     "lint:css": "stylelint src/**/**/*.css --fix",

@@ -1,8 +1,10 @@
 import { Router } from 'express';
 
-import { www } from '../controllers';
+import { renderApp, handleError } from '../controllers/www';
 
-export const appRoutes = (router: Router) => {
-  router.get('/*', www.renderApp);
-  router.use(www.handleError);
-};
+const wwwRouter = Router();
+
+wwwRouter.get('/*', renderApp);
+wwwRouter.use(handleError);
+
+export default wwwRouter;

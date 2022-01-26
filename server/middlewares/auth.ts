@@ -1,20 +1,22 @@
 import { RequestHandler } from 'express';
 
-import { createUser, getById } from '../services/users';
-import { createSettings, getByUserId } from '../services/settings';
+import * as usersService from '../services/users';
+import * as settingsService from '../services/settings';
 
 export const auth: RequestHandler = async (req, res, next) => {
   if (!req.session.userId && req.cookies.sbUserId) {
     req.session.userId = req.cookies.sbUserId as string;
 
-    const user = await getById(req.session.userId);
+    const user = await usersService.getById(req.session.userId);
 
     if (!user) {
-      await createUser(req.session.userId);
-      await createSettings({ userId: req.session.userId, lang: 'en' });
+      await usersService.create(req.session.userId);
+      await settingsService.create({ userId: req.session.userId, lang: '' });
     }
 
-    req.session.userSettings = await getByUserId(req.session.userId);
+    req.session.userSettings = await settingsService.getByUserId(
+      req.session.userId
+    );
   }
 
   if (req.session.userId && !req.cookies.sbUserId) {

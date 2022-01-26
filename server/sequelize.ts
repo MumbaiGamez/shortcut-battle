@@ -12,4 +12,28 @@ const sequelizeOptions: SequelizeOptions = {
   models: [User, Settings, Post, Comment],
 };
 
-export const sequelize = new Sequelize(sequelizeOptions);
+export const fillWithMocks = async () => {
+  const {
+    users,
+    settings,
+    posts,
+  }: // eslint-disable-next-line @typescript-eslint/no-var-requires
+  Record<string, any> = require('./mocks.json');
+  User.bulkCreate(users);
+  Settings.bulkCreate(settings);
+  await Promise.all(
+    posts.map(({ comments, ...rest }: any) => {
+      return Post.create(rest).then(({ id }) => {
+        return Promise.all(
+          comments.map((comment: any) => {
+            return Comment.create({ ...comment, postId: id });
+          })
+        );
+      });
+    })
+  );
+};
+
+const sequelize = new Sequelize(sequelizeOptions);
+
+export default sequelize;

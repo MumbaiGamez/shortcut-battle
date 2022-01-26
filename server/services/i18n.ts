@@ -8,6 +8,7 @@ import i18nextMiddleware from 'i18next-http-middleware';
 import { getSupportedLanguages, isDebug } from '../../lib/env';
 
 const userSettingsDetector = new i18nextMiddleware.LanguageDetector();
+
 userSettingsDetector.addDetector({
   name: 'user-settings-detector',
   lookup: (req) => {
@@ -53,4 +54,4 @@ export const i18nInit = (app: Express) => {
   );
 };
 
-export const instance = i18next;
+export default i18next;

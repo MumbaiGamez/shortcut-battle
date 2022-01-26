@@ -10,11 +10,11 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 
-import { User } from '.';
+import { User, UserAttributes } from '.';
 
-interface SettingsAttributes {
+export interface SettingsAttributes {
   id: number;
-  userId: string;
+  userId: UserAttributes['id'];
   lang?: string;
 }
 

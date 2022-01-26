@@ -15,11 +15,29 @@ export const validateUser: RequestHandler = (req, res, next) => {
 export const validateSettings: RequestHandler = body('data')
   .isObject()
   .custom((value) => {
-    const checkRegex = /(lang)/;
-
-    if (Object.keys(value).every((key) => checkRegex.test(key))) {
+    if (value.lang) {
       return true;
     }
 
-    throw new Error("Settings value doesn't match schema");
+    throw new Error("Settings data doesn't match schema");
+  });
+
+export const validatePost: RequestHandler = body('data')
+  .isObject()
+  .custom((value) => {
+    if (value.title && value.text) {
+      return true;
+    }
+
+    throw new Error("Post data doesn't match schema");
+  });
+
+export const validateComment: RequestHandler = body('data')
+  .isObject()
+  .custom((value) => {
+    if (value.title && value.text && value.postId) {
+      return true;
+    }
+
+    throw new Error("Comment data doesn't match schema");
   });

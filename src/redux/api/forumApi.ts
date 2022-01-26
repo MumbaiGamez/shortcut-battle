@@ -78,24 +78,18 @@ export const topics = [
 const forumApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getTopics: build.query<TopicType[], void>({
-      queryFn: () => {
-        return { data: topics };
-      },
-      // query: () => ({
-      //   url: '/forum/topics',
-      // }),
+      query: () => ({
+        url: '/forum/posts',
+      }),
     }),
     getTopicById: build.query<TopicType, string | undefined>({
-      queryFn: () => {
-        return { data: topics[0] };
-      },
-      // query: (id) => ({
-      //   url: `/forum/topics/${id}`,
-      // }),
+      query: (id) => ({
+        url: `/forum/posts/${id}`,
+      }),
     }),
     addTopic: build.mutation<void, NewTopicType>({
       query: (topic) => ({
-        url: '/forum/topics',
+        url: '/forum/posts',
         method: ApiMethods.POST,
         body: topic,
       }),
