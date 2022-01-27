@@ -44,6 +44,7 @@ export type CommentType = {
   id: number;
   author: string;
   text: string;
+  postId: number;
 
   comments?: CommentType[];
 };
@@ -65,4 +66,9 @@ export type TopicType = {
 export type NewTopicType = {
   title: string;
   text: string;
+};
+
+export type NewCommentType = {
+  text: string;
+  postId: number;
 };

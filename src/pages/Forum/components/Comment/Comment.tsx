@@ -15,7 +15,7 @@ import SendIcon from '@assets/icons/send.svg';
 const DEFAUL_LEFT_PADDING = 15;
 
 export const Comment = (props: CommentPropsType) => {
-  const { author, text, comments, level = 1 } = props;
+  const { author, text, comments, postId, level = 1 } = props;
 
   const {
     isAuth,
@@ -24,7 +24,7 @@ export const Comment = (props: CommentPropsType) => {
     handleInputChange,
     sendComment,
     toggleInput,
-  } = useComment();
+  } = useComment(postId);
 
   return (
     <>

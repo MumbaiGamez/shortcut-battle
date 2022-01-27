@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectIsAuth } from '@redux/slices/settingsSlice';
 import { useAddCommentMutation } from '@redux/api/forumApi';
 
-export const useComment = () => {
+export const useComment = (postId: number) => {
   const [isShowInput, setIsShowInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
@@ -23,7 +23,7 @@ export const useComment = () => {
 
   const sendComment = () => {
     if (inputValue) {
-      addComment(inputValue);
+      addComment({ text: inputValue, postId });
       handleInputChange('');
       toggleInput();
     }

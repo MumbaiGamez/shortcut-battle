@@ -2,6 +2,7 @@ import {
   ApiMethods,
   CommentType,
   NewTopicType,
+  NewCommentType,
   TopicType,
 } from '../types/apiTypes';
 import { baseApi } from './baseApi';
@@ -33,7 +34,7 @@ const forumApi = baseApi.injectEndpoints({
         url: `forum/posts/${id}/comments`,
       }),
     }),
-    addComment: build.mutation<void, string>({
+    addComment: build.mutation<void, NewCommentType>({
       query: (comment) => ({
         url: 'forum/comments',
         method: ApiMethods.POST,
