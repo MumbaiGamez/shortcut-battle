@@ -10,29 +10,29 @@ const forumApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getTopics: build.query<TopicType[], void>({
       query: () => ({
-        url: '/posts',
+        url: 'forum/posts',
       }),
     }),
     getTopicById: build.query<TopicType, string | undefined>({
       query: (id) => ({
-        url: `/posts/${id}`,
+        url: `forum//posts/${id}`,
       }),
     }),
     addTopic: build.mutation<void, NewTopicType>({
       query: (topic) => ({
-        url: '/posts',
+        url: 'forum//posts',
         method: ApiMethods.POST,
         body: topic,
       }),
     }),
     getComments: build.query<CommentType[], string | undefined>({
       query: (id) => ({
-        url: `/posts/${id}/comments`,
+        url: `forum//posts/${id}/comments`,
       }),
     }),
     addComment: build.mutation<void, string>({
       query: (comment) => ({
-        url: '/comments',
+        url: 'forum//comments',
         method: ApiMethods.POST,
         body: comment,
       }),

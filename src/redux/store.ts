@@ -9,6 +9,7 @@ import { baseApi, yandexApi } from './api/baseApi';
 import { errorMiddleware } from './middleware/error';
 import { authMiddleware } from './middleware/auth';
 import { successMiddleware } from './middleware/success';
+import { forumMiddleware } from './middleware/forum';
 
 import { isServer } from '@utils/ssr';
 
@@ -35,6 +36,7 @@ export const store = configureStore({
       authMiddleware,
       errorMiddleware,
       routerMiddleware,
+      forumMiddleware,
       successMiddleware
     );
   },
