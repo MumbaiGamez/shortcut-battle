@@ -14,7 +14,7 @@ const forumApi = baseApi.injectEndpoints({
         url: 'forum/posts',
       }),
       transformResponse: (response: TopicType[]) => {
-        return response.reverse();
+        return response.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
       },
     }),
     getTopicById: build.query<TopicType, string | undefined>({
