@@ -13,6 +13,7 @@ import { Comment } from '../Comment';
 import { useTopicListItem } from './useTopicListItem';
 
 import styles from './TopicListItem.css';
+import { CommentForm } from '../CommentForm';
 
 export const TopicListItem = (props: TopicType) => {
   const {
@@ -26,6 +27,7 @@ export const TopicListItem = (props: TopicType) => {
   } = props;
 
   const {
+    addComment,
     commentsText,
     isOpen,
     isShowComments,
@@ -45,9 +47,10 @@ export const TopicListItem = (props: TopicType) => {
           {text}
         </span>
         <span className={styles.time}>
-          {updatedAt ? `Created at ${updatedAt}` : `Updated at ${createdAt}`} by{' '}
+          {updatedAt ? `Updated at ${updatedAt}` : `Created at ${createdAt}`} by{' '}
           {author}
         </span>
+        <CommentForm sendCallback={addComment} />
         <TextWithUnderline
           className={styles.comments}
           text={commentsText}
