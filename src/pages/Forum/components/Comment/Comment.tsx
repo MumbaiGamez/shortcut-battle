@@ -36,9 +36,9 @@ export const Comment = (props: CommentPropsType) => {
         <p className={styles.text}>{text}</p>
         {isAuth && (
           <TextWithUnderline
-            className={styles.replay}
+            className={styles.reply}
             onClick={toggleInput}
-            text={'Replay'}
+            text={'Reply'}
           />
         )}
         {isShowInput && (
