@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button, ButtonTheme } from '@components/Button';
+import { Loader } from '@components/Loader';
 
 import { TopicListItem } from './components/TopicListItem';
 import { NewTopic } from './components/NewTopic';
@@ -10,13 +11,26 @@ import { useForum } from './useForum';
 import styles from './Forum.css';
 
 export const Forum = () => {
-  const { isAuth, isEmptyData, isNewTopicOpen, switchNewTopic, topics } =
-    useForum();
+  const {
+    isAuth,
+    isEmptyData,
+    isLoading,
+    isNewTopicOpen,
+    switchNewTopic,
+    topics,
+  } = useForum();
 
   return (
     <div className={styles.forum}>
       <div className={styles.topicsContainer}>
-        {isEmptyData && <div className={styles.emptyData}>No topics yet</div>}
+        {isLoading && (
+          <div className={styles.loaderContainer}>
+            <Loader />
+          </div>
+        )}
+        {!isLoading && isEmptyData && (
+          <div className={styles.emptyData}>No topics yet</div>
+        )}
         {isNewTopicOpen && <NewTopic saveCallback={switchNewTopic} />}
         {topics?.map((topic) => (
           <TopicListItem key={topic.id} {...topic} />
