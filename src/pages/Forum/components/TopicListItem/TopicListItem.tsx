@@ -34,7 +34,7 @@ export const TopicListItem = (props: TopicType) => {
   } = useTopicListItem(comments?.length || 0);
 
   return (
-    <Card contentClassName={styles.cardContent}>
+    <Card className={styles.container} contentClassName={styles.cardContent}>
       <Avatar name={author} src={avatar} size={50} />
       <div className={styles.body}>
         <h2 className={styles.title}>{title}</h2>
