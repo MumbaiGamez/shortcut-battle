@@ -30,6 +30,7 @@ export const TopicListItem = (props: TopicType) => {
   const {
     addComment,
     commentsText,
+    isAuth,
     isOpen,
     isShowComments,
     switchTextView,
@@ -51,7 +52,7 @@ export const TopicListItem = (props: TopicType) => {
           {updatedAt ? `Updated at ${updatedAt}` : `Created at ${createdAt}`} by{' '}
           {author.login}
         </span>
-        <CommentForm sendCallback={addComment} postId={id} />
+        {isAuth && <CommentForm sendCallback={addComment} postId={id} />}
         <TextWithUnderline
           className={styles.comments}
           text={commentsText}

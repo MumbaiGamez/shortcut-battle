@@ -1,10 +1,16 @@
 import { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
+import { selectIsAuth } from '@redux/slices/settingsSlice';
+
 import { useAddCommentMutation } from '@redux/api/forumApi';
 
 export const useTopicListItem = (numberComments: number) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isShowComments, setIsShowComments] = useState(false);
+
+  const isAuth = useSelector(selectIsAuth);
 
   const [addComment, { isLoading }] = useAddCommentMutation();
 
@@ -23,6 +29,7 @@ export const useTopicListItem = (numberComments: number) => {
   return {
     addComment,
     commentsText,
+    isAuth,
     isOpen,
     isLoading,
     isShowComments,
