@@ -3,7 +3,7 @@ import createHttpError from 'http-errors';
 import { body } from 'express-validator';
 
 export const validateUser: RequestHandler = (req, res, next) => {
-  const userId = req.session.userId;
+  const userId = req.session.user?.id;
 
   if (!userId) {
     return next(new createHttpError.Unauthorized());

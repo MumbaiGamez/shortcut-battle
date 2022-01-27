@@ -11,6 +11,7 @@ import { Settings, Comment, Post } from '.';
 
 export interface UserAttributes {
   id: string;
+  login: string;
 }
 
 @Table({
@@ -21,6 +22,9 @@ export class User extends Model<UserAttributes, UserAttributes> {
   @PrimaryKey
   @Column
   id!: string;
+
+  @Column
+  login!: string;
 
   @HasOne(() => Settings)
   settings: Settings;

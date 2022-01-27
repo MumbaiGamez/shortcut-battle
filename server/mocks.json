@@ -1,10 +1,12 @@
 {
   "users": [
     {
-      "id": "111"
+      "id": "111",
+      "login": "user1"
     },
     {
-      "id": "222"
+      "id": "222",
+      "login": "user2"
     }
   ],
   "settings": [

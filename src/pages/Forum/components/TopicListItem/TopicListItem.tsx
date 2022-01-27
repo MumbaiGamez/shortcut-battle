@@ -35,7 +35,7 @@ export const TopicListItem = (props: TopicType) => {
 
   return (
     <Card className={styles.container} contentClassName={styles.cardContent}>
-      <Avatar name={author} src={avatar} size={50} />
+      <Avatar name={author.login} src={avatar} size={50} />
       <div className={styles.body}>
         <h2 className={styles.title}>{title}</h2>
         <span
@@ -46,7 +46,7 @@ export const TopicListItem = (props: TopicType) => {
         </span>
         <span className={styles.time}>
           {updatedAt ? `Created at ${updatedAt}` : `Updated at ${createdAt}`} by{' '}
-          {author}
+          {author.login}
         </span>
         <TextWithUnderline
           className={styles.comments}

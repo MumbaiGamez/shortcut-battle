@@ -52,7 +52,7 @@ export class Comment extends Model<
   parentCommentId?: number;
 
   @BelongsTo(() => User)
-  user: User;
+  author: User;
 
   @BelongsTo(() => Post)
   post: Post;

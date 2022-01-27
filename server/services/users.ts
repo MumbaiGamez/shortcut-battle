@@ -1,9 +1,9 @@
-import { User } from '../models';
+import { User, UserAttributes } from '../models';
 
-export const create = async (id: string) => {
-  return await User.create({ id });
+export const create = async (data: UserAttributes) => {
+  return await User.create(data);
 };
 
-export const getById = async (id: string) => {
+export const getById = async (id: UserAttributes['id']) => {
   return await User.findByPk(id);
 };

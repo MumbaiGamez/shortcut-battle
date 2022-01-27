@@ -50,7 +50,9 @@ export type CommentType = {
 
 export type TopicType = {
   id: number;
-  author: string;
+  author: {
+    login: string;
+  };
   title: string;
   text: string;
   createdAt: string;
