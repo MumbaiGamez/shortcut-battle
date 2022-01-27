@@ -28,9 +28,9 @@ export const CommentForm = (props: CommentFormPropsType) => {
   return (
     <div className={styles.commentFormContainer}>
       <TextWithUnderline
-        className={classNames(styles.replay, textClassName)}
+        className={classNames(styles.reply, textClassName)}
         onClick={toggleInput}
-        text={'Replay'}
+        text={'Reply'}
       />
       {isShowInput && (
         <div className={styles.inputContainer}>

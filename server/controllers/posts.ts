@@ -7,7 +7,7 @@ import * as postsService from '../services/posts';
 
 export const createPost: RequestHandler = async (req, res, next) => {
   try {
-    const userId = req.session.userId as string;
+    const userId = req.session.user?.id as string;
     const { title, text } = req.body;
     const data: PostCreationAttributes = { authorId: userId, title, text };
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { CommentFormPropsType } from './types';
 
 export const useCommentForm = (props: CommentFormPropsType) => {
-  const { sendCallback } = props;
+  const { postId, sendCallback } = props;
 
   const [isShowInput, setIsShowInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -18,7 +18,7 @@ export const useCommentForm = (props: CommentFormPropsType) => {
 
   const sendComment = () => {
     if (inputValue) {
-      sendCallback(inputValue);
+      sendCallback({ text: inputValue, postId });
       handleInputChange('');
       toggleInput();
     }

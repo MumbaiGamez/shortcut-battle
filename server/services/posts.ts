@@ -3,6 +3,7 @@ import {
   PostCreationAttributes,
   PostAttributes,
   Comment,
+  User,
 } from '../models';
 
 export const create = async (data: PostCreationAttributes) => {
@@ -29,6 +30,6 @@ export const deleteById = async (id: PostAttributes['id']) => {
 };
 
 export const getAll = async () => {
-  const posts = await Post.findAll({ include: [Comment] });
+  const posts = await Post.findAll({ include: [Comment, User] });
   return posts;
 };

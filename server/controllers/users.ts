@@ -18,8 +18,8 @@ export const getUser: RequestHandler = async (req, res, next) => {
 
 export const getSettings: RequestHandler = async (req, res, next) => {
   try {
-    const userId = req.session.userId;
-    const userSettings = await settingsService.getByUserId(userId as string);
+    const userId = req.session.user?.id as string;
+    const userSettings = await settingsService.getByUserId(userId);
 
     return userSettings
       ? res.json(userSettings)
@@ -31,7 +31,7 @@ export const getSettings: RequestHandler = async (req, res, next) => {
 
 export const updateSettings: RequestHandler = async (req, res, next) => {
   try {
-    const userId = req.session.userId as string;
+    const userId = req.session.user?.id as string;
     const { lang } = req.body.data;
     const data: SettingsCreationAttributes = { lang, userId };
 

@@ -6,7 +6,7 @@ import * as commentsService from '../services/comments';
 
 export const createComment: RequestHandler = async (req, res, next) => {
   try {
-    const userId = req.session.userId as string;
+    const userId = req.session.user?.id as string;
     const { text, postId } = req.body;
     const data: CommentCreationAttributes = { authorId: userId, text, postId };
 

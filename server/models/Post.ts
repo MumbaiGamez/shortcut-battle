@@ -41,7 +41,7 @@ export class Post extends Model<PostAttributes, PostCreationAttributes> {
   authorId!: string;
 
   @BelongsTo(() => User)
-  user: User;
+  author: User;
 
   @HasMany(() => Comment)
   comments: Comment[];

@@ -11,7 +11,7 @@ import styles from './Comment.css';
 const DEFAUL_LEFT_PADDING = 15;
 
 export const Comment = (props: CommentPropsType) => {
-  const { author, text, comments, level = 1 } = props;
+  const { author, text, comments, postId, level = 1 } = props;
 
   const { addComment, isAuth } = useComment();
 
@@ -23,7 +23,7 @@ export const Comment = (props: CommentPropsType) => {
       >
         <p className={styles.author}>{author}</p>
         <p className={styles.text}>{text}</p>
-        {isAuth && <CommentForm sendCallback={addComment} />}
+        {isAuth && <CommentForm sendCallback={addComment} postId={postId} />}
       </div>
       {comments?.map((comment) => {
         return <Comment key={comment.id} {...comment} level={level + 1} />;

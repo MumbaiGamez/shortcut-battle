@@ -1,5 +1,8 @@
+import { NewCommentType } from '@redux/types/apiTypes';
+
 export type CommentFormPropsType = {
-  sendCallback: (inputValue: string) => void;
+  sendCallback: (props: NewCommentType) => void;
+  postId: number;
 
   textClassName?: string;
 };
