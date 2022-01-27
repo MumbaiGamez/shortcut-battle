@@ -35,7 +35,7 @@ export const validatePost: RequestHandler = body('data')
 export const validateComment: RequestHandler = body('data')
   .isObject()
   .custom((value) => {
-    if (value.title && value.text && value.postId) {
+    if (value.text && value.postId) {
       return true;
     }
 
