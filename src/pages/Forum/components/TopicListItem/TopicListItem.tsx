@@ -9,11 +9,13 @@ import { Avatar } from '@components/Avatar';
 import { Card } from '@components/Card';
 
 import { Comment } from '../Comment';
+import { CommentForm } from '../CommentForm';
 
 import { useTopicListItem } from './useTopicListItem';
 
+import { transformDate } from '@utils/date';
+
 import styles from './TopicListItem.css';
-import { CommentForm } from '../CommentForm';
 
 export const TopicListItem = (props: TopicType) => {
   const {
@@ -49,7 +51,9 @@ export const TopicListItem = (props: TopicType) => {
           {text}
         </span>
         <span className={styles.time}>
-          {updatedAt ? `Updated at ${updatedAt}` : `Created at ${createdAt}`} by{' '}
+          {updatedAt
+            ? `Updated at ${transformDate(updatedAt)}`
+            : `Created at ${transformDate(createdAt)}`}{' '}
           {author.login}
         </span>
         {isAuth && <CommentForm sendCallback={addComment} postId={id} />}
