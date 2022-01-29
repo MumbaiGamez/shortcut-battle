@@ -42,12 +42,17 @@ export type RegistrationDataType = Omit<ProfileDataType, 'displayName'> &
 
 export type CommentType = {
   id: number;
-  author: string;
+  author: {
+    id: number;
+    login: string;
+  };
   text: string;
   postId: number;
+  createdAt: string;
 
   parentCommentId?: number;
   comments?: CommentType[];
+  updatedAt?: string;
 };
 
 export type TopicType = {

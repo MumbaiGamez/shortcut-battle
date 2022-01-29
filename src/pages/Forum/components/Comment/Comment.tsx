@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { AuthorText } from '../AuthorText';
 import { CommentForm } from '../CommentForm';
 
 import { useComment } from './useComment';
@@ -11,7 +12,16 @@ import styles from './Comment.css';
 const DEFAUL_LEFT_PADDING = 15;
 
 export const Comment = (props: CommentPropsType) => {
-  const { id, author, text, comments, postId, level = 1 } = props;
+  const {
+    id,
+    author,
+    text,
+    comments,
+    createdAt,
+    updatedAt,
+    postId,
+    level = 1,
+  } = props;
 
   const { addComment, isAuth } = useComment();
 
@@ -21,8 +31,12 @@ export const Comment = (props: CommentPropsType) => {
         className={styles.comment}
         style={{ marginLeft: level * DEFAUL_LEFT_PADDING }}
       >
-        <p className={styles.author}>{author}</p>
         <p className={styles.text}>{text}</p>
+        <AuthorText
+          author={author.login}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+        />
         {isAuth && (
           <CommentForm
             sendCallback={addComment}

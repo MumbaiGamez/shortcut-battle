@@ -1,0 +1,5 @@
+.authorText {
+  margin: 10px 0;
+  color: var(--secondary-text-color);
+  font-size: 12px;
+}

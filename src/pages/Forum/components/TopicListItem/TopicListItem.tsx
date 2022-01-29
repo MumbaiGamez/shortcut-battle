@@ -10,10 +10,9 @@ import { Card } from '@components/Card';
 
 import { Comment } from '../Comment';
 import { CommentForm } from '../CommentForm';
+import { AuthorText } from '../AuthorText';
 
 import { useTopicListItem } from './useTopicListItem';
-
-import { transformDate } from '@utils/date';
 
 import styles from './TopicListItem.css';
 
@@ -50,13 +49,11 @@ export const TopicListItem = (props: TopicType) => {
         >
           {text}
         </span>
-        <span className={styles.time}>
-          {updatedAt
-            ? `Updated at ${transformDate(updatedAt)}`
-            : `Created at ${transformDate(createdAt)}`}
-          {` by `}
-          {author.login}
-        </span>
+        <AuthorText
+          author={author.login}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+        />
         {isAuth && <CommentForm sendCallback={addComment} postId={id} />}
         <TextWithUnderline
           className={styles.comments}
