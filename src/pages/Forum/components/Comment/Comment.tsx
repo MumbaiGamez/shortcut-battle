@@ -31,9 +31,18 @@ export const Comment = (props: CommentPropsType) => {
           />
         )}
       </div>
-      {comments?.map((comment) => {
-        return <Comment key={comment.id} {...comment} level={level + 1} />;
-      })}
+      {comments
+        ?.filter(({ parentCommentId }) => parentCommentId === id)
+        .map((comment) => {
+          return (
+            <Comment
+              key={comment.id}
+              {...comment}
+              comments={comments}
+              level={level + 1}
+            />
+          );
+        })}
     </>
   );
 };

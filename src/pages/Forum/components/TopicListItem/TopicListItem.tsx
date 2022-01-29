@@ -64,9 +64,18 @@ export const TopicListItem = (props: TopicType) => {
           onClick={switchComments}
         />
         {isShowComments &&
-          comments?.map((comment) => {
-            return <Comment key={comment.id} {...comment} postId={id} />;
-          })}
+          comments
+            ?.filter(({ parentCommentId }) => !parentCommentId)
+            .map((comment) => {
+              return (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  comments={comments}
+                  postId={id}
+                />
+              );
+            })}
       </div>
     </Card>
   );
