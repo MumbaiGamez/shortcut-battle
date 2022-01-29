@@ -46,6 +46,7 @@ export type CommentType = {
   text: string;
   postId: number;
 
+  parentCommentId?: number;
   comments?: CommentType[];
 };
 
@@ -70,5 +71,7 @@ export type NewTopicType = {
 
 export type NewCommentType = {
   text: string;
-  postId: number;
+  postId?: number;
+
+  parentCommentId?: number;
 };
