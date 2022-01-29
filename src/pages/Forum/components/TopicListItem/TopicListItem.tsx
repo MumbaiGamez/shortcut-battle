@@ -53,7 +53,8 @@ export const TopicListItem = (props: TopicType) => {
         <span className={styles.time}>
           {updatedAt
             ? `Updated at ${transformDate(updatedAt)}`
-            : `Created at ${transformDate(createdAt)}`}{' '}
+            : `Created at ${transformDate(createdAt)}`}
+          {` by `}
           {author.login}
         </span>
         {isAuth && <CommentForm sendCallback={addComment} postId={id} />}

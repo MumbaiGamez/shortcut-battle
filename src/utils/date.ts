@@ -4,16 +4,16 @@ export const transformDate = (date: string) => {
 
   currentDate.setHours(0, 0, 0, 0);
 
-  const hours = dateObj.getHours();
-  const minutes = dateObj.getMinutes();
+  const hours = `0${dateObj.getHours() + 1}`.slice(-2);
+  const minutes = `0${dateObj.getMinutes() + 1}`.slice(-2);
 
   if (dateObj.getTime() > currentDate.getTime()) {
     return `${hours}:${minutes}`;
   }
 
   const year = dateObj.getFullYear();
-  const month = dateObj.getMonth() + 1;
-  const day = dateObj.getDate();
+  const month = `0${dateObj.getMonth() + 1}`.slice(-2);
+  const day = `0${dateObj.getDate() + 1}`.slice(-2);
 
-  return `${year}-${month}-${day}, ${hours}:${minutes}`;
+  return `${year}.${month}.${day}, ${hours}:${minutes}`;
 };

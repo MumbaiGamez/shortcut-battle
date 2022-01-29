@@ -23,7 +23,7 @@ export const useTopicListItem = (numberComments: number) => {
   };
 
   const commentsText = `${
-    isShowComments ? 'Hide' : 'Show'
+    numberComments ? (isShowComments ? 'Hide' : 'Show') : ''
   } ${numberComments} comments`;
 
   return {
