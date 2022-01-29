@@ -30,6 +30,8 @@ export const deleteById = async (id: PostAttributes['id']) => {
 };
 
 export const getAll = async () => {
-  const posts = await Post.findAll({ include: [Comment, User] });
+  const posts = await Post.findAll({
+    include: [{ model: Comment, include: [User] }, User],
+  });
   return posts;
 };
