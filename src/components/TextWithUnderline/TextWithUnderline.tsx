@@ -10,7 +10,7 @@ export const TextWithUnderline = (props: TextWithUnderlinePropsType) => {
   const { className, onClick, text } = props;
   return (
     <span
-      className={classNames(styles.toggleFormText, className)}
+      className={classNames(styles.textWithUnderline, className)}
       onClick={onClick}
     >
       {text}

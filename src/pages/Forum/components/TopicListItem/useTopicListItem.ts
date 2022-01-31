@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
@@ -14,13 +14,13 @@ export const useTopicListItem = (numberComments: number) => {
 
   const [addComment, { isLoading }] = useAddCommentMutation();
 
-  const switchTextView = () => {
+  const switchTextView = useCallback(() => {
     setIsOpen((prevState) => !prevState);
-  };
+  }, []);
 
-  const switchComments = () => {
+  const switchComments = useCallback(() => {
     setIsShowComments((prevState) => !prevState);
-  };
+  }, []);
 
   const commentsText = `${
     numberComments ? (isShowComments ? 'Hide' : 'Show') : ''

@@ -1,10 +1,10 @@
-.toggleFormText {
+.textWithUnderline {
   cursor: pointer;
   margin: 20px;
   position: relative;
 }
 
-.toggleFormText::before {
+.textWithUnderline::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -15,12 +15,8 @@
   transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.button {
-  margin-top: 30px;
-}
-
 @media (hover: hover) and (pointer: fine) {
-  .toggleFormText:hover::before {
+  .textWithUnderline:hover::before {
     left: 0;
     right: auto;
     width: 100%;
