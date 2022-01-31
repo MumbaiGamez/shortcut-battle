@@ -5,10 +5,12 @@ import forumRouter from './forum';
 import staticRouter from './static';
 import wwwRouter from './www';
 
+import { forum, user } from '../@types/api';
+
 const router = Router();
 
-router.use('/users', usersRouter);
-router.use('/forum', forumRouter);
+router.use(user.index, usersRouter);
+router.use(forum.index, forumRouter);
 router.use(staticRouter);
 router.use(wwwRouter);
 
