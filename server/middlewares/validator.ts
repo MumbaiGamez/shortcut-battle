@@ -2,6 +2,8 @@ import { RequestHandler } from 'express';
 import createHttpError from 'http-errors';
 import { body } from 'express-validator';
 
+import { SchemaMismatchError } from '../errors';
+
 export const validateUser: RequestHandler = (req, res, next) => {
   const userId = req.session.user?.id;
 
@@ -19,7 +21,7 @@ export const validateSettings: RequestHandler = body('data')
       return true;
     }
 
-    throw new Error("Settings data doesn't match schema");
+    throw new SchemaMismatchError('Settings');
   });
 
 export const validatePost: RequestHandler = body('data')
@@ -29,7 +31,7 @@ export const validatePost: RequestHandler = body('data')
       return true;
     }
 
-    throw new Error("Post data doesn't match schema");
+    throw new SchemaMismatchError('Post');
   });
 
 export const validateComment: RequestHandler = body('data')
@@ -39,5 +41,5 @@ export const validateComment: RequestHandler = body('data')
       return true;
     }
 
-    throw new Error("Comment data doesn't match schema");
+    throw new SchemaMismatchError('Comment');
   });
