@@ -13,7 +13,9 @@ export const createPost: RequestHandler = async (req, res, next) => {
 
     const newPost = await postsService.create(data);
 
-    return newPost ? res.json(newPost) : next(new createHttpError.NotFound());
+    return newPost
+      ? res.json(newPost)
+      : next(new createHttpError.InternalServerError());
   } catch (err) {
     return next(new createHttpError.InternalServerError());
   }

@@ -19,7 +19,7 @@ export const createComment: RequestHandler = async (req, res, next) => {
 
     return newComment
       ? res.json(newComment)
-      : next(new createHttpError.NotFound());
+      : next(new createHttpError.InternalServerError());
   } catch (err) {
     return next(new createHttpError.InternalServerError());
   }

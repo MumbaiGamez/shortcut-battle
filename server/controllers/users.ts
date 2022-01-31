@@ -23,7 +23,7 @@ export const getSettings: RequestHandler = async (req, res, next) => {
 
     return userSettings
       ? res.json(userSettings)
-      : next(new createHttpError.NotFound());
+      : next(new createHttpError.InternalServerError());
   } catch (err) {
     return next(new createHttpError.InternalServerError());
   }
