@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import * as helmet from 'helmet';
 
 import { isProd, isDev } from '../lib/env';
 import i18n, { i18nInit } from './services/i18n';
@@ -35,6 +36,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 i18nInit(app);
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", 'https://ya-praktikum.tech'],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'", 'https://fonts.googleapis.com'],
+    },
+  })
+);
 
 app.use(cors);
 app.use(auth);
