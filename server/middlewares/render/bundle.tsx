@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 import { I18nextProvider } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 
 import { isDev } from '../../../lib/env';
 import { store } from '@redux/store';
@@ -24,6 +25,8 @@ const getBundleHtml = (req: Request) => {
 };
 
 export const getPageHtml = (req: Request) => {
+  const helmet = Helmet.rewind();
+
   const bundleHtml = getBundleHtml(req);
 
   const i18nInitialLanguage = req.i18n.languages[0];
@@ -41,15 +44,15 @@ export const getPageHtml = (req: Request) => {
 
   return `
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en" ${helmet.htmlAttributes.toString()}>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/main.css">
-        <title>Shortcut Battle</title>
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
+      ${helmet.link.toString()}
+      ${helmet.script.toString()}
+      <link rel="stylesheet" href="/main.css">
     </head>
-    <body>
+    <body ${helmet.bodyAttributes.toString()}>
         <div id="root">${bundleHtml}</div>
         <script src="/client.bundle.js"></script>
         <script>
