@@ -33,8 +33,10 @@ export const init = () => {
       <I18nextProvider i18n={i18n}>
         <Provider store={store}>
           <BrowserRouter>
-            <Meta />
-            <App />
+            <>
+              <Meta />
+              <App />
+            </>
           </BrowserRouter>
         </Provider>
       </I18nextProvider>

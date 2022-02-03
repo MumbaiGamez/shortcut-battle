@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/MumbaiGamez/shortcut-battle#readme",
   "devDependencies": {
+    "@babel/preset-env": "7.16.11",
     "@svgr/webpack": "6.1.2",
     "@types/cookie-parser": "1.4.2",
     "@types/express": "4.17.13",

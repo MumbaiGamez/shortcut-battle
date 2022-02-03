@@ -11,6 +11,7 @@ export default () => {
         options: {
           cacheDirectory: true,
           plugins: ['react-hot-loader/babel'],
+          presets: ['@babel/preset-env'],
         },
       },
       {

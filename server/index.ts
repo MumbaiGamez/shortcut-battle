@@ -41,6 +41,7 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'", 'https://ya-praktikum.tech'],
+      imgSrc: ["'self'", 'https://ya-praktikum.tech'],
       scriptSrc: ["'self'", "'unsafe-inline'"],
       fontSrc: ["'self'", 'https://fonts.googleapis.com'],
     },
