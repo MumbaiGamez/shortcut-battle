@@ -58,6 +58,18 @@ services:
       - pgadmindata:/var/lib/pgadmin
     networks:
       - netw
+  nginx:
+    image: nginx:mainline-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - www
+    networks:
+      - netw
 
 volumes:
   pgadmindata:
