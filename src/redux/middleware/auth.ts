@@ -12,14 +12,16 @@ import { history } from '../store';
 export const authMiddleware: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
     if (userEndpoints.getUser.matchFulfilled(action)) {
-      if (!Cookies.get('sbUserId')) {
-        Cookies.set('sbUserId', String(action.payload.id));
+      if (!Cookies.get('sbUser')) {
+        const { id, login } = action.payload;
+
+        Cookies.set('sbUser', JSON.stringify({ id: String(id), login }));
       }
 
       api.dispatch(setAuth(true));
     } else if (userEndpoints.getUser.matchRejected(action)) {
-      if (Cookies.get('sbUserId')) {
-        Cookies.remove('sbUserId');
+      if (Cookies.get('sbUser')) {
+        Cookies.remove('sbUser');
       }
     }
 
@@ -37,7 +39,7 @@ export const authMiddleware: Middleware =
     }
 
     if (authEndpoints.logout.matchFulfilled(action)) {
-      Cookies.remove('sbUserId');
+      Cookies.remove('sbUser');
       api.dispatch(setAuth(false));
     }
 

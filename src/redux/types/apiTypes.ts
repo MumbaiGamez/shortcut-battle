@@ -39,3 +39,44 @@ export type LoginDataType = {
 
 export type RegistrationDataType = Omit<ProfileDataType, 'displayName'> &
   Pick<LoginDataType, 'password'>;
+
+export type CommentType = {
+  id: number;
+  author: {
+    id: number;
+    login: string;
+  };
+  text: string;
+  postId: number;
+  createdAt: string;
+
+  parentCommentId?: number;
+  comments?: CommentType[];
+  updatedAt?: string;
+};
+
+export type TopicType = {
+  id: number;
+  author: {
+    login: string;
+  };
+  title: string;
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+
+  avatar?: string;
+  comments?: CommentType[];
+};
+
+export type NewTopicType = {
+  title: string;
+  text: string;
+};
+
+export type NewCommentType = {
+  text: string;
+  postId?: number;
+
+  parentCommentId?: number;
+};

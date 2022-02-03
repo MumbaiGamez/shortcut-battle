@@ -5,6 +5,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ComponentsLibrary } from '@pages/ComponentsLibrary';
 import { Leaderboard } from '@pages/Leaderboard';
 import { Profile } from '@pages/Profile';
+import { Forum } from '@pages/Forum';
 import { Login } from '@pages/Login';
 import { Home } from '@pages/Home';
 import { Game } from '@pages/Game';
@@ -46,6 +47,7 @@ const _App = () => {
                 <PrivateRoute element={<Navigate to={RoutesList.home} />} />
               }
             />
+            <Route path={RoutesList.forum} element={<Forum />} />
           </Routes>
           <Toaster />
         </div>

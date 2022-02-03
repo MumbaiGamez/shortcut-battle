@@ -3,4 +3,5 @@ export type AvatarProps = {
   handleDeleteAvatar?: () => void;
   name?: string;
   src?: string;
+  size?: number;
 };

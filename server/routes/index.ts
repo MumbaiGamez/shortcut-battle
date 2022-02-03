@@ -1,11 +1,17 @@
 import { Router } from 'express';
 
-import { staticRoutes } from './static';
-import { dbRoutes } from './db';
-import { appRoutes } from './www';
+import usersRouter from './users';
+import forumRouter from './forum';
+import staticRouter from './static';
+import wwwRouter from './www';
 
-export const router = Router();
+import { ForumAPI, UserAPI } from '../@types/api';
 
-staticRoutes(router);
-dbRoutes(router);
-appRoutes(router);
+const router = Router();
+
+router.use(UserAPI.root, usersRouter);
+router.use(ForumAPI.root, forumRouter);
+router.use(staticRouter);
+router.use(wwwRouter);
+
+export default router;

@@ -34,7 +34,7 @@ services:
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASS}
-      - POSTGRES_DB=settings-db
+      - POSTGRES_DB=users-data
       - PGUSER=${DB_USER}
     networks:
       - netw

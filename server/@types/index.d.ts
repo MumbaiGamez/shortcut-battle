@@ -1,4 +1,4 @@
-import { Settings } from '../models/Settings';
+import { UserAttributes, SettingsAttributes } from '../models';
 
 declare global {
   namespace Express {
@@ -18,8 +18,8 @@ declare global {
 
 declare module 'express-session' {
   interface SessionData {
-    userId?: string;
-    userSettings?: Settings | null;
+    user?: UserAttributes;
+    userSettings?: SettingsAttributes | null;
   }
 }
 

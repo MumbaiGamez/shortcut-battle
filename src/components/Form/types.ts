@@ -10,6 +10,8 @@ export enum FieldsList {
   password = 'password',
   phone = 'phone',
   secondName = 'secondName',
+  title = 'title',
+  text = 'text',
 }
 
 export type FieldsWithValidation = {

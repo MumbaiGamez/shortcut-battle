@@ -24,6 +24,7 @@ export enum InputTypeEnum {
   submit = 'submit',
   tel = 'tel',
   text = 'text',
+  textarea = 'textarea',
   time = 'time',
   url = 'url',
   week = 'week',

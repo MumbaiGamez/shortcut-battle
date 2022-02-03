@@ -2,11 +2,11 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
-import { isProd } from '../lib/env';
-import { i18n } from './services';
+import { isProd, isDev } from '../lib/env';
+import i18n, { i18nInit } from './services/i18n';
 import { auth, cors, render } from './middlewares';
-import { router } from './routes';
-import { sequelize } from './sequelize';
+import router from './routes';
+import sequelize, { fillWithMocks } from './sequelize';
 
 const {
   PORT = 3000,
@@ -34,7 +34,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-i18n.i18nInit(app);
+i18nInit(app);
 
 app.use(cors);
 app.use(auth);
@@ -43,7 +43,11 @@ app.use(router);
 
 (async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: isDev });
+
+    if (isDev) {
+      fillWithMocks();
+    }
   } catch (err) {
     console.error('Sequelize sync error:', err);
   }
@@ -58,9 +62,9 @@ app.use(router);
       });
   };
 
-  if (i18n.instance.isInitialized) {
+  if (i18n.isInitialized) {
     run();
   } else {
-    i18n.instance.on('initialized', run);
+    i18n.on('initialized', run);
   }
 })();

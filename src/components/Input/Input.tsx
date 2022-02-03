@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { InputProps } from './types';
+import { InputProps, InputTypeEnum } from './types';
 
 import { useInput } from './useInput';
 
@@ -44,13 +44,29 @@ export const Input = (props: InputProps) => {
   return (
     <div className={classNames(styles.inputContainer, className)}>
       {label && <span className={styles.label}>{label}</span>}
-      <input
-        className={classNames(styles.input, errorMessage && styles.errorBorder)}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        type={currentType}
-        value={currentValue}
-      />
+      {type === InputTypeEnum.textarea ? (
+        <textarea
+          className={classNames(
+            styles.input,
+            errorMessage && styles.errorBorder
+          )}
+          onChange={handleInputChange}
+          placeholder={placeholder}
+          value={currentValue}
+        />
+      ) : (
+        <input
+          className={classNames(
+            styles.input,
+            errorMessage && styles.errorBorder
+          )}
+          onChange={handleInputChange}
+          placeholder={placeholder}
+          type={currentType}
+          value={currentValue}
+        />
+      )}
+
       {shouldShowEyeIcon ? (
         isCrossedEye ? (
           <EyeCrossedIcon

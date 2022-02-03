@@ -1,0 +1,30 @@
+.forum {
+  margin-top: 50px;
+}
+
+.topicsContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.forumTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.addPost {
+  width: 150px;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  border: none;
+}
+
+.loaderContainer {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -55,7 +55,9 @@ export const useInput = (props: UseInputProps) => {
     setIsCrossedEye((prevState) => !prevState);
   }, [isCrossedEye]);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { target } = event;
 
     const { value } = target;
