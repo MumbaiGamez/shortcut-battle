@@ -8,23 +8,23 @@ import {
   validateUser,
 } from '../middlewares/validator';
 
-import { comment, post } from '../@types/api';
+import { CommentAPI, PostAPI } from '../@types/api';
 
 const forumRouter = Router();
 
-forumRouter.get(post.index, postsController.getAllPosts);
-forumRouter.get(post.byId, postsController.getPost);
-forumRouter.get(post.comments, postsController.getPostComments);
+forumRouter.get(PostAPI.root, postsController.getAllPosts);
+forumRouter.get(PostAPI.byId, postsController.getPost);
+forumRouter.get(PostAPI.comments, postsController.getPostComments);
 forumRouter.post(
-  post.index,
+  PostAPI.root,
   validateUser,
   validatePost,
   postsController.createPost
 );
 
-forumRouter.get(comment.byId, commentsController.getComment);
+forumRouter.get(CommentAPI.byId, commentsController.getComment);
 forumRouter.post(
-  comment.index,
+  CommentAPI.root,
   validateUser,
   validateComment,
   commentsController.createComment

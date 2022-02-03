@@ -3,12 +3,17 @@ import { Router } from 'express';
 import { validateUser, validateSettings } from '../middlewares/validator';
 import { getSettings, getUser, updateSettings } from '../controllers/users';
 
-import { user } from '../@types/api';
+import { UserAPI } from '../@types/api';
 
 const usersRouter = Router();
 
-usersRouter.get(user.byId, getUser);
-usersRouter.get(user.settings, validateUser, getSettings);
-usersRouter.put(user.settings, validateUser, validateSettings, updateSettings);
+usersRouter.get(UserAPI.byId, getUser);
+usersRouter.get(UserAPI.settings, validateUser, getSettings);
+usersRouter.put(
+  UserAPI.settings,
+  validateUser,
+  validateSettings,
+  updateSettings
+);
 
 export default usersRouter;
