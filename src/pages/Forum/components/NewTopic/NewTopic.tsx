@@ -21,7 +21,7 @@ export const NewTopic = (props: NewTopicPropsType) => {
       inputsList={inputsList}
       isButtonDisabled={!isFormValid}
       onButtonClick={handleSave}
-      title={t('newTopic')}
+      title={t('forum.newTopic')}
       isLoading={false}
     />
   );

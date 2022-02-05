@@ -26,7 +26,7 @@
     "comments": "comments",
     "updated": "Updated at {{date}}",
     "created": "Created at {{date}}",
-    "by": "by",
+    "by": " by",
     "noTopics": "No topics yet"
   },
   "homePage": {

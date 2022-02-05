@@ -16,7 +16,7 @@ export const AuthorText = (props: AuthorTextPropsType) => {
     ? t('forum.updated', { date: transformDate(updatedAt) })
     : t('forum.created', { date: transformDate(createdAt) });
 
-  const text = `${dateText} ${t('forum.by')} ${author}`;
+  const text = `${dateText}${t('forum.by')} ${author}`;
 
   return <span className={styles.authorText}>{text}</span>;
 };
