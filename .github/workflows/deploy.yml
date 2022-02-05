@@ -42,7 +42,7 @@ jobs:
             touch .env
             echo NODE_ENV=$NODE_ENV >> .env
             echo DB_USER=$DB_USER >> .env
-            echo DB_PASS=$DB_PASSWORD >> .env
+            echo DB_PASS=$DB_PASS >> .env
             echo PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL >> .env
             echo PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD >> .env
           EOF
