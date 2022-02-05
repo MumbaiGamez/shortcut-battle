@@ -1,5 +1,6 @@
-import { NewTopicPropsType } from './types';
 import { useMemo, useState } from 'react';
+
+import { useTranslation } from 'react-i18next';
 
 import { useAddTopicMutation } from '@redux/api/forumApi';
 
@@ -9,6 +10,8 @@ import { InputTypeEnum } from '@components/Input';
 
 import { setFormFieldValueFactory } from '@utils/setFormFieldValueFactory';
 
+import { NewTopicPropsType } from './types';
+
 export const useNewTopic = (
   saveCallback: NewTopicPropsType['saveCallback']
 ) => {
@@ -16,6 +19,8 @@ export const useNewTopic = (
     title: '',
     text: '',
   });
+
+  const { t } = useTranslation();
 
   const changeNewTopicDataFactory = setFormFieldValueFactory(setNewTopicData);
 
@@ -37,7 +42,7 @@ export const useNewTopic = (
       {
         fieldName: FieldsList.title,
         handleChange: changeNewTopicDataFactory(FieldsList.title),
-        placeholder: 'Title',
+        placeholder: t('forum.title'),
         value: newTopicData.title,
         validationRule: { isRequired: true },
         validateField,
@@ -45,14 +50,20 @@ export const useNewTopic = (
       {
         fieldName: FieldsList.text,
         handleChange: changeNewTopicDataFactory(FieldsList.text),
-        placeholder: 'Text',
+        placeholder: t('forum.text'),
         type: InputTypeEnum.textarea,
         value: newTopicData.text,
         validationRule: { isRequired: true },
         validateField,
       },
     ];
-  }, [changeNewTopicDataFactory, newTopicData, validateField]);
+  }, [
+    changeNewTopicDataFactory,
+    newTopicData.text,
+    newTopicData.title,
+    t,
+    validateField,
+  ]);
 
   return { handleSave, inputsList, isFormValid, isLoading };
 };

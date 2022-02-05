@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { transformDate } from '@utils/date';
 
@@ -9,11 +10,13 @@ import styles from './AuthorText.css';
 export const AuthorText = (props: AuthorTextPropsType) => {
   const { author, createdAt, updatedAt } = props;
 
-  const dateText = updatedAt
-    ? `Updated at ${transformDate(updatedAt)}`
-    : `Created at ${transformDate(createdAt)}`;
+  const { t } = useTranslation();
 
-  const text = `${dateText} by ${author}`;
+  const dateText = updatedAt
+    ? t('forum.updated', { date: transformDate(updatedAt) })
+    : t('forum.created', { date: transformDate(createdAt) });
+
+  const text = `${dateText} ${t('forum.by')} ${author}`;
 
   return <span className={styles.authorText}>{text}</span>;
 };

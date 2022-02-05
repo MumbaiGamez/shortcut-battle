@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { useGetLeaderboardMutation } from '@redux/api/leaderboardApi';
 import { useAppSelector } from '@redux/hooks';
 import { selectLeaders, selectPlayerStats } from '@redux/slices/gameSlice';
 
 export const useLeaderboard = () => {
+  const { t } = useTranslation();
+
   const [getLeaderboard] = useGetLeaderboardMutation();
 
   useEffect(() => {
@@ -54,11 +58,19 @@ export const useLeaderboard = () => {
 
   const headerList = useMemo(() => {
     return [
-      { title: 'Rating', prop: 'rating' },
-      { title: 'Login', prop: 'login', handleClick: sortByLogin },
-      { title: 'Score', prop: 'score', handleClick: sortByRating },
+      { title: t('leaderboard.rating'), prop: 'rating' },
+      {
+        title: t('leaderboard.login'),
+        prop: 'login',
+        handleClick: sortByLogin,
+      },
+      {
+        title: t('leaderboard.score'),
+        prop: 'score',
+        handleClick: sortByRating,
+      },
     ];
-  }, [sortByLogin, sortByRating]);
+  }, [sortByLogin, sortByRating, t]);
 
   return { dataList, headerList, rating, score };
 };

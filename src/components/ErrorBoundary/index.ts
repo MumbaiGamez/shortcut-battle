@@ -1,1 +1,2 @@
-export * from './ErrorBoundary';
+import ErrorBoundary from './ErrorBoundary';
+export { ErrorBoundary };

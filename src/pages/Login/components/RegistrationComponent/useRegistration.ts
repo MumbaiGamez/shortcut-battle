@@ -1,5 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { useSignupMutation } from '@redux/api/authApi';
 
 import { useForm } from '@components/Form/useForm';
@@ -18,6 +20,8 @@ export const useRegistration = () => {
     phone: '',
     password: '',
   });
+
+  const { t } = useTranslation();
 
   const changeRegistrationFactory =
     setFormFieldValueFactory(setRegistrationData);
@@ -39,7 +43,7 @@ export const useRegistration = () => {
       {
         fieldName: FieldsList.firstName,
         handleChange: changeRegistrationFactory(FieldsList.firstName),
-        placeholder: 'First name',
+        placeholder: t('form.firstName'),
         value: registrationData.firstName,
         validationRule: { isRequired: true },
         validateField,
@@ -47,7 +51,7 @@ export const useRegistration = () => {
       {
         fieldName: FieldsList.secondName,
         handleChange: changeRegistrationFactory(FieldsList.secondName),
-        placeholder: 'Second name',
+        placeholder: t('form.secondName'),
         value: registrationData.secondName,
         validationRule: { isRequired: true },
         validateField,
@@ -55,7 +59,7 @@ export const useRegistration = () => {
       {
         fieldName: FieldsList.email,
         handleChange: changeRegistrationFactory(FieldsList.email),
-        placeholder: 'Email',
+        placeholder: t('form.email'),
         type: InputTypeEnum.email,
         value: registrationData.email,
         validationRule: { isRequired: true, email: true },
@@ -64,7 +68,7 @@ export const useRegistration = () => {
       {
         fieldName: FieldsList.phone,
         handleChange: changeRegistrationFactory(FieldsList.phone),
-        placeholder: 'Phone',
+        placeholder: t('form.phone'),
         type: InputTypeEnum.email,
         value: registrationData.phone,
         validationRule: { isRequired: true, phone: true },
@@ -73,7 +77,7 @@ export const useRegistration = () => {
       {
         fieldName: FieldsList.login,
         handleChange: changeRegistrationFactory(FieldsList.login),
-        placeholder: 'Login',
+        placeholder: t('form.login'),
         value: registrationData.login,
         validationRule: { isRequired: true },
         validateField,
@@ -81,14 +85,24 @@ export const useRegistration = () => {
       {
         fieldName: FieldsList.password,
         handleChange: changeRegistrationFactory(FieldsList.password),
-        placeholder: 'Password',
+        placeholder: t('form.password'),
         type: InputTypeEnum.password,
         value: registrationData.password,
         validationRule: { minSymbols: 6 },
         validateField,
       },
     ],
-    [changeRegistrationFactory, registrationData, validateField]
+    [
+      changeRegistrationFactory,
+      registrationData.email,
+      registrationData.firstName,
+      registrationData.login,
+      registrationData.password,
+      registrationData.phone,
+      registrationData.secondName,
+      t,
+      validateField,
+    ]
   );
 
   return {

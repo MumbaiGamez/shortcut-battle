@@ -1,11 +1,15 @@
 import { useCallback, useState, useEffect, ChangeEvent } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { InputTypeEnum, UseInputProps } from './types';
 
 import { getValidationError } from '@utils/validation';
 
 export const useInput = (props: UseInputProps) => {
   const [defaultInputValue, defaultInputHandler] = useState('');
+
+  const { t } = useTranslation();
 
   const {
     fieldName,
@@ -22,7 +26,7 @@ export const useInput = (props: UseInputProps) => {
 
   useEffect(() => {
     if (validateField && fieldName) {
-      const { isValid } = getValidationError(validationRule, value);
+      const { isValid } = getValidationError(validationRule, value, t);
 
       validateField(fieldName, isValid);
     }
@@ -33,7 +37,8 @@ export const useInput = (props: UseInputProps) => {
     (value: string) => {
       const { isValid, errorMessage } = getValidationError(
         validationRule,
-        value
+        value,
+        t
       );
 
       if (validateField && fieldName) {
@@ -42,7 +47,7 @@ export const useInput = (props: UseInputProps) => {
 
       setErrorMessage(errorMessage);
     },
-    [validationRule, validateField, fieldName]
+    [validationRule, t, validateField, fieldName]
   );
 
   const toggleEye = useCallback(() => {
