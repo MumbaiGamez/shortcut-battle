@@ -55,5 +55,5 @@ jobs:
             cd shortcut-battle
             npm install
             npm run build:ssr
-            docker-compose up --remove-orphans --build -d
+            npm run docker:up
           EOF
