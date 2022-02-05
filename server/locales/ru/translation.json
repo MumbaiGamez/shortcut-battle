@@ -1,7 +1,90 @@
 {
+  "errors": {
+    "somethingWrong": "Что-то пошло не так"
+  },
+  "form": {
+    "firstName": "Имя",
+    "secondName": "Фамилия",
+    "displayName": "Никнейм",
+    "email": "Эл. почта",
+    "phone": "Телефон",
+    "login": "Логин",
+    "password": "Пароль",
+    "update": "Обновить"
+  },
+  "forum": {
+    "addPost": "Новый пост",
+    "closeForm": "Закрыть форму",
+    "addComment": "Добавить коммент",
+    "newTopic": "Новый пост",
+    "title": "Заголовок",
+    "text": "Текст",
+    "save": "Сохранить",
+    "reply": "Ответить",
+    "show": "Показать",
+    "hide": "Спрятать",
+    "comments": "комментариев",
+    "updated": "Обновлено {{date}}",
+    "created": "Создано {{date}}",
+    "by": ",",
+    "noTopics": "Нет ни одного поста, пока что"
+  },
+  "homePage": {
+    "title": "Домашняя страница"
+  },
+  "leaderboard": {
+    "title": "Таблица лидеров",
+    "myScore": "Мой счет",
+    "myRank": "Моя позиция",
+    "none": "Пусто",
+    "score": "Счёт",
+    "login": "Имя",
+    "rating": "Рейтинг"
+  },
+  "login": {
+    "login": "Логин",
+    "registration": "Регистрация",
+    "authYandex": "Войти через Яндекс",
+    "goToRegistration": "Не зарегистрирован? Перейти на регистрацию",
+    "goToLogin": "Уже зарегистрирован? Перейти на логин"
+  },
   "nav": {
     "home": "Домой",
     "play": "Играть",
-    "login": "Вход"
+    "login": "Вход",
+    "leaders": "Лидеры",
+    "profile": "Профиль",
+    "forum": "Форум",
+    "logout": "Выход"
+  },
+  "play": {
+    "startGame": "Начать новую игру",
+    "scores": "Счёт",
+    "gameOver": "Игра окончена",
+    "tryAgain": "Попробовать снова",
+    "fire": "Огонь",
+    "insertLineAbove": "Вставьте строку",
+    "pause": "Пауза",
+    "exit": "Выход",
+    "continue": "Продолжить",
+    "restart": "Сначала",
+    "youWon": "Поздравляем, вы выйграли!"
+  },
+  "shortcuts": {
+    "inserteLineAbove": "Вставить строку выше",
+    "inserteLineBelow": "Вставить строку ниже",
+    "deleteLine": "Удалить строку",
+    "copyLineUp": "Скопировать строку выше",
+    "copyLineDown": "Скопировать строку ниже",
+    "moveLineUp": "Переместить строку выше",
+    "moveLineDown": "Переместить строку ниже",
+    "unfoldRegion": "Развернуть",
+    "foldRegion": "Свернуть"
+  },
+  "validation": {
+    "fieldRequired": "Обязательное поле",
+    "invalidEmail": "неправильный эл. адрес",
+    "invalidPhone": "Неправильный телефон",
+    "lessSymbols": "Меньше, чем {{count}} символов"
   }
 }
