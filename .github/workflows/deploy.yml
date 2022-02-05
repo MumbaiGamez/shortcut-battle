@@ -1,5 +1,8 @@
 name: deploy
-on: [push]
+on:
+  push:
+    branches:
+      - deploy
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -31,8 +34,8 @@ jobs:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
-          PGADMIN_DEFAULT_EMAIL: ${{ PGADMIN_DEFAULT_EMAIL }}
-          PGADMIN_DEFAULT_PASSWORD: ${{ PGADMIN_DEFAULT_PASSWORD }}
+          PGADMIN_DEFAULT_EMAIL: ${{ secrets.PGADMIN_DEFAULT_EMAIL }}
+          PGADMIN_DEFAULT_PASSWORD: ${{ secrets.PGADMIN_DEFAULT_PASSWORD }}
         run: |
           ssh deploy << EOF
             cd shortcut-battle
