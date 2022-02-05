@@ -1,0 +1,56 @@
+name: deploy
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy.key
+          chmod 600 ~/.ssh/deploy.key
+          cat >> ~/.ssh/config << END
+          Host deploy
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/deploy.key
+            StrictHostKeyChecking no
+          END
+      - name: Clean
+        run: ssh deploy 'cd shortcut-battle && docker-compose down && cd && rm -rf ./shortcut-battle'
+      - name: Clone repo
+        if: always()
+        run: ssh deploy 'git clone git@github.com:MumbaiGamez/shortcut-battle.git -b deploy'
+      - name: Create .env
+        if: always()
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+          PGADMIN_DEFAULT_EMAIL: ${{ PGADMIN_DEFAULT_EMAIL }}
+          PGADMIN_DEFAULT_PASSWORD: ${{ PGADMIN_DEFAULT_PASSWORD }}
+        run: |
+          ssh deploy << EOF
+            cd shortcut-battle
+            touch .env
+            echo NODE_ENV=$NODE_ENV >> .env
+            echo DB_USER=$DB_USER >> .env
+            echo DB_PASS=$DB_PASSWORD >> .env
+            echo PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL >> .env
+            echo PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD >> .env
+          EOF
+      - name: Run
+        if: always()
+        run: |
+          ssh deploy << EOF
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd shortcut-battle
+            npm install
+            npm run build:ssr
+            docker-compose up --remove-orphans --build -d
+          EOF
