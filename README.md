@@ -14,6 +14,8 @@ DB_PASS=password
 
 PGADMIN_DEFAULT_EMAIL=admin@admin.com
 PGADMIN_DEFAULT_PASSWORD=password
+
+RUN_CMD=npm run dev
 ```
 
 ## Docker
