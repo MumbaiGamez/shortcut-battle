@@ -32,19 +32,23 @@ jobs:
         if: always()
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
+          RUN_CMD: ${{ secrets.RUN_CMD }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           PGADMIN_DEFAULT_EMAIL: ${{ secrets.PGADMIN_DEFAULT_EMAIL }}
           PGADMIN_DEFAULT_PASSWORD: ${{ secrets.PGADMIN_DEFAULT_PASSWORD }}
+          REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
         run: |
           ssh deploy << EOF
             cd shortcut-battle
             touch .env
             echo NODE_ENV=$NODE_ENV >> .env
+            echo RUN_CMD=$RUN_CMD >> .env
             echo DB_USER=$DB_USER >> .env
             echo DB_PASS=$DB_PASS >> .env
             echo PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL >> .env
             echo PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD >> .env
+            echo REDIRECT_URI=$REDIRECT_URI >> .env
           EOF
       - name: Run
         if: always()
