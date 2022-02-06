@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { useLogoutMutation } from '@redux/api/authApi';
 import { selectIsAuth } from '@redux/slices/settingsSlice';
-import { useTranslation } from 'react-i18next';
 
 export enum RoutesList {
   all = '*',

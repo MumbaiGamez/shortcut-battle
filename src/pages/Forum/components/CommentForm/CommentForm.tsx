@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { useTranslation } from 'react-i18next';
-
 import classNames from 'classnames';
 
 import { TextWithUnderline } from '@components/TextWithUnderline';
