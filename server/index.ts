@@ -2,6 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import * as helmet from 'helmet';
+import * as crypto from "crypto";
 
 import { isProd, isDev } from '../lib/env';
 import i18n, { i18nInit } from './services/i18n';
@@ -41,8 +42,9 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'", 'https://ya-praktikum.tech'],
+      connectSrc: ["'self'", 'https://ya-praktikum.tech'],
       imgSrc: ["'self'", 'https://ya-praktikum.tech'],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'", 'https://ya-praktikum.tech',  "'unsafe-inline'"],
       fontSrc: ["'self'", 'https://fonts.googleapis.com'],
     },
   })
