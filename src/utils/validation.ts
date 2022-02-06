@@ -1,12 +1,11 @@
-import { TFunction } from 'react-i18next';
+import i18next from 'i18next';
 
 import { ValidationRules } from '@components/Input';
 import { EMAIL_REG_EXP, PHONE_REG_EXP } from './regex';
 
 export const getValidationError = (
   rules: ValidationRules | undefined,
-  value: string | number,
-  t: TFunction<'translation', undefined>
+  value: string | number
 ) => {
   let isValid = true;
 
@@ -18,16 +17,18 @@ export const getValidationError = (
 
   if (rules.isRequired && !value) {
     isValid = false;
-    errorMessage = t('validation.fieldRequired');
+    errorMessage = i18next.t('validation.fieldRequired');
   } else if (rules.minSymbols && rules.minSymbols > value.toString().length) {
     isValid = false;
-    errorMessage = t('validation.lessSymbols', { count: rules.minSymbols });
+    errorMessage = i18next.t('validation.lessSymbols', {
+      count: rules.minSymbols,
+    });
   } else if (rules.phone && !value.toString().match(PHONE_REG_EXP)) {
     isValid = false;
-    errorMessage = t('validation.invalidPhone');
+    errorMessage = i18next.t('validation.invalidPhone');
   } else if (rules.email && !value.toString().match(EMAIL_REG_EXP)) {
     isValid = false;
-    errorMessage = t('validation.invalidEmail');
+    errorMessage = i18next.t('validation.invalidEmail');
   }
 
   return { isValid, errorMessage };

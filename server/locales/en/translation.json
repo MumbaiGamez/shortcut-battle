@@ -48,6 +48,12 @@
     "goToRegistration": "Not registered? Go to Registration",
     "goToLogin": "Already registered? Go to Login"
   },
+  "messages": {
+    "Success": "Success",
+    "Error": "Error",
+    "profileUpdatedSuccessfully": "Profile updated successfully",
+    "avatarUpdatedSuccessfully": "Avatar updated successfully"
+  },
   "nav": {
     "home": "Home",
     "play": "Play",

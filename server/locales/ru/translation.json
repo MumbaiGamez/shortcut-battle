@@ -48,6 +48,12 @@
     "goToRegistration": "Не зарегистрирован? Перейти на страницу регистрации",
     "goToLogin": "Уже зарегистрирован? Перейти на страницу логина"
   },
+  "messages": {
+    "Success": "Успешно",
+    "Error": "Ошибка",
+    "profileUpdatedSuccessfully": "Профиль успешно обновлён",
+    "avatarUpdatedSuccessfully": "Аватар успешно обновлён"
+  },
   "nav": {
     "home": "Домой",
     "play": "Играть",
