@@ -24,12 +24,11 @@ jobs:
             StrictHostKeyChecking no
           END
       - name: Clean
+        continue-on-error: true
         run: ssh deploy 'cd shortcut-battle && docker-compose down && cd && rm -rf ./shortcut-battle'
       - name: Clone repo
-        if: always()
         run: ssh deploy 'git clone git@github.com:MumbaiGamez/shortcut-battle.git -b deploy'
       - name: Create .env
-        if: always()
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           RUN_CMD: ${{ secrets.RUN_CMD }}
@@ -51,7 +50,6 @@ jobs:
             echo REDIRECT_URI=$REDIRECT_URI >> .env
           EOF
       - name: Run
-        if: always()
         run: |
           ssh deploy << EOF
             export NVM_DIR=~/.nvm
