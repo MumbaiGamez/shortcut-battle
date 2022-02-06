@@ -48,7 +48,7 @@ app.use(
       defaultSrc: ["'self'", 'https://ya-praktikum.tech'],
       connectSrc: ["'self'", 'https://ya-praktikum.tech'],
       imgSrc: ["'self'", 'https://ya-praktikum.tech'],
-      scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`, 'https://ya-praktikum.tech',  "'unsafe-inline'"],
+      scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`, 'https://ya-praktikum.tech'],
       fontSrc: ["'self'", 'https://fonts.googleapis.com'],
     },
   })
