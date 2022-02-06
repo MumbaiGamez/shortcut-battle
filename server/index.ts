@@ -19,6 +19,10 @@ const {
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.locals.cspNonce = crypto.randomBytes(16).toString("hex");
+  next();
+});
 app.use(cookieParser());
 app.use(
   session({
@@ -44,7 +48,7 @@ app.use(
       defaultSrc: ["'self'", 'https://ya-praktikum.tech'],
       connectSrc: ["'self'", 'https://ya-praktikum.tech'],
       imgSrc: ["'self'", 'https://ya-praktikum.tech'],
-      scriptSrc: ["'self'", 'https://ya-praktikum.tech',  "'unsafe-inline'"],
+      scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`, 'https://ya-praktikum.tech',  "'unsafe-inline'"],
       fontSrc: ["'self'", 'https://fonts.googleapis.com'],
     },
   })

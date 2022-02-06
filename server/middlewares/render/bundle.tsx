@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -24,8 +24,10 @@ const getBundleHtml = (req: Request) => {
   );
 };
 
-export const getPageHtml = (req: Request) => {
+export const getPageHtml = (req: Request, res: Response) => {
   const helmet = Helmet.rewind();
+
+  const nonce = res?.locals?.cspNonce;
 
   const bundleHtml = getBundleHtml(req);
 
@@ -54,8 +56,8 @@ export const getPageHtml = (req: Request) => {
     </head>
     <body ${helmet.bodyAttributes.toString()}>
         <div id="root">${bundleHtml}</div>
-        <script src="/client.bundle.js"></script>
-        <script>
+        <script nonce=${nonce} src="/client.bundle.js"></script>
+        <script nonce=${nonce} >
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())};
           window.__i18nStore__ = JSON.parse('${JSON.stringify(
             i18nInitialStore
