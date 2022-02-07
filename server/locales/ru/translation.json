@@ -35,7 +35,7 @@
   "leaderboard": {
     "title": "Таблица лидеров",
     "myScore": "Мой счет",
-    "myRank": "Моя позиция",
+    "myRank": "Мой рейтинг",
     "none": "Пусто",
     "score": "Счёт",
     "login": "Имя",
@@ -55,7 +55,7 @@
     "avatarUpdatedSuccessfully": "Аватар успешно обновлён"
   },
   "nav": {
-    "home": "Домой",
+    "home": "Главная",
     "play": "Играть",
     "login": "Вход",
     "leaders": "Лидеры",
