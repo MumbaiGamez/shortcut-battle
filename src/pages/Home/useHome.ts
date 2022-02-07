@@ -10,7 +10,7 @@ export const useHome = () => {
     const scrollTop = event.currentTarget.scrollTop;
 
     setShipTransform(
-      (scrollHeight / (scrollTop - containerHeight)) * 200 + 400
+      100 - (scrollTop / (scrollHeight - containerHeight)) * 300
     );
   };
 
