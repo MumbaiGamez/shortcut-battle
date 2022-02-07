@@ -6,6 +6,12 @@
   padding: 40px;
   overflow: auto;
   text-align: start;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.home::-webkit-scrollbar {
+  display: none;
 }
 
 .home p {

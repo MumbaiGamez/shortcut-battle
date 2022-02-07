@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { Star } from '@components/Star';
 import { useHome } from './useHome';
@@ -9,8 +8,6 @@ import styles from './Home.css';
 import playerImg from '@assets/images/player.png';
 
 export const Home = () => {
-  const { t } = useTranslation();
-
   const { shipTransform, handleScroll } = useHome();
 
   return (
@@ -37,7 +34,7 @@ export const Home = () => {
         </p>
         <p>
           Зарегистрированным пользователям доступны турнирная таблица и
-          возможность писать на форуме. Возможно авторизация через Яндекс.
+          возможность писать на форуме. Доступна авторизация через Яндекс.
         </p>
         <h2 className={styles.subtitle}>Технологии</h2>
         <p>
