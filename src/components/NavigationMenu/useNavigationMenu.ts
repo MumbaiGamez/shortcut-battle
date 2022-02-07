@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { useLogoutMutation } from '@redux/api/authApi';
 import { selectIsAuth } from '@redux/slices/settingsSlice';
-import { useTranslation } from 'react-i18next';
 
 export enum RoutesList {
   all = '*',
@@ -62,25 +62,25 @@ export const useNavigationMenu = () => {
         },
         {
           link: RoutesList.leaderboard,
-          name: 'Leaders',
+          name: t('nav.leaders'),
           handleClick: closeMenu,
           isShown: isAuth,
         },
         {
           link: RoutesList.profile,
-          name: 'Profile',
+          name: t('nav.profile'),
           handleClick: closeMenu,
           isShown: isAuth,
         },
         {
           link: RoutesList.forum,
-          name: 'Forum',
+          name: t('nav.forum'),
           handleClick: closeMenu,
           isShown: true,
         },
         {
           link: RoutesList.logout,
-          name: 'Logout',
+          name: t('nav.logout'),
           handleClick: handleLogout,
           isShown: isAuth,
         },

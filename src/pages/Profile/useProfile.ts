@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   useGetUserQuery,
@@ -23,6 +24,8 @@ export const useProfile = () => {
     email: '',
     phone: '',
   });
+
+  const { t } = useTranslation();
 
   const changeProfileFactory = setFormFieldValueFactory(setUserData);
 
@@ -70,8 +73,8 @@ export const useProfile = () => {
       {
         fieldName: FieldsList.firstName,
         handleChange: changeProfileFactory(FieldsList.firstName),
-        label: 'First name',
-        placeholder: 'First name',
+        label: t('form.firstName'),
+        placeholder: t('form.firstName'),
         value: userData.firstName || '',
         validationRule: { isRequired: true },
         validateField,
@@ -79,8 +82,8 @@ export const useProfile = () => {
       {
         fieldName: FieldsList.secondName,
         handleChange: changeProfileFactory(FieldsList.secondName),
-        label: 'Second name',
-        placeholder: 'Second name',
+        label: t('form.secondName'),
+        placeholder: t('form.secondName'),
         value: userData.secondName || '',
         validationRule: { isRequired: true },
         validateField,
@@ -88,16 +91,16 @@ export const useProfile = () => {
       {
         fieldName: FieldsList.displayName,
         handleChange: changeProfileFactory(FieldsList.displayName),
-        label: 'Display name',
-        placeholder: 'Display name',
+        label: t('form.displayName'),
+        placeholder: t('form.displayName'),
         value: userData.displayName || '',
         validateField,
       },
       {
         fieldName: FieldsList.email,
         handleChange: changeProfileFactory(FieldsList.email),
-        label: 'Email',
-        placeholder: 'Email',
+        label: t('form.email'),
+        placeholder: t('form.email'),
         type: InputTypeEnum.email,
         value: userData.email || '',
         validationRule: { isRequired: true, email: true },
@@ -106,8 +109,8 @@ export const useProfile = () => {
       {
         fieldName: FieldsList.phone,
         handleChange: changeProfileFactory(FieldsList.phone),
-        label: 'Phone',
-        placeholder: 'Phone',
+        label: t('form.phone'),
+        placeholder: t('form.phone'),
         type: InputTypeEnum.email,
         value: userData.phone || '',
         validationRule: { isRequired: true, phone: true },
@@ -116,14 +119,24 @@ export const useProfile = () => {
       {
         fieldName: FieldsList.login,
         handleChange: changeProfileFactory(FieldsList.login),
-        label: 'Login',
-        placeholder: 'Login',
+        label: t('form.login'),
+        placeholder: t('form.login'),
         value: userData.login || '',
         validationRule: { isRequired: true },
         validateField,
       },
     ],
-    [changeProfileFactory, userData, validateField]
+    [
+      changeProfileFactory,
+      t,
+      userData.displayName,
+      userData.email,
+      userData.firstName,
+      userData.login,
+      userData.phone,
+      userData.secondName,
+      validateField,
+    ]
   );
 
   const { data, isLoading: isProfileLoading } = useGetUserQuery();

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '@redux/hooks';
 import {
@@ -37,6 +38,7 @@ export const GameUI = (props: GameUIProps) => {
   const { isFullscreen, toggleFullscreen } = props;
 
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const { count } = useAppSelector(selectConfig);
   const currentScore = useAppSelector(selectCurrentScore);
@@ -90,13 +92,13 @@ export const GameUI = (props: GameUIProps) => {
       <section className={styles.inner}>
         <header className={styles.header}>
           <div className={styles.scores}>
-            <b>Scores:</b> <span>{currentScore}</span>
+            <b>{`${t('play.scores')}:`}</b> <span>{currentScore}</span>
           </div>
           <div className={styles.keys}>
-            <b className={styles.action}>Fire:</b>
+            <b className={styles.action}>{`${t('play.fire')}:`}</b>
             <div className={styles.shortcut}>
               <div className={styles.shortcutWrapper}>
-                <span className={styles.shortcutDesc}>{desc}</span>
+                <span className={styles.shortcutDesc}>{t(desc)}</span>
                 <span className={styles.shortcutKeys}>{name}</span>
               </div>
             </div>
@@ -107,14 +109,14 @@ export const GameUI = (props: GameUIProps) => {
               className={styles.headerButton}
               onClick={handlePause}
             >
-              Pause
+              {t('play.pause')}
             </Button>
             <Button
               theme={ButtonTheme.Glow}
               className={styles.headerButton}
               onClick={handleReset}
             >
-              Exit
+              {t('play.exit')}
             </Button>
           </div>
         </header>
@@ -123,18 +125,18 @@ export const GameUI = (props: GameUIProps) => {
             <Loader />
           </div>
           <div className={styles.initialized}>
-            <Button onClick={handleStart}>Start new game</Button>
+            <Button onClick={handleStart}>{t('play.startGame')}</Button>
           </div>
           <div className={styles.paused}>
-            <Button onClick={handleStart}>Continue</Button>
+            <Button onClick={handleStart}>{t('play.continue')}</Button>
           </div>
           <div className={styles.gameOver}>
-            <h2 className={styles.title}>Game Over</h2>
-            <Button onClick={handleReset}>Try again</Button>
+            <h2 className={styles.title}>{t('play.gameOver')}</h2>
+            <Button onClick={handleReset}>{t('play.tryAgain')}</Button>
           </div>
           <div className={styles.congrats}>
-            <h2 className={styles.title}>Congrats, you won!</h2>
-            <Button onClick={handleReset}>Restart</Button>
+            <h2 className={styles.title}>{t('play.youWon')}</h2>
+            <Button onClick={handleReset}>{t('play.restart')}</Button>
           </div>
         </main>
         {phase !== Phase.playing && (

@@ -152,6 +152,7 @@
 
 .shortcutDesc {
   color: var(--yellow-color);
+  line-height: 25px;
 }
 
 .shortcutKeys {
