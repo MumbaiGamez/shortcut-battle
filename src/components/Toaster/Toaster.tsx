@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
 import { useToaster } from './useToaster';
@@ -7,6 +8,7 @@ import styles from './Toaster.css';
 
 export const Toaster = () => {
   const { toasts } = useToaster();
+  const { t } = useTranslation();
 
   return (
     <div className={styles.toasterContainer}>
@@ -21,7 +23,7 @@ export const Toaster = () => {
               styles[`toasterTheme${theme}`]
             )}
           >
-            <span>{theme}</span>
+            <span>{t(`messages.${theme}`)}</span>
             <div>{message}</div>
           </div>
         );

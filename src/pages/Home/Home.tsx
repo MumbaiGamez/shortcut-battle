@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Home.css';
 
 export const Home = () => {
-  return <div className={styles.home}>Home page</div>;
+  const { t } = useTranslation();
+
+  return <div className={styles.home}>{t('homePage.title')}</div>;
 };

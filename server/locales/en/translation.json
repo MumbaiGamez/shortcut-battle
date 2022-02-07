@@ -1,7 +1,95 @@
 {
+  "errors": {
+    "somethingWrong": "Something went wrong"
+  },
+  "form": {
+    "firstName": "First Name",
+    "secondName": "Second Name",
+    "displayName": "Display Name",
+    "email": "Email",
+    "phone": "Phone",
+    "login": "Login",
+    "password": "Password",
+    "update": "Update"
+  },
+  "forum": {
+    "addPost": "Add new post",
+    "closeForm": "Close form",
+    "addComment": "Add comment",
+    "newTopic": "New topic",
+    "title": "Title",
+    "text": "Text",
+    "save": "Save",
+    "reply": "Reply",
+    "show": "Show",
+    "hide": "Hide",
+    "comments": "comments",
+    "updated": "Updated at {{date}}",
+    "created": "Created at {{date}}",
+    "by": " by",
+    "noTopics": "No topics yet"
+  },
+  "homePage": {
+    "title": "Home page"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "myScore": "My score",
+    "myRank": "My rank",
+    "none": "None",
+    "score": "Score",
+    "login": "Login",
+    "rating": "Rating"
+  },
+  "login": {
+    "login": "Login",
+    "registration": "Registration",
+    "authYandex": "Auth via Yandex",
+    "goToRegistration": "Not registered? Go to Registration",
+    "goToLogin": "Already registered? Go to Login"
+  },
+  "messages": {
+    "Success": "Success",
+    "Error": "Error",
+    "profileUpdatedSuccessfully": "Profile updated successfully",
+    "avatarUpdatedSuccessfully": "Avatar updated successfully"
+  },
   "nav": {
     "home": "Home",
     "play": "Play",
-    "login": "Login"
+    "login": "Login",
+    "leaders": "Leaders",
+    "profile": "Profile",
+    "forum": "Forum",
+    "logout": "Logout"
+  },
+  "play": {
+    "startGame": "Start new game",
+    "scores": "Scores",
+    "gameOver": "Game over",
+    "tryAgain": "Try again",
+    "fire": "Fire",
+    "pause": "Pause",
+    "exit": "Exit",
+    "continue": "Continue",
+    "restart": "Restart",
+    "youWon": "Congrats, you won!"
+  },
+  "shortcuts": {
+    "inserteLineAbove": "Insert line above",
+    "inserteLineBelow": "Insert line below",
+    "deleteLine": "Delete line",
+    "copyLineUp": "Copy line up",
+    "copyLineDown": "Copy line down",
+    "moveLineUp": "Move line up",
+    "moveLineDown": "Move line down",
+    "unfoldRegion": "Unfold region",
+    "foldRegion": "Fold region"
+  },
+  "validation": {
+    "fieldRequired": "Field is required",
+    "invalidEmail": "Invalid email",
+    "invalidPhone": "Invalid phone",
+    "lessSymbols": "Less than {{count}} symbols"
   }
 }

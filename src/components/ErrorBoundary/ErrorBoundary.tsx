@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 
 import { ErrorBoundaryProps, ErrorBoundaryState } from './types';
 
-export class ErrorBoundary extends Component<
-  ErrorBoundaryProps,
-  ErrorBoundaryState
-> {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -17,9 +15,11 @@ export class ErrorBoundary extends Component<
 
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+      return <h1>{this.props.t('errors.somethingWrong')}</h1>;
     }
 
     return this.props.children;
   }
 }
+
+export default withTranslation()(ErrorBoundary);

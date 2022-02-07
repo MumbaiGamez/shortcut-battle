@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button, ButtonTheme } from '@components/Button';
 import { Loader } from '@components/Loader';
@@ -20,6 +21,8 @@ export const Forum = () => {
     topics,
   } = useForum();
 
+  const { t } = useTranslation();
+
   return (
     <div className={styles.forum}>
       <div className={styles.topicsContainer}>
@@ -29,7 +32,7 @@ export const Forum = () => {
           </div>
         )}
         {!isLoading && isEmptyData && (
-          <div className={styles.emptyData}>No topics yet</div>
+          <div className={styles.emptyData}>{t('forum.noTopics')}</div>
         )}
         {isNewTopicOpen && <NewTopic saveCallback={switchNewTopic} />}
         {topics?.map((topic) => (
@@ -42,7 +45,7 @@ export const Forum = () => {
           className={styles.addPost}
           onClick={switchNewTopic}
         >
-          {isNewTopicOpen ? 'Close form' : 'Add new post'}
+          {isNewTopicOpen ? t('forum.closeForm') : t('forum.addPost')}
         </Button>
       )}
     </div>
