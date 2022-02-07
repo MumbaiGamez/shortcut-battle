@@ -15,21 +15,23 @@
 }
 
 .home p {
-  font-size: 30px;
-  margin-top: 30px;
+  font-size: 20px;
+  margin-top: 15px;
+  position: relative;
 }
 
 .title {
-  font-size: 60px;
+  font-size: 75px;
   -webkit-text-stroke: 1px white;
   color: black;
   overflow: hidden;
   transition: clip-path 1s ease;
 }
 
-.subtitle {
-  margin: 50px 0;
+p.subtitle {
+  margin-top: 50px;
   font-size: 50px;
+  line-height: 50px;
 }
 
 .title::before {
@@ -65,6 +67,12 @@
     0 0 10em 0 #9d6e2f,
     0 0 100px 50px var(--blue-color),
     0 0 10px 5px var(--light-blue-color);
+}
+
+.starPointer {
+  width: 0;
+  height: 0;
+  position: absolute;
 }
 
 .ship {

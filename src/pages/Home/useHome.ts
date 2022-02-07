@@ -2,6 +2,7 @@ import { useState, UIEvent } from 'react';
 
 export const useHome = () => {
   const [shipTransform, setShipTransform] = useState(100);
+  const [subtitleTransform, setSubtitleTransform] = useState(0);
 
   const handleScroll = (event: UIEvent<HTMLDivElement>) => {
     const containerHeight = event.currentTarget.clientHeight;
@@ -9,10 +10,12 @@ export const useHome = () => {
 
     const scrollTop = event.currentTarget.scrollTop;
 
-    setShipTransform(
-      100 - (scrollTop / (scrollHeight - containerHeight)) * 300
-    );
+    const scrollPercent = (scrollTop / (scrollHeight - containerHeight)) * 100;
+
+    setShipTransform(100 - scrollPercent * 3);
+
+    setSubtitleTransform(scrollPercent);
   };
 
-  return { shipTransform, handleScroll };
+  return { subtitleTransform, shipTransform, handleScroll };
 };
