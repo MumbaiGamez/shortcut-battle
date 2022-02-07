@@ -13,7 +13,7 @@ export const Home = () => {
   return (
     <div className={styles.home} onScroll={handleScroll}>
       <div>
-        <h1 className={styles.title}>Shortcat battle</h1>
+        <h1 className={styles.title}>Shortcut battle</h1>
         <p>
           Игра в жанре Shoot ’em up для запоминания комбинаций горячих клавиш
           различных программ. В настоящий момент в игре используются шорткаты

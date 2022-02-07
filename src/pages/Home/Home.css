@@ -34,7 +34,7 @@
 
 .title::before {
   position: absolute;
-  content: "Shortcat battle";
+  content: "Shortcut battle";
   color: var(--blue-color);
   clip-path: polygon(0 0, 0 100%, 0% 100%, 0 100%);
   transition: clip-path 1s ease;
