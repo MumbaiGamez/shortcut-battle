@@ -1,6 +1,8 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import * as helmet from 'helmet';
+import * as crypto from "crypto";
 
 import { isProd, isDev } from '../lib/env';
 import i18n, { i18nInit } from './services/i18n';
@@ -17,6 +19,10 @@ const {
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.locals.cspNonce = crypto.randomBytes(16).toString("hex");
+  next();
+});
 app.use(cookieParser());
 app.use(
   session({
@@ -35,6 +41,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 i18nInit(app);
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", 'https://ya-praktikum.tech'],
+      connectSrc: ["'self'", 'https://ya-praktikum.tech'],
+      imgSrc: ["'self'", 'https://ya-praktikum.tech'],
+      scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.cspNonce}'`, 'https://ya-praktikum.tech'],
+      fontSrc: ["'self'", 'https://fonts.googleapis.com'],
+    },
+  })
+);
 
 app.use(cors);
 app.use(auth);
