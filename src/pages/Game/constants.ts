@@ -13,39 +13,47 @@ export const APP_SHORTCUTS = {
     {
       name: 'Ctrl + Shift + Enter',
       keys: ['Control', 'Shift', 'Enter'],
-      desc: 'Insert line above',
+      desc: 'shortcuts.inserteLineAbove',
     },
     {
       name: 'Ctrl + Enter',
       keys: ['Control', 'Enter'],
-      desc: 'Insert line below',
+      desc: 'shortcuts.inserteLineBelow',
     },
     {
       name: 'Ctrl + Shift + K',
       keys: ['Control', 'Shift', 'K'],
-      desc: 'Delete line',
+      desc: 'shortcuts.deleteLine',
     },
     {
       name: 'Shift + Alt + UP',
       keys: ['Shift', 'Alt', 'ArrowUp'],
-      desc: 'Copy line up',
+      desc: 'shortcuts.copyLineUp',
     },
     {
       name: 'Shift + Alt + DOWN',
       keys: ['Shift', 'Alt', 'ArrowDown'],
-      desc: 'Copy line down',
+      desc: 'shortcuts.copyLineDown',
     },
-    { name: 'Alt + UP', keys: ['Alt', 'ArrowUp'], desc: 'Move line up' },
-    { name: 'Alt + DOWN', keys: ['Alt', 'ArrowDown'], desc: 'Move line down' },
+    {
+      name: 'Alt + UP',
+      keys: ['Alt', 'ArrowUp'],
+      desc: 'shortcuts.moveLineUp',
+    },
+    {
+      name: 'Alt + DOWN',
+      keys: ['Alt', 'ArrowDown'],
+      desc: 'shortcuts.moveLineDown',
+    },
     {
       name: 'Ctrl + Shift + ]',
       keys: ['Control', 'Shift', '}'],
-      desc: 'Unfold region',
+      desc: 'shortcuts.unfoldRegion',
     },
     {
       name: 'Ctrl + Shift + [',
       keys: ['Control', 'Shift', '{'],
-      desc: 'Fold region',
+      desc: 'shortcuts.foldRegion',
     },
   ],
 };

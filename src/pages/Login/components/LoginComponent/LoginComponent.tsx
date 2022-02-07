@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button, ButtonTheme } from '@components/Button';
 import { Form } from '@components/Form';
@@ -10,29 +11,31 @@ import { LoginComponentProps } from './types';
 export const LoginComponent = (props: LoginComponentProps) => {
   const { toggleForm } = props;
 
+  const { t } = useTranslation();
+
   const { handleLogin, inputsList, isFormValid, isLoading, redirectToOAuth } =
     useLogin();
 
   const oauthButton = useMemo(
     () => (
       <Button theme={ButtonTheme.Glow} onClick={redirectToOAuth}>
-        Auth via Yandex
+        {t('login.authYandex')}
       </Button>
     ),
-    [redirectToOAuth]
+    [redirectToOAuth, t]
   );
 
   return (
     <Form
       additionalButton={oauthButton}
-      buttonText="Login"
+      buttonText={t('login.login')}
       inputsList={inputsList}
       isLoading={isLoading}
       isButtonDisabled={!isFormValid}
       onButtonClick={handleLogin}
       toggleForm={toggleForm}
-      toggleFormText="Not registered? Go to Registration"
-      title="Login"
+      toggleFormText={t('login.goToRegistration')}
+      title={t('login.login')}
     />
   );
 };

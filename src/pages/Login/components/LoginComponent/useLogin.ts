@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   useGetOAuthServiceIdMutation,
@@ -17,6 +18,8 @@ export const useLogin = () => {
     login: '',
     password: '',
   });
+
+  const { t } = useTranslation();
 
   const changeLoginFactory = setFormFieldValueFactory(setLoginData);
 
@@ -41,7 +44,7 @@ export const useLogin = () => {
       {
         fieldName: FieldsList.login,
         handleChange: changeLoginFactory(FieldsList.login),
-        placeholder: 'Login',
+        placeholder: t('form.login'),
         value: loginData.login,
         validationRule: { isRequired: true },
         validateField,
@@ -49,14 +52,14 @@ export const useLogin = () => {
       {
         fieldName: FieldsList.password,
         handleChange: changeLoginFactory(FieldsList.password),
-        placeholder: 'Password',
+        placeholder: t('form.password'),
         type: InputTypeEnum.password,
         value: loginData.password,
         validationRule: { minSymbols: 6 },
         validateField,
       },
     ],
-    [changeLoginFactory, loginData, validateField]
+    [changeLoginFactory, loginData.login, loginData.password, t, validateField]
   );
 
   return {

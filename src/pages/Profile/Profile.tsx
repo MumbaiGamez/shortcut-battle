@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Form } from '@components/Form';
 import { Avatar } from '@components/Avatar';
@@ -19,15 +20,17 @@ export const Profile = () => {
     isLoading,
   } = useProfile();
 
+  const { t } = useTranslation();
+
   return (
     <div className={styles.profile}>
       <Form
-        buttonText="Update"
+        buttonText={t('form.update')}
         isButtonDisabled={!isFormValid}
         isLoading={isLoading}
         inputsList={inputsList}
         onButtonClick={handleUpdate}
-        title="Profile"
+        title={t('nav.profile')}
       >
         <Avatar
           handleChangeAvatar={handleChangeAvatar}

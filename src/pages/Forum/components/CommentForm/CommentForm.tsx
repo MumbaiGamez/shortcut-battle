@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
 import { TextWithUnderline } from '@components/TextWithUnderline';
@@ -17,6 +17,8 @@ import SendIcon from '@assets/icons/send.svg';
 export const CommentForm = (props: CommentFormPropsType) => {
   const { textClassName } = props;
 
+  const { t } = useTranslation();
+
   const {
     isShowInput,
     inputValue,
@@ -30,14 +32,14 @@ export const CommentForm = (props: CommentFormPropsType) => {
       <TextWithUnderline
         className={classNames(styles.reply, textClassName)}
         onClick={toggleInput}
-        text={'Reply'}
+        text={t('forum.reply')}
       />
       {isShowInput && (
         <div className={styles.inputContainer}>
           <Input
             value={inputValue}
             handleChange={handleInputChange}
-            placeholder={'Add comment'}
+            placeholder={t('forum.addComment')}
             className={styles.input}
           />
           <Button
