@@ -32,6 +32,7 @@ jobs:
             source ~/.nvm/nvm.sh
             cd shortcut-battle
             npm install
-            npm run build:ssr
-            npm run docker:up
+            docker-compose stop www
+            docker-compose build www
+            docker-compose up www -d
           EOF
