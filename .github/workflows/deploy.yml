@@ -34,5 +34,5 @@ jobs:
             npm install
             docker-compose stop www
             docker-compose build www
-            docker-compose up www -d
+            docker-compose up -d www
           EOF
