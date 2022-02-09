@@ -9,5 +9,3 @@ RUN npm ci --omit=dev --ignore-scripts
 COPY . /usr/app/
 
 EXPOSE 3000
-
-CMD ["npm", "run", "dev"]

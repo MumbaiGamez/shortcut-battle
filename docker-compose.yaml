@@ -3,7 +3,6 @@ version: "3"
 services:
   www:
     container_name: shortcut-battle
-    user: "node"
     build:
       context: .
     depends_on:
@@ -13,6 +12,7 @@ services:
       - .env
     ports:
       - "3000:3000"
+    command: ${RUN_CMD}
     volumes:
       - .:/usr/app:rw
     restart: always
@@ -58,6 +58,26 @@ services:
       - pgadmindata:/var/lib/pgadmin
     networks:
       - netw
+  nginx:
+    image: nginx:mainline-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d:ro
+      - ../certbot/www:/var/www/certbot:ro
+      - ../certbot/conf:/etc/nginx/ssl:ro
+    depends_on:
+      - www
+    networks:
+      - netw
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ../certbot/www:/var/www/certbot:rw
+      - ../certbot/conf:/etc/letsencrypt:rw
 
 volumes:
   pgadmindata:

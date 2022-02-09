@@ -31,7 +31,9 @@ export const fillWithMocks = async () => {
         );
       });
     })
-  );
+  ).catch((err) => {
+    console.log(err.message);
+  });
 };
 
 const sequelize = new Sequelize(sequelizeOptions);

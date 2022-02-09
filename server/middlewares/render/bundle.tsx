@@ -6,12 +6,11 @@ import { StaticRouter } from 'react-router-dom/server';
 import { I18nextProvider } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 
-import { isDev } from '../../../lib/env';
 import { store } from '@redux/store';
 
 const getBundleHtml = (req: Request) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const App = require(`../../../${isDev ? 'dist/' : ''}ssr.bundle.js`).App;
+  const App = require(`../../../dist/ssr.bundle.js`).App;
 
   return renderToString(
     <I18nextProvider i18n={req.i18n}>

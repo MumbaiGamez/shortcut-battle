@@ -23,4 +23,10 @@ declare module 'express-session' {
   }
 }
 
+declare module 'http' {
+  interface ServerResponse {
+    locals: { cspNonce: string };
+  }
+}
+
 export {};
