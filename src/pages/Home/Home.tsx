@@ -48,7 +48,17 @@ export const Home = () => {
         <section>
           <p className={styles.subtitle}>{t('home.project.title')}</p>
           <p>
-            <Trans i18nKey="home.project.text1" components={{ a: <a /> }} />
+            <Trans
+              i18nKey="home.project.text1"
+              components={[
+                <a
+                  key={0}
+                  href="https://practicum.yandex.ru/middle-frontend"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                ></a>,
+              ]}
+            />
           </p>
           <p>
             <Trans i18nKey="home.project.text2" />
