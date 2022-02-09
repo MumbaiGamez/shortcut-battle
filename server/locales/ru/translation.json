@@ -104,7 +104,7 @@
     },
     "project": {
       "title": "Что под капотом?",
-      "text1": "Данный проект создан в рамках курса <a href=\"https://practicum.yandex.ru/middle-frontend\" target=\"_blank\" rel=\"noopener noreferrer\"> курса \"Мидл фронтенд-разработчик\"</a>.",
+      "text1": "Данный проект создан в рамках курса <0> курса \"Мидл фронтенд-разработчик\"<0>.",
       "text2": "Сайт написан на Typescript. Используемые технологии и инструменты: React, Redux Toolkit для управления состоянием, RTK Query для запросов на сервер, nginx, Express, PostgreSQL в качестве БД форума, Docker и Docker Compose, GithubActions для CI/CD.",
       "text3": "Для оптимизации загрузки страниц на сайте реализован Server Side Rendering, а благодаря использованию Service Workers можно продолжать играть даже если нет соединения с интернетом."
     },
