@@ -2,9 +2,16 @@ import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { useAppSelector } from '../../../redux/hooks';
 import { selectAppShortcuts } from '../../../redux/slices/configSlice';
-import { selectActiveShortcut } from '../../../redux/slices/gameSlice';
+import {
+  selectActiveShortcut,
+  selectPhase,
+} from '../../../redux/slices/gameSlice';
 
-import { PlayerAction, ShortcutsPressed } from '../../../../typings/gameTypes';
+import {
+  Phase,
+  PlayerAction,
+  ShortcutsPressed,
+} from '../../../../typings/gameTypes';
 
 type KeyCode = string;
 
@@ -19,8 +26,11 @@ const defaultConfig = {
 };
 
 export const useShortcuts = () => {
+  const phase = useAppSelector(selectPhase);
   const activeShortcut = useAppSelector(selectActiveShortcut);
   const appShortcuts = useAppSelector(selectAppShortcuts);
+
+  const isPlaying = phase === Phase.playing;
 
   const config = useMemo(() => {
     const { keys } = appShortcuts[activeShortcut];
@@ -48,6 +58,11 @@ export const useShortcuts = () => {
     const onKeyDown = (event: KeyboardEvent) => {
       const { key } = event;
 
+      if (isPlaying) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+
       keysPressed.current.add(key);
       checkShortcutsPressed();
     };
@@ -73,7 +88,7 @@ export const useShortcuts = () => {
       document.removeEventListener('keyup', onKeyUp);
       window.removeEventListener('blur', onBlur);
     };
-  }, [checkShortcutsPressed]);
+  }, [checkShortcutsPressed, isPlaying]);
 
   return { shortcutsPressed };
 };
