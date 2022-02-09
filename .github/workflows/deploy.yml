@@ -1,0 +1,38 @@
+name: deploy
+on:
+  push:
+    branches:
+      - deploy
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy.key
+          chmod 600 ~/.ssh/deploy.key
+          cat >> ~/.ssh/config << END
+          Host deploy
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/deploy.key
+            StrictHostKeyChecking no
+          END
+      - name: Pull
+        run: ssh deploy 'cd shortcut-battle && git checkout deploy && git pull'
+      - name: Build and run
+        run: |
+          ssh deploy << EOF
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd shortcut-battle
+            npm install
+            docker-compose stop www
+            docker-compose build www
+            docker-compose up -d www
+          EOF

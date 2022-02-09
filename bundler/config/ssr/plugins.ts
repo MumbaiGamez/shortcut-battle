@@ -11,11 +11,7 @@ export default [
     'process.env': JSON.stringify(process.env),
     SUPPORTED_LANGUAGES: JSON.stringify(getSupportedLanguages()),
     PRODUCTION: JSON.stringify(isProd),
-    REDIRECT_URI: JSON.stringify(
-      isProd
-        ? 'https://shortcut-battle.herokuapp.com/'
-        : 'http://localhost:3000'
-    ),
+    REDIRECT_URI: JSON.stringify(process.env.REDIRECT_URI),
   }),
   new webpack.ProvidePlugin({
     window: [__MOCKS__, 'window'],
