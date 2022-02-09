@@ -35,15 +35,8 @@ export const Home = () => {
           </p>
         </section>
         <section>
-          <p
-            className={styles.subtitle}
-            style={{ left: `${Math.min(60 - subtitleTransform, 0)}%` }}
-          >
-            {t('home.social.title')}
-          </p>
-          <p style={{ left: `${Math.min(70 - subtitleTransform, 0)}%` }}>
-            {t('home.social.text')}
-          </p>
+          <p className={styles.subtitle}>{t('home.social.title')}</p>
+          <p>{t('home.social.text')}</p>
         </section>
         <section>
           <p className={styles.subtitle}>{t('home.project.title')}</p>

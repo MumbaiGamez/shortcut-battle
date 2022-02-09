@@ -102,7 +102,7 @@
       "text": "Join the community and get the opportunity to chat on the forum, share your results with friends. Enter the required information on the registration page or login with one click using your Yandex account."
     },
     "project": {
-      "title": "What's under the hood?",
+      "title": "What is under the hood?",
       "text1": "This project was created as part of the <0>course “Middle Frontend Developer”</0>.",
       "text2": "The site is written in Typescript. Technologies and tools used: React, Redux Toolkit for state management, RTK Query for server queries, nginx, Express, PostgreSQL as forum database, Docker and Docker Compose, GithubActions for CI/CD.",
       "text3": "To optimize page loading, the site has Server Side Rendering implemented, and due to Service Workers, you can continue to play even if there is no Internet connection."
