@@ -94,24 +94,24 @@
   },
   "home": {
     "about": {
-      "title": "Изучай горячие клавиши во время игры",
-      "text": "Для эффективного использования большинства приложений без знания горячих клавиш просто не обойтись. Заучивать шоткаты по документации - это долго и утомительно. Shortcut Battle позволяет сделать процесс интересным и эффективным."
+      "title": "Learn shortcuts in the game",
+      "text": "For the effective use of most applications, knowledge of shortcuts is indispensable. Memorizing shortcuts from documentation is long and tedious. Shortcut Battle allows you to make the process interesting and effective."
     },
     "social": {
-      "title": "Соревнуйся и общайся с друзьями",
-      "text": "Присоединяйся к сообществу и получи возможность общаться на форуме, делиться своими результатами с друзьями и бороться за место в рейтинге лучших игроков. Укажи необходимую информацию на странице регистрации или авторизуйся в один клик с помощью Яндекс аккаунта."
+      "title": "Compete and chat with friends",
+      "text": "Join the community and get the opportunity to chat on the forum, share your results with friends. Enter the required information on the registration page or login with one click using your Yandex account."
     },
     "project": {
-      "title": "Что под капотом?",
-      "text1": "Данный проект создан в рамках <0>курса “Мидл фронтенд-разработчик”</0>.",
-      "text2": "Сайт написан на Typescript. Используемые технологии и инструменты: React, Redux Toolkit для управления состоянием, RTK Query для запросов на сервер, nginx, Express, PostgreSQL в качестве БД форума, Docker и Docker Compose, GithubActions для CI/CD.",
-      "text3": "Для оптимизации загрузки страниц на сайте реализован Server Side Rendering, а благодаря использованию Service Workers можно продолжать играть даже если нет соединения с интернетом."
+      "title": "What is under the hood?",
+      "text1": "This project was created as part of the <0>course “Middle Frontend Developer”</0>.",
+      "text2": "The site is written in Typescript. Technologies and tools used: React, Redux Toolkit for state management, RTK Query for server queries, nginx, Express, PostgreSQL as forum database, Docker and Docker Compose, GithubActions for CI/CD.",
+      "text3": "To optimize page loading, the site has Server Side Rendering implemented, and due to Service Workers, you can continue to play even if there is no Internet connection."
     },
     "authors": {
-      "title": "Кого <s>ругать</s> хвалить?",
-      "devs": "Ответственных за это <s>безобразие</s> творение вы можете найти по ссылкам:",
-      "mentor": "Проверял и пропускал всё это в продакшен",
-      "thx": "за что ему большое спасибо",
+      "title": "Who should be <s>scolded</s> praised?",
+      "devs": "Responsible for this <s>disgrace</s> you can find on the links:",
+      "mentor": "Checked and approved all this for production",
+      "thx": "many thanks to him",
       "s": "Sergey",
       "d": "Dmitriy",
       "a": "Anton"

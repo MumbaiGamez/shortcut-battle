@@ -14,36 +14,29 @@ export const Home = () => {
 
   return (
     <div className={styles.home} onScroll={handleScroll}>
-      <div>
+      <div className={styles.homeContainer}>
         <Star
           className={styles.starPointer}
           style={{
-            left: `${Math.min(5 + subtitleTransform, 90)}%`,
-            top: `${Math.min(37 + subtitleTransform, 95)}%`,
+            left: `${Math.min(subtitleTransform, 90)}%`,
+            top: `${Math.min(subtitleTransform, 95)}%`,
           }}
         />
         <h1 className={styles.title}>Shortcut battle</h1>
         <section>
           <p
             className={styles.subtitle}
-            style={{ left: `${-subtitleTransform}%` }}
+            style={{ left: `${Math.min(40 - subtitleTransform, 0)}%` }}
           >
             {t('home.about.title')}
           </p>
-          <p style={{ left: `${Math.min(10 - subtitleTransform, 0)}%` }}>
+          <p style={{ left: `${Math.min(50 - subtitleTransform, 0)}%` }}>
             {t('home.about.text')}
           </p>
         </section>
         <section>
-          <p
-            className={styles.subtitle}
-            style={{ left: `${Math.min(20 - subtitleTransform, 0)}%` }}
-          >
-            {t('home.social.title')}
-          </p>
-          <p style={{ left: `${Math.min(30 - subtitleTransform, 0)}%` }}>
-            {t('home.social.text')}
-          </p>
+          <p className={styles.subtitle}>{t('home.social.title')}</p>
+          <p>{t('home.social.text')}</p>
         </section>
         <section>
           <p className={styles.subtitle}>{t('home.project.title')}</p>
