@@ -1,3 +1,108 @@
+@import "../../assets/styles/variables";
+
 .home {
-  height: 100%;
+  width: 80vw;
+  height: calc(100vh - var(--nav-height));
+  padding: 40px;
+  overflow: auto;
+  text-align: start;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.home::-webkit-scrollbar {
+  display: none;
+}
+
+.homeContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home p {
+  font-size: 20px;
+  margin-top: 15px;
+  position: relative;
+}
+
+.home a {
+  color: var(--light-blue-color);
+}
+
+.title {
+  font-size: 75px;
+  -webkit-text-stroke: 1px white;
+  color: black;
+  overflow: hidden;
+  transition: clip-path 1s ease;
+}
+
+p.subtitle {
+  margin-top: 50px;
+  font-size: 50px;
+  line-height: 50px;
+}
+
+.title::before {
+  position: absolute;
+  content: "Shortcut battle";
+  color: var(--blue-color);
+  clip-path: polygon(0 0, 0 100%, 0% 100%, 0 100%);
+  transition: clip-path 1s ease;
+}
+
+.title:hover::before {
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+}
+
+.star,
+.ship {
+  position: fixed;
+  top: 85%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+}
+
+.star {
+  transition: 1s;
+  box-shadow:
+    0 0 10em 5em #9d6e2f,
+    0 0 100px 50px var(--blue-color),
+    0 0 10px 5px var(--light-blue-color);
+}
+
+.star:hover {
+  box-shadow:
+    0 0 10em 0 #9d6e2f,
+    0 0 100px 50px var(--blue-color),
+    0 0 10px 5px var(--light-blue-color);
+}
+
+.starPointer {
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.ship {
+  filter: brightness(0%);
+  width: 50px;
+}
+
+@media only screen and (max-width: $mobile-screen-width) {
+  .home {
+    width: 100%;
+  }
+
+  .star {
+    opacity: 40%;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .home p {
+    font-size: 14px;
+  }
 }
