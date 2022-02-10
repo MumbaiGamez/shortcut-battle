@@ -25,6 +25,10 @@
   position: relative;
 }
 
+.home a {
+  color: var(--light-blue-color);
+}
+
 .title {
   font-size: 75px;
   -webkit-text-stroke: 1px white;
