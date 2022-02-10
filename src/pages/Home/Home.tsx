@@ -87,6 +87,7 @@ export const Home = () => {
         <Star className={styles.star} />
         <img
           className={styles.ship}
+          alt="ship"
           src={playerImg}
           style={{ transform: `translate(-50%, ${shipTransform}%)` }}
         />

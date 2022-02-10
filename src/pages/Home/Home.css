@@ -31,6 +31,7 @@
 
 .title {
   font-size: 75px;
+  position: relative;
   -webkit-text-stroke: 1px white;
   color: black;
   overflow: hidden;
