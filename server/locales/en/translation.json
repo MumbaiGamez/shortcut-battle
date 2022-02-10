@@ -91,5 +91,30 @@
     "invalidEmail": "Invalid email",
     "invalidPhone": "Invalid phone",
     "lessSymbols": "Less than {{count}} symbols"
+  },
+  "home": {
+    "about": {
+      "title": "Learn shortcuts in the game",
+      "text": "For the effective use of most applications, knowledge of shortcuts is indispensable. Memorizing shortcuts from documentation is long and tedious. Shortcut Battle allows you to make the process interesting and effective."
+    },
+    "social": {
+      "title": "Compete and chat with friends",
+      "text": "Join the community and get the opportunity to chat on the forum, share your results with friends. Enter the required information on the registration page or login with one click using your Yandex account."
+    },
+    "project": {
+      "title": "What is under the hood?",
+      "text1": "This project was created as part of the <0>course “Middle Frontend Developer”</0>.",
+      "text2": "The site is written in Typescript. Technologies and tools used: React, Redux Toolkit for state management, RTK Query for server queries, nginx, Express, PostgreSQL as forum database, Docker and Docker Compose, GithubActions for CI/CD.",
+      "text3": "To optimize page loading, the site has Server Side Rendering implemented, and due to Service Workers, you can continue to play even if there is no Internet connection."
+    },
+    "authors": {
+      "title": "Who should be <s>scolded</s> praised?",
+      "devs": "Responsible for this <s>disgrace</s> you can find on the links:",
+      "mentor": "Checked and approved all this for production",
+      "thx": "many thanks to him",
+      "s": "Sergey",
+      "d": "Dmitriy",
+      "a": "Anton"
+    }
   }
 }

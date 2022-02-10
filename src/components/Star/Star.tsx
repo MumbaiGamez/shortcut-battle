@@ -5,6 +5,6 @@ import { StarProps } from './types';
 
 import styles from './Star.css';
 
-export const Star = ({ className }: StarProps) => {
-  return <div className={classNames(styles.star, className)} />;
+export const Star = ({ className, style }: StarProps) => {
+  return <div className={classNames(styles.star, className)} style={style} />;
 };

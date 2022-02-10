@@ -87,7 +87,13 @@ export const GameUI = (props: GameUIProps) => {
   }, [phase, stats.login, updateStats]);
 
   return (
-    <div className={classNames(styles.gameUI, styles[phase])}>
+    <div
+      className={classNames(
+        styles.gameUI,
+        styles[phase],
+        isFullscreen && styles.fullscreen
+      )}
+    >
       <div className={styles.filler} />
       <section className={styles.inner}>
         <header className={styles.header}>
