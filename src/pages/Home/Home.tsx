@@ -49,7 +49,7 @@ export const Home = () => {
                   href="https://practicum.yandex.ru/middle-frontend"
                   target="_blank"
                   rel="noopener noreferrer"
-                ></a>,
+                />,
               ]}
             />
           </p>
