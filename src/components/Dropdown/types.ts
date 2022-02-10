@@ -1,10 +1,11 @@
-export type DropdownItemType = {
+export type DropdownItemType<T> = {
   name: string;
-  value: string;
+  value: T;
 };
 
-export type DropdownProps = {
-  items: DropdownItemType[];
-  selectedItem: DropdownItemType;
-  setSelectedItem: (item: string) => void;
+export type DropdownProps<T> = {
+  items: DropdownItemType<T>[];
+  selectedItem: DropdownItemType<T>;
+  setSelectedItem: (item: T) => void;
+  round?: boolean;
 };
