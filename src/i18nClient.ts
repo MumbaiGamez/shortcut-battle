@@ -5,7 +5,7 @@ import I18NextLocalStorageBackend from 'i18next-localstorage-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-import { isDebug } from '../lib/env';
+import { isDebug, isProd } from '../lib/env';
 
 const localStorageOptions = {
   expirationTime: 24 * 60 * 60 * 1000,
@@ -23,7 +23,7 @@ const options: InitOptions = {
   load: 'languageOnly',
   ns: ['translation'],
   defaultNS: 'translation',
-  saveMissing: true,
+  saveMissing: isProd,
   interpolation: {
     escapeValue: false,
   },

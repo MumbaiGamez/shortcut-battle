@@ -3,7 +3,7 @@ import { useOutsideClick } from '@/hooks/useOutsideClick';
 
 import { DropdownProps } from './types';
 
-export const useDropdown = (props: DropdownProps) => {
+export const useDropdown = <T = string>(props: DropdownProps<T>) => {
   const { items, selectedItem, setSelectedItem } = props;
 
   const ref = useRef<HTMLDivElement>(null);
@@ -22,7 +22,7 @@ export const useDropdown = (props: DropdownProps) => {
     setDropdownOpen(false);
   };
 
-  const selectItem = (item: string) => {
+  const selectItem = (item: T) => {
     setSelectedItem(item);
     switchDropdown();
   };

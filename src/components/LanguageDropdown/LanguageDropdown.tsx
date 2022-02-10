@@ -12,6 +12,7 @@ export const LanguageDropdown = () => {
       items={items}
       selectedItem={selectedItem}
       setSelectedItem={setLanguage}
+      round
     />
   );
 };

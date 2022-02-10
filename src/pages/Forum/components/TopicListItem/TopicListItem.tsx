@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Trans } from 'react-i18next';
 import classNames from 'classnames';
 
 import { TopicType } from '@redux/types/apiTypes';
@@ -30,13 +30,21 @@ export const TopicListItem = (props: TopicType) => {
 
   const {
     addComment,
-    commentsText,
     isAuth,
     isOpen,
     isShowComments,
     switchTextView,
     switchComments,
-  } = useTopicListItem(comments?.length || 0);
+  } = useTopicListItem();
+
+  const transKey = !comments.length
+    ? 'forum.empty'
+    : isShowComments
+    ? 'forum.hide'
+    : 'forum.show';
+  const commentsText = (
+    <Trans i18nKey={transKey} values={{ count: comments.length }} />
+  );
 
   return (
     <Card className={styles.container} contentClassName={styles.cardContent}>

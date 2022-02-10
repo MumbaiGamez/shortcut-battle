@@ -1,20 +1,23 @@
 import React from 'react';
-
 import classNames from 'classnames';
+
+import { useDropdown } from './useDropdown';
 
 import { DropdownProps } from './types';
 
 import styles from './Dropdown.css';
-import { useDropdown } from './useDropdown';
 
-export const Dropdown = (props: DropdownProps) => {
-  const { selectedItem } = props;
+export const Dropdown = function <T = string>(props: DropdownProps<T>) {
+  const { selectedItem, round } = props;
 
   const { isDropdownOpen, filteredItems, ref, switchDropdown, selectItem } =
-    useDropdown(props);
+    useDropdown<T>(props);
 
   return (
-    <div className={styles.dropdownContainer} ref={ref}>
+    <div
+      className={classNames(styles.dropdownContainer, round && styles.round)}
+      ref={ref}
+    >
       <div className={styles.selectedItem} onClick={switchDropdown}>
         {selectedItem.name}
       </div>

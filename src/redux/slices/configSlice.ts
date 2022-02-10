@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { APP_SHORTCUTS } from '../../pages/Game/constants';
 import { RootState } from '../store';
 
+import { AppName } from '@typings/gameTypes';
+
 type Config = {
   interval: number;
   count: number;
@@ -14,14 +16,14 @@ const initialState: Config = {
   interval: 4000,
   count: 20,
   hitScore: 10,
-  appName: 'VS_CODE',
+  appName: AppName.VS_CODE,
 };
 
 const configSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    change: (state, action: PayloadAction<Config>) => {
+    change: (state, action: PayloadAction<Partial<Config>>) => {
       Object.assign(state, action.payload);
     },
   },

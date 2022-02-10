@@ -16,13 +16,12 @@
 .selectedItem,
 .listItem {
   cursor: pointer;
-  width: 40px;
+  padding: 5px 10px;
+  border-radius: 10px;
 }
 
 .selectedItem {
   box-shadow: 0 0 10em 5em var(--dark-orange-color), 0 0 100px 50px var(--dark-orange-color) inset, 0 0 10px 5px #fff0;
-  height: 40px;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,4 +38,16 @@
 
 .listItem {
   margin-top: 10px;
+}
+
+.round {
+  .selectedItem {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .listItem {
+    width: 40px;
+  }
 }
