@@ -7,24 +7,24 @@ import {
   useGetLeaderboardMutation,
   useUpdateLeaderboardMutation,
 } from '@redux/api/leaderboardApi';
-import { selectConfig, selectAppShortcuts } from '@redux/slices/configSlice';
+import { selectConfig } from '@redux/slices/configSlice';
 import {
   reset,
-  pause,
   start,
-  selectCurrentScore,
   selectPhase,
-  selectActiveShortcut,
   selectPlayerStats,
 } from '@redux/slices/gameSlice';
 
 import { Loader } from '@components/Loader';
-import { Button, ButtonTheme } from '@components/Button';
+import { Button } from '@components/Button';
+import { GameHeader } from './components/GameHeader';
+import { ConfigHeader } from './components/ConfigHeader';
 
 import { Phase } from '@typings/gameTypes';
 
 import FullscreenOpen from '@assets/icons/fullscreenOpen.svg';
 import FullscreenExit from '@assets/icons/fullscreenExit.svg';
+
 import styles from './GameUI.css';
 
 type GameUIProps = {
@@ -41,16 +41,11 @@ export const GameUI = (props: GameUIProps) => {
   const { t } = useTranslation();
 
   const { count } = useAppSelector(selectConfig);
-  const currentScore = useAppSelector(selectCurrentScore);
   const phase = useAppSelector(selectPhase);
-  const activeShortcut = useAppSelector(selectActiveShortcut);
-  const appShortcuts = useAppSelector(selectAppShortcuts);
   const stats = useAppSelector(selectPlayerStats);
 
   const [updateLeaderboard] = useUpdateLeaderboardMutation();
   const [getLeaderboard] = useGetLeaderboardMutation();
-
-  const { name, desc } = appShortcuts[activeShortcut];
 
   const handleReset = useCallback(() => {
     dispatch(reset(count));
@@ -58,10 +53,6 @@ export const GameUI = (props: GameUIProps) => {
 
   const handleStart = useCallback(() => {
     dispatch(start());
-  }, [dispatch]);
-
-  const handlePause = useCallback(() => {
-    dispatch(pause());
   }, [dispatch]);
 
   const updateStats = useCallback(async () => {
@@ -96,36 +87,8 @@ export const GameUI = (props: GameUIProps) => {
     >
       <div className={styles.filler} />
       <section className={styles.inner}>
-        <header className={styles.header}>
-          <div className={styles.scores}>
-            <b>{`${t('play.scores')}:`}</b> <span>{currentScore}</span>
-          </div>
-          <div className={styles.keys}>
-            <b className={styles.action}>{`${t('play.fire')}:`}</b>
-            <div className={styles.shortcut}>
-              <div className={styles.shortcutWrapper}>
-                <span className={styles.shortcutDesc}>{t(desc)}</span>
-                <span className={styles.shortcutKeys}>{name}</span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <Button
-              theme={ButtonTheme.Glow}
-              className={styles.headerButton}
-              onClick={handlePause}
-            >
-              {t('play.pause')}
-            </Button>
-            <Button
-              theme={ButtonTheme.Glow}
-              className={styles.headerButton}
-              onClick={handleReset}
-            >
-              {t('play.exit')}
-            </Button>
-          </div>
-        </header>
+        <GameHeader />
+        <ConfigHeader />
         <main>
           <div className={styles.loader}>
             <Loader />

@@ -48,6 +48,7 @@ export enum GameEvent {
 
 export enum AppName {
   VS_CODE = 'VS_CODE',
+  FIGMA = 'FIGMA',
 }
 
 export type Engine = {

@@ -75,18 +75,31 @@
     "exit": "Выход",
     "continue": "Продолжить",
     "restart": "Сначала",
-    "youWon": "Поздравляем, вы выйграли!"
+    "youWon": "Поздравляем, вы выйграли!",
+    "choose": "Выберите приложение"
   },
   "shortcuts": {
-    "inserteLineAbove": "Вставить строку выше",
-    "inserteLineBelow": "Вставить строку ниже",
-    "deleteLine": "Удалить строку",
-    "copyLineUp": "Скопировать строку выше",
-    "copyLineDown": "Скопировать строку ниже",
-    "moveLineUp": "Переместить строку выше",
-    "moveLineDown": "Переместить строку ниже",
-    "unfoldRegion": "Развернуть",
-    "foldRegion": "Свернуть"
+    "vscode": {
+      "inserteLineAbove": "Вставить строку выше",
+      "inserteLineBelow": "Вставить строку ниже",
+      "deleteLine": "Удалить строку",
+      "copyLineUp": "Скопировать строку выше",
+      "copyLineDown": "Скопировать строку ниже",
+      "moveLineUp": "Переместить строку выше",
+      "moveLineDown": "Переместить строку ниже",
+      "unfoldRegion": "Развернуть",
+      "foldRegion": "Свернуть"
+    },
+    "figma": {
+      "textTool": "Создать Текст",
+      "rectTool": "Создать Прямоугольник",
+      "frameTool": "Создать Фрейм",
+      "addShowComments": "Добавить/показать комментарии",
+      "rulers": "Показать/скрыть линейки",
+      "outlines": "Показать/скрыть контуры элементов",
+      "layoutGrid": "Показать/скрыть сетку",
+      "pixelGrid": "Показать/скрыть пиксельную сетку"
+    }
   },
   "validation": {
     "fieldRequired": "Обязательное поле",

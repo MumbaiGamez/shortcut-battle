@@ -74,18 +74,31 @@
     "exit": "Exit",
     "continue": "Continue",
     "restart": "Restart",
-    "youWon": "Congrats, you won!"
+    "youWon": "Congrats, you won!",
+    "choose": "Choose app"
   },
   "shortcuts": {
-    "inserteLineAbove": "Insert line above",
-    "inserteLineBelow": "Insert line below",
-    "deleteLine": "Delete line",
-    "copyLineUp": "Copy line up",
-    "copyLineDown": "Copy line down",
-    "moveLineUp": "Move line up",
-    "moveLineDown": "Move line down",
-    "unfoldRegion": "Unfold region",
-    "foldRegion": "Fold region"
+    "vscode": {
+      "inserteLineAbove": "Insert line above",
+      "inserteLineBelow": "Insert line below",
+      "deleteLine": "Delete line",
+      "copyLineUp": "Copy line up",
+      "copyLineDown": "Copy line down",
+      "moveLineUp": "Move line up",
+      "moveLineDown": "Move line down",
+      "unfoldRegion": "Unfold region",
+      "foldRegion": "Fold region"
+    },
+    "figma": {
+      "textTool": "Text Tool",
+      "rectTool": "Rectangle Tool",
+      "frameTool": "Frame Tool",
+      "addShowComments": "Add/Show Comments",
+      "rulers": "Rulers",
+      "outlines": "Toggle outlines",
+      "layoutGrid": "Toggle layout grids",
+      "pixelGrid": "Toggle pixel grid"
+    }
   },
   "validation": {
     "fieldRequired": "Field is required",
